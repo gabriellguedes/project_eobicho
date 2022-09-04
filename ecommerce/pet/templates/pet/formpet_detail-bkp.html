@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container">
+	<h1>Ficha Técnica do Pet</h1>
+	<form class="form-row">
+		<div>
+			<div>
+				<label class="font-weight-bold">Nome: </label>
+				<label class="text-monospace">{{object.nome}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Apelido: </label>
+				<label class="text-monospace">{{object.apelido}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Aniversário: </label>
+				<label class="text-monospace">{{object.aniversario}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Idade: </label>
+				<label class="text-monospace">{{object.idade}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Peso(kg): </label>
+				<label class="text-monospace">{{object.peso}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Tamanho: </label>
+				<label class="text-monospace">{{object.tamanho}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Especie: </label>
+				<label class="text-monospace">{{object.especie}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Raça: </label>
+				<label class="text-monospace">{{object.racaCachorro}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Temperamento: </label>
+				<label class="text-monospace">{{object.temperamento}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Pelagem: </label>
+				<label class="text-monospace">{{object.pelagem}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Coloração: </label>
+				<label class="text-monospace">{{object.coloracao}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Tamanho(cm): </label>
+				<label class="text-monospace">{{object.tamanho}}</label> 
+			</div>
+			<div>
+				<label class="font-weight-bold">Caracteristicas: </label>
+				<label class="text-monospace">{{object.caracteristicas}}</label>
+			</div>
+			
+		</div>		
+	</form>
+	<button class="btn btn-primary btn-lg" type="submit" onclick="location.href='{% url 'pet:list'%}'">Voltar</button>
+</section>
+
+{% endblock %}

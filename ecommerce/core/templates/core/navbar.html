@@ -1,0 +1,23 @@
+<!-- Nav Menu -->
+        <div class="sticky-top">
+          <nav class="navbar sticky-top navbar-expand-lg navbar-light wrap-nav">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link"href="{% url 'pet:list' %}">Animais</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pet:form' %}">Cadastrar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pet:InspecaoPet' %}">Inspeção Física</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav><!-- /NAV -->
+        </div> 
