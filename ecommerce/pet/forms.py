@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import PetModel
+from .models import PetModel, AnamneseModel
 
 class formPet(forms.ModelForm):
 	aniversario = forms.DateField(
@@ -10,4 +10,9 @@ class formPet(forms.ModelForm):
     )
 	class Meta:
 		model = PetModel
+		fields = '__all__'
+
+class anamneseForm(forms.ModelForm):
+	class Meta:
+		model = AnamneseModel
 		fields = '__all__'

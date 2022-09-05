@@ -5,20 +5,39 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
-from .models import PetModel
-from .forms import formPet
+from .forms import anamneseForm, formPet
+from .models import PetModel, AnamneseModel
 
-def FormInspecaoPet(request):
-	return render(request, 'formInspecao.html')
+def anamnese(request):
+    template = 'anamnese.html'
+    if request.method == 'GET':
+        form = anamneseForm()
+        context = {
+            'form':form
+        }
+        return render(request, template, context=context)
+    else:
+        form = anamneseForm(request.POST)
+        if form.is_valid():
+            pet = form.save()
+            form = anamneseForm()
+        
+        context = {
+            'form':form
+        }
+        
+        return render(request, template, context=context)
+    return render(request, template)
 
 #Cadastro 
 def form(request):
+    template = 'pet/formpet_form.html'
     if request.method == 'GET':
         form = formPet()
         context = {
             'form':form
         }
-        return render(request, 'pet/formpet_form.html', context=context)
+        return render(request, template, context=context)
     else:
         form = formPet(request.POST)
         if form.is_valid():
@@ -29,10 +48,11 @@ def form(request):
             'form':form
         }
         
-        return render(request, 'pet/formpet_form.html', context=context)
+        return render(request, template, context=context)
 
 #Lista de Exibição e Pesquisa
 def paginacao(request):
+    template = 'pet/formpet_list.html'
     parametro_page = request.GET.get('page', '1')
     parametro_limit = request.GET.get('limit', '5')
     
@@ -42,10 +62,11 @@ def paginacao(request):
     pets = PetModel.objects.get_queryset().order_by('id')
     pets_paginator = Paginator(pets, parametro_limit)
 
+    objects = PetModel.objects.all()
     search = request.GET.get('search')
     if search:
-        pets = pets.filter(nome__icontains=search)
-
+        objects = objects.filter(nome__icontains=search)
+        return render(request, template)
     try:
         page = pets_paginator.page(parametro_page)
     except (EmptyPage, PageNotAnInteger):
@@ -56,9 +77,9 @@ def paginacao(request):
         'items_list': ['5','10', '20', '30', '50'],
         'qnt_page':parametro_limit,
         'pets': page,
-        'object_list':pets
+        'object_list':objects
     }
-    return render(request, 'pet/formpet_list.html', context)
+    return render(request, template, context)
 
 
 
