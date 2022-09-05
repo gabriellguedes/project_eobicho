@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'ecommerce.accounts',
     'ecommerce.core',
     'ecommerce.pet',
 ]

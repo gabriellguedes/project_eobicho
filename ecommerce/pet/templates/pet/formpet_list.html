@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
-
+{% block title%}
+{{block.super}} - Pets
+{% endblock title %}
 {% block content %}
 {% load crispy_forms_tags %}
 <section class="container">

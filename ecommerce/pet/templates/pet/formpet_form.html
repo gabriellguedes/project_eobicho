@@ -1,17 +1,19 @@
 {% extends 'core/base.html' %}
-{% block title%}
-{{block.super}} - Cadastrar novo Pet
+
+{% block title%} 
+  {{block.super}} - Cadastrar novo Pet
 {% endblock title %}
+
 {% load crispy_forms_tags %}
+
 {% block content %}
 <section class="container">
   <h2 class="">CADASTRO DO PET</h2>
   <form method="POST" action=".">
   	{% csrf_token %}
-    <br>
     
     <div class="form-row">
-      <div class="col col-lg-5 mb-3">
+      <div class="col-lg-5 mb-3">
         	{{ form.nome|as_crispy_field }}
       </div>
       <div class="col-md-4 mb-3">

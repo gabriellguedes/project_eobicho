@@ -56,7 +56,7 @@ def paginacao(request):
         'items_list': ['5','10', '20', '30', '50'],
         'qnt_page':parametro_limit,
         'pets': page,
-        'object_list':pets
+       
     }
     return render(request, 'pet/formpet_list.html', context)
 
