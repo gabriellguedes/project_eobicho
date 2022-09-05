@@ -136,15 +136,14 @@ class formPet(models.Model):
 	nome = models.CharField('Nome',max_length=150)
 	apelido = models.CharField('Apelido',max_length=30)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
-	idade = models.IntegerField('Idade')
-	peso = models.IntegerField('Peso(kg)')
-	tamanho = models.IntegerField('Tamanho')
+	idade = models.PositiveIntegerField('Idade')
+	peso = models.DecimalField('Peso(kg)', max_digits=7, decimal_places=2)
+	tamanho = models.PositiveIntegerField('Tamanho(cm)')
 	especie = models.CharField('Especie',max_length=10, choices=ESPECIE_CHOICES)
 	racaCachorro = models.CharField('Raça do Cachorro',max_length=150, choices=RACA_CACHORRO)
 	temperamento = models.CharField('Temperamento',max_length=60, choices=TEMPERAMENTO_CHOICES)
 	pelagem = models.CharField('Pelagem',max_length=150, choices=PELAGEM_CHOICES)
 	coloracao = models.CharField('Coloração',max_length=60, choices=COLORACAO_CHOICES)
-	tamanho = models.IntegerField('Tamanho(cm)',)
 	caracteristicas = models.CharField('Caracteristicas', max_length=200)
 	def __str__(self):
 		return self.nome	
