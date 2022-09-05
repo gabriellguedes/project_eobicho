@@ -5,8 +5,8 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
-from .models import formPet
-from .forms import CadastroPet
+from .models import PetModel
+from .forms import formPet
 
 def FormInspecaoPet(request):
 	return render(request, 'formInspecao.html')
@@ -14,16 +14,16 @@ def FormInspecaoPet(request):
 #Cadastro 
 def form(request):
     if request.method == 'GET':
-        form = CadastroPet()
+        form = formPet()
         context = {
             'form':form
         }
         return render(request, 'pet/formpet_form.html', context=context)
     else:
-        form = CadastroPet(request.POST)
+        form = formPet(request.POST)
         if form.is_valid():
             pet = form.save()
-            form = CadastroPet()
+            form = formPet()
         
         context = {
             'form':form
@@ -39,7 +39,7 @@ def paginacao(request):
     if not (parametro_limit.isdigit() and int(parametro_limit)>0):
         parametro_limit = '10'
 
-    pets = formPet.objects.all()
+    pets = PetModel.objects.get_queryset().order_by('id')
     pets_paginator = Paginator(pets, parametro_limit)
 
     search = request.GET.get('search')
@@ -56,14 +56,16 @@ def paginacao(request):
         'items_list': ['5','10', '20', '30', '50'],
         'qnt_page':parametro_limit,
         'pets': page,
-       
+        'object_list':pets
     }
     return render(request, 'pet/formpet_list.html', context)
+
+
 
 #Atualização
 def detailPet(request, pk):
     template ='pet/formpet_detail.html'
-    obj = formPet.objects.get(pk=pk)
+    obj = PetModel.objects.get(pk=pk)
     context = { 'object': obj }
     return render(request, template, context) 
 
@@ -71,12 +73,12 @@ def detailPet(request, pk):
 #Atualização
 class updatePet(UpdateView):
     template_name = 'pet/formpet_update.html'
-    model = formPet
+    model = PetModel
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
 
 #Apagar    
 class deletePet(DeleteView):
-    queryset = formPet.objects.all()
+    queryset = PetModel.objects.all()
     success_url = reverse_lazy('pet:list')
     

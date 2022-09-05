@@ -132,7 +132,7 @@ COLORACAO_CHOICES = (
 	('preto','Preto')
 )
 
-class formPet(models.Model):
+class PetModel(models.Model):
 	nome = models.CharField('Nome',max_length=150)
 	apelido = models.CharField('Apelido',max_length=30)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
@@ -145,6 +145,7 @@ class formPet(models.Model):
 	pelagem = models.CharField('Pelagem',max_length=150, choices=PELAGEM_CHOICES)
 	coloracao = models.CharField('Coloração',max_length=60, choices=COLORACAO_CHOICES)
 	caracteristicas = models.CharField('Caracteristicas', max_length=200)
+	
 	def __str__(self):
 		return self.nome	
 

@@ -11,7 +11,6 @@
   <h2 class="">CADASTRO DO PET</h2>
   <form method="POST" action=".">
   	{% csrf_token %}
-    
     <div class="form-row">
       <div class="col-lg-5 mb-3">
         	{{ form.nome|as_crispy_field }}
@@ -61,6 +60,7 @@
     </div>
    	
      <button class="btn btn-primary btn-lg" type="submit">Cadastrar</button>
+     <button class="btn btn-primary btn-lg" type="button" onclick="location.href='{% url 'pet:list' %}'">Voltar</button>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
 </section>  
 
