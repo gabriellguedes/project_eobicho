@@ -105,6 +105,57 @@ class Tuplas():
 		
 	)
 
+	RACA_GATO = (
+		('Abissínio', 'Abissínio'),
+		('Angorá', 'Angorá'),
+		('Balinês', 'Balinês'),
+		('Bengal', 'Bengal'),
+		('Bobtail americano', 'Bobtail americano'),
+		('Bobtail japonês', 'Bobtail japonês'),
+		('Bombay', 'Bombay'),
+		('Burmês', 'Burmês'),
+		('Burmês vermelho', 'Burmês vermelho'),
+		('Chartreux', 'Chartreux'),
+		('Colorpoint de Pêlo Curto', 'Colorpoint de Pêlo Curto'),
+		('Cornish Rex', 'Cornish Rex'),
+		('Curl Americano', 'Curl Americano'),
+		('Devon Rex', 'Devon Rex'),
+		('Himalaio', 'Himalaio'),
+		('Jaguatirica', 'Jaguatirica'),
+		('Javanês', 'Javanês'),
+		('Korat', 'Korat'),
+		('LaPerm', 'LaPerm'),
+		('Maine Coon', 'Maine Coon'),
+		('Manx', 'Manx'),
+		('Cymric', 'Cymric'),
+		('Mau Egípcio', 'Mau Egípcio'),
+		('Mist Australiano', 'Mist Australiano'),
+		('Munchkin', 'Munchkin'),
+		('Norueguês da Floresta', 'Norueguês da Floresta'),
+		('Pelo curto americano', 'Pelo curto americano'),
+		('Pelo curto brasileiro', 'Pelo curto brasileiro'),
+		('Pelo curto europeu', 'Pelo curto europeu'),
+		('Pelo curto inglês', 'Pelo curto inglês'),
+		('Persa', 'Persa'),
+		('Pixie-bob', 'Pixie-bob'),
+		('Ragdoll', 'Ragdoll'),
+		('Ocicat', 'Ocicat'),
+		('Russo Azul', 'Russo Azul'),
+		('Sagrado da Birmânia', 'Sagrado da Birmânia'),
+		('Savannah', 'Savannah'),
+		('Scottish Fold', 'Scottish Fold'),
+		('Selkirk Rex', 'Selkirk Rex'),
+		('Siamês', 'Siamês'),
+		('Siberiano', 'Siberiano'),
+		('Singapura', 'Singapura'),
+		('Somali', 'Somali'),
+		('Sphynx', 'Sphynx'),
+		('Thai', 'Thai'),
+		('Tonquinês', 'Tonquinês'),
+		('Toyger', 'Toyger'),
+		('Usuri', 'Usuri'),
+	)
+
 	TEMPERAMENTO_CHOICES =(
 		('Agressivo','Agressivo'),
 	    ('Manso','Manso'),
@@ -122,15 +173,33 @@ class Tuplas():
 	    ('Tímido','Tímido'),
 	)
 	PELAGEM_CHOICES = (
+		('Armada','Armada'),
+		('Aspera', 'Aspera'),
+		('Dura', 'Dura'),
+		('Encaracolada','Encaracolada'),
 		('Levemente Aspera','Levemente Aspera'),
-		('Fios Lisos e Longos', 'Fios Lisos e Longos')
+		('Lisa', 'Lisa'),
+		('Ondulada', 'Ondulada'),
+		('Sedosa', 'Sedosa'),
 	)
+	TYPE_PELO_CHOICES =(
+		('Curto', 'Curto'),
+		('Medio', 'Medio'),
+		('Longo', 'Longo'),
+		('Muito Longo', 'Muito Longo'),
+	)
+
 	COLORACAO_CHOICES = (
+		('Albino', 'Albino'),
 		('amarelo', 'Amarelo'),
 		('branco', 'Branco'),
 		('caramelo', 'Caramelo'),
-		('marrom', 'Marrom'),
-		('preto','Preto')
+		('Chocolate', 'Chocolate'),
+		('Cinza', 'Cinza'),
+		('Dourado', 'Dourado'),
+		('Vermelho','Vermelho'),
+		('preto','Preto'),
+
 	)
 	UNHAS_CHOICES = (
 		('Normais','Normais'),
@@ -200,5 +269,11 @@ class Tuplas():
 	ORELHAS_CHOICES =(
 		('Infecção','Infecção'),
 		('Inflamação','Inflamação'),
+	)
+	DOENCA_CHOICES = (
+		('Leishmaniose','Leishmaniose'),
+		('Doença Gastro Intestinal','Doença Gastro Intestinal'),
+		('Trauma Cutaneo','Trauma Cutaneo'),
+		('Hemorragia','Hemorragia'),
 	)
 

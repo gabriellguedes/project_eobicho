@@ -5,20 +5,24 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <section class="container">
-	<div class="">
-		<h3 class="font-weight-bold">Lista de cadastrados
-			<a class="btn btn-primary btn-lg float-right" href="{% url 'pet:form' %}">Cadastrar Pet</a>
-		</h3>
-	
-		
-	
-		<form method="GET" action="." class="form-inline">
-      		<input type="text" id="search" name="search" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
-	        <input class="btn btn-primary ml-sm-2" type="submit" id="button-addon2" value="Ok"></input>
-	     </form>	
-		
+	<div class="mb-3">
+		<h2 class="font-weight-bold">
+			<i class="bi bi-card-checklist"></i>
+			Cadastrados
+
+			<a class="btn btn-primary btn-lg float-end" href="{% url 'pet:form' %}">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Pet
+			</a>
+		</h2>
 		
 	</div>
+	<div>	
+		<form method="GET" action="." class="form-inline">
+      		<input type="text" id="search" name="search" class="" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2"/>
+	        <input class="btn btn-primary ml-sm-2" type="submit" id="button-addon2" value="Ok"/>
+	     </form>	
+	</div>
+
 	<!-- LISTA DE ANIMAIS CADASTRADOS -->	 
 	{% csrf_token %}
 	<table id="wrap-list-pet" class="table">
@@ -49,7 +53,7 @@
 	</table>
 	<!-- PAGINATOR -->
 	<div class="row">
-		<!-- Paginator -->
+		<!-- ITENS POR PÁGINA -->
 		<div class="col">
 			<p class="">Itens por página:</p>
 			<nav>
@@ -70,9 +74,11 @@
 				</ul class="pagination pagination-sm">
 			</nav>
 		</div><!-- /Itens por página -->
-		<div class="row justify-content-end align-items-end">
+
+		<!-- Paginator -->
+		<div class="col-md-6">
 			
-			<nav  class="col" >
+			<nav  class="d-flex justify-content-end" >
 			  <ul class="pagination">
 			  	{% if pets.has_previous %}
 				  	<li class="page-item">
