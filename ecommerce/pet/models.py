@@ -24,7 +24,8 @@ class PetModel(models.Model):
 		return self.nome	
 
 class AnamneseModel(models.Model):
-	pet = models.ForeignKey(PetModel,on_delete=models.CASCADE, related_name='fichaPets', default=None)
+	pet = models.ForeignKey(PetModel, on_delete=models.CASCADE, related_name='fichaPets', default=None)
+	idficha = models.CharField('Nº Ficha', max_length=11, unique=True, default=None )
 	unhas = models.CharField('', max_length=100, blank=True, null=True, choices=t.UNHAS_CHOICES)
 	ectoparasitas = models.CharField('Ectoparasitas', blank=True, null=True, max_length=100, choices=t.ECTOPARASITAS_CHOICES)
 	peleInfeccionada = models.CharField('Infecção na Pele', max_length=100, blank=True, null=True, choices=t.PELE_INFECCIONADA_CHOICES)
@@ -37,7 +38,7 @@ class AnamneseModel(models.Model):
 	patas = models.CharField('', max_length=100, blank=True, null=True, choices=t.PATAS_CHOICES)
 	orelhas = models.CharField('', max_length=100, blank=True, null=True, choices=t.ORELHAS_CHOICES)
 	doenca = models.CharField('', max_length=100, choices=t.DOENCA_CHOICES, default=None)
-	obs = models.TextField('Observações:', max_length=400, blank=True, null=True)
+	obs = models.TextField('', max_length=400, blank=True, null=True)
 
 	def __str__(self):
-		return self.id
+		return self.idficha

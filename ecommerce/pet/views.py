@@ -8,7 +8,7 @@ from django.views.generic.edit import DeleteView
 from .forms import anamneseForm, formPet
 from .models import PetModel, AnamneseModel
 
-def anamnese(request):
+def anamnese(request, pk):
     template = 'anamnese.html'
     if request.method == 'GET':
         form = anamneseForm()
@@ -19,15 +19,25 @@ def anamnese(request):
     else:
         form = anamneseForm(request.POST)
         if form.is_valid():
-            pet = form.save()
+            pet = PetModel.objects.get(pk=id)
+            fichaPets.objects.create()
+            ficha = form.save()
             form = anamneseForm()
+
         
         context = {
             'form':form
         }
         
         return render(request, template, context=context)
-    return render(request, template)
+
+def anamneseDetail(request, pk):
+    template ='pet/formpet_detail.html'
+    obj = AnamneseModel.objects.get(pk=pk)
+    pet = PetModel.objects.create()
+    pet.fichaPets.all()
+    context = { 'object': obj }
+    return render(request, template, context)     
 
 #Cadastro 
 def form(request):

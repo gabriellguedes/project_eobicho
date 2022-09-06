@@ -271,6 +271,7 @@ class Tuplas():
 		('Inflamação','Inflamação'),
 	)
 	DOENCA_CHOICES = (
+		('Sem Doenças', 'Sem Doença'),
 		('Leishmaniose','Leishmaniose'),
 		('Doença Gastro Intestinal','Doença Gastro Intestinal'),
 		('Trauma Cutaneo','Trauma Cutaneo'),
