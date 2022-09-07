@@ -6,6 +6,10 @@ a{
 	text-decoration: none !important;
 
 }
+span.required:after{
+	content: "*";
+	color: red;
+}
 #wrap-header{
  width: 100%;
  min-height: 100px;

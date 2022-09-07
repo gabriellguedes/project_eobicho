@@ -8,85 +8,14 @@
 	<h2 class="border-bottom pb-2"><i class="bi bi-journal-text"></i> Ficha Técnica do Pet</h2>
 
 	<div class="row">
-		<div class="col-lg-4 mb-3">
-			<div class="card">
-				<div class="text-center">
-			  		<img class="card-img-top rounded" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
-			  	</div>	
-			  <div class="card-body">
-			    <h5 class="card-title">
-			    	<label class="text-monospace">{{object.nome}} 
-			    		<span class="fw-normal">({{object.apelido}})</span>
-			    	</label>
-			    </h5>
-			    <div class="card-text">
-			    	
-						<div class="col">
-							<label class="font-weight-bold">Aniversário: </label>
-							<label class="text-monospace">{{object.aniversario}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Idade: </label>
-							<label class="text-monospace">{{object.idade}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Peso(kg): </label>
-							<label class="text-monospace">{{object.peso}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Tamanho(cm): </label>
-							<label class="text-monospace">{{object.tamanho}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Especie: </label>
-							<label class="text-monospace">{{object.especie}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Raça: </label>
-							<label class="text-monospace">{{object.racaCachorro}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Temperamento: </label>
-							<label class="text-monospace">{{object.temperamento}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Pelagem: </label>
-							<label class="text-monospace">{{object.pelagem}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Coloração: </label>
-							<label class="text-monospace">{{object.coloracao}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Caracteristicas: </label>
-							<label class="text-monospace">{{object.caracteristicas}}</label>
-						</div>
-			    </div>
-			    
-			  </div>
-			</div>
-		</div>	
-		
+				
 		<div class="col-lg-6">
 			<div class="card">
 			
 					<div class="card-header bg-primary">
 						<h3 class="text-white"><i class="bi bi-journal-text"></i> Ficha de Avalição</h3>
-						<div class="col row">
-							<div class="col-sm-3">
-								<label class="text-white">Nº Ficha: </label>
-								<label class="text-white"> {{ ficha.id }}</label>
-							</div>
-		 					<div class="col-sm-5">
-								<small class="font-weight-bold text-white ">Criado por: </small>
-								<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
-							</div>
-							<div class="col-sm-4">
-								<small class="font-weight-bold text-white">Data: </small>
-								<label class="text-monospace text-white"></label>
-							</div>
-						</div>	
-
+						<span class="text-white">Nº Ficha:</span>
+						<span class="text-white">{{ficha.id}}</span>
 
 					</div>
 					<div class="card-text px-3 py-3">
@@ -138,11 +67,20 @@
 							<label class="font-weight-bold">Observações: </label>
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
-						
+						<div class="col row">
+							<div class="col-sm-6">
+								<small class="font-weight-bold ">Criado por: </small>
+								<small class="text-monospace text-uppercase">{{ficha.funcionario}}</small>
+							</div>
+							<div class="col-sm-6">
+								<small class="font-weight-bold">Data: </small>
+								<label class="text-monospace"></label>
+							</div>
+						</div>	
 				   		<div class="row border-bottom"></div>
 
 					    <div class="col mt-3">
-					    	<p class="font-weight-bold">Fichas Antigas:</p>	
+					    	<p class="font-weight-bold">Outras Fichas:</p>	
 					    	<table class="table">
 					    		<thead class="thead-light">
 					    			<tr class="text-center">

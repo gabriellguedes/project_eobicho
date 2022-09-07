@@ -5,11 +5,14 @@ app_name = 'pet'
 
 urlpatterns = [
     
-    path('', views.form, name='form'),
     path('list/', views.paginacao, name='list'),
     path('update/<int:pk>/', views.updatePet.as_view(), name='update'),
-    path('detail/<int:pk>/', views.detailPet, name='detail'),
+    path('detail-pet/<int:pk>/', views.detailPet, name='detail'),
     path('delete/<int:pk>/', views.deletePet.as_view(), name='delete'),
-    path('anamnese/<int:pk>/', views.anamnese, name='anamnese'),
+    path('cadastro/', views.createPet, name='create'),
+    #Urls Fichas
+    path('ficha/', views.createFicha, name='createFicha'),
+    path('fichas/', views.listFicha, name='listFicha'),
+    path('oldficha/<int:pk>/', views.detailFicha, name='detailFicha'),
         
 ] 

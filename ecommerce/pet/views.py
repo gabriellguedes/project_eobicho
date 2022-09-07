@@ -1,65 +1,64 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.forms import inlineformset_factory
 from datetime import datetime
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
 from .forms import anamneseForm, formPet
 from .models import PetModel, AnamneseModel
 
-def anamnese(request, pk):
-    template = 'anamnese.html'
-    if request.method == 'GET':
-        form = anamneseForm()
-        context = {
-            'form':form
-        }
-        return render(request, template, context=context)
+#Cadastro Pet e Ficha
+def createPet(request):
+    template = 'form_create.html'
+    pet_form = PetModel()
+    a_form = inlineformset_factory(
+        PetModel,
+        AnamneseModel,
+        form=anamneseForm,
+        extra=0,
+        min_num=1,
+        validate_min=True,
+    )
+    if request.method == 'POST':
+        form= formPet(request.POST, instance=pet_form, prefix='main')
+        formset= a_form(
+            request.POST,
+            instance=pet_form, 
+            prefix='pet',
+        )
+        if form.is_valid() and formset.is_valid():
+            form=form.save()
+            formset=formset.save()
+            url = 'pet:detail'
+            return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
+        form= formPet(instance=pet_form, prefix='main')
+        formset= a_form(instance=pet_form, prefix='pet')
+    context={
+        'form': form,
+        'formset': formset
+    }    
+    return render(request, template, context)   
+
+def createFicha(request):
+    template = 'anamnese.html'
+    cad = PetModel.objects.all()
+    pet = PetModel()
+    if request.method == 'POST':
         form = anamneseForm(request.POST)
         if form.is_valid():
-            pet = PetModel.objects.get(pk=id)
-            fichaPets.objects.create()
-            ficha = form.save()
-            form = anamneseForm()
-
-        
-        context = {
-            'form':form
-        }
-        
-        return render(request, template, context=context)
-
-def anamneseDetail(request, pk):
-    template ='pet/formpet_detail.html'
-    obj = AnamneseModel.objects.get(pk=pk)
-    pet = PetModel.objects.create()
-    pet.fichaPets.all()
-    context = { 'object': obj }
-    return render(request, template, context)     
-
-#Cadastro 
-def form(request):
-    template = 'pet/formpet_form.html'
-    if request.method == 'GET':
-        form = formPet()
-        context = {
-            'form':form
-        }
-        return render(request, template, context=context)
+            form =form.save()
+            url = 'pet:detail'
+            return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
-        form = formPet(request.POST)
-        if form.is_valid():
-            pet = form.save()
-            form = formPet()
-        
-        context = {
-            'form':form
-        }
-        
-        return render(request, template, context=context)
-
+        form= anamneseForm(instance=pet, prefix='main')
+    context = {
+        'form': form,
+        'cad': cad
+    }        
+    return render(request, template, context)
 #Lista de Exibição e Pesquisa
 def paginacao(request):
     template = 'pet/formpet_list.html'
@@ -73,6 +72,7 @@ def paginacao(request):
     pets_paginator = Paginator(pets, parametro_limit)
 
     objects = PetModel.objects.all()
+    
     search = request.GET.get('search')
     if search:
         objects = objects.filter(nome__icontains=search)
@@ -91,14 +91,31 @@ def paginacao(request):
     }
     return render(request, template, context)
 
+def listFicha(request):
+    template_name = 'ficha_list.html'
+    lista = AnamneseModel.objects.all()
+    context = { 'lista': lista}
+    return render(request, template_name, context)
 
-
-#Atualização
+#Vizualizar Pet e Ficha
 def detailPet(request, pk):
     template ='pet/formpet_detail.html'
+    
     obj = PetModel.objects.get(pk=pk)
-    context = { 'object': obj }
+    ficha = obj.fichaPets.last()
+    last_fichas = obj.fichaPets.all()
+    context = { 
+    'object': obj,
+    'ficha': ficha,
+    'last_fichas': last_fichas,
+     }
     return render(request, template, context) 
+#Visualizar ficha antiga
+def detailFicha(request, pk):
+    template_name = 'ficha_detail.html'
+    ficha = AnamneseModel.objects.get(pk=pk)
+    context={ 'ficha': ficha }
+    return render(request, template_name, context)
 
 
 #Atualização
@@ -107,6 +124,12 @@ class updatePet(UpdateView):
     model = PetModel
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
+"""
+class updateFicha(UpdateView):
+    template_name = 'anamnese.html'
+    model = AnamneseModel
+    fields = '__all__'
+    success_url = reverse_lazy('pet:list')"""
 
 #Apagar    
 class deletePet(DeleteView):

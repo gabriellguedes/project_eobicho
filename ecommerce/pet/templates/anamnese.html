@@ -11,7 +11,15 @@
   <!-- FORM INSPEÇÃO FÍSICA E ESTETÍCA -->
   <form method="POST" action=".">
     {% csrf_token %}
-   
+    <select>
+     {%for pet in cad %}
+        <option>
+          <label class="">Nome do Pet:</label>
+          <label>{{pet.nome}}</label>
+        </option>
+     {% endfor%}
+    </select>
+
     <div class="row">
        <div class="col-lg-4 mb-3">
         <div class="card">

@@ -8,7 +8,7 @@
 	<div class="mb-3">
 		<h2 class="font-weight-bold">
 			<i class="bi bi-card-checklist"></i>
-			Cadastrados
+			Fichas de Anamnese 
 
 			<a class="btn btn-primary float-right" href="{% url 'pet:create' %}">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Pet
@@ -22,30 +22,30 @@
 	        <input class="btn btn-primary ml-sm-2" type="submit" id="button-addon2" value="Ok"/>
 	     </form>	
 	</div>
-{% if pets %}
+{% if lista %}
 	<!-- LISTA DE ANIMAIS CADASTRADOS -->	 
 	{% csrf_token %}
 	<table id="wrap-list-pet" class="table">
-	  <thead class="">
+	  <thead class="thead-light">
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Tutor</th>
 	      <th scope="col">Nome do Pet</th>
-	      <th scope="col">Espécie</th>
+	      <th scope="col">Nº Ficha</th>
 	      <th scope="col"></th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	  	 {% for pet in pets %}
+	  	 {% for iten in lista %}
 		    <tr>
-		   	  <th scope="row">{{pet.id}}</th>
+		   	  <th scope="row">{{iten.id}}</th>
 		      <td></td>
-		      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
-		      <td class="text-uppercase">{{pet.especie}}</td>
+		      <td><a href="">{{iten.pet}}</a> ({{iten.pk}})</td>
+		      <td class="text-uppercase">{{iten.pk}}</td>
 		      <td class="float-end">
-		      	<a class="btn btn-success mr-sm-2" href="{% url 'pet:detail' pk=pet.id %}">Visualizar</a>
-		      	<a class="btn btn-primary mr-sm-2" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
-		      	<a class="btn btn-danger mr-sm-2" href="{% url 'pet:delete' pk=pet.id %}">Deletar</a>
+		      	<a class="btn btn-primary mr-sm-2" href="">Visualizar</a>
+		      	<a class="btn btn-primary mr-sm-2" href="">Editar</a>
+		      	<a class="btn btn-primary mr-sm-2" href="">Deletar</a>
 
 		      </td>
 		    </tr>
