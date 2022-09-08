@@ -77,13 +77,13 @@
 								<label class="text-white">Nº Ficha: </label>
 								<label class="text-white"> {{ ficha.id }}</label>
 							</div>
-		 					<div class="col-sm-5">
+		 					<div class="col-sm-4">
 								<small class="font-weight-bold text-white ">Criado por: </small>
 								<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<small class="font-weight-bold text-white">Data: </small>
-								<label class="text-monospace text-white"></label>
+								<small class="text-monospace text-white">{{ficha.date}}</small>
 							</div>
 						</div>	
 
@@ -138,17 +138,21 @@
 							<label class="font-weight-bold">Observações: </label>
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
-						
+						<div class="col d-flex justify-content-end">
+							<a class="btn btn-success mb-3" href="{% url 'pet:createFicha' pk=object.id %}">Nova Anamnese</a>
+						</div>
+							
 				   		<div class="row border-bottom"></div>
 
 					    <div class="col mt-3">
 					    	<p class="font-weight-bold">Fichas Antigas:</p>	
 					    	<table class="table">
-					    		<thead class="thead-light">
+					    		<thead>
 					    			<tr class="text-center">
 						    			<th scope="col">Nº Ficha</th>
 						    			<th scope="col">Data</th>
 						    			<th scope="col">Funcionário</th>
+						    			<th scope="col"></th>
 						    		</tr>	
 					    		</thead>	
 					    		{% for iten in last_fichas %}
@@ -157,8 +161,15 @@
 								    		<th scope="row">
 								    			<a href="{% url 'pet:detailFicha' pk=iten.id %}">{{iten.id}}</a>
 								    		</th>
-								    		<td></td>
+								    		<td>
+								    			<small>
+								    				{{iten.date}}
+								    			</small>	
+								    		</td>
 								    		<td>{{iten.funcionario}}</td>
+								    		<td>
+								    			<a class="btn btn-primary" href="{% url 'pet:detailFicha' pk=iten.id %}">Visualizar</a>
+								    		</td>
 							    		</tr>
 							    	</tbody>	
 							    {% endfor%}							    	

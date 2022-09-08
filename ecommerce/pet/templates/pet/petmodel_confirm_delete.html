@@ -6,7 +6,7 @@
 <p>Tem certeza que deseja apagar o registro do '{{ object.nome }}'?</p>
 	<form method="POST">
 		{% csrf_token %}
-		<button class="btn btn-primary btn-md" type="submit">Sim, tenho certeza!</button>
+		<button class="btn btn-danger btn-md" type="submit">Sim, tenho certeza!</button>
 		<button class="btn btn-primary btn-md" type="reset" onclick="location.href='{% url 'pet:list' %}'">Não, desejo voltar!</button>
 	</form>
 </body>

@@ -11,7 +11,7 @@ urlpatterns = [
     path('delete/<int:pk>/', views.deletePet.as_view(), name='delete'),
     path('cadastro/', views.createPet, name='create'),
     #Urls Fichas
-    path('ficha/', views.createFicha, name='createFicha'),
+    path('ficha/<int:pk>/', views.createFicha, name='createFicha'),
     path('fichas/', views.listFicha, name='listFicha'),
     path('oldficha/<int:pk>/', views.detailFicha, name='detailFicha'),
         

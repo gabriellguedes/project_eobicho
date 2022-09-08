@@ -12,7 +12,7 @@ span.required:after{
 }
 #wrap-header{
  width: 100%;
- min-height: 100px;
+ min-height: 70px;
  background: #1fb9b1;
  color: white;
  margin-bottom: 15px;
@@ -20,8 +20,8 @@ span.required:after{
 }
 #wrap-header img{
 	display: block;
-	max-width: 250px;
-	padding: 15px 0;
+	max-width: 175px;
+	margin-top: 15px;
 }
 .wrap-nav{
 	background: #fdbe2d !important;
@@ -31,7 +31,7 @@ span.required:after{
 }
 #wrap-main{
 	width: 90%;
-	min-height: 400px;
+	min-height: 500px;
 	margin: 0 auto;
 }
 	#wrap-list-pet{

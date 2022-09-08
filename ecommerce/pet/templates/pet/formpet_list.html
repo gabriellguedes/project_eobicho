@@ -42,11 +42,12 @@
 		      <td></td>
 		      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
 		      <td class="text-uppercase">{{pet.especie}}</td>
-		      <td class="float-end">
-		      	<a class="btn btn-success mr-sm-2" href="{% url 'pet:detail' pk=pet.id %}">Visualizar</a>
-		      	<a class="btn btn-primary mr-sm-2" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
-		      	<a class="btn btn-danger mr-sm-2" href="{% url 'pet:delete' pk=pet.id %}">Deletar</a>
-
+		      <td>
+		      	<div class="d-flex justify-content-end">
+		      		<a class="btn btn-primary mr-sm-2" href="{% url 'pet:detail' pk=pet.id %}">Visualizar</a>
+		      		<a class="btn btn-warning mr-sm-2" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
+		      		<a class="btn btn-danger" href="{% url 'pet:delete' pk=pet.id %}">Deletar</a>
+		      	</div>	
 		      </td>
 		    </tr>
 	    {% endfor %}

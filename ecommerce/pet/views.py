@@ -42,24 +42,28 @@ def createPet(request):
     }    
     return render(request, template, context)   
 
-def createFicha(request):
+# Criar uma nova ficha
+def createFicha(request, pk):
     template = 'anamnese.html'
-    cad = PetModel.objects.all()
-    pet = PetModel()
+    pet = PetModel.objects.get(pk=pk)
+    ficha = pet.fichaPets.create()
+
     if request.method == 'POST':
-        form = anamneseForm(request.POST)
+        form = ficha(request.POST)
         if form.is_valid():
             form =form.save()
             url = 'pet:detail'
-            return HttpResponseRedirect(resolve_url(url, form.pk))
+            return HttpResponseRedirect(resolve_url(url, pet.pk))
     else:
-        form= anamneseForm(instance=pet, prefix='main')
+        form= anamneseForm(instance=ficha, prefix='main')
     context = {
         'form': form,
-        'cad': cad
+        'pet': ficha,
+        
     }        
     return render(request, template, context)
-#Lista de Exibição e Pesquisa
+
+#Lista de Exibição, Paginação e Pesquisa
 def paginacao(request):
     template = 'pet/formpet_list.html'
     parametro_page = request.GET.get('page', '1')
@@ -91,6 +95,7 @@ def paginacao(request):
     }
     return render(request, template, context)
 
+#Listar todas as fichas cadastradas
 def listFicha(request):
     template_name = 'ficha_list.html'
     lista = AnamneseModel.objects.all()
@@ -110,13 +115,14 @@ def detailPet(request, pk):
     'last_fichas': last_fichas,
      }
     return render(request, template, context) 
+
 #Visualizar ficha antiga
 def detailFicha(request, pk):
     template_name = 'ficha_detail.html'
-    ficha = AnamneseModel.objects.get(pk=pk)
+    pet = PetModel.objects.get(pk=pk)
+    ficha = pet.fichaPets.get()
     context={ 'ficha': ficha }
     return render(request, template_name, context)
-
 
 #Atualização
 class updatePet(UpdateView):
@@ -124,12 +130,6 @@ class updatePet(UpdateView):
     model = PetModel
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
-"""
-class updateFicha(UpdateView):
-    template_name = 'anamnese.html'
-    model = AnamneseModel
-    fields = '__all__'
-    success_url = reverse_lazy('pet:list')"""
 
 #Apagar    
 class deletePet(DeleteView):
