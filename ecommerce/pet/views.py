@@ -1,12 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404, resolve_url
-from django.contrib.auth.models import User
+from django.shortcuts import render, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import inlineformset_factory
-from datetime import datetime
 from django.urls import reverse_lazy
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import UpdateView
-from django.views.generic.edit import DeleteView
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm
@@ -104,8 +101,4 @@ class updatePet(UpdateView):
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
 
-#Apagar    
-class deletePet(DeleteView):
-    queryset = Pet.objects.all()
-    success_url = reverse_lazy('pet:list')
 
