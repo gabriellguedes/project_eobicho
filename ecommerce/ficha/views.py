@@ -7,8 +7,6 @@ from .forms import FichaForm
 def createFicha(request, pk):
     template_name = 'anamnese.html'
     pet = Pet.objects.get(id=pk)
-    ficha = pet.fichaPets.create()
-    fields = 'pet'
 
     if request.method == 'GET':
         form =  FichaForm()
@@ -17,14 +15,14 @@ def createFicha(request, pk):
         }
         return render(request, template_name, context=context)
     else:
-        form =  FichaForm(request.POST)
+        form =  FichaForm(request.POST, instance=pet)
         if form.is_valid():
             pet = form.save()
             form =  FichaForm()
 
         context = {
             'form':form,
-            'formset': ficha,
+            'formset': pet,
         }
 
         return render(request, template_name, context=context)

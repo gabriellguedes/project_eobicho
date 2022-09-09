@@ -2,11 +2,18 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load bootstrap %}
+{% block title %}
+{{block.super}} - Inspeção do Pet
+{% endblock title %}
+
+{% load bootstrap %}
+
 {% block content %}
-	
-<div class="row">
-    <div class="cols">
-      <form method="POST" novalidate>
+<section class="container">
+  <h2 class="border-bottom pb-2 mb-5"><i class="bi bi-heart-pulse-fill"></i> Inspeção física e estetíca</h2>
+  <!-- FORM INSPEÇÃO FÍSICA E ESTETÍCA -->
+  
+  <form method="POST" novalidate>
         {% csrf_token %}
         <legend style="border-bottom: 1px solid #e5e5e5;">Dados do Pet</legend>
 
@@ -64,20 +71,5 @@
         </div>
 
       </form>
-    </div>
-  </div>
-
+</section>
 {% endblock content %}
-
-{% block js %}
-
-  <script src="{% static 'js/style.js' %}"></script>
-
-  <script type="text/html" id="item-estoque">
-    <div id="item-__prefix__" class="form-group">
-    {{ formset.empty_form|bootstrap }}
-    </div>
-  </script>
-
-
-{% endblock js %}

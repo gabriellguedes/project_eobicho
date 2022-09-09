@@ -11,7 +11,7 @@ from .models import Pet
 
 #Cadastro Pet e Ficha
 def createPet(request):
-    template = 'form_create.html'
+    template_name = 'formpet_form.html'
     pet_form = Pet()
     a_form = inlineformset_factory(
         Pet,
@@ -40,7 +40,7 @@ def createPet(request):
         'form': form,
         'formset': formset
     }    
-    return render(request, template, context)   
+    return render(request, template_name, context)   
 
 
 
@@ -81,7 +81,6 @@ def paginacao(request):
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):
     template ='pet/formpet_detail.html'
-    
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
