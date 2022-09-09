@@ -209,6 +209,7 @@ class Tuplas():
 		('Infeccionadas','Infeccionadas'),
 	)
 	ECTOPARASITAS_CHOICES = (
+		('Sem Ectoparasitas','Sem Ectoparasitas'),
 		('Pulgas','Pulgas'),
 		('Piolho','Piolho'),
 		('Carrapato','Carrapato'),
@@ -216,15 +217,18 @@ class Tuplas():
 		('Miase','Miase'),
 	)
 	PELE_INFECCIONADA_CHOICES = (
+		('Normal','Normal'),
 		('Dermatite','Dermatite'),
 		('Micose','Micose'),
 	)
 	PELE_OUTROS_CHOICES =(
+		('Normal', 'Normal'),
 		('Oleosa','Oleosa'),
 		('Plurido','Plurido'),
 		('Seborea','Seborea'),
 	)
 	PELOS_CHOICES = (
+		('Hidratados', 'Hidratatos'),
 		('Ressecado','Ressecado'),
 		('Danificado','Danificado'),
 
@@ -245,11 +249,13 @@ class Tuplas():
 		('Crítico','Crítico'),
 	)
 	BOCA_CHOICES = (
+		('Normal','Normal'),
 		('Gengivite','Gengivite'),
 		('Doença Periodontal','Doença Periodontal'),
 		('Lesões endodônticas','Lesões endodônticas'),
 	)
 	OLHOS_CHOICES = (
+		('Normais', 'Normais'),
 		('Inflamados','Inflamados'),
 		('QueimadoGlaucoma','Glaucoma'),
 		('Catarata','Catarata'),
@@ -260,6 +266,7 @@ class Tuplas():
 		('Conjuntivite(Ceratoconjuntivite Seca)','Conjuntivite(Ceratoconjuntivite Seca)'),
 	)
 	PATAS_CHOICES = (
+		('Normais','Normais'),
 		('Calo','Calo'),
 		('Lesionados','Lesionados'),
 		('Infeccionado','Infeccionado'),

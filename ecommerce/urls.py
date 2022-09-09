@@ -22,6 +22,6 @@ app_name='ecommerce'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ecommerce.accounts.urls')),
+    path('', include('ecommerce.core.urls')),
     path('pet/', include('ecommerce.pet.urls')),
 ]

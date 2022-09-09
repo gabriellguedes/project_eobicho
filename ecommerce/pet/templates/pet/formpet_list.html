@@ -33,6 +33,7 @@
 	      <th scope="col">Nome do Pet</th>
 	      <th scope="col">Espécie</th>
 	      <th scope="col"></th>
+	      <th scope="col">Data</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -42,6 +43,7 @@
 		      <td></td>
 		      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
 		      <td class="text-uppercase">{{pet.especie}}</td>
+		      <td></td>
 		      <td>
 		      	<div class="d-flex justify-content-end">
 		      		<a class="btn btn-primary mr-sm-2" href="{% url 'pet:detail' pk=pet.id %}">Visualizar</a>

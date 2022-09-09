@@ -32,11 +32,11 @@
         </div>
 
         <div class="container">
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <legend style="border-bottom: 1px solid #e5e5e5;">Ficha de Anamnese</legend>
             <div id="estoque" class="form-inline">
               {% for item_estoque_form in formset %}
-                <div id="item-{{ forloop.counter0 }}" class="form-group">
+                <div id="item-{{ forloop.counter0 }}" class="">
                   {{ item_estoque_form|bootstrap }}
                 </div>
               {% endfor %}

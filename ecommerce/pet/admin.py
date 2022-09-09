@@ -1,33 +1,6 @@
 from django.contrib import admin
-from .models import PetModel, AnamneseModel
+from .models import Pet
 
-admin.site.register(PetModel)
-admin.site.register(AnamneseModel)
+admin.site.register(Pet)
 
-admin.register(PetModel)
-class PetAdmin(admin.ModelAdmin):
-	list_display = (
-		'__str__',
-		'nome',  
-	'apelido', 
-	'aniversario', 
-	'idade',
-	'peso',
-	'tamanho', 	
-	'especie',
-	'racaCachorro',
-	'racaGato',
-	'temperamentongth',
-	'pelagem', 
-	'type_pelo', 
-	'coloracao', 
-	'caracteristicas'
 
-	)
-	search_fields = ('nome')
-	list_filter = ('especie')
-
-admin.register(AnamneseModel)
-class AnamneseAdmin(admin.ModelAdmin):
-	model = AnamneseModel
-	extra = 0

@@ -15,51 +15,51 @@
 			  	</div>	
 			  <div class="card-body">
 			    <h5 class="card-title">
-			    	<label class="text-monospace">{{object.nome}} 
-			    		<span class="fw-normal">({{object.apelido}})</span>
+			    	<label class="text-monospace">{{pet.nome}} 
+			    		<span class="fw-normal">({{pet.apelido}})</span>
 			    	</label>
 			    </h5>
 			    <div class="card-text">
 			    	
 						<div class="col">
 							<label class="font-weight-bold">Aniversário: </label>
-							<label class="text-monospace">{{object.aniversario}}</label> 
+							<label class="text-monospace">{{pet.aniversario}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Idade: </label>
-							<label class="text-monospace">{{object.idade}}</label> 
+							<label class="text-monospace">{{pet.idade}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Peso(kg): </label>
-							<label class="text-monospace">{{object.peso}}</label> 
+							<label class="text-monospace">{{pet.peso}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Tamanho(cm): </label>
-							<label class="text-monospace">{{object.tamanho}}</label> 
+							<label class="text-monospace">{{pet.tamanho}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Especie: </label>
-							<label class="text-monospace">{{object.especie}}</label> 
+							<label class="text-monospace">{{pet.especie}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Raça: </label>
-							<label class="text-monospace">{{object.racaCachorro}}</label> 
+							<label class="text-monospace">{{pet.racaCachorro}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Temperamento: </label>
-							<label class="text-monospace">{{object.temperamento}}</label> 
+							<label class="text-monospace">{{pet.temperamento}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Pelagem: </label>
-							<label class="text-monospace">{{object.pelagem}}</label> 
+							<label class="text-monospace">{{pet.pelagem}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Coloração: </label>
-							<label class="text-monospace">{{object.coloracao}}</label> 
+							<label class="text-monospace">{{pet.coloracao}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Caracteristicas: </label>
-							<label class="text-monospace">{{object.caracteristicas}}</label>
+							<label class="text-monospace">{{pet.caracteristicas}}</label>
 						</div>
 			    </div>
 			    
@@ -139,7 +139,7 @@
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
 						<div class="col d-flex justify-content-end">
-							<a class="btn btn-success mb-3" href="{% url 'pet:createFicha' pk=object.id %}">Nova Anamnese</a>
+							<a class="btn btn-success mb-3" href="{% url 'pet:createFicha' pk=pet.id %}">Nova Anamnese</a>
 						</div>
 							
 				   		<div class="row border-bottom"></div>
@@ -159,7 +159,7 @@
 					    			<tbody>
 					    				<tr class="text-center">
 								    		<th scope="row">
-								    			<a href="{% url 'pet:detailFicha' pk=iten.id %}">{{iten.id}}</a>
+								    			<a href="{% url 'pet:detailFicha' pk=pet.id n=iten.id %}">{{iten.id}}</a>
 								    		</th>
 								    		<td>
 								    			<small>
@@ -168,7 +168,7 @@
 								    		</td>
 								    		<td>{{iten.funcionario}}</td>
 								    		<td>
-								    			<a class="btn btn-primary" href="{% url 'pet:detailFicha' pk=iten.id %}">Visualizar</a>
+								    			<a class="btn btn-primary" href="{% url 'pet:detailFicha' pk=pet.id  n=iten.id %}">Visualizar</a>
 								    		</td>
 							    		</tr>
 							    	</tbody>	

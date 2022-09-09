@@ -1,147 +1,75 @@
 {% extends 'core/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load bootstrap %}
 {% block title %}
 {{block.super}} - Inspeção do Pet
 {% endblock title %}
 
-{% load crispy_forms_tags %}
+{% load bootstrap %}
 
 {% block content %}
 <section class="container">
   <h2 class="border-bottom pb-2 mb-5"><i class="bi bi-heart-pulse-fill"></i> Inspeção física e estetíca</h2>
   <!-- FORM INSPEÇÃO FÍSICA E ESTETÍCA -->
   
-  <form method="POST" action=".">
-    {% csrf_token %}
-    
-             
-          <label class="">Nome do Pet:</label>
-          <label>{{fom.pet}}</label>
-       
-    <div class="row">
-       <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Doenças:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.doenca|as_crispy_field }}
-          </div>
-        </div>
-      </div>  
+  <form method="POST" novalidate>
+        {% csrf_token %}
+        <legend style="border-bottom: 1px solid #e5e5e5;">Dados do Pet</legend>
 
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção das Unhas:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.unhas|as_crispy_field }}
+        <div class="row">
+          <div class="col-sm-6">
+            {% for field in form.visible_fields %}
+              <div class="form-group{% if field.errors %} has-error {% endif%}">
+                <label for="{{ field.id_for_label }}">
+                  {% if field.field.required %}
+                    <span class="required">{{ field.label }} </span>
+                  {% else %}
+                    {{ field.label }}
+                  {% endif %}
+                </label>
+                {% render_field field class="form-control" %}
+                {% for error in field.errors %}
+                  <span class="text-muted">{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endfor %}
+            {{ formset.management_form }}
           </div>
         </div>
-      </div>  
 
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção dos Olhos:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.olhos|as_crispy_field }}
+        <div class="container">
+          <div class="col-sm-12">
+            <legend style="border-bottom: 1px solid #e5e5e5;">Ficha de Anamnese</legend>
+            <div id="estoque" class="form-inline">
+              {% for item_estoque_form in formset %}
+                <div id="item-{{ forloop.counter0 }}" class="">
+                  {{ item_estoque_form|bootstrap }}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção Bucal:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.boca|as_crispy_field }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção das Patas:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.patas|as_crispy_field }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção Auricular:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.orelhas|as_crispy_field }}
-          </div>
-        </div><!-- /Auricular -->
-      </div>
 
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-primary">
-          <h5 class="text-white">
-            <i class="bi bi-journal-text"></i> Inspeção do Pelo:
-          </h5>
-        </div>
-          <div class="card-body">
-            {{ form.pelos|as_crispy_field }}
-            {{ form.pelosEstado|as_crispy_field }}
-            {{ form.pelosCondicao|as_crispy_field }}
-          </div>  
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-primary">
-            <h5 class="text-white">
-              <i class="bi bi-journal-text"></i> Inspeção da Pele:
-            </h5>
-          </div>
-          <div class="card-body">
-            {{ form.ectoparasitas|as_crispy_field }}
-            {{ form.peleInfeccionada|as_crispy_field }}
-            {{ form.peleOutros|as_crispy_field }}
-          </div>
-        </div>
-      </div>
+        <span id="add-item" class="btn btn-info" style="margin-top: 10px;">
+          <i class="fa fa-plus"></i> Adicionar
+        </span>
 
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-primary">
-            <h5 class="text-white">
-              <i class="bi bi-journal-text"></i> Observações:
-            </h5>
-          </div>
-          <div class="card-body">
-            {{ form.obs|as_crispy_field }}
+        <div class="row float-right">
+          <div class="col-sm-12" style="margin-top: 10px;">
+            <div class="form-inline buttons">
+              <button class="btn btn-primary" value="Save">
+                <i class="fa fa-floppy-o"></i>
+                Salvar
+              </button>
+              <a href="{% url 'pet:list' %}" class="btn btn-danger">
+                <i class="fa fa-times"></i>
+                Cancelar
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-   
-    <button class="btn btn-primary btn-lg" type="submit">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar
-    </button>
-    <a class="btn btn-primary btn-lg" href="{% url 'pet:list' %}">Voltar</a>
-
-  </form>
+      </form>
 </section>
 {% endblock content %}

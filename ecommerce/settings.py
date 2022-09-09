@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'ecommerce.accounts',
     'ecommerce.core',
     'ecommerce.pet',
+    'ecommerce.ficha',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import inlineformset_factory
 from datetime import datetime
@@ -6,23 +7,25 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
-from .forms import anamneseForm, formPet
-from .models import PetModel, AnamneseModel
+from ecommerce.ficha.models import Ficha
+from ecommerce.ficha.forms import FichaForm
+from .forms import PetForm
+from .models import Pet
 
 #Cadastro Pet e Ficha
 def createPet(request):
     template = 'form_create.html'
-    pet_form = PetModel()
+    pet_form = Pet()
     a_form = inlineformset_factory(
-        PetModel,
-        AnamneseModel,
-        form=anamneseForm,
+        Pet,
+        Ficha,
+        form= FichaForm,
         extra=0,
         min_num=1,
         validate_min=True,
     )
     if request.method == 'POST':
-        form= formPet(request.POST, instance=pet_form, prefix='main')
+        form= PetForm(request.POST, instance=pet_form, prefix='main')
         formset= a_form(
             request.POST,
             instance=pet_form, 
@@ -34,7 +37,7 @@ def createPet(request):
             url = 'pet:detail'
             return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
-        form= formPet(instance=pet_form, prefix='main')
+        form= PetForm(instance=pet_form, prefix='main')
         formset= a_form(instance=pet_form, prefix='pet')
     context={
         'form': form,
@@ -44,26 +47,31 @@ def createPet(request):
 
 # Criar uma nova ficha
 def createFicha(request, pk):
-    template = 'anamnese.html'
-    pet = PetModel.objects.get(pk=pk)
+    template_name = 'anamnese.html'
+    pet = Pet.objects.get(id=pk)
     ficha = pet.fichaPets.create()
+    fields = 'pet'
 
-    if request.method == 'POST':
-        form = ficha(request.POST)
-        if form.is_valid():
-            form =form.save()
-            url = 'pet:detail'
-            return HttpResponseRedirect(resolve_url(url, pet.pk))
+    if request.method == 'GET':
+        form =  FichaForm()
+        context = {
+            'form':form
+        }
+        return render(request, template_name, context=context)
     else:
-        form= anamneseForm(instance=ficha, prefix='main')
-    context = {
-        'form': form,
-        'pet': ficha,
-        
-    }        
-    return render(request, template, context)
+        form =  FichaForm(request.POST)
+        if form.is_valid():
+            pet = form.save()
+            form =  FichaForm()
 
-#Lista de Exibição, Paginação e Pesquisa
+        context = {
+            'form':form,
+            'formset': ficha,
+        }
+
+        return render(request, template_name, context=context)
+
+#Lista de Exibição Paginação
 def paginacao(request):
     template = 'pet/formpet_list.html'
     parametro_page = request.GET.get('page', '1')
@@ -72,10 +80,10 @@ def paginacao(request):
     if not (parametro_limit.isdigit() and int(parametro_limit)>0):
         parametro_limit = '10'
 
-    pets = PetModel.objects.get_queryset().order_by('id')
+    pets = Pet.objects.get_queryset().order_by('id')
     pets_paginator = Paginator(pets, parametro_limit)
 
-    objects = PetModel.objects.all()
+    objects = Pet.objects.all()
     
     search = request.GET.get('search')
     if search:
@@ -98,7 +106,7 @@ def paginacao(request):
 #Listar todas as fichas cadastradas
 def listFicha(request):
     template_name = 'ficha_list.html'
-    lista = AnamneseModel.objects.all()
+    lista = Ficha.objects.all()
     context = { 'lista': lista}
     return render(request, template_name, context)
 
@@ -106,33 +114,38 @@ def listFicha(request):
 def detailPet(request, pk):
     template ='pet/formpet_detail.html'
     
-    obj = PetModel.objects.get(pk=pk)
+    obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
     context = { 
-    'object': obj,
-    'ficha': ficha,
-    'last_fichas': last_fichas,
+        'pet': obj,
+        'ficha': ficha,
+        'last_fichas': last_fichas,
      }
     return render(request, template, context) 
 
 #Visualizar ficha antiga
-def detailFicha(request, pk):
+def detailFicha(request, pk, n):
     template_name = 'ficha_detail.html'
-    pet = PetModel.objects.get(pk=pk)
-    ficha = pet.fichaPets.get()
-    context={ 'ficha': ficha }
+    pet = Pet.objects.get(pk=pk)
+    ficha = pet.fichaPets.get(id=n)
+    last_fichas = pet.fichaPets.all()
+    context={ 
+        'pet': pet,
+        'ficha': ficha,
+        'last_fichas': last_fichas
+     }
     return render(request, template_name, context)
 
 #Atualização
 class updatePet(UpdateView):
     template_name = 'pet/formpet_update.html'
-    model = PetModel
+    model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
 
 #Apagar    
 class deletePet(DeleteView):
-    queryset = PetModel.objects.all()
+    queryset = Pet.objects.all()
     success_url = reverse_lazy('pet:list')
-    
+
