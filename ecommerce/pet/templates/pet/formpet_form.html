@@ -3,6 +3,8 @@
 {% block title%} 
   {{block.super}} - Cadastrar novo Pet
 {% endblock title %}
+{% load bootstrap %}
+{% load widget_tweaks %}
 
 {% load crispy_forms_tags %}
 
@@ -14,64 +16,64 @@
   	{% csrf_token %}
     <div class="form-row">
       <div class="col-lg-5 mb-3">
-        	{{ form.nome|as_crispy_field }}
+        	{{ form.nome|bootstrap }}
       </div>
       <div class="col-md-4 mb-3">
-        {{ form.apelido|as_crispy_field }}
+        {{ form.apelido|bootstrap }}
       </div>
       <div class="col-md-3 mb-3">
-        {{ form.aniversario|as_crispy_field }}
+        {{ form.aniversario|bootstrap }}
       </div>
     
       <div class="col-md-3 mb-3">
-        {{ form.idade|as_crispy_field }}
+        {{ form.idade|bootstrap }}
       </div>
 
       <div class="col-md-3 mb-3">
-        {{ form.peso|as_crispy_field }}
+        {{ form.peso|bootstrap }}
       </div>
 
       <div class="col-md-3 mb-3">
-        {{ form.especie|as_crispy_field }}
+        {{ form.especie|bootstrap }}
       </div>
        {% if form.especie == 'cachorro'%} 
         <div class="col-md-3 mb-3">
-          {{ form.racaCachorro|as_crispy_field }}
+          {{ form.racaCachorro|bootstrap }}
         </div>
         {% endif %}
       <div class="col-md-3 mb-3">
-        {{ form.racaGato|as_crispy_field }}
+        {{ form.racaGato|bootstrap }}
       </div>
 
       <div class="col-md-3 mb-3">
-       {{ form.temperamento|as_crispy_field }}
+       {{ form.temperamento|bootstrap }}
       </div>
    
       <div class="col-md-3 mb-3">
-        {{ form.pelagem|as_crispy_field }}
+        {{ form.pelagem|bootstrap }}
       </div>
 
       <div class="col-md-3 mb-3">
-        {{ form.type_pelo|as_crispy_field }}
+        {{ form.type_pelo|bootstrap }}
       </div>
 
       <div class="col-md-3 mb-3">
-        {{ form.coloracao|as_crispy_field }}
+        {{ form.coloracao|bootstrap }}
       </div>
       
       <div class="col-md-3 mb-3">
-        {{ form.tamanho|as_crispy_field }}  
+        {{ form.tamanho|bootstrap }}  
       </div>
       
       <div class="col-md-3 mb-3">
-        {{ form.caracteristicas|as_crispy_field }}  
+        {{ form.caracteristicas|bootstrap }}  
       </div>
     </div>
    	
-    <button class="btn btn-primary btn-lg" type="submit">
+    <button class="btn btn-primary" type="submit">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar
     </button>
-     <button class="btn btn-primary btn-lg" type="button" onclick="location.href='{% url 'pet:list' %}'"><i class="bi bi-arrow-counterclockwise"></i>  Voltar</button>
+     <button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:list' %}'">Cancelar</button>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
 </section>  
 

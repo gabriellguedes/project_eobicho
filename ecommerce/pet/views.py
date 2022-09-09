@@ -1,7 +1,7 @@
 from django.shortcuts import render, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import inlineformset_factory
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import UpdateView
 from ecommerce.ficha.models import Ficha
@@ -9,40 +9,17 @@ from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm
 from .models import Pet
 
-#Cadastro Pet e Ficha
-def createPet(request):
-    template_name = 'formpet_form.html'
-    pet_form = Pet()
-    a_form = inlineformset_factory(
-        Pet,
-        Ficha,
-        form= FichaForm,
-        extra=0,
-        min_num=1,
-        validate_min=True,
-    )
+#Cadastro Pet
+def pet_add(request):
+    template_name = 'pet/formpet_form.html'
+    form = PetForm(request.POST or None)
+
     if request.method == 'POST':
-        form= PetForm(request.POST, instance=pet_form, prefix='main')
-        formset= a_form(
-            request.POST,
-            instance=pet_form, 
-            prefix='pet',
-        )
-        if form.is_valid() and formset.is_valid():
-            form=form.save()
-            formset=formset.save()
-            url = 'pet:detail'
-            return HttpResponseRedirect(resolve_url(url, form.pk))
-    else:
-        form= PetForm(instance=pet_form, prefix='main')
-        formset= a_form(instance=pet_form, prefix='pet')
-    context={
-        'form': form,
-        'formset': formset
-    }    
-    return render(request, template_name, context)   
-
-
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('pet:list'))
+    context = {'form': form}
+    return render(request, template_name, context)
 
 #Lista de Exibição Paginação
 def paginacao(request):
@@ -76,8 +53,6 @@ def paginacao(request):
     }
     return render(request, template, context)
 
-
-
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):
     template ='pet/formpet_detail.html'
@@ -90,8 +65,6 @@ def detailPet(request, pk):
         'last_fichas': last_fichas,
      }
     return render(request, template, context) 
-
-
 
 #Atualização
 class updatePet(UpdateView):

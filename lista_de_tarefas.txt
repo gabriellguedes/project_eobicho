@@ -29,10 +29,6 @@ Feito:
     - Finalizar Template detail pet -Ok
 
 (09-09-22)
-Fazendo:
-    - Criando template login
-    - Arrumar Form de Cadastro	
-
 Feito:
     - Criar App ficha - Ok
     - Separar Pet e Ficha -Ok
@@ -45,8 +41,12 @@ Feito:
     - Renover a opção de delete - Ok
     - Arrumar Template  Ficha list - Ok
     - Arruamar Funcionalidades em Ficha list - Ok
-Para Fazer:
+    - Criando template login - Ok
 
+Para Fazer:
+    - Arrumar Form de Cadastro
+    - Form Ficha
+    - Cadastro pet/ficha
     - Add campo de Status(ativo e inativo)
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)

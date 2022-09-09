@@ -2,8 +2,10 @@ from django.db import models
 from ecommerce.pet.tuplas import Tuplas
 from ecommerce.pet.models import Pet
 from django.contrib.auth.models import User
+from ecommerce.core.models import TimeStampedModel
 
 t = Tuplas()
+
 
 class Ficha(models.Model):
 	
@@ -21,7 +23,7 @@ class Ficha(models.Model):
 	orelhas = models.CharField('', max_length=100, choices=t.ORELHAS_CHOICES)
 	doenca = models.CharField('', max_length=100, choices=t.DOENCA_CHOICES)
 	obs = models.TextField('', max_length=400, blank=True, null=True)
-	date = models.DateField(auto_now_add=True)
+	
 
 	class Meta:
 		ordering = ('pk',)

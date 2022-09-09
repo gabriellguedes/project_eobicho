@@ -4,7 +4,9 @@
 {% block content %}
 <form method="POST" action=".">
     {% csrf_token %}
-      <h5 class=""><span class="font-weight-bold">Nome do Pet: {{formset.nome}}</span></h5>
+      <h5 class=""><span class="font-weight-bold">Nome do Pet:</span></h5>
+        {{ formset.pet|bootstrap }}
+        {{ formset.controle|bootstrap }}
        <div class="row">
        <div class="col-lg-4 mb-3">
         <div class="card">
@@ -14,7 +16,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.doenca|bootstrap }}
+            {{ formset.doenca|bootstrap }}
           </div>
         </div>
       </div>  
@@ -27,7 +29,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.unhas|bootstrap }}
+            {{ formset.unhas|bootstrap }}
           </div>
         </div>
       </div>  
@@ -40,7 +42,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.olhos|bootstrap }}
+            {{ formset.olhos|bootstrap }}
           </div>
         </div>
       </div>
@@ -52,7 +54,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.boca|bootstrap }}
+            {{ formset.boca|bootstrap }}
           </div>
         </div>
       </div>
@@ -64,7 +66,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.patas|bootstrap }}
+            {{ formset.patas|bootstrap }}
           </div>
         </div>
       </div>
@@ -76,7 +78,7 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.orelhas|bootstrap }}
+            {{ formset.orelhas|bootstrap }}
           </div>
         </div>
       </div>
@@ -89,9 +91,9 @@
           </h5>
         </div>
           <div class="card-body">
-            {{ form.pelos|bootstrap }}
-            {{ form.pelosEstado|bootstrap }}
-            {{ form.pelosCondicao|bootstrap }}
+            {{ formset.pelos|bootstrap }}
+            {{ formset.pelosEstado|bootstrap }}
+            {{ formset.pelosCondicao|bootstrap }}
           </div>  
         </div>
       </div>
@@ -103,9 +105,9 @@
             </h5>
           </div>
           <div class="card-body">
-            {{ form.ectoparasitas|bootstrap }}
-            {{ form.peleInfeccionada|bootstrap }}
-            {{ form.peleOutros|bootstrap }}
+            {{ formset.ectoparasitas|bootstrap }}
+            {{ formset.peleInfeccionada|bootstrap }}
+            {{ formset.peleOutros|bootstrap }}
           </div>
         </div>
       </div>
@@ -118,7 +120,7 @@
             </h5>
           </div>
           <div class="card-body">
-            {{ form.obs|bootstrap }}
+            {{ formset.obs|bootstrap }}
           </div>
         </div>
       </div>
