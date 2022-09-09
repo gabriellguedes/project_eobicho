@@ -1,0 +1,63 @@
+(05-09-22)
+Feito:
+    -Alterar os campos Inteiros - Ok
+    -Iniciar Config Admin/usuários - Ok
+    -Arrumar o template como o bootstrap Form Cadastro - Ok
+    -Arrumar o Cadastro(não está salvando) - Ok
+    -Iniciar Form Anamineses - Ok
+
+
+(06-09-22)
+Feito:
+    - Backend da Form Anamneses - Ok
+    - Add tupla Raça Gato - Ok
+    - Add Campo Raça Gatos - Ok
+    - Modificar o campo de pelagem na form de cadastro de pet - Ok
+    - Add os Atributos Blank, Null no Db - Ok
+    - Add campo observações - Ok
+    - Erro na pagina Pet-list - Ok
+    - Instalação bootstrap 5 - Ok
+    - Ícones bootstrap - Ok
+    - Finalizar layout Cadastro Anamneses - Ok
+    - Iniciar layout Ficha do Pet - Ok
+
+(08-09-22)
+Feito:
+    - Add campo Date -Ok
+    - Add Novos Valores as tuplas -Ok
+    - Template Update Pet - Ok
+    - Template Delete Pet - Ok
+    - Finalizar Template detail pet -Ok
+
+(09-09-22)
+Fazendo:
+    - Criando template login
+
+
+Feito:
+    - Criar App ficha - Ok
+    - Separar Pet e Ficha -Ok
+    - Criar core/url.py - Ok
+    - Criar ficha/url.py - Ok
+    - Criar a Função login na core/views.py - Ok
+    - Corrigir erros da pagina Detail Ficha - Ok
+    - Alterar urls de pet para ficha - Ok
+    - Alterar views de pet para ficha - Ok
+    - Renover a opção de delete - Ok
+    - Arrumar Template  Ficha list - Ok
+    - Arruamar Funcionalidades em Ficha list - Ok
+Para Fazer:
+
+
+    - Add campo de Status(ativo e inativo)
+    - Template Cadastro Pet/Anamineses
+    - Criar nova ficha(link do Detail-pet)
+    - Add Condições com jquery ao campo Especie
+    - Arrumar o layout do Cadastro(Form)
+    - Calcular automaticamente a idade
+    - Registro de Úsuarios
+
+    Inspeção vital
+
+
+
