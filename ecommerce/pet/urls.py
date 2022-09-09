@@ -10,9 +10,6 @@ urlpatterns = [
     path('detail-pet/<int:pk>/', views.detailPet, name='detail'),
     path('delete/<int:pk>/', views.deletePet.as_view(), name='delete'),
     path('cadastro/', views.createPet, name='create'),
-    # Urls Fichas
-    path('ficha/<int:pk>/', views.createFicha, name='createFicha'),
-    path('fichas/', views.listFicha, name='listFicha'),
-    path('oldficha/<int:pk>/<int:n>/', views.detailFicha, name='detailFicha'),
+    
         
 ] 

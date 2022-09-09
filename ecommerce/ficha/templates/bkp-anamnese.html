@@ -1,0 +1,133 @@
+<form method="POST" action=".">
+    {% csrf_token %}
+      <h5 class=""><span class="font-weight-bold">Nome do Pet:</span>
+        {% for iten in formset %}
+        <label>{{iten}}</label>
+        {% endfor %}
+       
+      </h5>
+       <div class="row">
+       <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Doenças:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.doenca|bootstrap }}
+          </div>
+        </div>
+      </div>  
+
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção das Unhas:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.unhas|bootstrap }}
+          </div>
+        </div>
+      </div>  
+
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção dos Olhos:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.olhos|bootstrap }}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção Bucal:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.boca|bootstrap }}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">  
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção das Patas:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.patas|bootstrap }}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção Auricular:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.orelhas|bootstrap }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-header bg-primary">
+          <h5 class="text-white">
+            <i class="bi bi-journal-text"></i> Inspeção do Pelo:
+          </h5>
+        </div>
+          <div class="card-body">
+            {{ form.pelos|bootstrap }}
+            {{ form.pelosEstado|bootstrap }}
+            {{ form.pelosCondicao|bootstrap }}
+          </div>  
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">  
+        <div class="card">
+          <div class="card-header bg-primary">
+            <h5 class="text-white">
+              <i class="bi bi-journal-text"></i> Inspeção da Pele:
+            </h5>
+          </div>
+          <div class="card-body">
+            {{ form.ectoparasitas|bootstrap }}
+            {{ form.peleInfeccionada|bootstrap }}
+            {{ form.peleOutros|bootstrap }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-3">  
+        <div class="card">
+          <div class="card-header bg-primary">
+            <h5 class="text-white">
+              <i class="bi bi-journal-text"></i> Observações:
+            </h5>
+          </div>
+          <div class="card-body">
+            {{ form.obs|bootstrap }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar
+    </button>
+    <a class="btn btn-primary" href="{% url 'pet:list' %}">Voltar</a>
+
+  </form>

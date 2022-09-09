@@ -30,6 +30,7 @@
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Tutor</th>
+	      <th scope="col">Status</th>
 	      <th scope="col">Nome do Pet</th>
 	      <th scope="col">Espécie</th>
 	      <th scope="col"></th>
@@ -40,6 +41,7 @@
 	  	 {% for pet in pets %}
 		    <tr>
 		   	  <th scope="row">{{pet.id}}</th>
+		      <td></td>
 		      <td></td>
 		      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
 		      <td class="text-uppercase">{{pet.especie}}</td>
