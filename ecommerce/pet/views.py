@@ -23,7 +23,7 @@ def pet_add(request):
 
 #Lista de Exibição Paginação
 def paginacao(request):
-    template = 'pet/formpet_list.html'
+    template_name = 'pet/formpet_list.html'
     parametro_page = request.GET.get('page', '1')
     parametro_limit = request.GET.get('limit', '5')
     
@@ -51,7 +51,7 @@ def paginacao(request):
         'pets': page,
         'object_list':objects
     }
-    return render(request, template, context)
+    return render(request, template_name, context)
 
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):
@@ -72,5 +72,3 @@ class updatePet(UpdateView):
     model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
-
-

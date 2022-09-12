@@ -1,7 +1,4 @@
 (12-09-22)
-Fazendo:
-    
-
 Feito:
     - Criado App cliente(tutor) - Ok
     - Models Cliente - Ok
@@ -11,9 +8,11 @@ Feito:
     - Arrumar Form de Cadastro - Ok
     - Mascara no Data - Ok
     - Add Condições com jquery ao campo Especie - Ok
+    - Erro na pagina Listar Fichas - OK
+    - Criar App Serviços - Ok
 
 Para Fazer:
-   
+    - Add e excluir(Especies e Raças)
     - Form Ficha
     - Cadastro pet/ficha
     - Add campo de Status(ativo e inativo)

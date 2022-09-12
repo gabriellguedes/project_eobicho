@@ -35,8 +35,8 @@ def createFicha(request, pk):
 def listFicha(request):
     template_name = 'ficha_list.html'
     lista = Ficha.objects.all()
-    context = { 'lista': lista}
-    return render(request, template_name, context)
+    context = { 'lista': lista,}
+    return render(request, template_name, context=context)
 
 #Visualizar ficha antiga
 def detailFicha(request, pk, n):

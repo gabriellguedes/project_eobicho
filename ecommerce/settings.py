@@ -30,13 +30,12 @@ INSTALLED_APPS = [
     # Apps de terceiros
     'widget_tweaks',
     'bootstrapform',
-    'crispy_forms',
-    'crispy_bootstrap5',
     # Meus Apps 
     'ecommerce.accounts',
     'ecommerce.core',
     'ecommerce.pet',
     'ecommerce.ficha',
+    'ecommerce.services',
 ]
 
 MIDDLEWARE = [
