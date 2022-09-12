@@ -21,7 +21,7 @@
       <div class="col-md-4 mb-3">
         {{ form.apelido|bootstrap }}
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 date">
         {{ form.aniversario|bootstrap }}
       </div>
     
@@ -32,23 +32,22 @@
       <div class="col-md-3 mb-3">
         {{ form.peso|bootstrap }}
       </div>
-      <!-- SELECT DE RAÇAS -->
-      <select id="select" name="select" class="col-md-3 mb-3">
-        {% for iten in form.especie %}
-          <option>{{iten}}</option>
-        {% endfor %}
-      </select>
+      
+<!-- SELECT TIPO DE ANIMAIS/RAÇAS -->
+      <div id="select" name="select" class="col-md-3 mb-3">
+         {{form.especie|bootstrap}}
+      </div>
 
-      <div id="racas">
-        <div id="cachorro" class="col-md-3 mb-3">
+      <div id="racas" class="col-md-3 mb-3">
+        <div id="cachorro">
           {{ form.racaCachorro|bootstrap }}
         </div>
         
-        <div id="gato" class="col-md-3 mb-3">
+        <div id="gato">
           {{ form.racaGato|bootstrap }}
         </div>
       </div>
-
+<!--/SELECT TIPO DE ANIMAIS/RAÇAS  -->
       <div class="col-md-3 mb-3">
        {{ form.temperamento|bootstrap }}
       </div>

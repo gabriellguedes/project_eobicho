@@ -9,7 +9,7 @@ class PetForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields['aniversario'].widget.attrs.update({'class': 'date'})
+		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})
 		
 
 
