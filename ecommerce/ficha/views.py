@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from ecommerce.pet.models import Pet
 from .models import Ficha
 from .forms import FichaForm
@@ -7,41 +9,27 @@ from django.forms import inlineformset_factory
 
 # Criar uma nova ficha
 def createFicha(request, pk):
-    template_name = 'form_add.html'
-    pet_form = Pet()
-    a_form = inlineformset_factory(
-        Pet,
-        Ficha,
-        form= FichaForm,
-        extra=0,
-        min_num=1,
-        validate_min=True,
-    )
-    if request.method == 'POST':
-        form= PetForm(request.POST, instance=pet_form, prefix='main')
-        formset= a_form(
-            request.POST,
-            instance=pet_form, 
-            prefix='pet',
-        )
-        if form.is_valid() and formset.is_valid():
-            form=form.save(commit=False)
-            formset.funcionario = request.user
-            formset.status = status
-            formset.pet= Pet.objects.get(id=pk)
-            form.save()
-            formset.save()
-
-            url = 'pet:detail'
-            return { 'pk': form.pk}
+    template_name = 'anamnese.html'
+    pet_pk = Pet.objects.get(pk=pk)
+    
+    if request.method == 'GET':
+        form = FichaForm()
+        context = {
+            'form':form
+        }
+        return render(request, template_name, context=context)
     else:
-        form= PetForm(instance=pet_form, prefix='main')
-        formset= a_form(instance=pet_form, prefix='pet')
-    context={
-        'form': form,
-        'formset': formset
-    }    
-    return render(request, template_name, context)   
+        form = FichaForm(request.POST)
+        if form.is_valid():
+            form.pet == pet_pk
+            pet = form.save()
+            return HttpResponseRedirect(reverse('pet:list'))
+        context = {
+            'form':form
+        }
+
+        return render(request, template_name, context=context)
+
 
 #Listar todas as fichas cadastradas
 def listFicha(request):

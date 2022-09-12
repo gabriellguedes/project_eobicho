@@ -32,17 +32,21 @@
       <div class="col-md-3 mb-3">
         {{ form.peso|bootstrap }}
       </div>
+      <!-- SELECT DE RAÇAS -->
+      <select id="select" name="select" class="col-md-3 mb-3">
+        {% for iten in form.especie %}
+          <option>{{iten}}</option>
+        {% endfor %}
+      </select>
 
-      <div class="col-md-3 mb-3">
-        {{ form.especie|bootstrap }}
-      </div>
-       {% if form.especie == 'cachorro'%} 
-        <div class="col-md-3 mb-3">
+      <div id="racas">
+        <div id="cachorro" class="col-md-3 mb-3">
           {{ form.racaCachorro|bootstrap }}
         </div>
-        {% endif %}
-      <div class="col-md-3 mb-3">
-        {{ form.racaGato|bootstrap }}
+        
+        <div id="gato" class="col-md-3 mb-3">
+          {{ form.racaGato|bootstrap }}
+        </div>
       </div>
 
       <div class="col-md-3 mb-3">

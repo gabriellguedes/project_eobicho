@@ -5,6 +5,8 @@ t = Tuplas()
 
 
 class Pet(models.Model):
+	
+	
 	nome = models.CharField('Nome',max_length=150)
 	apelido = models.CharField('Apelido',max_length=30)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
