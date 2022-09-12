@@ -35,6 +35,11 @@ def createFicha(request, pk):
 def listFicha(request):
     template_name = 'ficha_list.html'
     lista = Ficha.objects.all()
+    search = request.GET.get('search')
+    if search:
+        objects = objects.filter(nome__icontains=search)
+        return render(request, template)
+
     context = { 'lista': lista,}
     return render(request, template_name, context=context)
 

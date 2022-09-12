@@ -10,6 +10,8 @@ Feito:
     - Add Condições com jquery ao campo Especie - Ok
     - Erro na pagina Listar Fichas - OK
     - Criar App Serviços - Ok
+    - Criar o Urls na App serviços - Ok
+    - Criar o Forms na App serviços - Ok
 
 Para Fazer:
     - Add e excluir(Especies e Raças)
