@@ -7,7 +7,7 @@ from django.views.generic import UpdateView
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm
-from .models import Pet
+from .models import Pet, Especie, Raca
 
 #Cadastro Pet
 def pet_add(request):
@@ -72,3 +72,12 @@ class updatePet(UpdateView):
     model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:list')
+
+#Visualizar raças
+def raca_view(request):
+    template_name= 'formpet_form.html'
+    raca = Raca.objects.filter(especie=1)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)

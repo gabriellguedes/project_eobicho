@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="container">
+	<div class="col-md-6">
+		<table class="table">
+			<thead>
+				<th scope="col">#</th>
+				<th scope="col">Espécie:</th>
+				<th scope="col">Ações:</th>
+			</thead>
+			<tbody>
+				{% for iten in especie %}
+				<tr>
+					<th scope="col">{{iten.id}}</th>
+					<td>{{iten.especie}}</td>
+					<td>
+						<a class="btn btn-danger" href="{% url 'core:del_Especie' pk=iten.id %}">Apagar</a>
+					</td>
+				</tr>	
+				{% endfor%}
+			</tbody>
+		</table>
+	</div>	
+</section>
+{% endblock %}

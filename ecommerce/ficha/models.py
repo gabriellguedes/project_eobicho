@@ -25,7 +25,7 @@ class Create(TimeStampedModel):
 
 class Ficha(models.Model):
 
-	created = models.ForeignKey(Create, on_delete=models.CASCADE, related_name='timeCreated')
+	created = models.ForeignKey(Create, on_delete=models.CASCADE, related_name='timeCreated', default=None)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
 	unhas = models.CharField('', max_length=100, choices=t.UNHAS_CHOICES)
 	ectoparasitas = models.CharField('Ectoparasitas',  max_length=100, choices=t.ECTOPARASITAS_CHOICES)

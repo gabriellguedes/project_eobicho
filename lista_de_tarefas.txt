@@ -13,8 +13,29 @@ Feito:
     - Criar o Urls na App serviços - Ok
     - Criar o Forms na App serviços - Ok
 
+(13-09-22)
+Feito:
+    - Função de Add e excluir Especies - Ok
+        - Form - OK
+        - ModelAdmin - Ok
+        - Models - Ok
+        - Views(Add) - Ok
+        - Views(List) - Ok
+        - Views(delete) - Ok
+        - Url in Core - Ok
+    
+    - Função de Add e excluir Raças- OK
+        - Form - Ok
+        - Models - OK
+        - ModelAdmin - Ok
+        - Views(Add in Core) - OK
+        - Url in Core - OK 
+    
+    - Criar urls no App Core - Ok
+    - Criar Forms no App Core - Ok
+
 Para Fazer:
-    - Add e excluir(Especies e Raças)
+    
     - Form Ficha
     - Cadastro pet/ficha
     - Add campo de Status(ativo e inativo)
@@ -24,7 +45,6 @@ Para Fazer:
     - Calcular automaticamente a idade
     - Registro de Úsuarios
      
-    Inspeção vital
 
 
 

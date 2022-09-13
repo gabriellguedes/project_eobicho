@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="container">
+	<form method="POST" action=".">
+		<legend>Adicionar Raça</legend>
+		{% csrf_token %}
+		{% for iten in raca %}
+		<div class="col">
+			<label>Raça: </label> {{iten}}
+		</div>
+		{% endfor %}
+		<button class="btn btn-success" type="submit">Adicionar</button>		
+	</form>
+</section>
+{% endblock %}
