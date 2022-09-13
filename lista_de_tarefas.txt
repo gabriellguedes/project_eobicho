@@ -22,6 +22,7 @@ Feito:
         - Views(Add) - Ok
         - Views(List) - Ok
         - Views(delete) - Ok
+        - Views(update) -Ok
         - Url in Core - Ok
     
     - Função de Add e excluir Raças- OK

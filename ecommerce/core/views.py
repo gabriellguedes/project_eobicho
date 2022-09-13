@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import RacaForm, EspecieForm
 from ecommerce.pet.models import Raca, Especie
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 def login(request):
@@ -15,9 +15,9 @@ def add_Especie(request):
 	if request.method=='POST':
 		if form.is_valid():
 			form = form.save()
-			return HttpResponseRedirect(reverse_lazy('core:list_especie'))
+			return HttpResponseRedirect(reverse('core:list_Especie'))
 	context ={'especie': form}		
-	return render(request, template_name, context)
+	return render(request, template_name, context=context)
 
 #Listar as Especies
 def list_Especie(request):
@@ -31,7 +31,16 @@ def delete_Especie(request, pk):
 	obj = Especie.objects.get(id=pk)
 	obj.delete()
 	
-	return render(request, reverse_lazy('core:list_especie'))
+	return HttpResponseRedirect(reverse('core:list_Especie'))
+
+# Atualizar/Alterar
+def update_Especie(request, pk):
+	template_name = 'update_especie.html'
+	obj = Especie.objects.get(id=pk)
+	context = {
+		'especie': obj,
+	}
+	return render(request, template_name, context=context)
 
 # Adicionar Raça
 def add_Raca(request):
