@@ -23,6 +23,9 @@ Feito:
         - Views(List) - Ok
         - Views(delete) - Ok
         - Views(update) -Ok
+        - Template(Add) - Ok
+        - Template(List) - Ok
+        - Template(Update) - Ok
         - Url in Core - Ok
     
     - Função de Add e excluir Raças- OK
@@ -30,6 +33,11 @@ Feito:
         - Models - OK
         - ModelAdmin - Ok
         - Views(Add in Core) - OK
+        - Views(List) - Ok
+        - Views(delete) - Ok
+        - Views(update) -Ok
+        - Template(List) - Ok
+        - Template(Add) - Ok
         - Url in Core - OK 
     
     - Criar urls no App Core - Ok

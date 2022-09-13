@@ -11,5 +11,8 @@ urlpatterns =[
 	path('delete-Especie/<int:pk>/', views.delete_Especie, name='del_Especie'),
 	path('update-Especie/<int:pk>/', views.update_Especie, name='update_Especie'),
 	# Raças
-	path('addraca/', views.add_Raca, name='add_Raca'),
+	path('add-raca/', views.add_Raca, name='add_Raca'),
+	path('list-Raca/', views.list_Raca, name='list_Raca'),
+	path('update-Raca/<int:pk>/', views.update_Raca, name='update_Raca'),
+	path('delete-Raca/<int:pk>/', views.delete_Raca, name='delete_Raca'),
 ]

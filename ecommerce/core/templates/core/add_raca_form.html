@@ -4,14 +4,19 @@
 {% block content %}
 <section class="container">
 	<form method="POST" action=".">
-		<legend>Adicionar Raça</legend>
+		<legend class="border-bottom pb-2 text-info font-weight-bold">
+			<i class="bi bi-card-checklist"></i> Adicionar nova Raça
+		</legend>
 		{% csrf_token %}
-		{% for iten in raca %}
-		<div class="col">
-			<label>Raça: </label> {{iten}}
+		<div class="col-sm-4">
+			{{raca.especie|bootstrap}}
+			{{raca.raca|bootstrap}}
+			<div class="d-flex justify-content-end">
+				<button class="btn btn-primary" type="submit">Adicionar</button>
+			</div>		
 		</div>
-		{% endfor %}
-		<button class="btn btn-success" type="submit">Adicionar</button>		
+		
+			
 	</form>
 </section>
 {% endblock %}
