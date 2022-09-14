@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url
 from .forms import RacaForm, EspecieForm
 from ecommerce.pet.models import Raca, Especie
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.forms import inlineformset_factory
+from django.views.generic import UpdateView
 
 def login(request):
 	template_name = 'index.html'
@@ -31,8 +32,8 @@ def especie_add(request):
         if form.is_valid() and formset.is_valid():
             form = form.save()
             formset.save()
-            url = 'estoque:estoque_entrada_detail'
-            return HttpResponseRedirect(resolve_url(url, form.pk))
+            url = 'core:list_Especie'
+            return HttpResponseRedirect(resolve_url(url))
     else:
         form = EspecieForm(instance=especie_form, prefix='main')
         formset = raca_formset(instance=especie_form, prefix='estoque')
@@ -42,7 +43,7 @@ def especie_add(request):
 
 # Adicionar uma nova Especie
 def add_Especie(request):
-	template_name = 'core/add_form.html'
+	template_name = 'core/especie_add.html'
 	form = EspecieForm(request.POST or None)
 	if request.method=='POST':
 		if form.is_valid():
@@ -53,7 +54,7 @@ def add_Especie(request):
 
 # Listar as Especies
 def list_Especie(request):
-	template_name = 'core/list_especie.html'
+	template_name = 'core/especie_list.html'
 	obj = Especie.objects.all()
 	context = { 'especie': obj }
 	return render(request, template_name, context=context)
@@ -66,17 +67,15 @@ def delete_Especie(request, pk):
 	return HttpResponseRedirect(reverse('core:list_Especie'))
 
 # Atualizar/Alterar Espécies
-def update_Especie(request, pk):
-	template_name = 'update_especie.html'
-	obj = Especie.objects.get(id=pk)
-	context = {
-		'especie': obj,
-	}
-	return render(request, template_name, context=context)
+class update_Especie(UpdateView):
+	template_name = 'core/especie_update.html'
+	model = Especie
+	fields = '__all__'
+	success_url = reverse_lazy('core:list_Especie')
 
 # Adicionar Raça
 def add_Raca(request):
-	template_name = 'core/add_raca_form.html'
+	template_name = 'core/raca_add.html'
 	form = RacaForm(request.POST)
 	if request.method=='POST':
 		if form.is_valid():
@@ -89,7 +88,7 @@ def add_Raca(request):
 
 # Listar Todas as Raças
 def list_Raca(request):
-	template_name ='core/list_raca.html'
+	template_name ='core/raca_list.html'
 	raca = Raca.objects.all()
 	context = {
 		'raca': raca,
@@ -98,7 +97,7 @@ def list_Raca(request):
 
 # Atualizar/Alterar Raças
 def update_Raca(request, pk):
-	template_name = 'core/update_raca.html'
+	template_name = 'core/raca_update.html'
 	obj = Raca.objects.get(id=pk)
 	context = {
 		'raca': obj,

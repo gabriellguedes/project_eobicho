@@ -3,12 +3,18 @@
 {% load widget_tweaks %}
 {% block content %}
 <section class="container">
-	<h2 class="border-bottom pb-3 text-info font-weight-bold">
-		<i class="bi bi-card-checklist"></i> <span class="text-uppercase">Espécies cadastradas</span>
-		<div class="float-right">
-			<a class="btn btn-primary" href="{% url 'core:add_Especie' %}">Nova Espécie</a>
+	<div class="row">
+		<div class="col-md-6">
+			<h2 class="text-info font-weight-bold">
+				<i class="bi bi-card-checklist"></i> <span class="text-uppercase">Espécies cadastradas</span>
+			</h2>
+		</div>	
+		<div class="col-md-6">
+			  <div class="d-flex justify-content-end">
+				<a class="btn btn-primary" href="{% url 'core:add_Especie' %}">Nova Espécie</a>
+			</div>	
 		</div>
-	</h2>
+	</div>	
 	<div class="row">
 		<!-- MENSAGEM DE ALERTA -->
 		<div class="col-md-6">
