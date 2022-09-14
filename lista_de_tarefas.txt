@@ -51,8 +51,11 @@ Feito:
 (14-09-22)
 Feito:
     - Subir os aquirvos para o Heroku
+    - Inline add Especie/raça - Fazendo
 
 Para Fazer:
+    -
+    - Menu Admin
     - Alert javascript(delete Especie/Raça)
     - Form Ficha
     - Cadastro pet/ficha

@@ -3,10 +3,42 @@ from .forms import RacaForm, EspecieForm
 from ecommerce.pet.models import Raca, Especie
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.forms import inlineformset_factory
 
 def login(request):
 	template_name = 'index.html'
 	return render(request, template_name)
+
+# Add Espécie/Raça 
+def especie_add(request):
+    template_name = 'core/especie_add_form.html'
+    especie_form = Especie()
+    raca_formset = inlineformset_factory(
+        Especie,
+        Raca,
+        form=RacaForm,
+        extra=0,
+        min_num=1,
+        validate_min=True,
+    )
+    if request.method == 'POST':
+        form = EspecieForm(request.POST, instance=especie_form, prefix='main')
+        formset = raca_formset(
+            request.POST,
+            instance=especie_form,
+            prefix='estoque'
+        )
+        if form.is_valid() and formset.is_valid():
+            form = form.save()
+            formset.save()
+            url = 'estoque:estoque_entrada_detail'
+            return HttpResponseRedirect(resolve_url(url, form.pk))
+    else:
+        form = EspecieForm(instance=especie_form, prefix='main')
+        formset = raca_formset(instance=especie_form, prefix='estoque')
+
+    context = {'form': form, 'formset': formset}
+    return render(request, template_name, context)
 
 # Adicionar uma nova Especie
 def add_Especie(request):

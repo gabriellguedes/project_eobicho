@@ -6,6 +6,7 @@ app_name ='core'
 urlpatterns =[
 	path('', views.login, name='login' ),
 	# Especies
+	path('add-especie/', views.especie_add, name='especie_add'),
 	path('addespecie/', views.add_Especie, name='add_Especie'),
 	path('listEspecie/', views.list_Especie, name='list_Especie'),
 	path('delete-Especie/<int:pk>/', views.delete_Especie, name='del_Especie'),

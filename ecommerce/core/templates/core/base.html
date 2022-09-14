@@ -22,12 +22,13 @@
     <header id="wrap-header">
       <div class="container">
         <div class="row">
-          <div class="col">
+          <div class="col mb-4">
             <a href="{% url 'pet:list' %}"><img class="card-img-top" alt="logo" src="{% static 'img/logo.png'%}"></a>
           </div>
           
         </div>
-      </div>  
+      </div>
+      {% include 'includes/navbar.html'%}  
     </header><!-- /HEADER -->
     <main id="wrap-main">
       
@@ -43,12 +44,12 @@
 
     
    
-    
+  
     <script type="text/javascript" src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/styles.js' %}"></script> 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-     
+
 </body>
 </html>
