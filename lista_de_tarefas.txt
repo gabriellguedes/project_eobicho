@@ -43,6 +43,7 @@ Feito:
     - Criar urls no App Core - Ok
     - Criar Forms no App Core - Ok
 
+(14-09-22)
 Para Fazer:
     
     - Form Ficha
