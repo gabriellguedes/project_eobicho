@@ -50,7 +50,8 @@ Feito:
 
 (14-09-22)
 Feito:
-    - Subir os aquirvos para o Heroku
+    - Subir os aquirvos para o Heroku - Ok
+    - Atualizar arquivos no Heroku -
     - Inline add Especie/raça - Fazendo
 
 Para Fazer:
