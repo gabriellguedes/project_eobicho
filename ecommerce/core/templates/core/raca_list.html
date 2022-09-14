@@ -3,15 +3,22 @@
 {% load widget_tweaks %}
 {% block content %}
 <section class="container">
-	<h2 class="border-bottom pb-3 text-info font-weight-bold">
-		<i class="bi bi-card-checklist"></i> <span class="text-uppercase">Raças cadastradas</span>
-		<div class="float-right">
-			<a class="btn btn-primary" href="{% url 'core:add_Raca' %}">Adicionar Raça</a>
+	<div class="row border-bottom">
+		<div class="col-md-6">
+			<h2 class="text-info font-weight-bold">
+				<i class="bi bi-card-checklist"></i> <span class="text-uppercase">Raças cadastradas</span>
+			</h2>
+		</div>	
+		<div class="col-md-6">
+			  <div class="d-flex justify-content-end">
+				<a class="btn btn-primary" href="{% url 'core:add_Especie' %}">Nova Raça</a>
+			</div>	
 		</div>
-	</h2>
+	</div>	
+	
 	<div class="row">
 		<!-- MENSAGEM DE ALERTA -->
-		<div class="col-sm-5">
+		<div class="col-md-6 mt-4">
 			<div class="card">
 				<h3 class="card-header bg-primary text-white mb-3 d-flex justify-content-center font-weight-bold">Atenção!</h3>
 				<div class="card-text px-3">
@@ -21,7 +28,7 @@
 			</div>	
 		</div>
 		<!-- TABELA DE EXIBIÇÃO DAS ESPÉCIES CADASTRADAS -->
-		<div class="col-lg-7">
+		<div class="col-md-6 mt-4">
 			<table class="table">
 				<thead>
 					<th scope="col">#</th>
