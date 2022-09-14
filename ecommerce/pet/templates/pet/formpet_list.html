@@ -5,18 +5,20 @@
 {% block content %}
 
 <section class="container">
-	<div class="mb-3">
-		<h2 class="font-weight-bold text-info">
-			<i class="bi bi-card-checklist"></i>
-			Cadastrados
+	<div class="row border-bottom">
+		<div class="col-md-6">
+			<h2 class="font-weight-bold text-info">
+				<i class="bi bi-card-checklist"></i>
+				Cadastrados
+			</h2>
+		</div>	
+		<div class="col-md-6">
+			<div class="d-flex justify-content-end">
+				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Cadastrar Pet</a>
+			</div>	
+		</div>
+	</div>
 
-			<a class="btn btn-primary float-right" href="{% url 'pet:create' %}">Cadastrar Pet</a>
-		</h2>
-		
-	</div>
-	<div>	
-			
-	</div>
 {% if pets %}
 	<!-- LISTA DE ANIMAIS CADASTRADOS -->	 
 	{% csrf_token %}
@@ -53,7 +55,7 @@
 	  </tbody>
 	</table>
 {% else %}
-	<p class="alert alert-warning">Sem itens na lista.</p>
+	<p class="alert alert-warning mt-3">Sem itens na lista.</p>
 {% endif%}	
 	<!-- PAGINATOR -->
 	<div class="row">
