@@ -14,7 +14,7 @@
 		</div>	
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Cadastrar Pet</a>
+				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Cadastrar Pet <i class="fa-solid fa-paw"></i></a>
 			</div>	
 		</div>
 	</div>
@@ -22,38 +22,38 @@
 {% if pets %}
 	<!-- LISTA DE ANIMAIS CADASTRADOS -->	 
 	{% csrf_token %}
-	<table id="wrap-list-pet" class="table">
-	  <thead class="">
-	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">Tutor</th>
-	      <th scope="col">Status</th>
-	      <th scope="col">Nome do Pet</th>
-	      <th scope="col">Espécie</th>
-	      <th scope="col"></th>
-	      <th scope="col"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  	 {% for pet in pets %}
+	
+		<table class="table">
+		  <thead>
 		    <tr>
-		   	  <th scope="row">{{pet.id}}</th>
-		      <td></td>
-		      <td></td>
-		      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
-		      <td class="text-uppercase">{{pet.especie}}</td>
-		      <td></td>
-		      <td>
-		      	<div class="d-flex justify-content-end">
-		      		<a class="btn btn-primary mr-sm-2" href="{% url 'pet:detail' pk=pet.id %}">Visualizar</a>
-		      		<a class="btn btn-warning mr-sm-2" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
-		      	
-		      	</div>	
-		      </td>
+		      <th scope="col">#</th>
+		      <th scope="col">Tutor</th>
+		      <th scope="col">Status</th>
+		      <th scope="col">Nome do Pet</th>
+		      <th scope="col">Espécie</th>
+		      <th class="text-center" scope="col">Ações</th>
 		    </tr>
-	    {% endfor %}
-	  </tbody>
-	</table>
+		  </thead>
+		  <tbody>
+		  	 {% for pet in pets %}
+			    <tr>
+			   	  <th scope="row">{{pet.id}}</th>
+			      <td></td>
+			      <td></td>
+			      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
+			      <td class="text-uppercase">{{pet.especie}}</td>
+			      <td>
+			      	<div class="d-flex justify-content-end">
+			      		<a class="btn btn-primary mr-2" href="{% url 'pet:detail' pk=pet.id %}">
+			      			<i class="fa-regular fa-eye"></i> Visualizar</a>
+			      		<a class="btn btn-warning" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
+			      	</div>	
+			      </td>
+			    </tr>
+		    {% endfor %}
+		  </tbody>
+		</table>
+
 {% else %}
 	<p class="alert alert-warning mt-3">Sem itens na lista.</p>
 {% endif%}	

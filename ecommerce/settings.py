@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps de terceiros
     'widget_tweaks',
+    'fontawesomefree',
     'bootstrapform',
     # Meus Apps 
     'ecommerce.accounts',
