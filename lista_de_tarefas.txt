@@ -26,7 +26,11 @@ Feito:
         - Template(Add) - Ok
         - Template(List) - Ok
         - Template(Update) - Ok
-        - Url in Core - Ok
+        - Url(Add) - OK
+        - Url(List) - Ok
+        - Url(delete) - Ok
+        - Url(update) - OK
+        
     
     - Função de Add e excluir Raças- OK
         - Form - Ok
@@ -38,14 +42,18 @@ Feito:
         - Views(update) -Ok
         - Template(List) - Ok
         - Template(Add) - Ok
-        - Url in Core - OK 
-    
-    - Criar urls no App Core - Ok
-    - Criar Forms no App Core - Ok
+        - Url(Add) - OK
+        - Url(List) - Ok
+        - Url(delete) - Ok
+        - Url(update) - OK  
+
 
 (14-09-22)
+Feito:
+    - Subir os aquirvos para o Heroku
+
 Para Fazer:
-    
+    - Alert javascript(delete Especie/Raça)
     - Form Ficha
     - Cadastro pet/ficha
     - Add campo de Status(ativo e inativo)
