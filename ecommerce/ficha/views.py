@@ -10,7 +10,7 @@ from django.forms import inlineformset_factory
 
 # Criar uma nova ficha
 def createFicha(request, pk):
-    template_name = 'anamnese.html'
+    template_name = 'ficha_add.html'
     pet_pk = Pet.objects.get(pk=pk)
     
     if request.method == 'GET':

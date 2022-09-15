@@ -11,7 +11,7 @@ from .models import Pet, Especie, Raca
 
 #Cadastro Pet
 def pet_add(request):
-    template_name = 'pet/formpet_form.html'
+    template_name = 'pet/pet_add.html'
     form = PetForm(request.POST or None)
 
     if request.method == 'POST':
@@ -23,7 +23,7 @@ def pet_add(request):
 
 #Lista de Exibição Paginação
 def paginacao(request):
-    template_name = 'pet/formpet_list.html'
+    template_name = 'pet/pet_list.html'
     parametro_page = request.GET.get('page', '1')
     parametro_limit = request.GET.get('limit', '5')
     
@@ -52,7 +52,7 @@ def paginacao(request):
 
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):
-    template ='pet/formpet_detail.html'
+    template ='pet/pet_detail.html'
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
@@ -65,7 +65,7 @@ def detailPet(request, pk):
 
 #Atualização
 class updatePet(UpdateView):
-    template_name = 'pet/formpet_update.html'
+    template_name = 'pet/pet_update.html'
     model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:list')

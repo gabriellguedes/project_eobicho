@@ -70,7 +70,6 @@
 		
 		<div class="col-lg-6">
 			<div class="card">
-			
 					<div class="card-header bg-primary">
 						<h3 class="text-white"><i class="bi bi-journal-text"></i> Ficha de Avalição</h3>
 						<div class="col row">
@@ -91,8 +90,6 @@
 								<small class="text-monospace text-white">{{ficha.date}}</small>
 							</div>
 						</div>	
-
-
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
@@ -148,44 +145,42 @@
 								<i class="fa-solid fa-plus"></i> Nova Anamnese
 							</a>
 						</div>
-							
-				   		<div class="row border-bottom"></div>
-
-					    <div class="col mt-3">
-					    	<p class="font-weight-bold">
-					    		<i class="bi bi-journal-text"></i> Fichas Antigas:
-					    	</p>	
-					    	<table class="table table-hover">
-					    		<thead>
-					    			<tr class="text-center">
-						    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
-						    			<th scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
-						    			<th scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
-						    			<th scope="col"></th>
-						    		</tr>	
-					    		</thead>	
-					    		{% for iten in last_fichas %}
-					    			<tbody>
-					    				<tr class="text-center">
-								    		<th scope="row">
-								    			<a href="{% url 'fichas:detailFicha' pk=pet.id n=iten.id %}">{{iten.id}}</a>
-								    		</th>
-								    		<td>
-								    			<small>
-								    				{{iten.date}}
-								    			</small>	
-								    		</td>
-								    		<td>{{iten.funcionario}}</td>
-								    		<td>
-								    			<a class="btn btn-primary" href="{% url 'fichas:detailFicha' pk=pet.id  n=iten.id %}">Visualizar</a>
-								    		</td>
-							    		</tr>
-							    	</tbody>	
-							    {% endfor%}							    	
-					    	</table>
-					    </div>
-				  	</div>	
-			  </div>  
+					</div>		
+				</div>    		
+				   		
+			    <div class="col mt-3">
+			    	<p class="font-weight-bold">
+			    		<i class="bi bi-journal-text"></i> Fichas Antigas:
+			    	</p>	
+			    	<table class="table table-hover">
+			    		<thead>
+			    			<tr class="text-center">
+				    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
+				    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
+				    			<th class="block-none" scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
+				    			<th scope="col">Ações</th>
+				    		</tr>	
+			    		</thead>	
+			    		{% for iten in last_fichas %}
+			    			<tbody>
+			    				<tr class="text-center">
+						    		<th scope="row">
+						    			<a href="{% url 'fichas:detailFicha' pk=pet.id n=iten.id %}">{{iten.id}}</a>
+						    		</th>
+						    		<td class="block-none">
+						    			<small>
+						    				{{iten.date}}
+						    			</small>	
+						    		</td>
+						    		<td class="block-none">{{iten.funcionario}}</td>
+						    		<td>
+						    			<a class="btn btn-primary" href="{% url 'fichas:detailFicha' pk=pet.id  n=iten.id %}">Visualizar</a>
+						    		</td>
+					    		</tr>
+					    	</tbody>	
+					    {% endfor%}							    	
+			    	</table>
+			    </div>
 		</div>
 
 

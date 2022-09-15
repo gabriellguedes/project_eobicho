@@ -80,7 +80,6 @@ Feito:
                 - List Raça - Ok
                 - Update Raça - Ok
                 - Delete Raça - OK
-
     - Correções no layout List Pet - OK
     - Correções no layout List Fichas - OK
     - Add paginação no Lidt Fichas - Ok 
@@ -90,13 +89,18 @@ Feito:
     - Atualizar Cody Views Update Raça - Ok
     - Correção de erro no heroku(instalação do gunicorn) - Ok
     - Correção da img detail Pet - Ok
+    - Deletar aquivos desnecessários - Ok
+    - Renomear os arquivos .html(padronizando) - Ok
+    - Correções no layout responsive - Ok
 Para Fazer:
     
+    - (Models)Add campo datetime 
     - Add mais de uma opção no Anamneses
     - Menu Admin
     - Alert javascript(delete Especie/Raça)
     - Form Ficha
     - Cadastro pet/ficha
+    - (Models)Add campo de foto para pet
     - Add campo de Status(ativo e inativo)
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)
