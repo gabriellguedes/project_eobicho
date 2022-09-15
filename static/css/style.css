@@ -90,6 +90,9 @@ span.required:after{
 
 
 @media only screen and (max-width: 600px){
+	.logo{
+		align-content: center;
+	}
 	.block-none{
 		display: none;
 	}

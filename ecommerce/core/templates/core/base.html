@@ -10,7 +10,7 @@
      {% block title %} É O BICHO {% endblock title %}
     </title>
 
-
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %} ">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -24,7 +24,7 @@
       <div class="container">
         <div class="row">
           <div class="col mb-4">
-            <a href="{% url 'pet:list' %}"><img class="card-img-top" alt="logo" src="{% static 'img/logo.png'%}"></a>
+            <a href="{% url 'pet:list' %}"><img class="card-img-top logo" alt="logo" src="{% static 'img/logo.png'%}"></a>
           </div>
           
         </div>

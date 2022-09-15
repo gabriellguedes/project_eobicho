@@ -65,7 +65,7 @@ Feito:
                 - Update Pet - OK
         
         **** Ficha:
-                - Add Ficha -
+                - Add Ficha - Faltando 
                 - List Ficha - Ok
                 - Detail Ficha - OK
         
@@ -92,6 +92,7 @@ Feito:
     - Deletar aquivos desnecessários - Ok
     - Renomear os arquivos .html(padronizando) - Ok
     - Correções no layout responsive - Ok
+
 Para Fazer:
     
     - (Models)Add campo datetime 
