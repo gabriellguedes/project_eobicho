@@ -34,7 +34,7 @@
 			<table class="table">
 				<thead>
 					<th scope="col">#</th>
-					<th scope="col"><i class="fa-solid fa-paw"></i> Espécie</th>
+					<th class="block-none" scope="col"><i class="fa-solid fa-paw"></i> Espécie</th>
 					<th scope="col"><i class="fa-solid fa-shield-dog"></i> Raça</th>
 					<th class="text-center" scope="col">
 						<i class="fa-solid fa-gears"></i> Ações:
@@ -44,7 +44,7 @@
 					{% for iten in raca %}
 					<tr>
 						<th scope="col">{{iten.id}}</th>
-						<td>{{iten.especie}}</td>
+						<td class="block-none">{{iten.especie}}</td>
 						<td>
 							<a href="{% url 'core:update_Raca' pk=iten.id %}">{{iten.raca}}</a>
 						</td>
