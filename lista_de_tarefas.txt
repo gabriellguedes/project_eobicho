@@ -88,6 +88,8 @@ Feito:
     - Corrigir link de Nova Raça - Ok
     - Corrigir link de Update Raça - Ok
     - Atualizar Cody Views Update Raça - Ok
+    - Correção de erro no heroku(instalação do gunicorn) - Ok
+    - Correção da img detail Pet - Ok
 Para Fazer:
     
     - Add mais de uma opção no Anamneses
