@@ -5,16 +5,16 @@
 {% endblock title %}
 {% block content %}
 <section class="container">
-	<h2 class="border-bottom pb-2">
+	<h2 class="border-bottom pb-2 text-info">
 		<i class="bi bi-journal-text"></i>
-		Anamnese do <span class="text-info">{{ficha.pet}}</span> do dia <span class="text-info">{{ficha.date}}</span>
+		Anamnese do <span class="text-danger">{{ficha.pet}}</span> do dia <span class="text-danger">{{ficha.date}}</span>
 	</h2>
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card">
 			
 					<div class="card-header bg-primary">
-						<h3 class="text-white"><i class="bi bi-journal-text"></i> Ficha de Avalição Nº {{ficha.id}}</h3>
+						<h3 class="text-white"><i class="fa-solid fa-file"></i> Ficha de Avalição Nº {{ficha.id}}</h3>
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
@@ -70,13 +70,13 @@
 		</div>
 		<div class="col-lg-6">
 		    <div class="col mt-3">
-		    	<p class="font-weight-bold">Outras Anamneses:</p>	
+		    	<p class="font-weight-bold"><i class="fa-solid fa-notes-medical"></i> Outras Anamneses:</p>	
 		    	<table class="table">
 		    		<thead>
 		    			<tr class="text-center">
-			    			<th scope="col">Nº Ficha</th>
-			    			<th scope="col">Data</th>
-			    			<th scope="col">Funcionário</th>
+			    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
+			    			<th scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
+			    			<th scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
 			    		</tr>	
 		    		</thead>	
 		    		{% for iten in last_fichas %}

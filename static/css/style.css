@@ -34,6 +34,16 @@ span.required:after{
 	min-height: 500px;
 	margin: 0 auto;
 }
+.circulo{	
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;
+	float: left;
+	margin: 15px;
+	transition: 0.3s ease;
+}
+
 	#wrap-list-pet{
 		margin-top: 15px;
 	}
@@ -49,3 +59,8 @@ span.required:after{
 }
 
 
+@media only screen and (max-width: 600px){
+	.block-none{
+		display: none;
+	}
+}

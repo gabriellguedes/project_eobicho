@@ -14,6 +14,6 @@ urlpatterns =[
 	# Raças
 	path('add-raca/', views.add_Raca, name='add_Raca'),
 	path('list-Raca/', views.list_Raca, name='list_Raca'),
-	path('update-Raca/<int:pk>/', views.update_Raca, name='update_Raca'),
+	path('update-Raca/<int:pk>/', views.update_Raca.as_view(), name='update_Raca'),
 	path('delete-Raca/<int:pk>/', views.delete_Raca, name='delete_Raca'),
 ]

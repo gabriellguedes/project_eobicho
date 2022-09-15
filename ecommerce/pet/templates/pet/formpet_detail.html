@@ -11,18 +11,19 @@
 		<div class="col-lg-4 mb-3">
 			<div class="card">
 				<div class="text-center">
-			  		<img class="card-img-top rounded" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+			  		<img class="card-img-top circulo rounded" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
 			  	</div>	
 			  <div class="card-body">
 			    <h5 class="card-title">
-			    	<label class="text-monospace">{{pet.nome}} 
+			    	<label class="text-monospace">
+			    		<i class="fa-solid fa-paw"></i> {{ pet.nome}} 
 			    		<span class="fw-normal">({{pet.apelido}})</span>
 			    	</label>
 			    </h5>
 			    <div class="card-text">
 			    	
 						<div class="col">
-							<label class="font-weight-bold">Aniversário: </label>
+							<label class="font-weight-bold"><i class="fa-solid fa-balloon"></i> Aniversário: </label>
 							<label class="text-monospace">{{pet.aniversario}}</label> 
 						</div>
 						<div class="col">
@@ -43,7 +44,7 @@
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Raça: </label>
-							<label class="text-monospace">{{pet.racaCachorro}}</label> 
+							<label class="text-monospace">{{pet.raca.raca}}</label> 
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Temperamento: </label>
@@ -78,11 +79,15 @@
 								<label class="text-white"> {{ ficha.id }}</label>
 							</div>
 		 					<div class="col-sm-4">
-								<small class="font-weight-bold text-white ">Criado por: </small>
+								<small class="font-weight-bold text-white ">
+									<i class="fa-solid fa-user"></i> Criado por: 
+								</small>
 								<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
 							</div>
 							<div class="col-sm-5">
-								<small class="font-weight-bold text-white">Data: </small>
+								<small class="font-weight-bold text-white">
+									<i class="fa-regular fa-calendar"></i> Data: 
+								</small>
 								<small class="text-monospace text-white">{{ficha.date}}</small>
 							</div>
 						</div>	
@@ -139,19 +144,23 @@
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
 						<div class="col d-flex justify-content-end">
-							<a class="btn btn-success mb-3" href="{% url 'fichas:createFicha' pk=pet.id %}">Nova Anamnese</a>
+							<a class="btn btn-success mb-3" href="{% url 'fichas:createFicha' pk=pet.id %}">
+								<i class="fa-solid fa-plus"></i> Nova Anamnese
+							</a>
 						</div>
 							
 				   		<div class="row border-bottom"></div>
 
 					    <div class="col mt-3">
-					    	<p class="font-weight-bold">Fichas Antigas:</p>	
-					    	<table class="table">
+					    	<p class="font-weight-bold">
+					    		<i class="bi bi-journal-text"></i> Fichas Antigas:
+					    	</p>	
+					    	<table class="table table-hover">
 					    		<thead>
 					    			<tr class="text-center">
-						    			<th scope="col">Nº Ficha</th>
-						    			<th scope="col">Data</th>
-						    			<th scope="col">Funcionário</th>
+						    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
+						    			<th scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
+						    			<th scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
 						    			<th scope="col"></th>
 						    		</tr>	
 					    		</thead>	

@@ -6,36 +6,38 @@
 	<div class="row border-bottom">
 		<div class="col-md-6">
 			<h2 class="text-info font-weight-bold">
-				<i class="bi bi-card-checklist"></i> <span class="text-uppercase">Raças cadastradas</span>
+				<i class="fa-solid fa-shield-dog"></i><span class="text-uppercase"> Raças cadastradas</span>
 			</h2>
 		</div>	
 		<div class="col-md-6">
 			  <div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'core:add_Especie' %}"><i class="fa-solid fa-plus"></i> Nova Raça</a>
+				<a class="btn btn-primary mb-3" href="{% url 'core:add_Raca' %}">
+					<i class="fa-solid fa-plus"></i> Nova Raça</a>
 			</div>	
 		</div>
 	</div>	
 	
 	<div class="row">
 		<!-- MENSAGEM DE ALERTA -->
-		<div class="col-md-6 mt-4">
+		<div class="col-md-4 mt-4">
 			<div class="card">
-				<h3 class="card-header bg-primary text-white mb-3 d-flex justify-content-center font-weight-bold"><i class="fa-solid fa-do-not-enter"></i> Atenção!</h3>
+				<h3 class="card-header bg-primary text-white mb-3 text-center font-weight-bold">
+					<i class="fa-solid fa-triangle-exclamation"></i> Atenção!</h3>
 				<div class="card-text px-3">
-					<label class="text-justify pb-3">Cuidado ao excluir uma <span class="text-primary font-weight-bold">espécie</span>,  pois serão<span class="text-primary font-weight-bold"> apagados todas as raças</span> a ela vinculada e se  houver algum animal já cadastrado com alguma das raças, ocorrerá<span class="text-primary font-weight-bold"> erro de integridade</span> no banco de dados.
+					<label class="text-justify pb-3">Cuidado ao <span class="text-primary font-weight-bold">excluir</span> ou <span class="text-primary font-weight-bold">editar</span> uma <span class="text-primary font-weight-bold">espécie</span>,  pois serão<span class="text-primary font-weight-bold"> apagados todas as raças</span> a ela vinculada e se  houver algum animal já cadastrado com alguma das raças, ocorrerá<span class="text-primary font-weight-bold"> erro de integridade</span> no banco de dados.
 					</label>
 				</div>	
 			</div>	
 		</div>
 		<!-- TABELA DE EXIBIÇÃO DAS ESPÉCIES CADASTRADAS -->
-		<div class="col-md-6 mt-4">
+		<div class="col-md-8 mt-4">
 			<table class="table">
 				<thead>
 					<th scope="col">#</th>
-					<th scope="col">Espécie</th>
-					<th scope="col">Raça</th>
-					<th scope="col">
-						<div class="d-flex justify-content-center"> Ações:</div>
+					<th scope="col"><i class="fa-solid fa-paw"></i> Espécie</th>
+					<th scope="col"><i class="fa-solid fa-shield-dog"></i> Raça</th>
+					<th class="text-center" scope="col">
+						<i class="fa-solid fa-gears"></i> Ações:
 					</th>
 				</thead>
 				<tbody>
@@ -44,12 +46,16 @@
 						<th scope="col">{{iten.id}}</th>
 						<td>{{iten.especie}}</td>
 						<td>
-							<a href="{% url 'core:update_Especie' pk=iten.id %}">{{iten.raca}}</a>
+							<a href="{% url 'core:update_Raca' pk=iten.id %}">{{iten.raca}}</a>
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">
-								<a class="btn btn-primary text-white mr-3" href="{% url 'core:update_Especie' pk=iten.id %}">Alterar</a>
-								<a class="btn btn-danger" href="{% url 'core:del_Especie' pk=iten.id %}">Apagar</a>
+								<a class="btn btn-primary text-white mr-3" href="{% url 'core:update_Raca' pk=iten.id %}">
+									<i class="fa-regular fa-pen-to-square"></i> Editar
+								</a>
+								<a class="btn btn-danger" href="{% url 'core:del_Especie' pk=iten.id %}">
+									<i class="fa-solid fa-trash"></i> Excluir
+								</a>
 							</div>
 						</td>
 					</tr>	

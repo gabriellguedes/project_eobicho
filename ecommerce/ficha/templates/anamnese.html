@@ -5,6 +5,7 @@
 <form method="POST" action=".">
     {% csrf_token %}
       <h5 class=""><span class="font-weight-bold">Nome do Pet:</span></h5>
+      {{form.pet|bootstrap }}
         
        <div class="row">
        <div class="col-lg-4 mb-3">

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -21,7 +22,6 @@ def createFicha(request, pk):
     else:
         form = FichaForm(request.POST)
         if form.is_valid():
-            form.pet == pet_pk
             pet = form.save()
             return HttpResponseRedirect(reverse('pet:list'))
         context = {
@@ -34,13 +34,29 @@ def createFicha(request, pk):
 #Listar todas as fichas cadastradas
 def listFicha(request):
     template_name = 'ficha_list.html'
-    lista = Ficha.objects.all()
-    search = request.GET.get('search')
-    if search:
-        objects = objects.filter(nome__icontains=search)
-        return render(request, template)
+    parametro_page = request.GET.get('page', '1')
+    parametro_limit = request.GET.get('limit', '5')
+    
+    if not (parametro_limit.isdigit() and int(parametro_limit)>0):
+        parametro_limit = '10'
 
-    context = { 'lista': lista,}
+    fichas = Ficha.objects.get_queryset().order_by('id')
+    fichas_paginator = Paginator(fichas, parametro_limit)
+
+    lista = Ficha.objects.all()
+    
+    try:
+        page = fichas_paginator.page(parametro_page)
+
+    except (EmptyPage, PageNotAnInteger):
+        page = fichas_paginator.page(1)
+
+    context = { 
+        'items_list': ['5','10', '20', '30', '50'],
+        'qnt_page':parametro_limit,
+        'fichas': page,
+        'lista': lista,
+        }
     return render(request, template_name, context=context)
 
 #Visualizar ficha antiga

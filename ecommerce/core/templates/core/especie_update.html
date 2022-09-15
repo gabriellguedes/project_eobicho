@@ -9,8 +9,18 @@
 		</legend>
 		{% csrf_token %}
 		<div class="col-md-6 my-4">
-			<label class="font-weight-bold">Nome Espécie: </label> {{form.especie|bootstrap}}
-			<button class="btn btn-primary" type="submit">Atualizar</button>
+			<div>
+				<label class="font-weight-bold">
+					<i class="fa-solid fa-paw"></i> Nome Espécie: 
+				</label> {{form.especie|bootstrap}}
+			</div>
+				
+			<button class="btn btn-primary mx-3 my-3" type="submit">
+				<i class="fa-solid fa-plus"></i> Atualizar
+			</button>
+			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'core:list_Especie' %}'">
+      			<i class="fa-solid fa-xmark"></i> Cancelar
+   			</button>
 		</div>
 		
 				

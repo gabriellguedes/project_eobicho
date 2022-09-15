@@ -47,7 +47,6 @@ Feito:
         - Url(delete) - Ok
         - Url(update) - OK  
 
-
 (14-09-22)
 Feito:
     - Subir os aquirvos para o Heroku - Ok
@@ -56,9 +55,42 @@ Feito:
     - Criar Menu - Ok
     - Inline add Especie/raça - Fazendo
 
+(15-09-22)
+Feito: 
+    - Add Icons aos layouts:
+        **** Pet:
+                - Add Pet - Ok
+                - List Pet - Ok
+                - Detail Pet - Ok 
+                - Update Pet - OK
+        
+        **** Ficha:
+                - Add Ficha -
+                - List Ficha - Ok
+                - Detail Ficha - OK
+        
+        **** Adm/Espécie:
+                - Add Espécie - Ok
+                - List Espécie - Ok
+                - Update Espécie - Ok
+                - Delete Espécie - Ok
+
+        **** Adm/Raça:
+                - Add Raça - Ok
+                - List Raça - Ok
+                - Update Raça - Ok
+                - Delete Raça - OK
+
+    - Correções no layout List Pet - OK
+    - Correções no layout List Fichas - OK
+    - Add paginação no Lidt Fichas - Ok 
+    - Responsive table(page list pet) - Ok         
+    - Corrigir link de Nova Raça - Ok
+    - Corrigir link de Update Raça - Ok
+    - Atualizar Cody Views Update Raça - Ok
 Para Fazer:
     
-    -
+    - Add mais de uma opção no Anamneses
     - Menu Admin
     - Alert javascript(delete Especie/Raça)
     - Form Ficha
@@ -68,7 +100,7 @@ Para Fazer:
     - Criar nova ficha(link do Detail-pet)
     - Arrumar o layout do Cadastro(Form)
     - Calcular automaticamente a idade
-    - Registro de Úsuarios
+    - Registro de Úsuarios(Funcionários, Clientes)
      
 
 

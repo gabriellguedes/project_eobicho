@@ -96,13 +96,11 @@ def list_Raca(request):
 	return render(request, template_name, context=context)
 
 # Atualizar/Alterar Raças
-def update_Raca(request, pk):
+class update_Raca(UpdateView):
 	template_name = 'core/raca_update.html'
-	obj = Raca.objects.get(id=pk)
-	context = {
-		'raca': obj,
-	}
-	return render(request, template_name, context=context)
+	model = Raca
+	fields = '__all__'
+	success_url = reverse_lazy('core:list_Raca')
 
 # Deletar uma Raça
 def delete_Raca(request, pk):

@@ -35,10 +35,7 @@ def paginacao(request):
 
     objects = Pet.objects.all()
     
-    search = request.GET.get('search')
-    if search:
-        objects = objects.filter(nome__icontains=search)
-        return render(request, template)
+  
     try:
         page = pets_paginator.page(parametro_page)
     except (EmptyPage, PageNotAnInteger):
@@ -51,7 +48,7 @@ def paginacao(request):
         'pets': page,
         'object_list':objects
     }
-    return render(request, template_name, context)
+    return render(request, template_name, context=context)
 
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):

@@ -8,13 +8,13 @@
 	<div class="row border-bottom">
 		<div class="col-md-6">
 			<h2 class="font-weight-bold text-info">
-				<i class="bi bi-card-checklist"></i>
-				Cadastrados
+				<i class="fa-solid fa-paw"></i>
+				Pets Cadastrados
 			</h2>
 		</div>	
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Cadastrar Pet <i class="fa-solid fa-paw"></i></a>
+				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
 			</div>	
 		</div>
 	</div>
@@ -23,30 +23,35 @@
 	<!-- LISTA DE ANIMAIS CADASTRADOS -->	 
 	{% csrf_token %}
 	
-		<table class="table">
+		<table class="table table-hover">
 		  <thead>
 		    <tr>
 		      <th scope="col">#</th>
-		      <th scope="col">Tutor</th>
-		      <th scope="col">Status</th>
-		      <th scope="col">Nome do Pet</th>
-		      <th scope="col">Espécie</th>
-		      <th class="text-center" scope="col">Ações</th>
+		      <th class="block-none" scope="col"><i class="fa-solid fa-user"></i> Tutor</th>
+		      <th class="block-none" scope="col"><i class="fa-regular fa-circle"></i> Status</th>
+		      <th class="text-center" scope="col"><i class="fa-sharp fa-solid fa-shield-cat"></i> Pet</th>
+		      <th class="block-none" scope="col"><i class="fa-solid fa-paw"></i> Espécie</th>
+		      <th class="text-center" scope="col"><i class="fa-solid fa-gears"></i>  Ações</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	 {% for pet in pets %}
 			    <tr>
 			   	  <th scope="row">{{pet.id}}</th>
-			      <td></td>
-			      <td></td>
-			      <td><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
-			      <td class="text-uppercase">{{pet.especie}}</td>
+			      <td class="block-none"></td>
+			      <td class="block-none"></td>
+			      <td class="text-center"><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
+			      <td class="text-uppercase block-none">{{pet.especie}}</td>
 			      <td>
 			      	<div class="d-flex justify-content-end">
 			      		<a class="btn btn-primary mr-2" href="{% url 'pet:detail' pk=pet.id %}">
-			      			<i class="fa-regular fa-eye"></i> Visualizar</a>
-			      		<a class="btn btn-warning" href="{% url 'pet:update' pk=pet.id %}">Editar</a>
+			      			<i class="fa-regular fa-eye"></i> 
+			      			Visualizar
+			      		</a>
+			      		<a class="btn btn-warning text-white" href="{% url 'pet:update' pk=pet.id %}">
+			      			<i class="fa-regular fa-pen-to-square"></i>
+			      			Editar
+			      		</a>
 			      	</div>	
 			      </td>
 			    </tr>
@@ -110,11 +115,11 @@
 
 				{% if pets.has_next %}	    
 				    <li class="page-item">
-				      <a class="page-link" href="{% url 'pet:list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}">Next</a>
+				      <a class="page-link" href="{% url 'pet:list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}">Próximo</a>
 				    </li>
 				{% else %}
 					<li class="page-item disabled">
-				      <a class="page-link" href="#">Next</a>
+				      <a class="page-link" href="#">Próximo</a>
 				    </li>    
 				{% endif %}
 			  </ul>

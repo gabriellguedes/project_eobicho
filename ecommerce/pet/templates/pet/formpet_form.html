@@ -9,7 +9,7 @@
 {% block content %}
 <section class="container">
 
-  <h2 class="border-bottom pb-2 text-info font-weight-bold"><i class="bi bi-journal-text"></i> CADASTRAR NOVO PET</h2>
+  <h2 class="border-bottom pb-2 text-info font-weight-bold"><i class="fa-solid fa-paw"></i> CADASTRAR NOVO PET</h2>
   <form method="POST" action=".">
   	{% csrf_token %}
     <div class="form-row">
@@ -67,9 +67,11 @@
     </div>
    	
     <button class="btn btn-primary" type="submit">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar
+      <i class="fa-solid fa-paw"></i> Cadastrar
     </button>
-     <button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:list' %}'">Cancelar</button>
+     <button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:list' %}'">
+      <i class="fa-solid fa-xmark"></i> Cancelar
+    </button>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
 </section>  
 
