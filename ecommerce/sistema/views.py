@@ -45,7 +45,7 @@ def add_Especie(request):
 	if request.method=='POST':
 		if form.is_valid():
 			form = form.save()
-			return HttpResponseRedirect(reverse('sys:list_Especie'))
+			return HttpResponseRedirect(reverse('sys:especie_list'))
 	context ={'especie': form}		
 	return render(request, template_name, context=context)
 
@@ -61,14 +61,14 @@ def delete_Especie(request, pk):
 	obj = Especie.objects.get(id=pk)
 	obj.delete()
 	
-	return HttpResponseRedirect(reverse('sys:list_Especie'))
+	return HttpResponseRedirect(reverse('sys:especie_list'))
 
 # Atualizar/Alterar Espécies
 class update_Especie(UpdateView):
 	template_name = 'cad_pet/especie_update.html'
 	model = Especie
 	fields = '__all__'
-	success_url = reverse_lazy('sys:list_Especie')
+	success_url = reverse_lazy('sys:especie_list')
 
 # Adicionar Raça
 def add_Raca(request):
@@ -77,7 +77,7 @@ def add_Raca(request):
 	if request.method=='POST':
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect(reverse_lazy('sys:list_Raca'))
+			return HttpResponseRedirect(reverse_lazy('sys:raca_list'))
 	context = {
 		'raca': form,
 	}
@@ -97,13 +97,13 @@ class update_Raca(UpdateView):
 	template_name = 'cad_pet/raca_update.html'
 	model = Raca
 	fields = '__all__'
-	success_url = reverse_lazy('sys:list_Raca')
+	success_url = reverse_lazy('sys:raca_list')
 
 # Deletar uma Raça
 def delete_Raca(request, pk):
 	obj = Raca.objects.get(id=pk)
 	obj.delete()
 
-	return HttpResponseRedirect(reverse('core:list_Raca'))
+	return HttpResponseRedirect(reverse('core:raca_list'))
 
 

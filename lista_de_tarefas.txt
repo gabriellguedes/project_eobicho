@@ -95,10 +95,12 @@ Feito:
 
 (16-09-22)
 Feito:
-    - Criar App sistema(Organizar arquivos) - Fazendo
+    - Criar App sistema(Organizar arquivos) - Ok
+    - Padronizar urls - Ok
 
 Para Fazer:
     
+    - Nome duplica na page(url sys/add-especie)
     - (Models)Add campo datetime 
     - Add mais de uma opção no Anamneses
     - Menu Admin
