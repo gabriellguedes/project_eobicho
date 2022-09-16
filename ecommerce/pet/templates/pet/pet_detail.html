@@ -141,7 +141,7 @@
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
 						<div class="col d-flex justify-content-end">
-							<a class="btn btn-success mb-3" href="{% url 'fichas:createFicha' pk=pet.id %}">
+							<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
 								<i class="fa-solid fa-plus"></i> Nova Anamnese
 							</a>
 						</div>
@@ -165,7 +165,7 @@
 			    			<tbody>
 			    				<tr class="text-center">
 						    		<th scope="row">
-						    			<a href="{% url 'fichas:detailFicha' pk=pet.id n=iten.id %}">{{iten.id}}</a>
+						    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=iten.id %}">{{iten.id}}</a>
 						    		</th>
 						    		<td class="block-none">
 						    			<small>
@@ -174,7 +174,7 @@
 						    		</td>
 						    		<td class="block-none">{{iten.funcionario}}</td>
 						    		<td>
-						    			<a class="btn btn-primary" href="{% url 'fichas:detailFicha' pk=pet.id  n=iten.id %}">Visualizar</a>
+						    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">Visualizar</a>
 						    		</td>
 					    		</tr>
 					    	</tbody>	
@@ -185,7 +185,7 @@
 
 
 	</div>	
-	<a class="btn btn-primary mt-3" href="{% url 'pet:list'%}">
+	<a class="btn btn-primary mt-3" href="{% url 'pet:pet_list'%}">
 		<i class="bi bi-arrow-counterclockwise"></i> Voltar</a>
 </section>
 

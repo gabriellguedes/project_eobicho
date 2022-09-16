@@ -14,7 +14,7 @@
 		</div>	
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'pet:create' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
+				<a class="btn btn-primary mb-3" href="{% url 'pet:pet_add' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
 			</div>	
 		</div>
 	</div>
@@ -40,15 +40,15 @@
 			   	  <th scope="row">{{pet.id}}</th>
 			      <td class="block-none"></td>
 			      <td class="block-none"></td>
-			      <td class="text-center"><a href="{% url 'pet:detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
+			      <td class="text-center"><a href="{% url 'pet:pet_detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
 			      <td class="text-uppercase block-none">{{pet.especie}}</td>
 			      <td>
 			      	<div class="d-flex justify-content-end">
-			      		<a class="btn btn-primary mr-2" href="{% url 'pet:detail' pk=pet.id %}">
+			      		<a class="btn btn-primary mr-2" href="{% url 'pet:pet_detail' pk=pet.id %}">
 			      			<i class="fa-regular fa-eye"></i> 
 			      			Visualizar
 			      		</a>
-			      		<a class="btn btn-warning text-white" href="{% url 'pet:update' pk=pet.id %}">
+			      		<a class="btn btn-warning text-white" href="{% url 'pet:pet_update' pk=pet.id %}">
 			      			<i class="fa-regular fa-pen-to-square"></i>
 			      			Editar
 			      		</a>
@@ -77,7 +77,7 @@
 						
 					{% else %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'pet:list'%}?limit={{qnt}}">{{ qnt }}</a>
+							<a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt}}">{{ qnt }}</a>
 						</li>	
 						
 					{% endif %}
@@ -93,7 +93,7 @@
 			  <ul class="pagination">
 			  	{% if pets.has_previous %}
 				  	<li class="page-item">
-				      <a class="page-link" href="{% url 'pet:list'%}?limit={{qnt_page}}&page={{pets.previous_page_number}}">Anterior</a>
+				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.previous_page_number}}">Anterior</a>
 				    </li>
 			    {% else %}
 				    <li class="page-item disabled">
@@ -108,14 +108,14 @@
 				    	</li>
 			    	{% else %}
 				    	<li class="page-item">
-				    		<a class="page-link" href="{% url 'pet:list'%}?limit={{qnt_page}}&page={{num}}">{{ num }}</a>
+				    		<a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{num}}">{{ num }}</a>
 				    	</li>
 			    	{% endif %}	
 			    {% endfor %}
 
 				{% if pets.has_next %}	    
 				    <li class="page-item">
-				      <a class="page-link" href="{% url 'pet:list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}">Próximo</a>
+				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}">Próximo</a>
 				    </li>
 				{% else %}
 					<li class="page-item disabled">

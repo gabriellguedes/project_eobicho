@@ -23,7 +23,7 @@ def createFicha(request, pk):
         form = FichaForm(request.POST)
         if form.is_valid():
             pet = form.save()
-            return HttpResponseRedirect(reverse('pet:list'))
+            return HttpResponseRedirect(reverse('pet:pet_list'))
         context = {
             'form':form
         }

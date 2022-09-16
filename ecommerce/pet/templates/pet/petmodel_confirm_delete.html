@@ -19,7 +19,7 @@
 				{% csrf_token %}
 				<div class="mt-5">
 					<button class="btn btn-danger" type="submit">Sim, tenho certeza!</button>
-					<button class="btn btn-primary ml-3" type="reset" onclick="location.href='{% url 'pet:list' %}'">Não, desejo voltar!</button>
+					<button class="btn btn-primary ml-3" type="reset" onclick="location.href='{% url 'pet:pet_list' %}'">Não, desejo voltar!</button>
 				</div>
 			</form>
 		</div>	

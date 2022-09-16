@@ -17,7 +17,7 @@ def pet_add(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('pet:list'))
+            return HttpResponseRedirect(reverse('pet:pet_list'))
     context = {'form': form}
     return render(request, template_name, context)
 
@@ -68,7 +68,7 @@ class updatePet(UpdateView):
     template_name = 'pet/pet_update.html'
     model = Pet
     fields = '__all__'
-    success_url = reverse_lazy('pet:list')
+    success_url = reverse_lazy('pet:pet_list')
 
 #Visualizar raças
 def raca_view(request):

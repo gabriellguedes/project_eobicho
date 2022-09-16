@@ -83,7 +83,7 @@
 		    			<tbody>
 		    				<tr class="text-center">
 					    		<th scope="row">
-					    			<a href="{% url 'fichas:detailFicha' pk=pet.id n=ficha.id %}">{{iten.id}}</a>
+					    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=ficha.id %}">{{iten.id}}</a>
 					    		</th>
 					    		<td></td>
 					    		<td>{{iten.funcionario}}</td>
@@ -94,7 +94,7 @@
 		    </div>
 		</div>	
 	</div>	
-	<a class="btn btn-primary mt-3" href="{% url 'pet:list' %}">
+	<a class="btn btn-primary mt-3" href="{% url 'pet:pet_list' %}">
 		<i class="bi bi-arrow-counterclockwise"></i> Voltar</a>
 </section>
 

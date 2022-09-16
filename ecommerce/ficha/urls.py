@@ -5,7 +5,7 @@ app_name = 'fichas'
 
 urlpatterns = [
 	
-    path('', views.listFicha, name='listFicha'),
-    path('ficha/<int:pk>/', views.createFicha, name='createFicha'),
-    path('oldficha/<int:pk>/<int:n>/', views.detailFicha, name='detailFicha'),
+    path('', views.listFicha, name='ficha_list'),
+    path('ficha/<int:pk>/', views.createFicha, name='ficha_add'),
+    path('oldficha/<int:pk>/<int:n>/', views.detailFicha, name='ficha_detail'),
 ]
