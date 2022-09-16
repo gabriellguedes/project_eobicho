@@ -98,8 +98,11 @@ Feito:
     - Criar App sistema(Organizar arquivos) - Ok
     - Padronizar urls - Ok
     - Arrumar o layout do Cadastro(Form) - Ok
-    - Add inline Raça(add + de 1 raça por vez) -
+    - Add inline Raça(add + de 1 raça por vez) - 
     - Add campo de Status(ativo e inativo) - Ok
+    - Mudança de layout -
+
+
 Para Fazer:
     
     - Nome duplica na page(url sys/add-especie)
@@ -113,7 +116,7 @@ Para Fazer:
     - (Models)Add campo de foto para pet
     
     - Template Cadastro Pet/Anamineses
-    - Criar nova ficha(link do Detail-pet)
+    - Criar nova ficha(link do Detail-pet)x
     - Calcular automaticamente a idade
     - Registro de Úsuarios(Funcionários, Clientes)
      

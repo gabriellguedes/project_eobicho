@@ -4,189 +4,203 @@
 {{block.super}} - Ficha técnica
 {% endblock title %}
 {% block content %}
-<section class="container">
-	<h2 class="border-bottom pb-2 font-weight-bold text-info"><i class="bi bi-journal-text"></i> Ficha Técnica do Pet</h2>
 
-	<div class="row">
-		<div class="col-lg-4 mb-3">
-			<div class="card">
-				<div class="text-center">
-			  		<img class="card-img-top rounded" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+	<div class="border dados-pet mb-5">
+		<div class="bg-dark dados-pet-header pt-2">
+			<div class="row">
+				<div class="col-md-9">
+					<h6 class="font-weight-bold text-white pl-5">Dados do animal</h6>
+				</div>
+				<div class="col-md-2 text-white text-center">
+					<h6 class="font-weight-bold">Id: {{pet.id}}</h6>					
+				</div>	
+			</div>	
+		</div>
+		<div class="px-3 py-4">	
+			<div class=" row">
+				<div class="col-md-2 ml-4">
+			  		<img class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+			  		<h5 class="text-monospace ml-5 mx-2">{{pet.nome}}</h5>
 			  	</div>	
-			  <div class="card-body">
-			    <h5 class="card-title">
-			    	<label class="text-monospace">
-			    		<i class="fa-solid fa-paw"></i> {{ pet.nome}} 
-			    		<span class="fw-normal">({{pet.apelido}})</span>
-			    	</label>
-			    </h5>
-			    <div class="card-text">
-			    	
-						<div class="col">
-							<label class="font-weight-bold"><i class="fa-solid fa-balloon"></i> Aniversário: </label>
-							<label class="text-monospace">{{pet.aniversario}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Idade: </label>
-							<label class="text-monospace">{{pet.idade}}</label> 
-						</div>
-						<div class="col">
+			  	
+			   
+			    <div class="col-md-8 row">
+			    		<div class="col-sm-4">
 							<label class="font-weight-bold">Peso(kg): </label>
 							<label class="text-monospace">{{pet.peso}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Tamanho(cm): </label>
 							<label class="text-monospace">{{pet.tamanho}}</label> 
 						</div>
-						<div class="col">
-							<label class="font-weight-bold">Especie: </label>
+						<div class="col-sm-4">
+							<label class="font-weight-bold"><i class="fa-solid fa-paw"></i> Especie: </label>
 							<label class="text-monospace">{{pet.especie}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Raça: </label>
 							<label class="text-monospace">{{pet.raca.raca}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Temperamento: </label>
 							<label class="text-monospace">{{pet.temperamento}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Pelagem: </label>
 							<label class="text-monospace">{{pet.pelagem}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Coloração: </label>
 							<label class="text-monospace">{{pet.coloracao}}</label> 
 						</div>
-						<div class="col">
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-balloon"></i> Data de Nascimento:
+							</label>
+							<label class="text-monospace">{{pet.aniversario}}</label> 
+						</div>
+						<div class="col-sm-4">
 							<label class="font-weight-bold">Caracteristicas: </label>
 							<label class="text-monospace">{{pet.caracteristicas}}</label>
 						</div>
+
 			    </div>
-			    
-			  </div>
-			</div>
-		</div>	
-		
-		<div class="col-lg-6">
-			<div class="card">
-					<div class="card-header bg-primary">
-						<h3 class="text-white"><i class="bi bi-journal-text"></i> Ficha de Avalição</h3>
-						<div class="col row">
-							<div class="col-sm-3">
-								<label class="text-white">Nº Ficha: </label>
-								<label class="text-white"> {{ ficha.id }}</label>
-							</div>
-		 					<div class="col-sm-4">
-								<small class="font-weight-bold text-white ">
-									<i class="fa-solid fa-user"></i> Criado por: 
-								</small>
-								<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
-							</div>
-							<div class="col-sm-5">
-								<small class="font-weight-bold text-white">
-									<i class="fa-regular fa-calendar"></i> Data: 
-								</small>
-								<small class="text-monospace text-white">{{ficha.date}}</small>
-							</div>
-						</div>	
-					</div>
-					<div class="card-text px-3 py-3">
-			    		<div class="col">
-			    			<label class="font-weight-bold">Unhas: </label>
-							<label class="text-monospace">{{ficha.unhas}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Ectoparasitas: </label>
-							<label class="text-monospace">{{ficha.ectoparasitas}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Pele: </label>
-							<label class="text-monospace">{{ficha.peleInfeccionada}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Pelos: </label>
-							<label class="text-monospace">{{ficha.pelos}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Estado dos pelos: </label>
-							<label class="text-monospace">{{ficha.pelosEstado}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Condição dos Pelos: </label>
-							<label class="text-monospace">{{ficha.pelosCondicao}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Boca: </label>
-							<label class="text-monospace">{{ficha.boca}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Olhos: </label>
-							<label class="text-monospace">{{ficha.olhos}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Patas: </label>
-							<label class="text-monospace">{{ficha.patas}}</label> 
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Orelhas: </label>
-							<label class="text-monospace">{{ficha.orelhas}}</label>
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Doenças: </label>
-							<label class="text-monospace">{{ficha.doenca}}</label>
-						</div>
-						<div class="col">
-							<label class="font-weight-bold">Observações: </label>
-							<label class="text-monospace">{{ficha.obs}}</label>
-						</div>
-						<div class="col d-flex justify-content-end">
-							<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
-								<i class="fa-solid fa-plus"></i> Nova Anamnese
-							</a>
-						</div>
-					</div>		
-				</div>    		
-				   		
-			    <div class="col mt-3">
-			    	<p class="font-weight-bold">
-			    		<i class="bi bi-journal-text"></i> Fichas Antigas:
-			    	</p>	
-			    	<table class="table table-hover">
-			    		<thead>
-			    			<tr class="text-center">
-				    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
-				    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
-				    			<th class="block-none" scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
-				    			<th scope="col">Ações</th>
-				    		</tr>	
-			    		</thead>	
-			    		{% for iten in last_fichas %}
-			    			<tbody>
-			    				<tr class="text-center">
-						    		<th scope="row">
-						    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=iten.id %}">{{iten.id}}</a>
-						    		</th>
-						    		<td class="block-none">
-						    			<small>
-						    				{{iten.date}}
-						    			</small>	
-						    		</td>
-						    		<td class="block-none">{{iten.funcionario}}</td>
-						    		<td>
-						    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">Visualizar</a>
-						    		</td>
-					    		</tr>
-					    	</tbody>	
-					    {% endfor%}							    	
-			    	</table>
-			    </div>
+			    <div class="col-md-2">
+			    	<button class="btn btn-lg btn-outline-warning" onclick="location.href=''">
+			    		<i class="fa-regular fa-pen-to-square"></i> Editar
+			    	</button>
+			    </div>	
+
+	  		</div>
 		</div>
-
-
 	</div>	
-	<a class="btn btn-primary mt-3" href="{% url 'pet:pet_list'%}">
-		<i class="bi bi-arrow-counterclockwise"></i> Voltar</a>
-</section>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	  <li class="nav-item">
+	    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Histórico</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Prontuário</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Avaliações Antigas</a>
+	  </li>
+	</ul>
+	
+	<div class="tab-content" id="myTabContent">
+	  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Home Test</div>
+	  <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+	  	<div class="card-header bg-dark">
+					<h3 class="text-white"><i class="bi bi-journal-text"></i> Prontuário</h3>
+					<div class="col row">
+						<div class="col-sm-3">
+							<label class="text-white">Nº Ficha: </label>
+							<label class="text-white"> {{ ficha.id }}</label>
+						</div>
+	 					<div class="col-sm-4">
+							<small class="font-weight-bold text-white ">
+								<i class="fa-solid fa-user"></i> Criado por: 
+							</small>
+							<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
+						</div>
+						<div class="col-sm-5">
+							<small class="font-weight-bold text-white">
+								<i class="fa-regular fa-calendar"></i> Data: 
+							</small>
+							<small class="text-monospace text-white">{{ficha.date}}</small>
+						</div>
+					</div>	
+				</div>
+				<div class="card-text px-3 py-3">
+		    		<div class="col">
+		    			<label class="font-weight-bold">Unhas: </label>
+						<label class="text-monospace">{{ficha.unhas}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Ectoparasitas: </label>
+						<label class="text-monospace">{{ficha.ectoparasitas}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Pele: </label>
+						<label class="text-monospace">{{ficha.peleInfeccionada}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Pelos: </label>
+						<label class="text-monospace">{{ficha.pelos}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Estado dos pelos: </label>
+						<label class="text-monospace">{{ficha.pelosEstado}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Condição dos Pelos: </label>
+						<label class="text-monospace">{{ficha.pelosCondicao}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Boca: </label>
+						<label class="text-monospace">{{ficha.boca}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Olhos: </label>
+						<label class="text-monospace">{{ficha.olhos}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Patas: </label>
+						<label class="text-monospace">{{ficha.patas}}</label> 
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Orelhas: </label>
+						<label class="text-monospace">{{ficha.orelhas}}</label>
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Doenças: </label>
+						<label class="text-monospace">{{ficha.doenca}}</label>
+					</div>
+					<div class="col">
+						<label class="font-weight-bold">Observações: </label>
+						<label class="text-monospace">{{ficha.obs}}</label>
+					</div>
+					<div class="col d-flex justify-content-end">
+						<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
+							<i class="fa-solid fa-plus"></i> Nova Anamnese
+						</a>
+					</div>
+				</div>
+	  </div>
+	  <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
+	  	<div class="col mt-3">
+		    	<p class="font-weight-bold">
+		    		<i class="bi bi-journal-text"></i> Fichas Antigas:
+		    	</p>	
+		    	<table class="table table-hover">
+		    		<thead>
+		    			<tr class="text-center">
+			    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
+			    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
+			    			<th class="block-none" scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
+			    			<th scope="col">Ações</th>
+			    		</tr>	
+		    		</thead>	
+		    		{% for iten in last_fichas %}
+		    			<tbody>
+		    				<tr class="text-center">
+					    		<th scope="row">
+					    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=iten.id %}">{{iten.id}}</a>
+					    		</th>
+					    		<td class="block-none">
+					    			<small>
+					    				{{iten.date}}
+					    			</small>	
+					    		</td>
+					    		<td class="block-none">{{iten.funcionario}}</td>
+					    		<td>
+					    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">Visualizar</a>
+					    		</td>
+				    		</tr>
+				    	</tbody>	
+				    {% endfor%}							    	
+		    	</table>
+		    </div>
+	  </div>
+	</div>
 
 {% endblock %}
