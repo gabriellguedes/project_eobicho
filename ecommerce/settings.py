@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ecommerce.pet',
     'ecommerce.ficha',
     'ecommerce.services',
+    'ecommerce.sistema',
 ]
 
 MIDDLEWARE = [

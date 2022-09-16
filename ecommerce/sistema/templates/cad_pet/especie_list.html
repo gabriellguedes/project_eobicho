@@ -11,7 +11,7 @@
 		</div>	
 		<div class="col-md-6">
 			  <div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3 text-white" href="{% url 'core:add_Especie'  %}"><i class="fa-regular fa-plus"></i> Nova Espécie</a>
+				<a class="btn btn-primary mb-3 text-white" href="{% url 'sys:add_Especie'  %}"><i class="fa-regular fa-plus"></i> Nova Espécie</a>
 			</div>	
 		</div>
 	</div>	
@@ -43,14 +43,14 @@
 					<tr>
 						<th scope="col">{{iten.id}}</th>
 						<td>
-							<a href="{% url 'core:update_Especie' pk=iten.id %}">{{iten.especie}}</a>
+							<a href="{% url 'sys:update_Especie' pk=iten.id %}">{{iten.especie}}</a>
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">
-								<a class="btn btn-primary text-white mr-3" href="{% url 'core:update_Especie' pk=iten.id %}">
+								<a class="btn btn-primary text-white mr-3" href="{% url 'sys:update_Especie' pk=iten.id %}">
 									<i class="fa-regular fa-pen-to-square"></i> Editar
 								</a>
-								<a class="btn btn-danger" href="{% url 'core:del_Especie' pk=iten.id %}">
+								<a class="btn btn-danger" href="{% url 'sys:del_Especie' pk=iten.id %}">
 									<i class="fa-solid fa-trash"></i> Excluir
 								</a>
 							</div>

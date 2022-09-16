@@ -1,5 +1,6 @@
 from django.db import models
 from ecommerce.pet.tuplas import Tuplas
+from ecommerce.sistema.models import Especie, Raca
 
 t = Tuplas()
 
@@ -16,8 +17,8 @@ class Pet(models.Model):
 	type_pelo = models.CharField('Pelo', max_length=150, blank=True, null=True, choices=t.TYPE_PELO_CHOICES)
 	coloracao = models.CharField('Coloração',max_length=60, blank=True, null=True, choices=t.COLORACAO_CHOICES)
 	caracteristicas = models.CharField('Caracteristicas', max_length=200)
-	especie = models.ForeignKey('Especie', on_delete=models.SET_NULL, null=True, blank=True)
-	raca = models.ForeignKey('Raca', on_delete=models.SET_NULL, null=True, blank=True)
+	especie = models.ForeignKey(Especie, on_delete=models.SET_NULL, null=True, blank=True)
+	raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, null=True, blank=True)
 	
 	class Meta:
 		ordering=('nome',)
@@ -25,21 +26,3 @@ class Pet(models.Model):
 	def __str__(self):
 		return self.nome	
 
-class Especie(models.Model):
-	especie = models.CharField(max_length=100, unique=True)
-
-	class Meta:
-		ordering = ('especie',)
-
-	def __str__(self):
-		return self.especie
-
-class Raca(models.Model):
-	especie = models.ForeignKey(Especie, on_delete=models.CASCADE, related_name='raças')
-	raca = models.CharField(max_length=100, unique=True)
-
-	class Meta:
-		ordering = ('raca',)
-	
-	def __str__(self):
-		return '{} - {}'.format(self.raca, self.especie)

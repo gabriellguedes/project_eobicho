@@ -1,5 +1,5 @@
 from django import forms
-from ecommerce.pet.models import Raca, Especie
+from .models import Raca, Especie
 
 class EspecieForm(forms.ModelForm):
 	class Meta:
