@@ -39,7 +39,16 @@
 			    <tr>
 			   	  <th scope="row">{{pet.id}}</th>
 			      <td class="block-none"></td>
-			      <td class="block-none"></td>
+			      <td class="block-none">
+			      	{% if pet.status %}
+	                  <i class="fa fa-check-circle ok"></i> 
+	                  <span class="font-weight-bold ok"> Ativo</span>
+	                {% else %}
+	                  <i class="fa fa-minus-circle no"></i>
+	                  <span class="font-weight-bold no"> Inativo</span>
+	                {% endif %}
+
+			      </td>
 			      <td class="text-center"><a href="{% url 'pet:pet_detail' pk=pet.id %}">{{pet.nome}}</a> ({{pet.apelido}})</td>
 			      <td class="text-uppercase block-none">{{pet.especie}}</td>
 			      <td>

@@ -99,7 +99,7 @@ Feito:
     - Padronizar urls - Ok
     - Arrumar o layout do Cadastro(Form) - Ok
     - Add inline Raça(add + de 1 raça por vez) -
-
+    - Add campo de Status(ativo e inativo) - Ok
 Para Fazer:
     
     - Nome duplica na page(url sys/add-especie)
@@ -111,7 +111,7 @@ Para Fazer:
     - Cadastro pet/ficha
     - Campo raça 
     - (Models)Add campo de foto para pet
-    - Add campo de Status(ativo e inativo)
+    
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)
     - Calcular automaticamente a idade

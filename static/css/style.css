@@ -61,14 +61,12 @@ span.required:after{
 	min-height: 500px;
 	margin: 0 auto;
 }
-.circulo{	
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	overflow: hidden;
-	float: left;
-	margin: 15px;
-	transition: 0.3s ease;
+.ok {
+  color: green !important;
+}
+
+.no {
+  color: grey;
 }
 
 	#wrap-list-pet{
