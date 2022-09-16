@@ -17,5 +17,5 @@ class Raca(models.Model):
 		ordering = ('raca',)
 	
 	def __str__(self):
-		return '{} - {}'.format(self.raca, self.especie)
+		return self.raca
 

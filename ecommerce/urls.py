@@ -24,6 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ecommerce.core.urls')),
     path('pet/', include('ecommerce.pet.urls')),
-    path('fichas/', include('ecommerce.ficha.urls')),
-    path('sys/', include('ecommerce.sistema.urls')),
+    path('ficha/', include('ecommerce.ficha.urls')),
+    path('sistema/', include('ecommerce.sistema.urls')),
 ]

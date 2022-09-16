@@ -24,16 +24,16 @@ def especie_add(request):
         formset = raca_formset(
             request.POST,
             instance=especie_form,
-            prefix='estoque'
+            prefix='especie'
         )
         if form.is_valid() and formset.is_valid():
             form = form.save()
             formset.save()
-            url = 'sys:list_Especie'
+            url = 'sys:especie_list'
             return HttpResponseRedirect(resolve_url(url))
     else:
         form = EspecieForm(instance=especie_form, prefix='main')
-        formset = raca_formset(instance=especie_form, prefix='estoque')
+        formset = raca_formset(instance=especie_form, prefix='especie')
 
     context = {'form': form, 'formset': formset}
     return render(request, template_name, context)

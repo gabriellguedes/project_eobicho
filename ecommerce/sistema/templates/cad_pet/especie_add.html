@@ -14,6 +14,10 @@
 				<label class="font-weight-bold">
 					<i class="fa-solid fa-paw"></i> Nova Espécie: 
 				</label> {{iten}}
+
+				{% for error in iten.errors %}
+                  <label class="text-muted">{{ error }}</label>
+                {% endfor %}
 			</div>
 			
 			<button class="btn btn-primary mx-3 my-3" type="submit">

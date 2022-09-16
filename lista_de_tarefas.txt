@@ -97,6 +97,8 @@ Feito:
 Feito:
     - Criar App sistema(Organizar arquivos) - Ok
     - Padronizar urls - Ok
+    - Arrumar o layout do Cadastro(Form) - Ok
+    - Add inline Raça(add + de 1 raça por vez) -
 
 Para Fazer:
     
@@ -107,11 +109,11 @@ Para Fazer:
     - Alert javascript(delete Especie/Raça)
     - Form Ficha
     - Cadastro pet/ficha
+    - Campo raça 
     - (Models)Add campo de foto para pet
     - Add campo de Status(ativo e inativo)
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)
-    - Arrumar o layout do Cadastro(Form)
     - Calcular automaticamente a idade
     - Registro de Úsuarios(Funcionários, Clientes)
      
