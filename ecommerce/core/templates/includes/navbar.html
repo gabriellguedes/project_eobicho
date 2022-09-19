@@ -1,6 +1,6 @@
 <!-- Nav Menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <div class="container">
+  <div class="wrap-nav">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Alterna navegação">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,13 +29,13 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="{% url 'sys:sys_dashboard' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="text-white font-weight-bold">
               <i class="fa-solid fa-gears"></i>  Administrativo
             </span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <span class="dropdown-item">Cadastro Pet</span>
+          <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'sys:sys_dashboard'%}"> Dashboard</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'sys:especie_list' %}">Espécies</a>
               <a class="dropdown-item" href="{% url 'sys:raca_list' %}">Raças</a>

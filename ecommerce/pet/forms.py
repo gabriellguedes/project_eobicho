@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import Pet
+from .models import Pet, Peso
 
 class PetForm(forms.ModelForm):
 	class Meta:
@@ -12,4 +12,8 @@ class PetForm(forms.ModelForm):
 		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})
 		
 
+class PesoForm(forms.ModelForm):
+	class Meta:
+		model = Peso
+		fields = '__all__'
 

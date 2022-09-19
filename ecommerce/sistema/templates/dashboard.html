@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="row">
+	<div class="card">
+		<h4 class="card-header">
+			<i class="fa-solid fa-paw text-info"></i> 
+			<span class="text-secondary"> Pet</span>
+		</h4>
+		<div class="card-body">
+			 <a class="" href="{% url 'sys:especie_list' %}">Espécies</a>
+             <a class="" href="{% url 'sys:raca_list' %}">Raças</a>
+		</div>
+	</div>	
+	<div class="card mx-3">
+		<h4 class="card-header">
+			<i class="bi bi-card-checklist text-info"></i> 
+			<scan class="text-secondary"> Prontuário</scan>
+		</h4>
+	</div>
+	<div class="card">
+		<h4 class="card-header">
+			<i class="fa-solid fa-user text-info"></i> 
+		<span class="text-secondary">	Usuários</span>
+	</h4>
+	</div>
+</section>
+{% endblock %}

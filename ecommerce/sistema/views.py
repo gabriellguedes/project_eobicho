@@ -6,6 +6,10 @@ from django.http import HttpResponseRedirect
 from django.forms import inlineformset_factory
 from django.views.generic import UpdateView
 
+# Dashbord
+def dashboard(request):
+	template_name = 'dashboard.html'
+	return render(request, template_name)
 
 # Add Espécie/Raça 
 def especie_add(request):

@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load bootstrap %}
 {% block title%}
 {{block.super}} - Ficha técnica
 {% endblock title %}
@@ -26,48 +27,60 @@
 			   
 			    <div class="col-md-8 row">
 			    		<div class="col-sm-4">
-							<label class="font-weight-bold">Peso(kg): </label>
-							<label class="text-monospace">{{pet.peso}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold">Tamanho(cm): </label>
-							<label class="text-monospace">{{pet.tamanho}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold"><i class="fa-solid fa-paw"></i> Especie: </label>
-							<label class="text-monospace">{{pet.especie}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold">Raça: </label>
-							<label class="text-monospace">{{pet.raca.raca}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold">Temperamento: </label>
-							<label class="text-monospace">{{pet.temperamento}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold">Pelagem: </label>
-							<label class="text-monospace">{{pet.pelagem}}</label> 
-						</div>
-						<div class="col-sm-4">
-							<label class="font-weight-bold">Coloração: </label>
-							<label class="text-monospace">{{pet.coloracao}}</label> 
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-user text-info"></i> Tutor: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.tutor.nome}}</label> 
 						</div>
 						<div class="col-sm-4">
 							<label class="font-weight-bold">
-								<i class="fa-solid fa-balloon"></i> Data de Nascimento:
+								<i class="fa-solid fa-venus-mars text-info"></i> Sexo: 
 							</label>
-							<label class="text-monospace">{{pet.aniversario}}</label> 
+							<label class="text-monospace text-secondary">{{pet.sexo}}</label> 
 						</div>
 						<div class="col-sm-4">
-							<label class="font-weight-bold">Caracteristicas: </label>
-							<label class="text-monospace">{{pet.caracteristicas}}</label>
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-paw text-info"></i> Especie: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.especie}}</label> 
 						</div>
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-shield-cat text-info"></i> Raça: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.raca.raca}}</label> 
+						</div>
+						
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-dog text-info"></i> Pelagem: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.pelagem}}</label> 
+						</div>
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-droplet text-info"></i> Coloração: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.coloracao}}</label> 
+						</div>
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-face-smile text-info"></i> Temperamento: 
+							</label>
+							<label class="text-monospace text-secondary">{{pet.temperamento}}</label> 
+						</div>
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-heart text-info"></i> Data de Nascimento:
+							</label>
+							<label class="text-monospace text-secondary">{{pet.aniversario}}</label> 
+						</div>
+						
 
 			    </div>
 			    <div class="col-md-2">
-			    	<button class="btn btn-lg btn-outline-warning" onclick="location.href=''">
-			    		<i class="fa-regular fa-pen-to-square"></i> Editar
+			    	<button class="btn btn-lg btn-outline-info" onclick="location.href='{% url 'pet:pet_update' pk=pet.id %}'">
+			    		<i class="fa-solid fa-pen"></i> Editar
 			    	</button>
 			    </div>	
 
@@ -75,8 +88,11 @@
 		</div>
 	</div>	
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	   <li class="nav-item">
+	    <a class="nav-link active" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
+	  </li>	
 	  <li class="nav-item">
-	    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Histórico</a>
+	    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Histórico</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Prontuário</a>
@@ -87,8 +103,28 @@
 	</ul>
 	
 	<div class="tab-content" id="myTabContent">
-	  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Home Test</div>
-	  <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+		<section class="tab-pane fade show active" id="peso" role="tabpanel" aria-labelledby="peso-tab">
+			<div class="col-4 mt-3">
+				<div id="card">
+					<h4 class="card-header text-info font-weight-bold"><i class="fa-solid fa-scale-unbalanced-flip"></i> Peso</h4>
+					<form method="POST" action=".">
+						{% csrf_token %}
+						{% for iten in peso %}
+							<p>{{iten|bootstrap}}</p>
+						{% endfor %}
+						<button type="submit" class="btn btn-info btn-peso mt-3">
+							<i class="fa-solid fa-plus"></i>
+						</button>	
+					</form>	
+				</div>
+			</div>	
+		</section>	
+	  
+	  <section class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
+	  	Home Test
+	  </section>
+	  
+	  <section class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
 	  	<div class="card-header bg-dark">
 					<h3 class="text-white"><i class="bi bi-journal-text"></i> Prontuário</h3>
 					<div class="col row">
@@ -165,8 +201,8 @@
 						</a>
 					</div>
 				</div>
-	  </div>
-	  <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
+	  </section>
+	  <section class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
 	  	<div class="col mt-3">
 		    	<p class="font-weight-bold">
 		    		<i class="bi bi-journal-text"></i> Fichas Antigas:
@@ -200,7 +236,7 @@
 				    {% endfor%}							    	
 		    	</table>
 		    </div>
-	  </div>
+	  </section>
 	</div>
 
 {% endblock %}

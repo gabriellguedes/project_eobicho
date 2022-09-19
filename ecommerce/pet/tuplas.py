@@ -1,5 +1,10 @@
 
 class Tuplas():
+
+	SEXO_CHOICES = (
+		('Macho','Macho'),
+		('Fêmia', 'Fêmia'),
+	)
 	
 	ESPECIE_CHOICES = (
 		('cachorro', 'Cachorro'),

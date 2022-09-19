@@ -1,0 +1,23 @@
+{% extends 'core/base.html'%}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section>
+	<h3 class="border-bottom pb-2 text-info"><i class="fa-solid fa-user"></i> Cadastro Cliente</h3>
+	
+	<div class="col-md-4">
+		<form method="POST" action=".">
+			{% csrf_token %}
+
+			 <p>{{form.nome|bootstrap}}</p>
+			 <p>{{form.cpf|bootstrap}}</p>
+			 <p>{{form.telefone|bootstrap}}</p>
+			 <p>{{form.email|bootstrap}}</p>
+			
+			<button class="btn btn-info" type="submit">Atualizar</button>
+			<button class="btn btn-danger" onclick="location.href='{% url 'contas:cliente_list'%}'">Cancelar</button>
+		</form>
+	</div>	
+</section>
+{% endblock %}

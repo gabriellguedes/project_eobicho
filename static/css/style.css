@@ -31,12 +31,16 @@ span.required:after{
  1.2 - Nav
 *****************************/
 .wrap-nav{
+	width: 90%;
+	margin: 0 auto;
 }
 .nav-dropdown {
   position: relative;
   display: inline-block;
 }
-
+.btn-peso{
+	border-radius: 50% !important;
+}
 .dropdown-content {
   display: none;
   position: absolute;
@@ -99,7 +103,7 @@ span.required:after{
 #wrap-footer{
 	width: 100%;
 	margin-top: 15px;
-	min-height: 80px;
+	min-height: 50px;
 	background: black;
 	color: white;
 }

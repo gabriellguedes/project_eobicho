@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 from django.views.generic import UpdateView
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
-from .forms import PetForm
-from .models import Pet, Especie, Raca
+from .forms import PetForm, PesoForm
+from .models import Pet, Peso
 
 #Cadastro Pet
 def pet_add(request):
@@ -69,6 +69,17 @@ class updatePet(UpdateView):
     model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:pet_list')
+
+#Add Peso
+def peso_add(request):
+    template_name = 'pet/pet_detail.html'
+    form = PesoForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail'))
+    context = {'peso': form}
+    return render(request, template_name, context=context)
 
 #Visualizar raças
 def raca_view(request):

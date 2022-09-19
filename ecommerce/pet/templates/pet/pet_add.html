@@ -14,23 +14,16 @@
   	{% csrf_token %}
     <div class="form-row">
       <div class="col-lg-5 mb-3">
+          {{ form.tutor|bootstrap }}
+      </div>
+      <div class="col-lg-5 mb-3">
         	{{ form.nome|bootstrap }}
       </div>
-      <div class="col-md-4 mb-3">
-        {{ form.apelido|bootstrap }}
-      </div>
+      
       <div class="col-md-3 mb-3 date">
         {{ form.aniversario|bootstrap }}
       </div>
-    
-      <div class="col-md-3 mb-3">
-        {{ form.idade|bootstrap }}
-      </div>
-
-      <div class="col-md-3 mb-3">
-        {{ form.peso|bootstrap }}
-      </div>
-      
+               
 <!-- SELECT TIPO DE ANIMAIS/RAÇAS -->
       <div id="select" name="select" class="col-md-3 mb-3">
          {{form.especie|bootstrap}}
@@ -41,10 +34,6 @@
       </div>
    
 <!--/SELECT TIPO DE ANIMAIS/RAÇAS  -->
-      <div class="col-md-3 mb-3">
-       {{ form.temperamento|bootstrap }}
-      </div>
-   
       <div class="col-md-3 mb-3">
         {{ form.pelagem|bootstrap }}
       </div>
@@ -58,11 +47,16 @@
       </div>
       
       <div class="col-md-3 mb-3">
-        {{ form.tamanho|bootstrap }}  
+        {{ form.sexo|bootstrap }}  
       </div>
-      
+      <div class="col-md-3 mb-3">
+        {{ form.temperamento|bootstrap }}  
+      </div>
       <div class="col-md-3 mb-3">
         {{ form.caracteristicas|bootstrap }}  
+      </div>
+      <div class="col-md-3 mb-3">
+       {{ form.status|bootstrap }}
       </div>
     </div>
    	

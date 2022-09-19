@@ -4,7 +4,9 @@ from . import views
 app_name = 'sys'
 
 urlpatterns = [
-# Especies
+	# Dashboard
+	path('', views.dashboard, name='sys_dashboard'),
+	# Especies
 	path('add-especie/', views.especie_add, name='especie_add'),
 	path('addespecie/', views.add_Especie, name='add_Especie'),
 	path('list-especie/', views.list_Especie, name='especie_list'),
