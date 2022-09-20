@@ -20,12 +20,12 @@ class Pet(models.Model):
 	especie = models.ForeignKey(Especie, on_delete=models.SET_NULL, null=True, blank=True)
 	raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, null=True, blank=True)
 	sexo = models.CharField('Sexo', max_length=10, choices=t.SEXO_CHOICES,default=True)
-	
+	castracao = models.BooleanField('Castrado(a)', default=False)
 	class Meta:
 		ordering=('nome',)
 
 	def __str__(self):
-		return '{}-{}'.format(self.nome, self.id)
+		return '{} - {}'.format(self.nome, self.id)
 
 	def id_formated(self):
 		if self.id:

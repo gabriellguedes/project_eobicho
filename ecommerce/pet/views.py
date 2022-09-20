@@ -56,12 +56,24 @@ def detailPet(request, pk):
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
+        
+    # Add Peso
+    formPeso = PesoForm(request.POST or None)
+    if request.method == 'POST':
+        if formPeso.is_valid():
+            formPeso.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail'))
+    # Listar Peso        
+    list_peso = Peso.objects.filter(pet=obj.pk)
+   
     context = { 
         'pet': obj,
         'ficha': ficha,
         'last_fichas': last_fichas,
+        'peso': formPeso,
+        'listpeso': list_peso,
      }
-    return render(request, template, context) 
+    return render(request, template, context=context) 
 
 #Atualização
 class updatePet(UpdateView):
@@ -69,17 +81,6 @@ class updatePet(UpdateView):
     model = Pet
     fields = '__all__'
     success_url = reverse_lazy('pet:pet_list')
-
-#Add Peso
-def peso_add(request):
-    template_name = 'pet/pet_detail.html'
-    form = PesoForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('pet:pet_detail'))
-    context = {'peso': form}
-    return render(request, template_name, context=context)
 
 #Visualizar raças
 def raca_view(request):

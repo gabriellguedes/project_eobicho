@@ -38,9 +38,7 @@ span.required:after{
   position: relative;
   display: inline-block;
 }
-.btn-peso{
-	border-radius: 50% !important;
-}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -66,6 +64,9 @@ span.required:after{
 	min-height: 500px;
 	margin: 0 auto;
 }
+/**********************************************************
+ 2.2 - Pet Detail
+ *********************************************************/
 .pet-img{
 	max-width: 150px;
 	border: 3px solid deepskyblue;
@@ -79,6 +80,19 @@ span.required:after{
 	.dados-pet-header{
 		border-radius: 9px 9px 0 0;
 	}
+/**** 2.2.1 - Peso - Detail Pet ****/
+.btn-peso{
+	min-height: 70px;
+	min-width: 70px;
+	border-radius: 50% !important;
+}
+.box-peso-title{
+	border-radius: 9px 9px 0 0;
+}
+.box-peso{
+	border-radius: 10px;
+	box-shadow: 2px 5px 10px #a4a4a4; ;
+}
 .status-color{
 	color: green !important;
 }
@@ -109,7 +123,7 @@ span.required:after{
 }
 
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 400px){
 	.logo{
 		align-content: center;
 	}

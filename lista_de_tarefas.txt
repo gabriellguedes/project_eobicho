@@ -13,7 +13,7 @@ Para Fazer:
     - Cadastro pet/ficha
     - Campo raça 
     - (Models)Add campo de foto para pet
-    
+    - Pertences personales
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)x
     - Calcular automaticamente a idade

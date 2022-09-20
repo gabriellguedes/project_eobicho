@@ -16,4 +16,3 @@ class PesoForm(forms.ModelForm):
 	class Meta:
 		model = Peso
 		fields = '__all__'
-

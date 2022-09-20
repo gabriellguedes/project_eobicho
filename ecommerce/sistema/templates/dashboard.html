@@ -4,27 +4,50 @@
 
 {% block content %}
 <section class="row">
-	<div class="card">
-		<h4 class="card-header">
+	<!-- Animais/Pet -->
+	<div class="col-5">
+		<h4 class="py-3 pl-3 border-bottom">
 			<i class="fa-solid fa-paw text-info"></i> 
-			<span class="text-secondary"> Pet</span>
+			<span class="text-secondary"> Animais</span>
 		</h4>
-		<div class="card-body">
-			 <a class="" href="{% url 'sys:especie_list' %}">Espécies</a>
-             <a class="" href="{% url 'sys:raca_list' %}">Raças</a>
+		<div class="">
+			<ol>
+				<li class="nav-item"><a href="{% url 'pet:pet_list' %}">Lista de Animais</a></li>
+				<li class="nav-item"><a class="" href="{% url 'sys:especie_list' %}">Espécies</a></li>
+				<li class="nav-item"><a class="" href="{% url 'sys:raca_list' %}">Raças</a></li>
+			</ol>
+			
+             
 		</div>
 	</div>	
-	<div class="card mx-3">
-		<h4 class="card-header">
+
+	<!-- Prontuários -->
+	<div class="col-5 ml-3">
+		<h4 class="border-bottom py-3 pl-3">
 			<i class="bi bi-card-checklist text-info"></i> 
 			<scan class="text-secondary"> Prontuário</scan>
 		</h4>
+		<div class="">
+			<ol>
+				<li class="nav-item"><a href="{% url 'fichas:ficha_list' %}">Lista de Prontuários</a></li>
+			</ol>
+		       
+		</div>
 	</div>
-	<div class="card">
-		<h4 class="card-header">
+
+	<!-- Usuário -->
+	<div class="col-5 mt-3">
+		<h4 class="border-bottom py-3 pl-3">
 			<i class="fa-solid fa-user text-info"></i> 
-		<span class="text-secondary">	Usuários</span>
-	</h4>
+			<span class="text-secondary">	Usuários</span>
+		</h4>
+		<div class="">
+			<ol>
+				<li class="nav-item"><a href="{% url 'contas:cliente_list' %}">Lista de Clientes</a></li>
+			</ol>
+		       
+		</div>
+
 	</div>
 </section>
 {% endblock %}

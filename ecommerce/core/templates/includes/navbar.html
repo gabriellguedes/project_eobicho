@@ -17,6 +17,10 @@
             <span class="sr-only">(Página atual)</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contas:cliente_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-user"></i> Clientes</span></a>
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="{% url 'pet:pet_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-paw"></i> Pets</span></a>
@@ -28,21 +32,14 @@
             </span>
           </a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{% url 'sys:sys_dashboard' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'sys:sys_dashboard' %}">
             <span class="text-white font-weight-bold">
-              <i class="fa-solid fa-gears"></i>  Administrativo
+              <i class="fa-solid fa-gears"></i> Administrativo
             </span>
           </a>
-          <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'sys:sys_dashboard'%}"> Dashboard</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'sys:especie_list' %}">Espécies</a>
-              <a class="dropdown-item" href="{% url 'sys:raca_list' %}">Raças</a>
-           
-            
-          </div>
         </li>
+        
       </ul>
     </div>
   </div>  

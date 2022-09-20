@@ -75,6 +75,16 @@
 							</label>
 							<label class="text-monospace text-secondary">{{pet.aniversario}}</label> 
 						</div>
+						<div class="col-sm-4">
+							<label class="font-weight-bold">
+								<i class="fa-solid fa-staff-snake text-info"></i> Castrado(a)
+							</label>
+							{% if pet.castracao == False %}
+								<label class="text-monospace text-secondary"> Não</label> 
+							{% else %}
+								<label class="text-monospace text-secondary"> Sim</label>
+							{% endif %}	
+						</div>
 						
 
 			    </div>
@@ -104,20 +114,42 @@
 	
 	<div class="tab-content" id="myTabContent">
 		<section class="tab-pane fade show active" id="peso" role="tabpanel" aria-labelledby="peso-tab">
-			<div class="col-4 mt-3">
-				<div id="card">
-					<h4 class="card-header text-info font-weight-bold"><i class="fa-solid fa-scale-unbalanced-flip"></i> Peso</h4>
-					<form method="POST" action=".">
-						{% csrf_token %}
-						{% for iten in peso %}
-							<p>{{iten|bootstrap}}</p>
-						{% endfor %}
-						<button type="submit" class="btn btn-info btn-peso mt-3">
-							<i class="fa-solid fa-plus"></i>
-						</button>	
-					</form>	
+			<div class="row my-3">
+				<div class="col-4">
+					<div class="border box-peso">
+						<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
+							<i class="fa-solid fa-scale-unbalanced-flip text-info"></i> Peso
+						</h4>
+						<form class="px-3" method="POST" action=".">
+							{% csrf_token %}
+							{% for iten in peso %}
+								<p>{{iten|bootstrap}}</p>
+							{% endfor %}
+							<div class="d-flex justify-content-center">
+								<button type="submit" class="btn btn-lg btn-info btn-peso my-3">
+									<i class="fa-solid fa-plus"></i>
+								</button>
+							</div>		
+						</form>	
+					</div>
 				</div>
-			</div>	
+				<div class="col-7">
+					<div class="">
+						<h4 class="text-secondary font-weight-bold ml-3 mt-3">
+							<i class="bi bi-journal-text text-info"></i> Histórico Peso
+						</h4>
+							<div class="card-body">
+								{% for item in listpeso %}
+								<div class="text-secondary border-bottom pt-2">
+									<label><span class="text-info"> Peso(Kg):</span> {{ item.peso }}<span class="text-info"> em </span>
+									{{item.created}}
+									</label>
+								</div>
+								{% endfor %}
+							</div>
+					</div>
+				</div>
+			</div>		
 		</section>	
 	  
 	  <section class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
