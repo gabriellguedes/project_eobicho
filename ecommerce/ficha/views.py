@@ -11,24 +11,33 @@ from django.forms import inlineformset_factory
 # Criar uma nova ficha
 def createFicha(request, pk):
     template_name = 'ficha_add.html'
-    pet_pk = Pet.objects.get(pk=pk)
+    obj = Pet.objects.get(pk=pk)
     
     if request.method == 'GET':
-        form = FichaForm()
-        context = {
-            'form':form
-        }
-        return render(request, template_name, context=context)
-    else:
-        form = FichaForm(request.POST)
-        if form.is_valid():
-            pet = form.save()
-            return HttpResponseRedirect(reverse('pet:pet_list'))
-        context = {
-            'form':form
-        }
+        form = PetForm()
+        form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1)
+        form_ficha = form_ficha_factory()
 
+        context = {
+            'form':form_ficha,
+            'pet': obj, 
+        }
         return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = PetForm(request.POST)
+        form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm)
+        form_ficha = form_ficha_factory(request.POST)
+
+        if form_ficha.is_valid():
+            form_ficha.instance = obj    
+            form_ficha.save()
+            return HttpResponseRedirect(reverse('pet:pet_list'))
+        else:
+            context = {
+                'form':form_ficha
+            }
+
+            return render(request, template_name, context=context)
 
 
 #Listar todas as fichas cadastradas
@@ -44,7 +53,8 @@ def listFicha(request):
     fichas_paginator = Paginator(fichas, parametro_limit)
 
     lista = Ficha.objects.all()
-    
+    pet = Pet.objects.all()
+
     try:
         page = fichas_paginator.page(parametro_page)
 
@@ -56,6 +66,7 @@ def listFicha(request):
         'qnt_page':parametro_limit,
         'fichas': page,
         'lista': lista,
+        'pet': pet,
         }
     return render(request, template_name, context=context)
 

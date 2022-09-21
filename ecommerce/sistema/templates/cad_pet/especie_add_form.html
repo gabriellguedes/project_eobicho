@@ -28,17 +28,18 @@
                 {% endfor %}
               </div>
             {% endfor %}
-          {{ formset.management_form }}
+          {{ form_raca.management_form }}
           </div>
         </div>
 
-        <div class="row">
+        <div class="">
           <div class="col-sm-12">
             <legend style="border-bottom: 1px solid #e5e5e5;"><i class="fa-solid fa-shield-dog"></i> Raças</legend>
             <div id="estoque" class="form-inline">
-              {% for item_estoque_form in formset %}
-                <div id="item-{{ forloop.counter0 }}" class="form-group">
-                  {{ item_estoque_form|bootstrap }}
+              {% for new_raca in form_raca %}
+
+                <div id="item-{{ forloop.counter0 }}" class="form-group mx-2 mt-3 col-5">
+                  {{ new_raca|bootstrap }}
                 </div>
               {% endfor %}
             </div>
@@ -73,8 +74,8 @@
 {% block js %}
 
 <script type="text/html" id="item-estoque">
-  <div id="item-__prefix__" class="form-group" style="margin-top: 10px;">
-    {{ formset.empty_form|bootstrap }}
+  <div id="item-__prefix__" class="form-group mx-2 mt-3 col-5" style="margin-top: 10px;">
+    {{ form_raca.empty_form|bootstrap }}
   </div>
 </script>
 

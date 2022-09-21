@@ -14,33 +14,34 @@ def dashboard(request):
 # Add Espécie/Raça 
 def especie_add(request):
     template_name = 'cad_pet/especie_add_form.html'
-    especie_form = Especie()
-    raca_formset = inlineformset_factory(
-        Especie,
-        Raca,
-        form=RacaForm,
-        extra=0,
-        min_num=1,
-        validate_min=True,
-    )
-    if request.method == 'POST':
-        form = EspecieForm(request.POST, instance=especie_form, prefix='main')
-        formset = raca_formset(
-            request.POST,
-            instance=especie_form,
-            prefix='especie'
-        )
-        if form.is_valid() and formset.is_valid():
-            form = form.save()
-            formset.save()
-            url = 'sys:especie_list'
-            return HttpResponseRedirect(resolve_url(url))
-    else:
-        form = EspecieForm(instance=especie_form, prefix='main')
-        formset = raca_formset(instance=especie_form, prefix='especie')
+    
+    if request.method == 'GET':
+    	form = EspecieForm()
+    	form_raca_factory = inlineformset_factory(Especie, Raca, form=RacaForm, extra=3)
+    	form_raca = form_raca_factory()
 
-    context = {'form': form, 'formset': formset}
-    return render(request, template_name, context)
+    	context = {
+    		'form': form,
+    		'form_raca': form_raca,
+    	}
+    	return render(request, template_name, context=context)
+
+    elif request.method == 'POST':
+    	form = EspecieForm(request.POST)
+    	form_raca_factory = inlineformset_factory(Especie, Raca, form=RacaForm, extra=3)
+    	form_raca = form_raca_factory(request.POST)
+    	
+    	if form.is_valid() and form_raca.is_valid():
+    		especie = form.save()
+    		form_raca.instance = especie
+    		form_raca.save()
+    		return HttpResponseRedirect(reverse('sys:especie_list'))
+    	else:
+    		context = {
+    		 'form': form,
+    		 'form_raca': form_raca
+    		}
+    		return render(request, template_name, context=context)
 
 # Adicionar uma nova Especie
 def add_Especie(request):

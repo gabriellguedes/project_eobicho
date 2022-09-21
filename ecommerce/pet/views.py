@@ -3,7 +3,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import UpdateView
+from ecommerce.accounts.models import Cliente
+from ecommerce.accounts.forms import ClienteForm
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm, PesoForm
@@ -52,35 +53,80 @@ def paginacao(request):
 
 #Vizualizar Pet e Ficha
 def detailPet(request, pk):
-    template ='pet/pet_detail.html'
+    template_name ='pet/pet_detail.html'
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
-        
-    # Add Peso
-    formPeso = PesoForm(request.POST or None)
-    if request.method == 'POST':
-        if formPeso.is_valid():
-            formPeso.save()
-            return HttpResponseRedirect(reverse('pet:pet_detail'))
     # Listar Peso        
-    list_peso = Peso.objects.filter(pet=obj.pk)
-   
-    context = { 
-        'pet': obj,
-        'ficha': ficha,
-        'last_fichas': last_fichas,
-        'peso': formPeso,
-        'listpeso': list_peso,
-     }
-    return render(request, template, context=context) 
+    list_peso = Peso.objects.filter(pet=obj.pk)    
+    
+    # Add Peso
+    if request.method == 'GET':
+        form = PetForm()
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, extra=1)
+        form_peso = form_peso_factory()
+
+        context={
+            'pet': obj,
+            'ficha': ficha,
+            'last_fichas': last_fichas,
+            'peso': form_peso,
+            'listpeso': list_peso,
+        }
+        return render(request, template_name, context=context)
+        
+    elif request.method == 'POST':
+        form = PetForm(request.POST)
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm)
+        form_peso = form_peso_factory(request.POST)
+        
+        if form_peso.is_valid():
+            form_peso.instance = obj
+            form_peso.save()
+            return HttpResponseRedirect(reverse('pet:pet_list'))
+        else:
+           
+            context = { 
+                'pet': obj,
+                'ficha': ficha,
+                'last_fichas': last_fichas,
+                'peso': form_peso,
+                'listpeso': list_peso,
+             }
+            return render(request, template_name, context=context) 
 
 #Atualização
-class updatePet(UpdateView):
+def pet_update(request, pk):
     template_name = 'pet/pet_update.html'
-    model = Pet
-    fields = '__all__'
-    success_url = reverse_lazy('pet:pet_list')
+    obj_pet = Pet.objects.get(id=pk)
+    n = obj_pet.tutor.id
+    obj_cliente = Cliente.objects.get(id=n)
+    
+    if request.method == 'GET':
+        form = ClienteForm()
+        form_pet_factory = inlineformset_factory(Cliente, Pet, form=PetForm, extra=0)
+        form_pet = form_pet_factory(instance=obj_cliente)
+        context = {
+            'form': form,
+            'form_pet': form_pet
+        }
+        return render(request, template_name, context=context)
+
+    elif request.method == 'POST':
+        form = ClienteForm()
+        form_pet_factory = inlineformset_factory(Cliente, Pet, form=PetForm)
+        form_pet = form_pet_factory(request.POST, instance=obj_cliente)
+        if form_pet.is_valid():
+            form_pet.instance = obj_cliente 
+            form_pet.save()
+            return HttpResponseRedirect(reverse('pet:pet_list'))
+        else:
+            context = {
+                'form': form,
+                'form_pet': form_pet
+            }    
+            return render(request, template_name, context=context)
+
 
 #Visualizar raças
 def raca_view(request):

@@ -14,55 +14,15 @@
   </div>  
   <form method="POST" action=".">
   	{% csrf_token %}
-  <div class="row">  
-  {% for item in form %}
-  <div class="col-2">
-  <p>{{item|bootstrap}}</p>
- </div>
-  {% endfor %}
-</div>
-   <!-- 
-    <div class="form-row">
-   
-      <div class="col col-lg-5 mb-3">
-        	{{ form.nome|bootstrap }}
-      </div>
-      
-      <div class="col-md-3 mb-3">
-        {{ form.aniversario|bootstrap }}
-      </div>
-    
-      <div class="col-md-3 mb-3">
-        {{ form.especie|bootstrap }}
-      </div>
-        
-      <div class="col-md-3 mb-3">
-        {{ form.raca|bootstrap }}
-      </div>
-
-      <div class="col-md-3 mb-3">
-       {{ form.temperamento|bootstrap }}
-      </div>
-   
-      <div class="col-md-3 mb-3">
-        {{ form.pelagem|bootstrap }}
-      </div>
-    
-      <div class="col-md-3 mb-3">
-        {{ form.coloracao|bootstrap }}
-      </div>
-      
-      <div class="col-md-3 mb-3">
-        {{ form.caracteristicas|bootstrap }}  
-      </div>
-      <div class="col-md-3 mb-3">
-        {{ form.castracao|bootstrap }}  
-      </div>
-      <div class="col-md-3 mb-3">
-          {{ form.status|bootstrap }}
-      </div>
-    </div>-->
-   	
+    <div class="row">  
+      {{form_pet.management_form}}
+      {% for item in form_pet %}
+        <div class="col-md-4">
+          {{item|bootstrap}}
+        </div>
+      {% endfor %}
+    </div>
+      	
      <button class="btn btn-primary" type="submit">Salvar Alterações</button>
      <a class="btn btn-danger" href="{% url 'pet:pet_list' %}">Cancelar</a>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->

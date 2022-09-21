@@ -3,7 +3,7 @@ Feito:
     - 
 
 Para Fazer:
-    - Detail Cliente
+    - Dashboard Cliente
     - Nome duplica na page(url sys/add-especie)
     - (Models)Add campo datetime 
     - Add mais de uma opção no Anamneses
@@ -16,7 +16,6 @@ Para Fazer:
     - Pertences personales
     - Template Cadastro Pet/Anamineses
     - Criar nova ficha(link do Detail-pet)x
-    - Calcular automaticamente a idade
     - Registro de Úsuarios(Funcionários, Clientes)
      
 

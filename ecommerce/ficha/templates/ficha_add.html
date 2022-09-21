@@ -4,128 +4,128 @@
 {% block content %}
 <form method="POST" action=".">
     {% csrf_token %}
-      <h5 class=""><span class="font-weight-bold">Nome do Pet:</span></h5>
-      {{form.pet|bootstrap }}
-        
+      <legend class="text-secondary font-weight-bold">Inspeção do <span class="text-danger"> {{pet.nome}} </span></legend>
+      {{form.management_form}}
+       {% for pf in form %} 
        <div class="row">
        <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Doenças:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.doenca|bootstrap }}
+            {{ pf.doenca|bootstrap }}
           </div>
         </div>
       </div>  
 
       <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção das Unhas:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.unhas|bootstrap }}
+            {{ pf.unhas|bootstrap }}
           </div>
         </div>
       </div>  
 
       <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção dos Olhos:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.olhos|bootstrap }}
+            {{ pf.olhos|bootstrap }}
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção Bucal:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.boca|bootstrap }}
+            {{ pf.boca|bootstrap }}
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-3">  
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção das Patas:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.patas|bootstrap }}
+            {{ pf.patas|bootstrap }}
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção Auricular:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.orelhas|bootstrap }}
+            {{ pf.orelhas|bootstrap }}
           </div>
         </div>
       </div>
 
       <div class="col-lg-4 mb-3">
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
           <h5 class="text-white">
             <i class="bi bi-journal-text"></i> Inspeção do Pelo:
           </h5>
         </div>
           <div class="card-body">
-            {{ form.pelos|bootstrap }}
-            {{ form.pelosEstado|bootstrap }}
-            {{ form.pelosCondicao|bootstrap }}
+            {{ pf.pelos|bootstrap }}
+            {{ pf.pelosEstado|bootstrap }}
+            {{ pf.pelosCondicao|bootstrap }}
           </div>  
         </div>
       </div>
       <div class="col-lg-4 mb-3">  
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
             <h5 class="text-white">
               <i class="bi bi-journal-text"></i> Inspeção da Pele:
             </h5>
           </div>
           <div class="card-body">
-            {{ form.ectoparasitas|bootstrap }}
-            {{ form.peleInfeccionada|bootstrap }}
-            {{ form.peleOutros|bootstrap }}
+            {{ pf.ectoparasitas|bootstrap }}
+            {{ pf.peleInfeccionada|bootstrap }}
+            {{ pf.peleOutros|bootstrap }}
           </div>
         </div>
       </div>
 
       <div class="col-lg-4 mb-3">  
         <div class="card">
-          <div class="card-header bg-primary">
+          <div class="card-header bg-dark">
             <h5 class="text-white">
               <i class="bi bi-journal-text"></i> Observações:
             </h5>
           </div>
           <div class="card-body">
-            {{ form.obs|bootstrap }}
+            {{ pf.obs|bootstrap }}
           </div>
         </div>
       </div>
     </div>
-
+    {% endfor %}
     <div class="d-flex justify-content-end">
       <button class="btn btn-success mr-3" type="submit">Adicionar</button>
       <a class="btn btn-primary" href="{% url 'pet:pet_list' %}">Voltar</a>

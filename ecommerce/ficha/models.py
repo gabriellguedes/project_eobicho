@@ -6,16 +6,11 @@ from ecommerce.core.models import TimeStampedModel
 
 t = Tuplas()
 
-STATUS = (
-    ('a', 'ativo'),
-    ('i', 'inativo'),
-)
-
-
-class Create(TimeStampedModel):
+class Prontuario(TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    movimento = models.CharField(max_length=1, choices=STATUS, blank=True)
-
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    tamanho = models.PositiveIntegerField('Tamanho(cm)')
+    
     class Meta:
         ordering = ('-created',)
 
@@ -24,8 +19,6 @@ class Create(TimeStampedModel):
     
 
 class Ficha(models.Model):
-
-
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
 	unhas = models.CharField('', max_length=100, choices=t.UNHAS_CHOICES)
 	ectoparasitas = models.CharField('Ectoparasitas',  max_length=100, choices=t.ECTOPARASITAS_CHOICES)

@@ -7,7 +7,7 @@ urlpatterns = [
 
     path('add-pet/', views.pet_add, name='pet_add'),
     path('list-pet/', views.paginacao, name='pet_list'),
-    path('update-pet/<int:pk>/', views.updatePet.as_view(), name='pet_update'),
+    path('update-pet/<int:pk>/', views.pet_update, name='pet_update'),
     path('detail-pet/<int:pk>/', views.detailPet, name='pet_detail'),
    
 
