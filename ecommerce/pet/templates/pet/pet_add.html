@@ -15,10 +15,10 @@
   <form method="POST" action=".">
   	{% csrf_token %}
     <div class="form-row">
-      <div class="col-lg-5 mb-3">
+      <div class="col-md-3 mb-3">
           {{ form.tutor|bootstrap }}
       </div>
-      <div class="col-lg-5 mb-3">
+      <div class="col-md-3 mb-3">
         	{{ form.nome|bootstrap }}
       </div>
       
@@ -58,7 +58,7 @@
        {{ form.status|bootstrap }}
       </div>
       <div>
-        {{ form.castracao|bootstrap }}
+        {{ form.castracao|bootstmd-3}}
       </div>
     </div>
    	
