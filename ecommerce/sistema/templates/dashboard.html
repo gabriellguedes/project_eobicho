@@ -12,7 +12,7 @@
 		</h4>
 		<div class="col-md-6">
 			<ol>
-				<li class="nav-item"><a href="{% url 'pet:pet_list' %}">Lista de Animais</a></li>
+				<li class="nav-item"><a href="{% url 'pet:pet_list' %}">Animais</a></li>
 				<li class="nav-item"><a class="" href="{% url 'sys:especie_list' %}">Espécies</a></li>
 				<li class="nav-item"><a class="" href="{% url 'sys:raca_list' %}">Raças</a></li>
 			</ol>
@@ -25,10 +25,23 @@
 			<i class="bi bi-card-checklist text-info"></i> 
 			<scan class="text-secondary"> Prontuário</scan>
 		</h4>
-		<div class="col-md-6">
+		<div class="col-md-7">
 			<ol>
-				<li class="nav-item"><a href="{% url 'fichas:ficha_list' %}">Lista de Prontuários</a></li>
-				<li class="nav-item"><a href="{% url 'fichas:pele_list' %}">Tipos de Pele</a></li>
+				<li class="nav-item"><a href="{% url 'fichas:ficha_list' %}">Prontuários</a></li>
+				<li class="nav-item"><a href="{% url 'fichas:pele_list' %}">Tipos de Pele</a>
+					<ol>
+						<li class="nav-item"><a href="{% url 'fichas:ectoparasitas_list'%}">Ectoparasitas</a></li>
+						<li class="nav-item"><a href="{% url 'fichas:infec_pele_list'%}">Infecções na Pele</a></li>
+					</ol>
+				</li>
+				<li class="nav-item">
+					<a href="{% url 'fichas:pelos_list' %}">Pelos</a>
+					<ol>
+						<li class="nav-item"><a href="{% url 'fichas:estado_pelos_list'%}">Estado dos pelos</a></li>
+						<li class="nav-item"><a href="{% url 'fichas:condicao_pelos_list' %}">Condição dos pelos</a></li>
+					</ol>
+				</li>
+				<li class="nav-item"><a href="{% url 'fichas:doenca_list' %}">Doenças</a></li>
 			</ol>
 		       
 		</div>
@@ -42,8 +55,8 @@
 		</h4>
 		<div class="col-md-6">
 			<ol>
-				<li class="nav-item"><a href="{% url 'contas:cliente_list' %}">Lista de Clientes</a></li>
-				<li class="nav-item"><a href="{% url 'contas:funcionario_list' %}">Lista de Funcionários</a></li>
+				<li class="nav-item"><a href="{% url 'contas:cliente_list' %}">Clientes</a></li>
+				<li class="nav-item"><a href="{% url 'contas:funcionario_list' %}">Funcionários</a></li>
 			</ol>
 		       
 		</div>

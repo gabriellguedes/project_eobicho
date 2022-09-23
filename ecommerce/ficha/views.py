@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from ecommerce.pet.models import Pet
-from .models import Ficha, Prontuario, Pele, Doenca
-from .forms import FichaForm, ProntuarioForm, PeleForm, DoencaForm
+from .models import Ficha, Prontuario, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos
+from .forms import FichaForm, ProntuarioForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
@@ -180,4 +180,264 @@ def doenca_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
 
+# Adicionar Ectoparasitas
+def ectoparasitas_add(request):
+    template_name='itens_ficha/pele/ectoparasitas_add.html'
+    if request.method == 'GET':
+        form = EctoparasitasForm()
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = EctoparasitasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:ectoparasitas_list'))
+        else:
+            context = { 'form': form}
+            return render(request, template_name, context=context)
+# Listar ectoparasitas
+def ectoparasitas_list(request):
+    template_name = 'itens_ficha/pele/ectoparasitas_list.html'
+    objeto = Ectoparasitas.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Update ectoparasitas
+def ectoparasitas_update(request, pk):
+    template_name='itens_ficha/pele/ectoparasitas_update.html'
+    objeto = Ectoparasitas.objects.get(id=pk)
+    if request.method == 'GET':
+        form = EctoparasitasForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = EctoparasitasForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:ectoparasitas_list'))
+        else:
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# Deletar ectoparasitas
+def ectoparasitas_delete(request, pk):
+    objeto = Ectoparasitas.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:ectoparasitas_list'))
+    else:
+        context = {'form':form}
+        return render(request, context=context)
 
+# Add infec_pele
+def infec_pele_add(request):
+    template_name = 'itens_ficha/pele/infec_pele_add.html'
+    if request.method == 'GET':
+        form = Infec_peleForm()
+        context = {'form':form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = Infec_peleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:infec_pele_list'))
+        else: 
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# Listar infec_pele
+def infec_pele_list(request):
+    template_name = 'itens_ficha/pele/infec_pele_list.html'
+    objeto = Infec_pele.objects.all()
+    context = {'form': objeto}
+    return render(request, template_name, context=context)
+# Atualizar infec_pele
+def infec_pele_update(request, pk):
+    template_name = 'itens_ficha/pele/infec_pele_update.html'
+    objeto = Infec_pele.objects.get(id=pk)
+    if request.method == 'GET':
+        form = Infec_peleForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = Infec_peleForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:infec_pele_list'))
+        else:
+            context = {'form': form}
+            return render(request,template_name, context=context)
+# Deletar infec_pele
+def infec_pele_delete(request, pk):
+    objeto = Infec_pele.objects.get(id=pk)
+    if objeto != '':
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:infec_pele_list'))
+    else:
+        msg = 'Item não existe!'
+        context = {'msg': msg }
+        return render(request, context=context)    
+
+# Adicionar Novo Tipo de Pelos
+def pelos_add(request):
+    template_name = 'itens_ficha/pelos/pelos_add.html'
+    if request.method == 'GET':
+        form = PelosForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = PelosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar Tipos de pelos cadastradas
+def pelos_list(request):
+    template_name='itens_ficha/pelos/pelos_list.html'
+    objeto = Pelos.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar Tipo de pelo cadastrada
+def pelos_update(request, pk):
+    template_name = 'itens_ficha/pelos/pelos_update.html'
+    objeto = Pelos.objects.get(id=pk)
+    if request.method == 'GET':
+        form = PelosForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = PelosForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar um Tipo de Pelo
+def pelos_delete(request, pk):
+    objeto = Pelos.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:pelos_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+   
+
+# Adicionar Novo condição de Pelos
+def estado_pelos_add(request):
+    template_name = 'itens_ficha/pelos/estado_pelos_add.html'
+    if request.method == 'GET':
+        form = Estado_pelosForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = Estado_pelosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:estado_pelos_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar condição dos pelos cadastradas
+def estado_pelos_list(request):
+    template_name='itens_ficha/pelos/estado_pelos_list.html'
+    objeto = Estado_pelos.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar condição do pelo cadastrada
+def estado_pelos_update(request, pk):
+    template_name = 'itens_ficha/pelos/estado_pelos_update.html'
+    objeto = Estado_pelos.objects.get(id=pk)
+    if request.method == 'GET':
+        form = Estado_pelosForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = Estado_pelosForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:estado_pelos_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar um Condição de Pelo
+def estado_pelos_delete(request, pk):
+    objeto = Estado_pelos.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:estado_pelos_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+   
+
+# Adicionar Novo Tipo de Pelos
+def condicao_pelos_add(request):
+    template_name = 'itens_ficha/pelos/condicao_pelos_add.html'
+    if request.method == 'GET':
+        form = Condicao_pelosForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = Condicao_pelosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:condicao_pelos_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar Tipos de pelos cadastradas
+def condicao_pelos_list(request):
+    template_name='itens_ficha/pelos/condicao_pelos_list.html'
+    objeto = Condicao_pelos.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar Tipo de pelo cadastrada
+def condicao_pelos_update(request, pk):
+    template_name = 'itens_ficha/pelos/condicao_pelos_update.html'
+    objeto = Condicao_pelos.objects.get(id=pk)
+    if request.method == 'GET':
+        form = Condicao_pelosForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = Condicao_pelosForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:condicao_pelos_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar um Tipo de Pelo
+def condicao_pelos_delete(request, pk):
+    objeto = Condicao_pelos.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:condicao_pelos_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+   

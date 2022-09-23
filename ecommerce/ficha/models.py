@@ -14,6 +14,7 @@ class Prontuario(TimeStampedModel):
 
     def __str__(self):
     	return '{} - {}'.format(self.pk, self.created.strftime('%d-%m-%Y'))
+
 class Doenca(models.Model):
 	doenca = models.CharField(max_length=150)
 	class Meta:
@@ -21,7 +22,7 @@ class Doenca(models.Model):
 
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.doenca)
-		
+
 class Pele(models.Model):
 	tipo_pele = models.CharField('Outros', max_length=100)
 	
@@ -46,18 +47,32 @@ class Infec_pele(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.ectoparasitas)		
+		return '{} - {}'.format(self.pk, self.peleInfeccionada)		
 
 class Pelos(models.Model):
 	pelos = models.CharField('Pelos', max_length=100)
-	pelosEstado = models.CharField('Estado do Pelo', max_length=100)
-	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100)
 
 	class Meta:
 		ordering =('pk',)
 
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.pelos)
+
+class Estado_pelos(models.Model):	
+	pelosEstado = models.CharField('Estado do Pelo', max_length=100)
+	class Meta:
+		ordering =('pk',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.pelosEstado)
+
+class Condicao_pelos(models.Model):
+	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100)
+	class Meta:
+		ordering =('pk',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.pelosCondicao)
 
 class Ficha(models.Model):
 	prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, default=None)
