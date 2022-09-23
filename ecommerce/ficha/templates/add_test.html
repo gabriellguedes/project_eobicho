@@ -1,0 +1,13 @@
+{% extends 'core/base.html'%}
+{% block content %}
+<form method="POST" action=".">
+	{% csrf_token %}
+	{% for item in form%}
+		<p>{{item.prontuario}}</p>
+		<p>{{item.obs}}</p>
+		<p>{{item.pele}}</p>
+		<p>{{item.pelos}}</p>
+	{% endfor %}
+	
+</form>
+{% endblock %}

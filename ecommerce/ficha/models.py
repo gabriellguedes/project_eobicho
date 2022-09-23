@@ -8,38 +8,62 @@ t = Tuplas()
 
 class Prontuario(TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-    tamanho = models.PositiveIntegerField('Tamanho(cm)')
-    obs = models.TextField('', max_length=400, blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-    	return '{} --- {}'.format(self.pk, self.created.strftime('%d-%m-%Y'))
+    	return '{} - {}'.format(self.pk, self.created.strftime('%d-%m-%Y'))
+class Doenca(models.Model):
+	doenca = models.CharField(max_length=150)
+	class Meta:
+		ordering = ('pk',)
 
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.doenca)
+		
 class Pele(models.Model):
-	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+	tipo_pele = models.CharField('Outros', max_length=100)
+	
+	class Meta:
+		ordering = ('pk',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.tipo_pele)		
+
+class Ectoparasitas(models.Model):
+	ectoparasitas = models.CharField('Ectoparasitas',  max_length=100)
 
 	class Meta:
 		ordering = ('pk',)
+
 	def __str__(self):
-		return self.pet    
+		return '{} - {}'.format(self.pk, self.ectoparasitas)	
+
+class Infec_pele(models.Model):
+	peleInfeccionada = models.CharField('Infecção na Pele', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.ectoparasitas)		
+
+class Pelos(models.Model):
+	pelos = models.CharField('Pelos', max_length=100)
+	pelosEstado = models.CharField('Estado do Pelo', max_length=100)
+	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100)
+
+	class Meta:
+		ordering =('pk',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.pelos)
 
 class Ficha(models.Model):
+	prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, default=None)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
-	unhas = models.CharField('', max_length=100, choices=t.UNHAS_CHOICES)
-	ectoparasitas = models.CharField('Ectoparasitas',  max_length=100, choices=t.ECTOPARASITAS_CHOICES)
-	peleInfeccionada = models.CharField('Infecção na Pele', max_length=100,  choices=t.PELE_INFECCIONADA_CHOICES)
-	peleOutros = models.CharField('Outros', max_length=100, choices=t.PELE_OUTROS_CHOICES)
-	pelos = models.CharField('Pelos', max_length=100, choices=t.PELOS_CHOICES)
-	pelosEstado = models.CharField('Estado do Pelo', max_length=100, choices=t.PELOS_ESTADO_CHOICES)
-	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100, choices=t.PELOS_CONDICAO_CHOICES)
-	boca = models.CharField('', max_length=100, choices=t.BOCA_CHOICES)
-	olhos = models.CharField('', max_length=100, choices=t.OLHOS_CHOICES)
-	patas = models.CharField('', max_length=100, choices=t.PATAS_CHOICES)
-	orelhas = models.CharField('', max_length=100, choices=t.ORELHAS_CHOICES)
-	doenca = models.CharField('', max_length=100, choices=t.DOENCA_CHOICES)
+	pele = models.ForeignKey(Pele, on_delete=models.CASCADE, default=None)
+	pelos = models.ForeignKey(Pelos, on_delete=models.CASCADE, default=None)
 	obs = models.TextField('', max_length=400, blank=True, null=True)
 	
 
@@ -48,3 +72,12 @@ class Ficha(models.Model):
 
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.pet.pk)
+
+""" 
+unhas = models.CharField('', max_length=100, choices=t.UNHAS_CHOICES)
+	boca = models.CharField('', max_length=100, choices=t.BOCA_CHOICES)
+	olhos = models.CharField('', max_length=100, choices=t.OLHOS_CHOICES)
+	patas = models.CharField('', max_length=100, choices=t.PATAS_CHOICES)
+	orelhas = models.CharField('', max_length=100, choices=t.ORELHAS_CHOICES)
+	doenca = models.CharField('', max_length=100, choices=t.DOENCA_CHOICES)
+"""

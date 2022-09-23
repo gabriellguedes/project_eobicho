@@ -1,0 +1,22 @@
+{% extends 'core/base.html'%}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section>
+	<h3 class="border-bottom pb-2 text-secondary">
+		<i class="fa-solid fa-user text-info"></i> Cadastrar novo funcionário
+	</h3>
+	
+	<div class="col-md-4">
+		<form method="POST" action=".">
+			 {% csrf_token %}
+			{% for iten in form %}
+
+			 <p>{{iten|bootstrap}}</p>
+			{% endfor %}
+			<button class="btn btn-info" type="submit">Criar</button>
+		</form>
+	</div>	
+</section>
+{% endblock %}

@@ -11,7 +11,7 @@ Para Fazer:
     - Menu Admin
     - Alert javascript(delete Especie/Raça)
     - Form Ficha
-    - Cadastro pet/ficha
+    - Cadastro pet(Seleção espécie e raça)
     - Campo raça 
     - (Models)Add campo de foto para pet
     - Pertences personales

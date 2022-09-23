@@ -5,7 +5,7 @@ class Cliente(models.Model):
 	nome = models.CharField('Nome', max_length=150)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
 	email = models.EmailField('Email')
-	telefone = models.CharField('Telefone', max_length=15)
+	telefone = models.CharField('Telefone', max_length=16)
 
 	class Meta:
 		ordering = ('pk',)
@@ -22,7 +22,7 @@ class Funcionario(models.Model):
 	status = models.BooleanField(default=True)
 	nome = models.CharField('Nome', max_length=150)
 	email = models.EmailField('Email')
-	telefone = models.CharField('Telefone', max_length=15)
+	telefone = models.CharField('Telefone', max_length=16)
 	
 	class Meta:
 		ordering = ('pk',)

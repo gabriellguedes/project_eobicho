@@ -5,8 +5,8 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from ecommerce.accounts.models import Cliente
 from ecommerce.accounts.forms import ClienteForm
-from ecommerce.ficha.models import Ficha
-from ecommerce.ficha.forms import FichaForm
+from ecommerce.ficha.models import Ficha, Prontuario
+from ecommerce.ficha.forms import FichaForm, ProntuarioForm
 from .forms import PetForm, PesoForm
 from .models import Pet, Peso
 

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Conexão Esporte{% endblock %}
+
+{% block content %}
+<section id="login-section">
+	<div class="mdl-grid demo-content mdl-color-red mdl-shadow--4dp">
+    	<h4 class="session-title">Login</h4>
+    	{% include 'site/block-login.html' %}
+    </div>
+</section>
+
+<section id="contact-section">
+	<div class="mdl-grid demo-content mdl-color-red mdl-shadow--4dp">
+   		<h4 class="session-title">Registre-se Aqui</h4>
+   		{% include 'site/block-cadastro.html' %}
+   	</div>
+</section>
+{% endblock %}
