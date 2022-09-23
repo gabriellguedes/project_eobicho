@@ -4,6 +4,7 @@ Feito:
 
 Para Fazer:
     - Dashboard Cliente
+    - Dashboard Funcionário
     - Nome duplica na page(url sys/add-especie)
     - (Models)Add campo datetime 
     - Add mais de uma opção no Anamneses

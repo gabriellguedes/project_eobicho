@@ -10,13 +10,21 @@ class Prontuario(TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     tamanho = models.PositiveIntegerField('Tamanho(cm)')
-    
+    obs = models.TextField('', max_length=400, blank=True, null=True)
+
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
     	return '{} --- {}'.format(self.pk, self.created.strftime('%d-%m-%Y'))
-    
+
+class Pele(models.Model):
+	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+
+	class Meta:
+		ordering = ('pk',)
+	def __str__(self):
+		return self.pet    
 
 class Ficha(models.Model):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')

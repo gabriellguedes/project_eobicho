@@ -9,7 +9,7 @@ from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
 # Criar uma nova ficha
-def createFicha(request, pk):
+def prontuario_create(request, pk):
     template_name = 'ficha_add.html'
     obj = Pet.objects.get(pk=pk)
     
@@ -41,7 +41,7 @@ def createFicha(request, pk):
 
 
 #Listar todas as fichas cadastradas
-def listFicha(request):
+def prontuario_list(request):
     template_name = 'ficha_list.html'
     parametro_page = request.GET.get('page', '1')
     parametro_limit = request.GET.get('limit', '5')
@@ -71,7 +71,7 @@ def listFicha(request):
     return render(request, template_name, context=context)
 
 #Visualizar ficha antiga
-def detailFicha(request, pk, n):
+def prontuario_detail(request, pk, n):
     template_name = 'ficha_detail.html'
     pet = Pet.objects.get(pk=pk)
     ficha = pet.fichaPets.get(id=n)

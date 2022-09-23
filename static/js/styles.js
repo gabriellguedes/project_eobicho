@@ -4,6 +4,23 @@ $(document).ready(function(){
   $('.mask-tel').mask('(00) 0000-0000');
   $('.dropdown-toggle').dropdown();
   
+  // Oculta as opções do segundo select:
+    $("#t-shift option").hide();
+    
+    // Observa o evento change do primeiro select:
+    $("#p-shift").on("change", function () {
+    
+      // Recupera o valor selecionado:
+      let course = $("#p-shift").val();
+      
+      // Oculta as opções atuais:
+      $("#t-shift option").hide();
+      
+      // Exibe as opções conforme a seleção:
+      $("#t-shift option[data-course="+ course +"]").show();
+    
+    });
+
   $('#id_especie').on('change', function(){
     
     var selectValor = '#'+$(this).val();

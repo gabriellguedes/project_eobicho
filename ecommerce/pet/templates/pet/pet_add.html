@@ -28,12 +28,23 @@
                
 <!-- SELECT TIPO DE ANIMAIS/RAÇAS -->
       <div id="select" name="select" class="col-md-3 mb-3">
-         {{form.especie|bootstrap}}
+        <label>Espécie</label>
+         <select id="p-shift" class="form-control">
+           {% for e in form.especie%}
+            <option value="{{e.id}}">{{e}}</option>
+           {% endfor %}}
+         </select>
+         
       </div>
       
       <div id="1" class="col-md-3 mb-3">
-        {{ form.raca|bootstrap }}
-      </div>
+        <label>Raça</label>
+        <select id="t-shift" class="form-control">
+          {% for item in form.raca %}
+            <option data-course="{{ item.especie.id}}" value="{{ item.id }}">{{item}}</option>
+          {% endfor %}
+        </select>
+     </div>
    
 <!--/SELECT TIPO DE ANIMAIS/RAÇAS  -->
       <div class="col-md-3 mb-3">
