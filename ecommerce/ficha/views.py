@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from ecommerce.pet.models import Pet
-from .models import Ficha, Prontuario, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos
-from .forms import FichaForm, ProntuarioForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm
+from .models import Ficha, Prontuario, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
+from .forms import FichaForm, ProntuarioForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm, BocaForm, UnhasForm, OlhosForm, OrelhasForm, PatasForm
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
@@ -130,7 +130,6 @@ def pele_delete(request, pk):
         objeto.delete()
     else:
         msg = 'Item não encotrado'
-   
 
 # Criar uma Doença
 def doenca_add(request):
@@ -441,3 +440,273 @@ def condicao_pelos_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
    
+
+#Boca 
+def boca_add(request):
+    template_name = 'itens_ficha/boca/boca_add.html'
+    if request.method == 'GET':
+        form = BocaForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = BocaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:boca_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar boca cadastradas
+def boca_list(request):
+    template_name='itens_ficha/boca/boca_list.html'
+    objeto = Boca.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar boca cadastrada
+def boca_update(request, pk):
+    template_name = 'itens_ficha/boca/boca_update.html'
+    objeto = Boca.objects.get(id=pk)
+    if request.method == 'GET':
+        form = BocaForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = BocaForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:boca_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar uma boca
+def boca_delete(request, pk):
+    objeto = Boca.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:boca_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+   
+#Unhas 
+def unhas_add(request):
+    template_name = 'itens_ficha/unhas/unhas_add.html'
+    if request.method == 'GET':
+        form = UnhasForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = UnhasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:unhas_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar unhas cadastradas
+def unhas_list(request):
+    template_name='itens_ficha/unhas/unhas_list.html'
+    objeto = Unhas.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar unhas cadastrada
+def unhas_update(request, pk):
+    template_name = 'itens_ficha/unhas/unhas_update.html'
+    objeto = Unhas.objects.get(id=pk)
+    if request.method == 'GET':
+        form = UnhasForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = UnhasForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:unhas_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar uma unhas
+def unhas_delete(request, pk):
+    objeto = Unhas.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:unhas_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+
+#Olhos 
+def olhos_add(request):
+    template_name = 'itens_ficha/olhos/olhos_add.html'
+    if request.method == 'GET':
+        form = OlhosForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = OlhosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:olhos_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar boca cadastradas
+def olhos_list(request):
+    template_name='itens_ficha/olhos/olhos_list.html'
+    objeto = Olhos.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar boca cadastrada
+def olhos_update(request, pk):
+    template_name = 'itens_ficha/olhos/olhos_update.html'
+    objeto = Olhos.objects.get(id=pk)
+    if request.method == 'GET':
+        form = OlhosForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = OlhosForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:olhos_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar uma boca
+def olhos_delete(request, pk):
+    objeto = Olhos.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:olhos_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+
+#Orelhas 
+def orelhas_add(request):
+    template_name = 'itens_ficha/orelhas/orelhas_add.html'
+    if request.method == 'GET':
+        form = OrelhasForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = OrelhasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:orelhas_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar orelhas cadastradas
+def orelhas_list(request):
+    template_name='itens_ficha/orelhas/orelhas_list.html'
+    objeto = Orelhas.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar orelhas cadastrada
+def orelhas_update(request, pk):
+    template_name = 'itens_ficha/orelhas/orelhas_update.html'
+    objeto = Orelhas.objects.get(id=pk)
+    if request.method == 'GET':
+        form = OrelhasForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = OrelhasForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:orelhas_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar uma orelhas
+def orelhas_delete(request, pk):
+    objeto = Orelhas.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:orelhas_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+
+#Patas
+def patas_add(request):
+    template_name = 'itens_ficha/patas/patas_add.html'
+    if request.method == 'GET':
+        form = PatasForm()
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = PatasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:patas_list'))
+        else:
+            context = {
+                'form': form
+            }    
+            return render(request, template_name, context=context)
+# Listar patas cadastradas
+def patas_list(request):
+    template_name='itens_ficha/patas/patas_list.html'
+    objeto = Patas.objects.all()
+    context = {
+        'form': objeto
+    }
+    return render(request, template_name, context=context)
+# Atualizar patas cadastrada
+def patas_update(request, pk):
+    template_name = 'itens_ficha/patas/patas_update.html'
+    objeto = Patas.objects.get(id=pk)
+    if request.method == 'GET':
+        form = PatasForm(instance=objeto)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method =='POST':
+        form = PatasForm(request.POST, instance=objeto)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:patas_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)    
+# Apagar uma patas
+def patas_delete(request, pk):
+    objeto = Patas.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:patas_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)

@@ -1,5 +1,7 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
 from django.http import HttpResponseRedirect
@@ -10,7 +12,42 @@ from .forms import ClienteForm, FuncionarioForm
 
 def home(request):
 	template = 'accounts/home.html'
-	return render(request, template)
+	data = {}
+	if(request.POST['password'] != request.POST['password-conf']):
+		data['msg'] = 'Senha e confirmação de senha diferentes!'
+		data['class'] = 'alert-danger'
+	else:
+		user = User.objects.create_user(request.POST['user'], request.POST['email'], request.POST['password'])
+		user.first_name = request.POST['name']
+		user.save()
+		data['msg'] = 'Usuário cadastrado com sucesso!'
+		data['class'] = 'alert-success'
+	return render(request,template_name,data)
+
+def dologin(request):
+    data = {}
+    user = authenticate(username=request.POST['user'], password=request.POST['password'])
+    if user is not None:
+        login(request, user)
+        return redirect('/dashboard/')
+    else:
+        data['msg'] = 'Usuário ou Senha inválidos!'
+        data['class'] = 'alert-danger'
+        return render(request,'painel.html',data)
+
+def store(request):
+	template_name = 'index.html'
+	data = {}
+	if(request.POST['password'] != request.POST['password-conf']):
+		data['msg'] = 'Senha e confirmação de senha diferentes!'
+		data['class'] = 'alert-danger'
+	else:
+		user = User.objects.create_user(request.POST['user'], request.POST['email'], request.POST['password'])
+		user.first_name = request.POST['name']
+		user.save()
+		data['msg'] = 'Usuário cadastrado com sucesso!'
+		data['class'] = 'alert-success'
+	return render(request,template_name,data)
 
 # Add Cliente 
 def cliente_add(request):
@@ -139,3 +176,4 @@ class funcionario_delete(DeleteView):
 	template_name = 'funcionarios/funcionario_delete.html'
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
+

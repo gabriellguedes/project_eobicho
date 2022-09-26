@@ -74,11 +74,57 @@ class Condicao_pelos(models.Model):
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.pelosCondicao)
 
+class Boca(models.Model):
+	boca = models.CharField('', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.boca)	
+
+class Unhas(models.Model):
+	unhas = models.CharField('', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.unhas)
+
+class Olhos(models.Model):
+	olhos = models.CharField('', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+	def __str__(self):
+		return '{}-{}'.format(self.pk, self.olhos)
+class Patas(models.Model):
+	patas = models.CharField('', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.patas)
+
+class Orelhas(models.Model):
+	orelhas = models.CharField('', max_length=100)
+	class Meta:
+		ordering = ('pk',)
+	
+	def __str__(self):
+		return '{} - {}'.format(self.pk, self.orelhas)
+
 class Ficha(models.Model):
 	prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, default=None)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
 	pele = models.ForeignKey(Pele, on_delete=models.CASCADE, default=None)
+	peleInfeccionada = models.ForeignKey(Infec_pele, on_delete=models.CASCADE, default=None)
 	pelos = models.ForeignKey(Pelos, on_delete=models.CASCADE, default=None)
+	pelosEstado = models.ForeignKey(Estado_pelos, on_delete=models.CASCADE, default=None)
+	pelosCondicao = models.ForeignKey(Condicao_pelos, on_delete=models.CASCADE, default=None)
+	ectoparasitas = models.ForeignKey(Ectoparasitas, on_delete=models.CASCADE, default=None)
+	boca = models.ForeignKey(Boca, on_delete=models.CASCADE, default=None)
+	unhas = models.ForeignKey(Unhas, on_delete=models.CASCADE, default=None)
+	olhos = models.ForeignKey(Olhos, on_delete=models.CASCADE, default=None)
+	patas = models.ForeignKey(Patas, on_delete=models.CASCADE, default=None)
+	orelhas = models.ForeignKey(Orelhas, on_delete=models.CASCADE, default=None)
+	doenca = models.ForeignKey(Doenca, on_delete=models.CASCADE, default=None)
+
 	obs = models.TextField('', max_length=400, blank=True, null=True)
 	
 
@@ -88,11 +134,4 @@ class Ficha(models.Model):
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.pet.pk)
 
-""" 
-unhas = models.CharField('', max_length=100, choices=t.UNHAS_CHOICES)
-	boca = models.CharField('', max_length=100, choices=t.BOCA_CHOICES)
-	olhos = models.CharField('', max_length=100, choices=t.OLHOS_CHOICES)
-	patas = models.CharField('', max_length=100, choices=t.PATAS_CHOICES)
-	orelhas = models.CharField('', max_length=100, choices=t.ORELHAS_CHOICES)
-	doenca = models.CharField('', max_length=100, choices=t.DOENCA_CHOICES)
-"""
+	

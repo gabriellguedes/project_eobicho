@@ -24,36 +24,46 @@
     <header id="wrap-header">
       <div class="container">
         <div class="row">
-          <div class="col mb-4">
+          <div class="col mb-3 m-auto">
             <a href="{% url 'pet:pet_list' %}"><img class="card-img-top logo" alt="logo" src="{% static 'img/logo.png'%}"></a>
           </div>
-          
+          {% if request.user.is_authenticated %}
+          <div class="dropdown mb-3" id="login-section">
+            <div class="row">
+              <div class="m-auto ">
+                <label class=" text-center mt-4 w-100 mb-0">Gabriel Guedes</label>
+                <label class=" w-100 text-center"><a href="">Sair</a></label>
+              </div>  
+              <img class="dropdown-toggle ml-2" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}" />
+            </div>   
+            
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Editar Perfil</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          {% endif %}
         </div>
-      </div>
+       </div>
       {% include 'includes/navbar.html'%}  
-    </header><!-- /HEADER -->
-    <main id="wrap-main">
+  </header><!-- /HEADER -->
+  <main id="wrap-main">
       
       {% block content %} 
       {% endblock content %}
 
-
-    </main><!-- /MAIN -->
-    <footer id="wrap-footer">
+  </main><!-- /MAIN -->
+  <footer id="wrap-footer">
         
-    </footer><!-- /FOOTER -->
-
-
-    
-   
+  </footer><!-- /FOOTER -->
+  <script type="text/javascript" src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/styles.js' %}"></script> 
   
-    <script type="text/javascript" src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/styles.js' %}"></script> 
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-{% block js %}{% endblock js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  {% block js %}{% endblock js %}
 
 </body>
 </html>

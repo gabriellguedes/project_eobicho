@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ficha, Prontuario, Pele, Pelos, Doenca, Ectoparasitas, Infec_pele, Estado_pelos, Condicao_pelos
+from .models import Ficha, Prontuario, Pele, Pelos, Doenca, Ectoparasitas, Infec_pele, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
 
 class ProntuarioForm(forms.ModelForm):
 	model = Prontuario
@@ -44,3 +44,29 @@ class FichaForm(forms.ModelForm):
 	class Meta:
 		model = Ficha
 		fields = '__all__'
+
+class BocaForm(forms.ModelForm):
+	class Meta:
+		model = Boca
+		fields = '__all__'
+
+class UnhasForm(forms.ModelForm):
+	class Meta:
+		model = Unhas
+		fields = '__all__'
+
+class OlhosForm(forms.ModelForm):
+	class Meta:
+		model = Olhos
+		fields = '__all__'
+
+class PatasForm(forms.ModelForm):
+	class Meta:
+		model = Patas
+		fields = '__all__'
+
+class OrelhasForm(forms.ModelForm):
+	class Meta:
+		model = Orelhas
+		fields = '__all__'
+		

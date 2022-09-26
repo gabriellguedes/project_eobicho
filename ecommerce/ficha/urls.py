@@ -52,4 +52,35 @@ urlpatterns = [
     path('update_condicao_pelos/<int:pk>/', views.condicao_pelos_update, name='condicao_pelos_update'),
     path('delete_condicao_pelos/<int:pk>/', views.condicao_pelos_delete, name='condicao_pelos_delete'),
 
+
+    #Boca
+    path('add_boca/', views.boca_add, name='boca_add'),
+    path('list_boca/', views.boca_list, name='boca_list'),
+    path('update_boca/<int:pk>/', views.boca_update, name='boca_update'),
+    path('delete_boca/<int:pk>/', views.boca_delete, name='boca_delete'), 
+    
+    #Unhas
+    path('add_unhas/', views.unhas_add, name='unhas_add'),
+    path('list_unhas/', views.unhas_list, name='unhas_list'),
+    path('update_unhas/<int:pk>/', views.unhas_update, name='unhas_update'),
+    path('delete_unhas/<int:pk>/', views.unhas_delete, name='unhas_delete'), 
+    
+    #Olhos
+    path('add_olhos/', views.olhos_add, name='olhos_add'),
+    path('list_olhos/', views.olhos_list, name='olhos_list'),
+    path('update_olhos/<int:pk>/', views.olhos_update, name='olhos_update'),
+    path('delete_olhos/<int:pk>/', views.olhos_delete, name='olhos_delete'), 
+    
+    #Orelhas
+    path('add_orelhas/', views.orelhas_add, name='orelhas_add'),
+    path('list_orelhas/', views.orelhas_list, name='orelhas_list'),
+    path('update_orelhas/<int:pk>/', views.orelhas_update, name='orelhas_update'),
+    path('delete_orelhas/<int:pk>/', views.orelhas_delete, name='orelhas_delete'), 
+    
+    #Patas
+    path('add_patas/', views.patas_add, name='patas_add'),
+    path('list_patas/', views.patas_list, name='patas_list'),
+    path('update_patas/<int:pk>/', views.patas_update, name='patas_update'),
+    path('delete_patas/<int:pk>/', views.patas_delete, name='patas_delete'),
+
 ]

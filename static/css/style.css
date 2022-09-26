@@ -28,6 +28,15 @@ span.required:after{
 	margin-top: 15px;
 }
 /****************************
+ 1.1 - Login Seccion
+*****************************/
+#login-section{
+
+}
+	#login-section img{
+		width: 70px !important;	
+}
+/****************************
  1.2 - Nav
 *****************************/
 .wrap-nav{
