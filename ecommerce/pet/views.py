@@ -5,8 +5,8 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from ecommerce.accounts.models import Cliente
 from ecommerce.accounts.forms import ClienteForm
-from ecommerce.ficha.models import Ficha, Prontuario
-from ecommerce.ficha.forms import FichaForm, ProntuarioForm
+from ecommerce.ficha.models import Ficha
+from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm, PesoForm
 from .models import Pet, Peso
 
@@ -101,7 +101,7 @@ def pet_update(request, pk):
     obj_pet = Pet.objects.get(id=pk)
     n = obj_pet.tutor.id
     obj_cliente = Cliente.objects.get(id=n)
-    
+        
     if request.method == 'GET':
         form = ClienteForm()
         form_pet_factory = inlineformset_factory(Cliente, Pet, form=PetForm, extra=0)

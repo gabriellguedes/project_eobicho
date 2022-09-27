@@ -7,47 +7,14 @@ from django.views.generic.edit import DeleteView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
+from ecommerce.pet.models import Pet
 from .models import Cliente, Funcionario
 from .forms import ClienteForm, FuncionarioForm
 
 def home(request):
-	template = 'accounts/home.html'
-	data = {}
-	if(request.POST['password'] != request.POST['password-conf']):
-		data['msg'] = 'Senha e confirmação de senha diferentes!'
-		data['class'] = 'alert-danger'
-	else:
-		user = User.objects.create_user(request.POST['user'], request.POST['email'], request.POST['password'])
-		user.first_name = request.POST['name']
-		user.save()
-		data['msg'] = 'Usuário cadastrado com sucesso!'
-		data['class'] = 'alert-success'
-	return render(request,template_name,data)
-
-def dologin(request):
-    data = {}
-    user = authenticate(username=request.POST['user'], password=request.POST['password'])
-    if user is not None:
-        login(request, user)
-        return redirect('/dashboard/')
-    else:
-        data['msg'] = 'Usuário ou Senha inválidos!'
-        data['class'] = 'alert-danger'
-        return render(request,'painel.html',data)
-
-def store(request):
-	template_name = 'index.html'
-	data = {}
-	if(request.POST['password'] != request.POST['password-conf']):
-		data['msg'] = 'Senha e confirmação de senha diferentes!'
-		data['class'] = 'alert-danger'
-	else:
-		user = User.objects.create_user(request.POST['user'], request.POST['email'], request.POST['password'])
-		user.first_name = request.POST['name']
-		user.save()
-		data['msg'] = 'Usuário cadastrado com sucesso!'
-		data['class'] = 'alert-success'
-	return render(request,template_name,data)
+	template_name = 'accounts/home.html'
+	
+	return render(request,template_name)
 
 # Add Cliente 
 def cliente_add(request):
@@ -86,6 +53,19 @@ def cliente_list(request):
         'qnt_page':parametro_limit,
         'clientes': page,
 		'lista': lista,
+	}
+	return render(request, template_name, context=context)
+
+# Detail CLiente
+def cliente_detail(request, pk):
+	template_name = 'clientes/cliente_detail.html'
+	obj_cliente = Cliente.objects.get(id=pk)
+	pet = Pet.objects.filter(tutor=obj_cliente.id)
+	pet_last = pet.last()
+
+	context = {
+		'cliente': obj_cliente,
+		'pet': pet,
 	}
 	return render(request, template_name, context=context)
 

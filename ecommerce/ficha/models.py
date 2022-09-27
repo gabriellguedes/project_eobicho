@@ -6,15 +6,6 @@ from ecommerce.core.models import TimeStampedModel
 
 t = Tuplas()
 
-class Prontuario(TimeStampedModel):
-    funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-
-    class Meta:
-        ordering = ('-created',)
-
-    def __str__(self):
-    	return '{} - {}'.format(self.pk, self.created.strftime('%d-%m-%Y'))
-
 class Doenca(models.Model):
 	doenca = models.CharField(max_length=150)
 	class Meta:
@@ -110,21 +101,21 @@ class Orelhas(models.Model):
 		return '{} - {}'.format(self.pk, self.orelhas)
 
 class Ficha(models.Model):
-	prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE, default=None)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
-	pele = models.ForeignKey(Pele, on_delete=models.CASCADE, default=None)
-	peleInfeccionada = models.ForeignKey(Infec_pele, on_delete=models.CASCADE, default=None)
-	pelos = models.ForeignKey(Pelos, on_delete=models.CASCADE, default=None)
-	pelosEstado = models.ForeignKey(Estado_pelos, on_delete=models.CASCADE, default=None)
-	pelosCondicao = models.ForeignKey(Condicao_pelos, on_delete=models.CASCADE, default=None)
-	ectoparasitas = models.ForeignKey(Ectoparasitas, on_delete=models.CASCADE, default=None)
-	boca = models.ForeignKey(Boca, on_delete=models.CASCADE, default=None)
-	unhas = models.ForeignKey(Unhas, on_delete=models.CASCADE, default=None)
-	olhos = models.ForeignKey(Olhos, on_delete=models.CASCADE, default=None)
-	patas = models.ForeignKey(Patas, on_delete=models.CASCADE, default=None)
-	orelhas = models.ForeignKey(Orelhas, on_delete=models.CASCADE, default=None)
-	doenca = models.ForeignKey(Doenca, on_delete=models.CASCADE, default=None)
-
+	pele = models.ForeignKey(Pele, on_delete=models.CASCADE)
+	peleInfeccionada = models.ForeignKey(Infec_pele, on_delete=models.CASCADE)
+	pelos = models.ForeignKey(Pelos, on_delete=models.CASCADE)
+	pelosEstado = models.ForeignKey(Estado_pelos, on_delete=models.CASCADE)
+	pelosCondicao = models.ForeignKey(Condicao_pelos, on_delete=models.CASCADE)
+	ectoparasitas = models.ForeignKey(Ectoparasitas, on_delete=models.CASCADE)
+	boca = models.ForeignKey(Boca, on_delete=models.CASCADE)
+	unhas = models.ForeignKey(Unhas, on_delete=models.CASCADE)
+	olhos = models.ForeignKey(Olhos, on_delete=models.CASCADE)
+	patas = models.ForeignKey(Patas, on_delete=models.CASCADE)
+	orelhas = models.ForeignKey(Orelhas, on_delete=models.CASCADE)
+	doenca = models.ForeignKey(Doenca, on_delete=models.CASCADE)
+	funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+	created = models.DateField('Criado em', auto_now_add=True, auto_now=False)
 	obs = models.TextField('', max_length=400, blank=True, null=True)
 	
 
@@ -132,6 +123,6 @@ class Ficha(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.pet.pk)
+		return '{} - {} - {}'.format(self.pk, self.pet.pk, self.created.strftime('%d-%m-%Y'))
 
 	

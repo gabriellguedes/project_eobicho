@@ -14,7 +14,7 @@
 		</div>	
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'pet:pet_add' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
+				<a class="btn btn-dark mb-3" href="{% url 'pet:pet_add' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
 			</div>	
 		</div>
 	</div>
@@ -27,10 +27,14 @@
 		  <thead>
 		    <tr>
 		      <th class="text-info" scope="col">#</th>
-		      <th class="block-none" scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
-		      <th class="block-none" scope="col"><i class="fa-regular fa-circle text-info"></i> Status</th>
+		      <th class="block-none text-center" scope="col">
+		      	<i class="fa-solid fa-user text-info"></i> Tutor
+		      </th>
+		      <th class="block-none text-center" scope="col">
+		      	<i class="fa-regular fa-circle text-info"></i> Status
+		      </th>
 		      <th class="text-center" scope="col"><i class="fa-sharp fa-solid fa-shield-cat text-info"></i> Pet</th>
-		      <th class="block-none" scope="col"><i class="fa-solid fa-paw text-info"></i> Espécie</th>
+		      <th class="block-none text-center" scope="col"><i class="fa-solid fa-paw text-info"></i> Espécie</th>
 		      <th class="text-center" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
 		    </tr>
 		  </thead>
@@ -38,8 +42,8 @@
 		  	 {% for pet in pets %}
 			    <tr>
 			   	  <th scope="row">{{pet.id}}</th>
-			      <td class="block-none">{{pet.tutor.nome}}</td>
-			      <td class="block-none">
+			      <td class="block-none text-center">{{pet.tutor.nome}}</td>
+			      <td class="block-none text-center">
 			      	{% if pet.status %}
 	                  <i class="fa fa-check-circle ok"></i> 
 	                  <span class="font-weight-bold ok"> Ativo</span>
@@ -50,16 +54,16 @@
 
 			      </td>
 			      <td class="text-center"><a href="{% url 'pet:pet_detail' pk=pet.id %}">{{pet.nome}}</a></td>
-			      <td class="text-uppercase block-none">{{pet.especie}}</td>
+			      <td class="text-uppercase text-center block-none">{{pet.especie}}</td>
 			      <td>
-			      	<div class="d-flex justify-content-end">
+			      	<div class="d-flex justify-content-center">
 			      		<a class="btn btn-primary mr-2" href="{% url 'pet:pet_detail' pk=pet.id %}">
 			      			<i class="fa-regular fa-eye"></i> 
-			      			Visualizar
+			      			
 			      		</a>
 			      		<a class="btn btn-warning text-white" href="{% url 'pet:pet_update' pk=pet.id %}">
 			      			<i class="fa-regular fa-pen-to-square"></i>
-			      			Editar
+			      			
 			      		</a>
 			      	</div>	
 			      </td>

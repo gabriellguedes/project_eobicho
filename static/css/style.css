@@ -34,8 +34,13 @@ span.required:after{
 
 }
 	#login-section img{
-		width: 70px !important;	
-}
+		width: 70px !important;
+		box-shadow: 1px 1px 5px blue !important;
+    border-radius: 50%;	
+	}
+	#login-section label{
+		text-shadow: 1px 1px 5px blue !important;
+	}
 /****************************
  1.2 - Nav
 *****************************/

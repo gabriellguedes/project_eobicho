@@ -12,7 +12,7 @@
 		</div>	
 		<div class="col-md-6">
 			  <div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'fichas:olhos_add' %}">
+				<a class="btn btn-dark mb-3" href="{% url 'fichas:olhos_add' %}">
 					<i class="fa-solid fa-plus"></i> Adicionar</a>
 			</div>	
 		</div>
@@ -49,11 +49,11 @@
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">
-								<a class="btn btn-primary text-white mr-3" href="{% url 'fichas:olhos_update' pk=iten.id %}">
-									<i class="fa-regular fa-pen-to-square"></i> Editar
+								<a class="btn btn-warning text-white mr-3" href="{% url 'fichas:olhos_update' pk=iten.id %}">
+									<i class="fa-regular fa-pen-to-square"></i>
 								</a>
 								<a class="btn btn-danger" href="{% url 'fichas:olhos_delete' pk=iten.id %}">
-									<i class="fa-solid fa-trash"></i> Excluir
+									<i class="fa-solid fa-trash"></i>
 								</a>
 							</div>
 						</td>

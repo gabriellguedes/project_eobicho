@@ -14,7 +14,7 @@
 		</div>	
 		<div class="col-md-6">
 			<div class="d-flex justify-content-end">
-				<a class="btn btn-primary mb-3" href="{% url 'contas:cliente_add' %}">Novo Cliente <i class="fa-solid fa-user"></i></a>
+				<a class="btn btn-dark mb-3" href="{% url 'contas:cliente_add' %}">Novo Cliente <i class="fa-solid fa-user"></i></a>
 			</div>	
 		</div>
 	</div>
@@ -41,17 +41,17 @@
 			      <td class="text-uppercase">{{item.cpf}}</td>
 			      <td>
 			      	<div class="text-center">
-			      		<a class="btn btn-primary mr-2" href="">
+			      		<a class="btn btn-primary mr-2" href="{% url 'contas:cliente_detail' pk=item.id %}">
 			      			<i class="fa-regular fa-eye"></i> 
-			      			Visualizar
+			      			
 			      		</a>
 			      		<a class="btn btn-warning text-white mr-2" href="{% url 'contas:cliente_update' pk=item.id %}">
 			      			<i class="fa-regular fa-pen-to-square"></i>
-			      			Editar
+			      		
 			      		</a>
 			      		<a class="btn btn-danger text-white" href="{% url 'contas:cliente_delete' pk=item.id %}">
-			      			<i class="fa-regular fa-pen-to-square"></i>
-			      			Excluir
+			      			<i class="fa-solid fa-trash"></i>
+			      			
 			      		</a>
 			      	</div>	
 			      </td>

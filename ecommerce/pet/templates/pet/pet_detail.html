@@ -231,7 +231,7 @@
     <!-- Prontuário  -->
     <section class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
   	<div class="card-header bg-dark">
-				<h3 class="text-white"><i class="bi bi-journal-text"></i> Prontuário</h3>
+				<h3 class="text-white"><i class="bi bi-journal-text text-info"></i> Prontuário</h3>
 				<div class="col row">
 					<div class="col-sm-3">
 						<label class="text-white">Nº Ficha: </label>
@@ -247,54 +247,54 @@
 						<small class="font-weight-bold text-white">
 							<i class="fa-regular fa-calendar"></i> Data: 
 						</small>
-						<small class="text-monospace text-white">{{ficha.date}}</small>
+						<small class="text-monospace text-white">{{ficha.created}}</small>
 					</div>
 				</div>	
 			</div>
 			<div class="card-text px-3 py-3">
 	    		<div class="col">
 	    			<label class="font-weight-bold">Unhas: </label>
-					<label class="text-monospace">{{ficha.unhas}}</label> 
+					<label class="text-monospace">{{ficha.unhas.unhas}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Ectoparasitas: </label>
-					<label class="text-monospace">{{ficha.ectoparasitas}}</label> 
+					<label class="text-monospace">{{ficha.ectoparasitas.ectoparasitas}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Pele: </label>
-					<label class="text-monospace">{{ficha.peleInfeccionada}}</label> 
+					<label class="text-monospace">{{ficha.peleInfeccionada.peleInfeccionada}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Pelos: </label>
-					<label class="text-monospace">{{ficha.pelos}}</label> 
+					<label class="text-monospace">{{ficha.pelos.pelos}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Estado dos pelos: </label>
-					<label class="text-monospace">{{ficha.pelosEstado}}</label> 
+					<label class="text-monospace">{{ficha.pelosEstado.pelosEstado}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Condição dos Pelos: </label>
-					<label class="text-monospace">{{ficha.pelosCondicao}}</label> 
+					<label class="text-monospace">{{ficha.pelosCondicao.pelosCondicao}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Boca: </label>
-					<label class="text-monospace">{{ficha.boca}}</label> 
+					<label class="text-monospace">{{ficha.boca.boca}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Olhos: </label>
-					<label class="text-monospace">{{ficha.olhos}}</label> 
+					<label class="text-monospace">{{ficha.olhos.olhos}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Patas: </label>
-					<label class="text-monospace">{{ficha.patas}}</label> 
+					<label class="text-monospace">{{ficha.patas.patas}}</label> 
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Orelhas: </label>
-					<label class="text-monospace">{{ficha.orelhas}}</label>
+					<label class="text-monospace">{{ficha.orelhas.orelhas}}</label>
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Doenças: </label>
-					<label class="text-monospace">{{ficha.doenca}}</label>
+					<label class="text-monospace">{{ficha.doenca.doenca}}</label>
 				</div>
 				<div class="col">
 					<label class="font-weight-bold">Observações: </label>
@@ -316,10 +316,10 @@
 	    	<table class="table table-hover">
 	    		<thead>
 	    			<tr class="text-center">
-		    			<th scope="col"><i class="fa-solid fa-file"></i> Nº Ficha</th>
-		    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar"></i> Data</th>
-		    			<th class="block-none" scope="col"><i class="fa-solid fa-user"></i> Funcionário</th>
-		    			<th scope="col">Ações</th>
+		    			<th scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
+		    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar text-info"></i> Data</th>
+		    			<th class="block-none" scope="col"><i class="fa-solid fa-user text-info"></i> Funcionário</th>
+		    			<th scope="col"><i class="fa-solid fa-gears text-info"></i> Ações</th>
 		    		</tr>	
 	    		</thead>	
 	    		{% for iten in last_fichas %}
@@ -330,12 +330,14 @@
 				    		</th>
 				    		<td class="block-none">
 				    			<small>
-				    				{{iten.date}}
+				    				{{iten.created}}
 				    			</small>	
 				    		</td>
 				    		<td class="block-none">{{iten.funcionario}}</td>
 				    		<td>
-				    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">Visualizar</a>
+				    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">
+				    				<i class="fa-regular fa-eye"></i>
+				    			</a>
 				    		</td>
 			    		</tr>
 			    	</tbody>	

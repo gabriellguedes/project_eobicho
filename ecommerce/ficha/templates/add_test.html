@@ -1,13 +1,15 @@
 {% extends 'core/base.html'%}
+{% load bootstrap %}
+{% load widget_tweaks %}
 {% block content %}
-<form method="POST" action=".">
+<form class="container" method="POST" action=".">
 	{% csrf_token %}
+	<div class="row w-100">
 	{% for item in form%}
-		<p>{{item.prontuario}}</p>
-		<p>{{item.obs}}</p>
-		<p>{{item.pele}}</p>
-		<p>{{item.pelos}}</p>
+		<div class="col-4">
+			<p class="w-100">{{ item|bootstrap }}</p>
+		</div>
 	{% endfor %}
-	
+	</div>
 </form>
 {% endblock %}

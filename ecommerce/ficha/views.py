@@ -3,18 +3,19 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from ecommerce.pet.models import Pet
-from .models import Ficha, Prontuario, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
-from .forms import FichaForm, ProntuarioForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm, BocaForm, UnhasForm, OlhosForm, OrelhasForm, PatasForm
+from .models import Ficha, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
+from .forms import FichaForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm, BocaForm, UnhasForm, OlhosForm, OrelhasForm, PatasForm
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
 # Criar uma nova ficha
 def prontuario_create(request, pk):
-    template_name = 'add_test.html'
+    template_name = 'ficha_add.html'
     obj = Pet.objects.get(pk=pk)
     
     if request.method == 'GET':
         form = PetForm()
+        
         form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1)
         form_ficha = form_ficha_factory()
 
@@ -23,13 +24,16 @@ def prontuario_create(request, pk):
             'pet': obj, 
         }
         return render(request, template_name, context=context)
+    
     elif request.method == 'POST':
+        
         form = PetForm(request.POST)
         form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm)
         form_ficha = form_ficha_factory(request.POST)
 
         if form_ficha.is_valid():
-            form_ficha.instance = obj    
+            form_ficha.instance = obj
+            form_ficha.funcionario = request.user    
             form_ficha.save()
             return HttpResponseRedirect(reverse('pet:pet_list'))
         else:

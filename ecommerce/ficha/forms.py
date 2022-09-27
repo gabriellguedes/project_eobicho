@@ -1,9 +1,5 @@
 from django import forms
-from .models import Ficha, Prontuario, Pele, Pelos, Doenca, Ectoparasitas, Infec_pele, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
-
-class ProntuarioForm(forms.ModelForm):
-	model = Prontuario
-	fields = '__all__'
+from .models import Ficha, Pele, Pelos, Doenca, Ectoparasitas, Infec_pele, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
 
 class DoencaForm(forms.ModelForm):
 	class Meta:

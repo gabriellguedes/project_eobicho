@@ -24,28 +24,28 @@
     <header id="wrap-header">
       <div class="container">
         <div class="row">
-          <div class="col mb-3 m-auto">
-            <a href="{% url 'pet:pet_list' %}"><img class="card-img-top logo" alt="logo" src="{% static 'img/logo.png'%}"></a>
+          <div class="col m-auto">
+            <a href="{% url 'pet:pet_list' %}"><img class="card-img-top logo mb-3" alt="logo" src="{% static 'img/logo.png'%}"></a>
           </div>
           {% if request.user.is_authenticated %}
-          <div class="dropdown mb-3" id="login-section">
-            <div class="row">
-              <div class="m-auto ">
-                <label class=" text-center mt-4 w-100 mb-0">Gabriel Guedes</label>
-                <label class=" w-100 text-center"><a href="">Sair</a></label>
-              </div>  
-              <img class="dropdown-toggle ml-2" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}" />
-            </div>   
+          <div class="row mb-3" id="login-section">
+            <div class="m-auto">
+              <label class="mr-5 text-center mt-4 w-100 mb-0">{{user.username}}</label>
+            </div> 
             
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Editar Perfil</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown">
+              <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
+              
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Editar Perfil</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Sair</a>
+              </div>
             </div>
-          </div>
+          </div>  
           {% endif %}
-        </div>
-       </div>
+        </div>  
+      </div>
       {% include 'includes/navbar.html'%}  
   </header><!-- /HEADER -->
   <main id="wrap-main">

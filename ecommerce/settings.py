@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'sistema',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Chock@1001',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=InnoDB'
