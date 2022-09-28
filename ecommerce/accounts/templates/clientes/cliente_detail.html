@@ -25,6 +25,7 @@
 				</div>
 			</div>	
 		</div>
+		{% if pet %}
 		<div class="px-3 py-4">	
 			<div class=" row">
 				{% for item in pet %}
@@ -41,6 +42,9 @@
 			  	{% endfor %}
 			</div>
 		</div>
+		{% else %}
+			<p class="mt-3 alert alert-warning">Ainda não existe nenhum pet cadastrado!</p>
+		{% endif %}	
 	</section>
 </div>	
 {% endblock %}

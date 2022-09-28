@@ -5,15 +5,15 @@ Feito:
 Para Fazer:
     - Finalizar Dashboard Cliente 
     - Iniciar Dashboard Funcionário
-    - Nome duplica na page(url sys/add-especie)
     - Add mais de uma opção no Anamneses
-    - Menu Admin
+    - Menu Admin - Ok
     - Alert javascript(delete Especie/Raça)
     - Cadastro pet(Seleção espécie e raça) 
     - Campo raça 
     - (Models)Add campo de foto para pet
     - Pertences personales
     - Registro de Úsuarios(Funcionários, Clientes)
+    - Editar Pet está puchando mais de um pet por vez 
      
 
 

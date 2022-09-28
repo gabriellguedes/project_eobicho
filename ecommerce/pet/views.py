@@ -14,10 +14,16 @@ from django.views.generic import UpdateView
 # Cadastrar Pet - Feito por funcionário
 def pet_add(request):
     template_name = 'pet/pet_add.html'
+    especie = Especie.objects.all().order_by('especie')
+    raca = []
 
     if request.method == 'GET':
         form = PetForm()
-        context = {'form': form}
+        context = {
+            'form': form,
+            'especie': especie,
+            'raca': raca,
+            }
         return render(request, template_name, context=context)
     elif request.method == 'POST':
         form = PetForm(request.POST)
@@ -166,15 +172,6 @@ def pet_update(request, pk):
             }    
             return render(request, template_name, context=context)
 
-#Visualizar raças
-def raca_view(request):
-    template_name= 'formpet_form.html'
-    raca = Raca.objects.filter(especie=1)
-    context = {
-        'raca': raca,
-    }
-    return render(request, template_name, context=context)
-
 # Add Espécie/Raça 
 def especie_add(request):
     template_name = 'cad_pet/especie_add_form.html'
@@ -199,7 +196,7 @@ def especie_add(request):
             especie = form.save()
             form_raca.instance = especie
             form_raca.save()
-            return HttpResponseRedirect(reverse('sys:especie_list'))
+            return HttpResponseRedirect(reverse('pet:especie_list'))
         else:
             context = {
              'form': form,
@@ -214,7 +211,7 @@ def add_Especie(request):
     if request.method=='POST':
         if form.is_valid():
             form = form.save()
-            return HttpResponseRedirect(reverse('sys:especie_list'))
+            return HttpResponseRedirect(reverse('pet:especie_list'))
     context ={'especie': form}      
     return render(request, template_name, context=context)
 
@@ -230,14 +227,14 @@ def delete_Especie(request, pk):
     obj = Especie.objects.get(id=pk)
     obj.delete()
     
-    return HttpResponseRedirect(reverse('sys:especie_list'))
+    return HttpResponseRedirect(reverse('pet:especie_list'))
 
 # Atualizar/Alterar Espécies
 class update_Especie(UpdateView):
     template_name = 'cad_pet/especie_update.html'
     model = Especie
     fields = '__all__'
-    success_url = reverse_lazy('sys:especie_list')
+    success_url = reverse_lazy('pet:especie_list')
 
 # Adicionar Raça
 def add_Raca(request):
@@ -246,7 +243,7 @@ def add_Raca(request):
     if request.method=='POST':
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse_lazy('sys:raca_list'))
+            return HttpResponseRedirect(reverse_lazy('pet:raca_list'))
     context = {
         'raca': form,
     }
@@ -266,7 +263,7 @@ class update_Raca(UpdateView):
     template_name = 'cad_pet/raca_update.html'
     model = Raca
     fields = '__all__'
-    success_url = reverse_lazy('sys:raca_list')
+    success_url = reverse_lazy('pet:raca_list')
 
 # Deletar uma Raça
 def delete_Raca(request, pk):
@@ -274,3 +271,18 @@ def delete_Raca(request, pk):
     obj.delete()
 
     return HttpResponseRedirect(reverse('core:raca_list'))
+
+#Visualizar raças
+def select_view(request):
+    template_name= 'formpet_form.html'
+    especie = Especie.objects.all().order_by('especie')
+    raca = []
+
+    context = {
+        'especie': especie,
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+
+def load_funcoes(request):
+    setor_id = request.GET.get('especie_id')
