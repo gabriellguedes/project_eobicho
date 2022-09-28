@@ -11,7 +11,7 @@ class Cliente(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{}-{}'.format(self.pk, self.nome) 
+		return '{} - {}'.format(self.pk, self.nome) 
 
 	def id_formated(self):
 		if self.pk:

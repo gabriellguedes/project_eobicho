@@ -2,17 +2,17 @@
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
-<section class="container">
+<section class="container py-4">
 	<div class="row border-bottom">
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<h2 class="text-secondary font-weight-bold">
 				<i class="fa-solid fa-shield-dog text-info"></i>
 				<span class="text-uppercase"> Doenças na boca Cadastradas</span>
 			</h2>
 		</div>	
-		<div class="col-md-6">
+		<div class="col-md-4">
 			  <div class="d-flex justify-content-end">
-				<a class="btn btn-dark mb-3" href="{% url 'fichas:doenca_add' %}">
+				<a class="btn btn-info mb-3" href="{% url 'fichas:doenca_add' %}">
 					<i class="fa-solid fa-plus"></i> Adicionar</a>
 			</div>	
 		</div>
@@ -45,7 +45,7 @@
 					<tr>
 						<th scope="col">{{iten.id}}</th>
 						<td>
-							<a href="{% url 'fichas:pele_update' pk=iten.id %}">{{iten.doenca}}</a>
+							<a href="{% url 'fichas:pele_update' pk=iten.id %}">{{iten.boca}}</a>
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">

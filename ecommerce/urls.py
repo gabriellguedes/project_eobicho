@@ -25,6 +25,5 @@ urlpatterns = [
     path('', include('ecommerce.core.urls')),
     path('pet/', include('ecommerce.pet.urls')),
     path('ficha/', include('ecommerce.ficha.urls')),
-    path('sistema/', include('ecommerce.sistema.urls')),
     path('', include('ecommerce.accounts.urls')),
 ]

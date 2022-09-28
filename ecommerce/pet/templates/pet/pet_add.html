@@ -7,13 +7,15 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<section class="container">
+<section class="container py-4">
 
   <h2 class="border-bottom pb-2 text-secondary font-weight-bold">
     <i class="fa-solid fa-paw text-info"></i> CADASTRAR NOVO PET
   </h2>
   <form method="POST" action=".">
   	{% csrf_token %}
+    {{form.management_form}}
+    
     <div class="form-row">
       <div class="col-md-3 mb-3">
           {{ form.tutor|bootstrap }}
@@ -72,7 +74,6 @@
         {{ form.castracao|bootstrap}}
       </div>
     </div>
-   	
     <button class="btn btn-success" type="submit">
       <i class="fa-solid fa-paw"></i> Cadastrar
     </button>

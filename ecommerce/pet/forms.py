@@ -1,6 +1,16 @@
 from django import forms
 from datetime import datetime
-from .models import Pet, Peso
+from .models import Pet, Peso, Raca, Especie
+
+class EspecieForm(forms.ModelForm):
+	class Meta:
+		model = Especie
+		fields = '__all__'
+
+class RacaForm(forms.ModelForm):
+	class Meta:
+		model = Raca
+		fields = '__all__'
 
 class PetForm(forms.ModelForm):
 	class Meta:

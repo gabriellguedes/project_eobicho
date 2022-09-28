@@ -39,19 +39,26 @@
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Editar Perfil</a>
                 <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Sair</a>
+                <form id="logout-form" method="post" action="/admin/logout/">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="hCJofjTMtXudgA9PwzwknRAx6CwLxZPUjLYTp9IwDh9cAGlfVTOm2Hwztc4Ob9fu">
+                    <button type="submit">Encerrar sessão</button>
+                </form>
               </div>
             </div>
           </div>  
           {% endif %}
         </div>  
       </div>
-      {% include 'includes/navbar.html'%}  
-  </header><!-- /HEADER -->
-  <main id="wrap-main">
       
-      {% block content %} 
-      {% endblock content %}
+  </header><!-- /HEADER -->
+  <main class="row">
+      {% if request.user.is_authenticated %}
+        {% include 'includes/admin_navbar.html'%}
+      {% endif %}  
+      <div class="col">
+        {% block content %} 
+        {% endblock content %}
+      </div>
 
   </main><!-- /MAIN -->
   <footer id="wrap-footer">

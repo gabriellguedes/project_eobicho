@@ -114,8 +114,8 @@ class Ficha(models.Model):
 	patas = models.ForeignKey(Patas, on_delete=models.CASCADE)
 	orelhas = models.ForeignKey(Orelhas, on_delete=models.CASCADE)
 	doenca = models.ForeignKey(Doenca, on_delete=models.CASCADE)
-	funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-	created = models.DateField('Criado em', auto_now_add=True, auto_now=False)
+	funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+	created = models.DateField('Criado em', auto_now_add=True, auto_now=False, null=True)
 	obs = models.TextField('', max_length=400, blank=True, null=True)
 	
 

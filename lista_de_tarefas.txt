@@ -3,20 +3,16 @@ Feito:
     - 
 
 Para Fazer:
-    - Dashboard Cliente
-    - Dashboard Funcionário
+    - Finalizar Dashboard Cliente 
+    - Iniciar Dashboard Funcionário
     - Nome duplica na page(url sys/add-especie)
-    - (Models)Add campo datetime 
     - Add mais de uma opção no Anamneses
     - Menu Admin
     - Alert javascript(delete Especie/Raça)
-    - Form Ficha
-    - Cadastro pet(Seleção espécie e raça)
+    - Cadastro pet(Seleção espécie e raça) 
     - Campo raça 
     - (Models)Add campo de foto para pet
     - Pertences personales
-    - Template Cadastro Pet/Anamineses
-    - Criar nova ficha(link do Detail-pet)x
     - Registro de Úsuarios(Funcionários, Clientes)
      
 

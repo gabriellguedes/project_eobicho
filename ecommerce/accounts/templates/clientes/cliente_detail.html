@@ -3,34 +3,44 @@
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
-<section class="border">
-	<h3>{{cliente.nome}}</h3>
-	
-</section>
-
-<section class="border dados-pet mb-5">
-	<div class="bg-dark dados-pet-header pt-2">
-		<div class="row">
-			<div class="col-md-9">
-				<h6 class="font-weight-bold text-white pl-5">Meus Pets</h6>
+<div class="container py-4">
+	<section class="mb-3">
+		<div class="row py-3">
+			<div class="col-md-6">
+				<h3 class="text-secondary ml-4">Olá 
+					<span class="text-info font-weight-bold">{{cliente.nome}}</span>
+				</h3>
 			</div>
+			<div class="col-md-6 d-flex justify-content-end">	
+				<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=cliente.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
+			</div>	
 		</div>	
-	</div>
-	<div class="px-3 py-4">	
-		<div class=" row">
-			{% for item in pet %}
-			<div class="row col-4 ml-4">
-				<a href="{% url 'pet:pet_detail' pk=item.id %}">
-		  			<img style="max-width: 120px;" class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
-		  		</a>
-		  		<div class="col m-auto">
-			  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Nome:</span><a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> </label>
-			  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Espécie:</span> {{item.especie}} </label>
-			  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Raça:</span> {{item.raca.raca}} </label>
-			  	</div>	
-		  	</div>	
-		  	{% endfor %}
+	</section>
+
+	<section class="border dados-pet mb-5">
+		<div class="bg-dark dados-pet-header pt-2">
+			<div class="row">
+				<div class="col-md-9">
+					<h6 class="font-weight-bold text-white pl-5">Meus Pets</h6>
+				</div>
+			</div>	
 		</div>
-	</div>
-</section>
+		<div class="px-3 py-4">	
+			<div class=" row">
+				{% for item in pet %}
+				<div class="row col-4 ml-4">
+					<a href="{% url 'pet:pet_detail' pk=item.id %}">
+			  			<img style="max-width: 120px;" class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+			  		</a>
+			  		<div class="col m-auto">
+				  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Nome:</span><a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> </label>
+				  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Espécie:</span> {{item.especie}} </label>
+				  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Raça:</span> {{item.raca.raca}} </label>
+				  	</div>	
+			  	</div>	
+			  	{% endfor %}
+			</div>
+		</div>
+	</section>
+</div>	
 {% endblock %}

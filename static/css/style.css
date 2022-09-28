@@ -19,7 +19,6 @@ span.required:after{
  min-height: 70px;
  background: #1fb9b1;
  color: white;
- margin-bottom: 15px;
  
 }
 #wrap-header img{
@@ -35,7 +34,7 @@ span.required:after{
 }
 	#login-section img{
 		width: 70px !important;
-		box-shadow: 1px 1px 5px blue !important;
+		box-shadow: 1px 1px 5px ghostwhite; !important;
     border-radius: 50%;	
 	}
 	#login-section label{
@@ -73,9 +72,13 @@ span.required:after{
 /********************************************************************
  2.0 - Main
 ********************************************************************/
+main{
+	max-width: 100%;
+	min-height: 500px;
+}
 #wrap-main{
 	width: 90%;
-	min-height: 500px;
+	
 	margin: 0 auto;
 }
 /**********************************************************
@@ -130,7 +133,6 @@ span.required:after{
 ********************************************************************/
 #wrap-footer{
 	width: 100%;
-	margin-top: 15px;
 	min-height: 50px;
 	background: black;
 	color: white;

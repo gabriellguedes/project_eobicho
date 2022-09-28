@@ -2,7 +2,8 @@
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
-<form method="POST" action=".">
+<section class="container py-4">
+  <form method="POST" action=".">
     {% csrf_token %}
       <legend class="text-secondary font-weight-bold">Inspeção do <span class="text-danger"> {{pet.nome}} </span></legend>
       {{form.management_form}}
@@ -131,6 +132,6 @@
       <button class="btn btn-success mr-3" type="submit">Adicionar</button>
       <a class="btn btn-danger" href="{% url 'pet:pet_list' %}">Cancelar</a>
     </div>  
-
   </form>
+</section>  
 {% endblock %}
