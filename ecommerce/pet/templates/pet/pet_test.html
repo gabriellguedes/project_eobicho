@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title%} 
+  {{block.super}} - Cadastrar novo Pet
+{% endblock title %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% for item in form %}
+  <p>{{item|bootstrap}}</p>
+{% endfor %}  
+{% endblock%}
