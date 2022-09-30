@@ -15,7 +15,7 @@ span.required:after{
  1.0 - Header
 ********************************************************************/
 #wrap-header{
- width: 100%;
+ max-width: 100%;
  min-height: 70px;
  background: #1fb9b1;
  color: white;
@@ -34,8 +34,9 @@ span.required:after{
 }
 	#login-section img{
 		width: 70px !important;
-		box-shadow: 1px 1px 5px ghostwhite; !important;
+		box-shadow: 1px 1px 5px ghostwhite !important;
     border-radius: 50%;	
+    margin-top: 0;
 	}
 	#login-section label{
 		text-shadow: 1px 1px 5px blue !important;
@@ -134,8 +135,6 @@ main{
 #wrap-footer{
 	width: 100%;
 	min-height: 50px;
-	background: black;
-	color: white;
 }
 
 

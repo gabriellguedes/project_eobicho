@@ -31,7 +31,7 @@
 				{% for item in pet %}
 				<div class="row col-4 ml-4">
 					<a href="{% url 'pet:pet_detail' pk=item.id %}">
-			  			<img style="max-width: 120px;" class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+			  			<img style="max-width: 100px;" class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
 			  		</a>
 			  		<div class="col m-auto">
 				  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Nome:</span><a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> </label>

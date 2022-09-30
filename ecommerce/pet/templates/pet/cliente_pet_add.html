@@ -12,7 +12,7 @@
   <h2 class="border-bottom pb-2 text-secondary font-weight-bold">
     <i class="fa-solid fa-paw text-info"></i> CADASTRAR NOVO PET
   </h2>
-  <form method="POST" action=".">
+  <form name="FormAddPetCliente" id="FormAddPetCliente"  method="POST" action="." data-funcoes-url="{% url 'pet:ajax_load_cliente' %}">
   	{% csrf_token %}
     {{form.management_form}}
     
@@ -26,28 +26,13 @@
       <div class="col-md-3 mb-3 date">
         {{ item.aniversario|bootstrap }}
       </div>
-               
-<!-- SELECT TIPO DE ANIMAIS/RAÇAS -->
-      <div id="select" name="select" class="col-md-3 mb-3">
-        <label>Espécie</label>
-         <select id="p-shift" class="form-control">
-           {% for e in item.especie%}
-            <option value="{{e.id}}">{{e}}</option>
-           {% endfor %}}
-         </select>
-         
+      <div class="col-md-3 mb-3 date">
+        {{ item.especie|bootstrap }}
       </div>
-      
-      <div id="1" class="col-md-3 mb-3">
-        <label>Raça</label>
-        <select id="t-shift" class="form-control">
-          {% for item in item.raca %}
-            <option data-course="{{ item.especie.id}}" value="{{ item.id }}">{{item}}</option>
-          {% endfor %}
-        </select>
-     </div>
-   
-<!--/SELECT TIPO DE ANIMAIS/RAÇAS  -->
+      <div class="col-md-3 mb-3 date">
+        {{ item.raca|bootstrap }}
+      </div>                
+
       <div class="col-md-3 mb-3">
         {{ item.pelagem|bootstrap }}
       </div>

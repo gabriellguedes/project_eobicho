@@ -10,6 +10,10 @@ class Cliente(models.Model):
 	class Meta:
 		ordering = ('pk',)
 
+	def get_absolute_url(self):
+		return reverse_lazy('contas:cliente_detail', kwargs={'pk': self.pk})
+	
+		
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.nome) 
 

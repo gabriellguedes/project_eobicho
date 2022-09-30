@@ -2,6 +2,7 @@ $(document).ready(function(){
   $('.mask-date').mask('00/00/0000');
   $('.mask-cpf').mask('000.000.000-00', {reverse: true});
   $('.mask-tel').mask('(00) 00000-0000');
+  $('.mask-peso').mask('00.000');
   $('.dropdown-toggle').dropdown();
   
   // Oculta as opções do segundo select:
@@ -21,14 +22,31 @@ $(document).ready(function(){
     
     });
 
-  $('#id_especie').on('change', function(){
-    
-    var selectValor = '#'+$(this).val();
-    $('#racas').children('div').hide();
-    $('#racas').children(selectValor).show();
+  $('#id_especie').change(function(){
+      const url = $('#FormAddPet').attr("data-funcoes-url");
+      especieId =  $(this).val();
+      $.ajax({
+        url : url,
+        data : { 'id_especie': especieId},
+        success: function(data){
+          $("#id_raca").html(data);
+        }
+      });
 
+    });
   
-  });
+  $('#id_pet_set-0-especie').change(function(){
+      const url = $('#FormAddPetCliente').attr("data-funcoes-url");
+      especieId =  $(this).val();
+      $.ajax({
+        url : url,
+        data : { 'id_pet_set-0-especie': especieId},
+        success: function(data){
+          $("#id_pet_set-0-raca").html(data);
+        }
+      });
+
+    });
 });
 $('#add-item').click(function(ev) {
     ev.preventDefault();

@@ -2,8 +2,14 @@ from django.db import models
 from ecommerce.accounts.models import Cliente
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.pet.tuplas import Tuplas
+import uuid
+import os 
 
 t = Tuplas()
+
+def upload_image_formater(instance, filename):
+	return  'user_{0}/{1}'.format(instance.pet.id, filename)
+ 
 
 class Especie(models.Model):
 	especie = models.CharField(max_length=100, unique=True)
@@ -26,6 +32,7 @@ class Raca(models.Model):
 
 
 class Pet(models.Model):
+	photo = models.ImageField(upload_to=upload_image_formater, blank=True, null=True)
 	tutor = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
 	nome = models.CharField('Nome',max_length=150)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
@@ -42,13 +49,25 @@ class Pet(models.Model):
 	class Meta:
 		ordering=('nome',)
 
+	def get_absolute_url(self):
+		return reverse_lazy('pet:pet_detail', kwargs={'pk': self.pk})
+	
+	def has_image(self):
+		return self.photo != None and self.photo !=''
+
+	def remove_image(self):
+		if self.has_image():
+			if os.path.isfile(self.photo.path):
+				os.remove(self.image.path)
+		self.photo = None		
+
+	def delete(self):
+		self.remove_image()
+		super().delete()	
+
 	def __str__(self):
 		return '{} - {} - {}'.format(self.nome, self.id, self.status)
 
-	def id_formated(self):
-		if self.id:
-			return str(self.id).zfill(4)
-		return '----'
 
 class Peso(TimeStampedModel):
 	peso = models.DecimalField('Peso(kg)', max_digits=6, decimal_places=3)

@@ -12,11 +12,14 @@
   <h2 class="border-bottom pb-2 text-secondary font-weight-bold">
     <i class="fa-solid fa-paw text-info"></i> CADASTRAR NOVO PET
   </h2>
-  <form name="FormAddPet" id="FormAddPet"  method="POST" action="." data-funcoes-url="{% url 'ajax_load_funcoes' %}">
+  <form name="FormAddPet" id="FormAddPet"  method="POST" action="." data-funcoes-url="{% url 'pet:ajax_load_funcoes' %}">
   	{% csrf_token %}
     {{form.management_form}}
     
     <div class="form-row">
+      <div class="col-md-3 mb-3">
+          {{ form.photo|bootstrap }}
+      </div>
       <div class="col-md-3 mb-3">
           {{ form.tutor|bootstrap }}
       </div>
@@ -27,28 +30,15 @@
       <div class="col-md-3 mb-3 date">
         {{ form.aniversario|bootstrap }}
       </div>
-               
-<!-- SELECT TIPO DE ANIMAIS/RAÇAS -->
-      <div id="select" name="select" class="col-md-3 mb-3">
-        <label>Espécie</label>
-         <select id="especie_id" class="form-control">
-           {% for e in form.especie%}
-            <option value="{{e.especie}}">{{e}}</option>
-           {% endfor %}}
-         </select>
-         
-      </div>
       
-      <div id="1" class="col-md-3 mb-3">
-        <label>Raça</label>
-        <select id="t-shift" class="form-control">
-          {% for item in form.raca %}
-            <option data-course="{{ item.especie}}" value="{{ item.especie }}">{{item}}</option>
-          {% endfor %}
-        </select>
-     </div>
-   
-<!--/SELECT TIPO DE ANIMAIS/RAÇAS  -->
+      <div class="col-md-3 mb-3 date">
+        {{ form.especie|bootstrap }}
+      </div>
+      <div class="col-md-3 mb-3 date">
+        {{ form.raca|bootstrap }}
+      </div> 
+
+
       <div class="col-md-3 mb-3">
         {{ form.pelagem|bootstrap }}
       </div>
@@ -81,6 +71,7 @@
       <i class="fa-solid fa-xmark"></i> Cancelar
     </button>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
+  
 </section>  
 
 {% endblock content %}

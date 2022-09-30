@@ -102,6 +102,14 @@ def funcionario_add(request):
 			}	
 			return render(request, template_name, context=context)
 
+#Detail funcionario
+def funcionario_detail(request, pk):
+	template_name = 'funcionarios/funcionario_detail.html'
+	obj_funcionario = Funcionario.objects.get(id=pk)
+
+	context = { 'funcionario': obj_funcionario,}
+	return render(request, template_name, context=context)
+
 # Lista de todos os funcionários
 def funcionario_list(request):
 	template_name = 'funcionarios/funcionario_list.html'

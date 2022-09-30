@@ -35,7 +35,7 @@ def prontuario_create(request, pk):
             form_ficha.instance = obj
             form_ficha.funcionario = request.user    
             form_ficha.save()
-            return HttpResponseRedirect(reverse('pet:pet_list'))
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = {
                 'form':form_ficha

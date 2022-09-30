@@ -1,19 +1,37 @@
-(19-09-22)
+(29-09-22)
 Feito:
-    - 
 
-Para Fazer:
-    - Finalizar Dashboard Cliente 
-    - Iniciar Dashboard Funcionário
-    - Add mais de uma opção no Anamneses
+    - Cadastro pet(Seleção espécie e raça) - Ok
+    - Cadastro Pet Cliente ( Retorna para detail cliente ao finalizar criação) - Ok
     - Menu Admin - Ok
+    - Não está salvando Raça e Espécie - ok
+    - Campo raça - Ok
+    - Editar Pet está puchando mais de um pet por vez - Ok
+    - Iniciar Dashboard Funcionário - Ok
+    - Mascara no peso do pet - Ok
+
+(30/09/22)
+Feito:
+    -  
+    -    
+Para Fazer:
+
+    - Finalizar Dashboard Cliente 
+    - Finalizar Dashboard Funcionário
+
+    - Add mais de uma opção no Anamneses
+   
     - Alert javascript(delete Especie/Raça)
-    - Cadastro pet(Seleção espécie e raça) 
-    - Campo raça 
-    - (Models)Add campo de foto para pet
+   
+    - (Models) Add campo de foto para pet
     - Pertences personales
     - Registro de Úsuarios(Funcionários, Clientes)
-    - Editar Pet está puchando mais de um pet por vez 
+    
+   
+
+    
+
+    
      
 
 

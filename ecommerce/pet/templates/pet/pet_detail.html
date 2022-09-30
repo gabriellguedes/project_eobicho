@@ -21,7 +21,16 @@
 	<div class="px-3 py-4">	
 		<div class=" row">
 			<div class="col-md-2 ml-4">
-		  		<img class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+				{% if pet.photo != None %}
+		  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+						<img class="pet-img mb-2 mask" src="{% static 'img/pet-default.png' %}" alt="Foto de perfil do pet">	 	
+					</div>	
+					
+		  	{% else %}
+		  	<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+						<img class="pet-img mb-2 mask" src="{{pet.photo}}" alt="Foto de perfil do pet">
+					</div>	
+		  	{% endif %}	
 		  		<h5 class="text-monospace ml-5 mx-2">{{pet.nome}}</h5>
 		  	</div>	
 		  	

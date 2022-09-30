@@ -13,16 +13,51 @@
     </h2>
   </div>  
   <form method="POST" action=".">
-  	{% csrf_token %}
+    {% csrf_token %}
     <div class="row">  
       {{form_pet.management_form}}
-      {% for item in form_pet %}
         <div class="col-md-4">
-          {{item|bootstrap}}
+          {{form_pet.photo|bootstrap}}
         </div>
-      {% endfor %}
+         <div class="d-none">
+          {{form_pet.tutor|bootstrap}}
+        </div>
+        <div class="col-md-4">
+          {{form_pet.nome|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.aniversario|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.pelagem|bootstrap}}
+        </div>
+
+         <div class="col-md-4">
+          {{form_pet.type_pelo|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.coloracao|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.temperamento|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.especie|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.raca|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.sexo|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.castracao|bootstrap}}
+        </div>
+         <div class="col-md-4">
+          {{form_pet.status|bootstrap}}
+        </div>
     </div>
-      	
+        
      <button class="btn btn-success" type="submit">Salvar Alterações</button>
      <a class="btn btn-danger" href="{% url 'pet:pet_list' %}">Cancelar</a>
   </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
