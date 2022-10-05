@@ -77,18 +77,16 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_6e84b62f4706019',
-        'HOST': 'us-cdbr-east-06.cleardb.net',
-        'USER': 'bd9717d1ba80ba',
-        'PASSWORD': '82b5980e',
+        'NAME': 'pecsebe6ggq6mqdn',
+        'HOST': 'qvti2nukhfiig51b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'USER': 'u7n4yx9a28wbh3vf',
+        'PASSWORD': 'i3px6db92nh8dgso',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=InnoDB'
         }
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
