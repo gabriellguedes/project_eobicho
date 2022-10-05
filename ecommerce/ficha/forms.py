@@ -63,14 +63,6 @@ class OrelhasForm(forms.ModelForm):
 
 
 class FichaForm(forms.ModelForm):
-
-	obj_doenca = Doenca.objects.all()
-	doenca=[]
-	for item in obj_doenca:
-		tupla_doenca = (item.doenca, item.doenca)
-		doenca.append(tupla_doenca)
-
-	doenca = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=doenca)
 	class Meta:
 		model = Ficha
 		fields = '__all__'
