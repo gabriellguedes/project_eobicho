@@ -32,6 +32,7 @@ def prontuario_create(request, pk):
         form_ficha = form_ficha_factory(request.POST)
 
         if form_ficha.is_valid():
+            form_ficha.save(commit=False)
             form_ficha.instance = obj
             form_ficha.funcionario = request.user    
             form_ficha.save()

@@ -20,18 +20,21 @@
 	</div>
 	<div class="px-3 py-4">	
 		<div class=" row">
-			<div class="col-md-2 ml-4">
-				{% if pet.photo != None %}
-		  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-						<img class="pet-img mb-2 mask" src="{% static 'img/pet-default.png' %}" alt="Foto de perfil do pet">	 	
+			<div class="col-md-2">
+				{% if pet.photo.url != None %}
+				<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+						<img class="pet-img mb-2 mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
 					</div>	
-					
+		  							
 		  	{% else %}
-		  	<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-						<img class="pet-img mb-2 mask" src="{{pet.photo}}" alt="Foto de perfil do pet">
+		  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+		  			{% if pet.sexo  != 'Macho' %}
+							<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+		  			{% else %}
+		  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
+		  			{% endif%}
 					</div>	
 		  	{% endif %}	
-		  		<h5 class="text-monospace ml-5 mx-2">{{pet.nome}}</h5>
 		  	</div>	
 		  	
 		   

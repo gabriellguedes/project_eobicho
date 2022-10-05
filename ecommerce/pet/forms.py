@@ -21,7 +21,6 @@ class PetForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})
 		
-
 class PesoForm(forms.ModelForm):
 	class Meta:
 		model = Peso

@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sistema',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Chock@1001',
+        'NAME': 'sheroku_1c892633b80c84f',
+        'HOST': 'us-cdbr-east-06.cleardb.net',
+        'USER': 'b8ab1c42554c57',
+        'PASSWORD': '2047a5a0',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=InnoDB'
@@ -127,7 +127,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS =(os.path.join(BASE_DIR, 'static')),
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type

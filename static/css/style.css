@@ -11,13 +11,20 @@ span.required:after{
 	content: "*";
 	color: red;
 }
+/*
+body{
+	background: url('../img/bg.png') transparent;
+
+}*/
 /********************************************************************
  1.0 - Header
 ********************************************************************/
 #wrap-header{
  max-width: 100%;
  min-height: 70px;
- background: #1fb9b1;
+ background-image: url('../img/bg.png');
+ background-color:  #1fb9b1;
+ background-size: cover;
  color: white;
  
 }
@@ -32,14 +39,20 @@ span.required:after{
 #login-section{
 
 }
+	.welcome{
+		color: #6c757d!important;
+    text-shadow: 1px 1px 5px whitesmoke;
+    font-size: 1.3em;
+	}
 	#login-section img{
 		width: 70px !important;
-		box-shadow: 1px 1px 5px ghostwhite !important;
+		border: 2px solid greenyellow;
+		box-shadow: 1px 1px 15px greenyellow; !important;
     border-radius: 50%;	
     margin-top: 0;
 	}
 	#login-section label{
-		text-shadow: 1px 1px 5px blue !important;
+		text-shadow: 2px 2px 5px blanchedalmond; !important;
 	}
 /****************************
  1.2 - Nav
@@ -79,13 +92,13 @@ main{
 }
 #wrap-main{
 	width: 90%;
-	
 	margin: 0 auto;
 }
 /**********************************************************
  2.2 - Pet Detail
  *********************************************************/
 .pet-img{
+	height: 150px;
 	max-width: 150px;
 	border: 3px solid deepskyblue;
 	border-radius: 50% !important;

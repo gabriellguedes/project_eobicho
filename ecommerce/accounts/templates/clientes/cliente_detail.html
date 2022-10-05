@@ -21,7 +21,7 @@
 		<div class="bg-dark dados-pet-header pt-2">
 			<div class="row">
 				<div class="col-md-9">
-					<h6 class="font-weight-bold text-white pl-5">Meus Pets</h6>
+					<h6 class="font-weight-bold text-white pl-5"><i class="fa-solid fa-paw"></i> Meus Pets</h6>
 				</div>
 			</div>	
 		</div>
@@ -29,9 +29,24 @@
 		<div class="px-3 py-4">	
 			<div class=" row">
 				{% for item in pet %}
-				<div class="row col-4 ml-4">
+				<div class="row col-5 ml-4">
 					<a href="{% url 'pet:pet_detail' pk=item.id %}">
-			  			<img style="max-width: 100px;" class="pet-img mb-2" src="{% static 'img/curto.jpg' %}" alt="Foto de perfil do pet">
+			  				<div class="col-md-2">
+								{% if item.photo.url != None %}
+								<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+										<img class="pet-img mb-2 mask" src="{{item.photo.url}}" alt="Foto de perfil do pet">
+									</div>	
+						  							
+						  		{% else %}
+						  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+						  			{% if item.sexo  != 'Macho' %}
+											<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+						  			{% else %}
+						  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
+						  			{% endif%}
+									</div>	
+						  		{% endif %}	
+						  	</div>	
 			  		</a>
 			  		<div class="col m-auto">
 				  		<label class="text-monospace w-100"><span class="font-weight-bold text-info"> Nome:</span><a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> </label>

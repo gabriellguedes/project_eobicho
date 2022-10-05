@@ -47,11 +47,11 @@
 	                {% endif %}
 
 			      </td>
-			      <td class=""><a href="">{{item.nome}}</a></td>
+			      <td class=""><a href="{% url 'contas:funcionario_detail' pk=item.pk %}">{{item.nome}}</a></td>
 			      <td>{{item.email}}</td>
 			      <td>
 			      	<div class="text-center">
-			      		<a class="btn btn-primary mr-2" href="">
+			      		<a class="btn btn-primary mr-2" href="{% url 'contas:funcionario_detail' pk=item.pk %}">
 			      			<i class="fa-regular fa-eye"></i> 
 			      			
 			      		</a>

@@ -7,7 +7,7 @@
 <section class="container py-4">
 	<h2 class="border-bottom pb-2 text-secondary">
 		<i class="bi bi-journal-text text-info"></i>
-		Prontuário do <span class="text-danger">{{ficha.pet.nome}}</span> do dia <span class="text-danger">{{ficha.created}}</span>
+		Prontuário{% if ficha.pet.sexo != 'Macho' %} da{% else %} do {% endif %} <span class="text-danger">{{ficha.pet.nome}}</span> do dia <span class="text-danger">{{ficha.created}}</span>
 	</h2>
 	<div class="row">
 		<div class="col-lg-6">

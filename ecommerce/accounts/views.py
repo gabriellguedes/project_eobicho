@@ -70,11 +70,24 @@ def cliente_detail(request, pk):
 	return render(request, template_name, context=context)
 
 # Atualização Cliente
-class cliente_update(UpdateView):
+def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
-    model = Cliente
-    fields = '__all__'
-    success_url = reverse_lazy('contas:cliente_list')
+    obj = Cliente.objects.get(id=pk)
+    pet = Pet.objects.get(tutor=obj)
+    if request.method == 'GET':
+    	form = ClienteForm(instance=obj)
+    	context = {'form': form,'pet': pet}
+    	return render(request, template_name, context=context)
+    elif request.method == 'POST':
+    	form = ClienteForm(request.POST, request.FILES, instance=obj)
+    	if form.is_valid():
+    		form.save()
+    		return HttpResponseRedirect(reverse('contas:cliente_list'))
+    	else:
+    		context = {'form': form, 'pet': pet,}
+    		return render(request, template_name, context=context)
+
+
 
 #Apagar Cliente   
 class cliente_delete(DeleteView):

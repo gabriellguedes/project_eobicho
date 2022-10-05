@@ -7,7 +7,11 @@
 {% load widget_tweaks %}
 
 {% block content %}
-{% for item in form %}
-  <p>{{item|bootstrap}}</p>
-{% endfor %}  
+<form class="container" method="POST" action="." enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for item in form %}
+    <p>{{item|bootstrap}}</p>
+  {% endfor %}
+  <button class="btn btn-primary" type="submit">Post</button>
+</form>  
 {% endblock%}

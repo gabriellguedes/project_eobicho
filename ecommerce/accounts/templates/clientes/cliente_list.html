@@ -37,7 +37,7 @@
 			    <tr>
 			   	  <th scope="row">{{item.pk}}</th>
 			      
-			      <td class=""><a href="">{{item.nome}}</a></td>
+			      <td class=""><a href="{% url 'contas:cliente_detail' pk=item.id %}">{{item.nome}}</a></td>
 			      <td class="text-uppercase">{{item.cpf}}</td>
 			      <td>
 			      	<div class="text-center">

@@ -10,21 +10,35 @@ Feito:
     - Iniciar Dashboard Funcionário - Ok
     - Mascara no peso do pet - Ok
 
-(30/09/22)
+(03/10/22)
 Feito:
-    -  
-    -    
+    - (Models) Add campo de foto para pet
+    - Add imagem de perfil - Ok
+    - Alterar e excluir imagem de perfil  - Fazendo 
+(04/10/22)
+Feito:
+    - Atulizar espécie e raça - OK
+    - link lista de cliente(nome do cliente)- OK
+    - Link lista Funcionários(Detail ) - Ok
+    - Alterar nomes no models Ficha - Ok
+    - Alterar palavras por gênero - Ok
+    - Correção lik (Delete Raça) - Ok
+    - testar scritp para add conteúdo no sistema - Ok 
+(05/10/22)
+Feito:
+    - Arrumar BD no heroku - Ok
+    - Add mais de uma opção no Anamneses - fazendo
+
 Para Fazer:
 
     - Finalizar Dashboard Cliente 
     - Finalizar Dashboard Funcionário
 
-    - Add mais de uma opção no Anamneses
+    - Validação do CPF 
    
     - Alert javascript(delete Especie/Raça)
    
-    - (Models) Add campo de foto para pet
-    - Pertences personales
+    - (Models) Pertences personales
     - Registro de Úsuarios(Funcionários, Clientes)
     
    
