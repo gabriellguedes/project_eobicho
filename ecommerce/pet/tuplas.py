@@ -7,11 +7,11 @@ class Tuplas():
 	)
 	
 	ESPECIE_CHOICES = (
-		('cachorro', 'Cachorro'),
-		('gato', 'Gato'),
-		('coelho', 'Coelho'),
-		('cavalo', 'Cavalo'),
-		('peixe', 'Peixe')
+		('Cachorro', 'Cachorro'),
+		('Gato', 'Gato'),
+		('Coelho', 'Coelho'),
+		('Cavalo', 'Cavalo'),
+		('Peixe', 'Peixe')
 	)
 
 	RACA_CACHORRO = (

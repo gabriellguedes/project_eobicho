@@ -26,7 +26,7 @@ Feito:
     - testar scritp para add conteúdo no sistema - Ok 
 (05/10/22)
 Feito:
-    - Arrumar BD no heroku - Fazendo
+    - Arrumar BD no heroku - Ok
     - Add mais de uma opção no Anamneses - fazendo
 
 Para Fazer:
@@ -41,7 +41,6 @@ Para Fazer:
     - (Models) Pertences personales
     - Registro de Úsuarios(Funcionários, Clientes)
 
-mysql://b8ab1c42554c57:2047a5a0@us-cdbr-east-06.cleardb.net/heroku_1c892633b80c84f?reconnect=true
     
 
     
