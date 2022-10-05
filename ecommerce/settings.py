@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sistema',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Chock@1001',
+        'NAME': 'pecsebe6ggq6mqdn',
+        'HOST': 'qvti2nukhfiig51b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'USER': 'u7n4yx9a28wbh3vf',
+        'PASSWORD': 'i3px6db92nh8dgso',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=InnoDB'
