@@ -40,8 +40,6 @@ Para Fazer:
    
     - (Models) Pertences personales
     - Registro de Úsuarios(Funcionários, Clientes)
-    
-   
 
     
 

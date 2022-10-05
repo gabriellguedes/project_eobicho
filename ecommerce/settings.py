@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sheroku_1c892633b80c84f',
+        'NAME': 'heroku_1c892633b80c84f',
         'HOST': 'us-cdbr-east-06.cleardb.net',
         'USER': 'b8ab1c42554c57',
         'PASSWORD': '2047a5a0',
