@@ -78,7 +78,7 @@ class Tuplas():
 		('Leonberger','Leonberger'),
 		('Lhasa Apso','Lhasa Apso'),
 		('Lulu da Pomerânia','Lulu da Pomerânia'),
-		('malamute do Alasca','Malamute do Alasca'),
+		('Malamute do Alasca','Malamute do Alasca'),
 		('Maltês','Maltês'),
 		('Mastife','Mastife'),
 		('Mastim Napolitano','Mastim Napolitano'),
