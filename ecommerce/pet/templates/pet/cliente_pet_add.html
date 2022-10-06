@@ -12,7 +12,7 @@
   <h2 class="border-bottom pb-2 text-secondary font-weight-bold">
     <i class="fa-solid fa-paw text-info"></i> CADASTRAR NOVO PET
   </h2>
-  <form name="FormAddPetCliente" id="FormAddPetCliente"  method="POST" action="." data-funcoes-url="{% url 'pet:ajax_load_cliente' %}">
+  <form name="FormAddPetCliente" id="FormAddPetCliente"  method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_load_cliente' %}">
   	{% csrf_token %}
     {{form.management_form}}
     
