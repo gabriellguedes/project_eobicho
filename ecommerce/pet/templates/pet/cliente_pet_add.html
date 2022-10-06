@@ -19,6 +19,9 @@
     <div class="form-row">
       
       {% for item in form%}
+       <div class="col-md-3 mb-3">
+          {{ item.photo|bootstrap }}
+      </div>
       <div class="col-md-3 mb-3">
         	{{ item.nome|bootstrap }}
       </div>
