@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Nav Menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="wrap-nav">
@@ -8,38 +9,88 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'core:login' %}">
-            <span class="text-white font-weight-bold">
-              <i class="fa-solid fa-house-chimney"></i>
-              Home
-            </span> 
-            <span class="sr-only">(Página atual)</span>
-          </a>
-        </li>
+        <li>
+            <div class="col m-auto">
+              <a href="{% url 'pet:pet_list' %}"><img class="card-img-top logo mb-3" alt="logo" src="{% static 'img/logo.png'%}"></a>
+            </div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'contas:funcionario_detail' pk=1 %}">
+              <span class="text-white font-weight-bold">
+                <i class="fa-solid fa-house-chimney text-info"></i>
+                Home
+              </span> 
+              <span class="sr-only">(Página atual)</span>
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'contas:cliente_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-user"></i> Clientes</span></a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pet:pet_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-paw"></i> Pets</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'fichas:ficha_list' %}">
-            <span class="text-white font-weight-bold">
-              <i class="fa-solid fa-feather-pointed"></i> Avaliações
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pet:pet_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-paw text-info"></i> Animais</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'fichas:ficha_list' %}">
+              <span class="text-white font-weight-bold">
+                <i class="fa-solid fa-feather-pointed text-info"></i> Avaliações
+              </span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contas:cliente_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-user text-info"></i> Clientes</span></a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contas:funcionario_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-user-doctor text-info"></i> Funcionários</span></a>
+          </li>
+          <li class="nav-item my-3 border-bottom">
+            <span class="text-white font-weight-bold  ml-2">
+              <i class="fa-solid fa-gears text-info"></i> Sistema
             </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'sys:sys_dashboard' %}">
-            <span class="text-white font-weight-bold">
-              <i class="fa-solid fa-gears"></i> Administrativo
-            </span>
-          </a>
-        </li>
-        
+          </li>
+          <li class="nav-item dropdown pl-3">
+            
+            <a data-toggle="collapse" href="#ItensProntuario" role="button" aria-expanded="false" aria-controls="ItensProntuario">
+                <span class="text-white font-weight-bold">
+                <i class="fa-solid fa-file text-info"></i> Itens Prontuário
+                </span>
+            </a>
+                  
+            <div class="collapse" id="ItensProntuario" aria-labelledby="ItensProntuario">
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:boca_list' %}">Boca</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:doenca_list' %}">Doenças</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:olhos_list' %}">Olhos</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:orelhas_list' %}">Orelhas</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:patas_list' %}">Patas</a>
+              <a class="dropdown-item bg-secondary text-white" data-toggle="collapse" href="#Pele" role="button" aria-expanded="false" aria-controls="pele">Pele</a>
+             
+                <div class="collapse" id="Pele" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pele_list' %}">Tipos de Pele</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:infec_pele_list' %}">Doenças de Pele</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:ectoparasitas_list' %}">Ectoparasitas</a>
+                </div> 
+              
+              <a class="dropdown-item bg-secondary text-white" data-toggle="collapse" href="#Pelos" role="button" aria-expanded="false" aria-controls="Pelos">Pelos</a>
+                <div class="collapse" id="Pelos" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos_list' %}">Tipos de Pelos</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:estado_pelos_list' %}">Estado dos Pelos</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:condicao_pelos_list' %}">Condição dos Pelos</a>
+                </div> 
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:unhas_list' %}">Unhas</a>
+            </div> 
+          </li>
+          
+          <li class="nav-item dropdown pl-3 mt-2">
+            <a data-toggle="collapse" href="#ItensCadastroPet" role="button" aria-expanded="false" aria-controls="ItensCadastroPet">
+                <span class="text-white font-weight-bold">
+                <i class="fa-solid fa-paw text-info"></i> Cadastro do Pet
+              </span>
+            </a>
+            <div class="collapse" id="ItensCadastroPet" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'pet:especie_list' %}"> Espécies</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'pet:raca_list' %}">Raças</a>
+            </div> 
+          </li>
       </ul>
     </div>
   </div>  

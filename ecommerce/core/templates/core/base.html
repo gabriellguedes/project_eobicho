@@ -22,35 +22,36 @@
 </head>
 <body class="row m-0" style="max-width: 100%;">
   {% if request.user.is_authenticated %}
-        {% include 'includes/admin_navbar.html'%}
-      {% endif %}  
+    {% include 'includes/admin_navbar.html'%}
+  {% endif %}  
     <div class="col p-0">  
       <header id="wrap-header">
+            <button class="navbar-toggler border border-secondary" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa-solid fa-bars"></i>
+            </button>
         <div class="container">
           <div class="col">
-            
             {% if request.user.is_authenticated %}
-            <div class="d-flex justify-content-end py-3 mr-4" id="login-section">
-              <div class="col-sm-2 mt-2">
-                <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
-                <label class="text-right font-weight-bold text-uppercase w-100">{{user.username}}</label>
-              </div> 
-              
-              <div class="dropdown">
-                <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
+              <div class="d-flex justify-content-end py-3 mr-4" id="login-section">
+                <div class="col-sm-2 mt-2">
+                  <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
+                  <label class="text-right font-weight-bold text-uppercase w-100">{{user.username}}</label>
+                </div> 
                 
-                <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Editar Perfil</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Sair</a>
+                <div class="dropdown">
+                  <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
                   
+                  <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Editar Perfil</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Sair</a>
+                    
+                  </div>
                 </div>
-              </div>
-            </div>  
+              </div>  
             {% endif %}
           </div>  
         </div>
-        
     </header><!-- /HEADER -->
     <main class="row">
         

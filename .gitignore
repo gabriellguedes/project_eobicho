@@ -107,5 +107,5 @@ venv.bak/
 
 .idea
 .vscode
-
+ecommerce/settings.py
 lista_de_tarefas.txt
