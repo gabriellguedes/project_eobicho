@@ -15,7 +15,6 @@
   <form name="FormAddPetCliente" id="FormAddPetCliente"  method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_load_cliente' %}">
   	{% csrf_token %}
     {{form.management_form}}
-    
     <div class="form-row">
       
       {% for item in form%}
