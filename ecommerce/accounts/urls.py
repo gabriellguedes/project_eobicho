@@ -18,7 +18,7 @@ urlpatterns = [
     path('funcionario_update/<int:pk>/', views.funcionario_update, name='funcionario_update'),
     path('funcionario_delete/<int:pk>/', views.funcionario_delete.as_view(), name='funcionario_delete'),
        
-    path('accounts/', include('django.contrib.auth.urls')), 
+    path('', include('django.contrib.auth.urls')), 
     path('accounts/register/', views.register_cliente, name='register_cliente'),
     path('accounts/edit/', views.edit, name='edit_profile'),   
 ] 

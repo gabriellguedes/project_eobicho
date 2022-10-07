@@ -4,6 +4,6 @@ from . import views
 app_name ='core'
 
 urlpatterns =[
-	path('login/', views.login, name='login' ),
+	path('', views.login, name='redirect_login' ),
 	
 ]
