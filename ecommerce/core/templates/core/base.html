@@ -32,16 +32,16 @@
               <div class="d-flex justify-content-end py-3 mr-4" id="login-section">
                 <div class="col-sm-2 mt-2">
                   <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
-                  <label class="text-right font-weight-bold text-uppercase w-100">{{user.username}}</label>
+                  <label class="text-center font-weight-bold text-uppercase w-100">{{user.first_name}}</label>
                 </div> 
                 
                 <div class="dropdown">
                   <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
                   
                   <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Editar Perfil</a>
+                    <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Sair</a>
+                    <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
                     
                   </div>
                 </div>
@@ -50,13 +50,11 @@
           </div>  
         </div>
     </header><!-- /HEADER -->
-    <main class="row">
+    <main>
+    
+      {% block content %} 
+      {% endblock content %}
         
-        <div class="col">
-          {% block content %} 
-          {% endblock content %}
-        </div>
-
     </main><!-- /MAIN -->
     <footer id="wrap-footer">
           

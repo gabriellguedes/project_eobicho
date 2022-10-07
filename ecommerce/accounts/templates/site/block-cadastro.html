@@ -1,39 +1,34 @@
-<form action="."  method="POST">
+{% load bootstrap %}
+{% load widget_tweaks %}
+<form action="{% url 'contas:register_cliente' %}"  method="POST">
     <div class="mdl-textfield mdl-js-textfield">
-        <label class="mdl-textfield__label" for="id_first_name">Nome:</label>
-        <input class="mdl-textfield__input" type="text" name="first_name" maxlength="30" id="id_first_name">
+        <input class="mb-3" type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Nome">
     </div>    
    
     <div class="mdl-textfield mdl-js-textfield">
-        <label class="mdl-textfield__label" for="id_last_name">Sobrenome:</label>
-        <input class="mdl-textfield__input" type="text" name="last_name" maxlength="30" id="id_last_name">
+        <input class="mb-3" type="text" name="last_name" maxlength="30" id="id_last_name" placeholder="Sobrenome">
     </div>
     
     <div class="mdl-textfield mdl-js-textfield">
-        <label class="mdl-textfield__label" for="id_email">Endereço de email:</label>
-        <input class="mdl-textfield__input" type="email" name="email" maxlength="254" id="id_email">
+        <input class="mb-3" type="email" name="email" maxlength="254" id="id_email" placeholder="Email">
     </div>
-    <br/>
-    <!--<div class="mdl-textfield mdl-js-textfield">
-        <label for="id_groups" class="helptext">Tipo de Usuário:</label>
-        <select name="groups" id="id_groups">
-            <option class="mdl-textfield__label" value="1">atleta</option>
-            <option class="mdl-textfield__label" value="2">equipe</option>
-            <option class="mdl-textfield__label" value="3">organizador</option>
-        </select>
-    </div>-->
-    <br/>
+    <div class="col">
+        {% for item in form_cliente %}
+            <p>{{ item|bootstrap }}</p>
+        {% endfor %}        
+    </div>
+  
     <div class="mdl-textfield mdl-js-textfield">
-        <label class="mdl-textfield__label" for="id_password">Senha:</label> <input class="mdl-textfield__input" type="password" name="password" id="id_password">
+        <input class="mb-3" type="password" name="password" id="id_password" placeholder="Senha">
     </div>    
     
     <div class="mdl-textfield mdl-js-textfield">
-        <label class="mdl-textfield__label" for="id_password2">Confirma Senha:</label> <input class="mdl-textfield__input" type="password" name="password2" id="id_password2">
+        <input class="mb-3" type="password" name="password2" id="id_password2" placeholder="Confirmar Senha">
     </div>
     
     <input type="hidden" value="6QS5FJzZUlWFfsI40rkpejqPShvQoGdX" name="csrfmiddlewaretoken">
   
     {% csrf_token %}
-    <button class="mdl-button mdl-js-button mdl-button--primary button" type="submit">Criar Conta</button>
+    <button class="btn btn-primary" type="submit">Criar Conta</button>
 
 </form>

@@ -38,18 +38,8 @@ body{
 *****************************/
 
 #login-section{
-  width: 45%;
-  display: inline-block;
-  margin-right: 15px
+  
 }
-  #container-login{}
-  #form-login{
-    width: 90%;
-    display: block;
-  }
-    #form-login>div{
-      width: 50%;
-    }
 
 	.welcome{
 		color: #6c757d!important;

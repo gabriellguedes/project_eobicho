@@ -23,8 +23,8 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar Senha', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -45,3 +45,8 @@ class ClienteEditForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ('__all__')
+
+    def __init__(self, *args, **kwargs):
+    	super().__init__(*args, **kwargs)
+    	self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
+    	self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	

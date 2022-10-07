@@ -23,15 +23,16 @@
 			<div class="col-md-2">
 				{% if pet.photo.url != None %}
 				<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-						<img class="pet-img mb-2 mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
-					</div>	
+					<img class="pet-img mb-2 mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
+				</div>	
 		  							
 		  	{% else %}
 		  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
 		  			{% if pet.sexo  != 'Macho' %}
-							<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+							<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	
+								<label class="text-center w-100 font-weight-bold text-uppercase">{{pet.nome}}</label> 	
 		  			{% else %}
-		  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
+		  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	<label class="text-center w-100 font-weight-bold text-uppercase">{{pet.nome}}</label>
 		  			{% endif%}
 					</div>	
 		  	{% endif %}	
@@ -43,7 +44,7 @@
 						<label class="font-weight-bold">
 							<i class="fa-solid fa-user text-info"></i> Tutor: 
 						</label>
-						<label class="text-monospace text-secondary">{{pet.tutor.nome}}</label> 
+						<label class="text-monospace text-secondary">{{pet.tutor.user.first_name}}</label> 
 					</div>
 					<div class="col-sm-4">
 						<label class="font-weight-bold">

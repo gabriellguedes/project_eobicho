@@ -1,19 +1,30 @@
 {% extends "core/base.html" %}
 
-{% block title %}Conexão Esporte{% endblock %}
+{% block title %}É o Bicho{% endblock %}
 
 {% block content %}
-<section id="login-section">
-	<div class="mdl-grid demo-content mdl-color-red mdl-shadow--4dp">
-    	<h4 class="session-title">Login</h4>
-    	{% include 'site/block-login.html' %}
-    </div>
-</section>
+<div class="d-flex justify-content-end">
+	<ul class="nav nav-tabs mt-3 col-6" id="myTab" role="tablist">
+		<li class="nav-item">
+	   		 <a class="nav-link active" id="cadastrar-tab" data-toggle="tab" href="#cadastrar" role="tab" aria-controls="cadastrar" aria-selected="true">Inscrever-se</a>
+	   </li>
+		<li class="nav-item">
+	   		 <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+	   </li>
+			
+	</ul>
+</div>
 
-<section id="contact-section">
-	<div class="mdl-grid demo-content mdl-color-red mdl-shadow--4dp">
-   		<h4 class="session-title">Registre-se Aqui</h4>
+<div class="tab-content d-flex justify-content-end" id="myTabContent">
+	<!-- Histórico -->	
+	<section class="col-6 tab-pane fade show active " id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
+		<h4 class="alert alert-info">Registre-se Aqui</h4>
    		{% include 'site/block-cadastro.html' %}
-   	</div>
-</section>
+	</section>
+	<section class="tab-pane fade col-6" id="login" role="tabpanel" aria-labelledby="login-tab">
+		<h4 class="alert alert-info">Login</h4>
+    	{% include 'site/block-login.html' %}
+	</section>
+</div>	
+
 {% endblock %}

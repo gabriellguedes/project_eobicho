@@ -3,9 +3,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 class Cliente(models.Model):
-	nome = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
-	email = models.EmailField('Email')
 	telefone = models.CharField('Telefone', max_length=16)
 
 	class Meta:
@@ -16,7 +15,7 @@ class Cliente(models.Model):
 	
 		
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.nome) 
+		return '{} - {}'.format(self.pk, self.user.first_name) 
 
 	def id_formated(self):
 		if self.pk:

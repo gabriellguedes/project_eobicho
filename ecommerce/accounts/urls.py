@@ -5,11 +5,7 @@ from . import views
 app_name = 'contas'
 
 urlpatterns = [
-    
-    path('', views.home, name='home'),
-
     # Cliente 
-    path('cliente_add/', views.cliente_add, name='cliente_add'),
     path('cliente_list/', views.cliente_list, name='cliente_list'),
     path('cliente_detail/<int:pk>/', views.cliente_detail, name='cliente_detail'),
     path('cliente_update/<int:pk>/', views.cliente_update, name='cliente_update'),
@@ -22,5 +18,7 @@ urlpatterns = [
     path('funcionario_update/<int:pk>/', views.funcionario_update, name='funcionario_update'),
     path('funcionario_delete/<int:pk>/', views.funcionario_delete.as_view(), name='funcionario_delete'),
        
-    path('accounts/', include('django.contrib.auth.urls')),    
+    path('accounts/', include('django.contrib.auth.urls')), 
+    path('accounts/register/', views.register_cliente, name='register_cliente'),
+    path('accounts/edit/', views.edit, name='edit_profile'),   
 ] 

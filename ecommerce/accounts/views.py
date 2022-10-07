@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect
+from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView
@@ -11,21 +12,7 @@ from ecommerce.pet.models import Pet
 from .models import Cliente, Funcionario
 from .forms import ClienteForm, FuncionarioForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteEditForm
 
-def home(request):
-	template_name = 'accounts/home.html'
-	
-	return render(request,template_name)
 
-# Add Cliente 
-def cliente_add(request):
-	template_name = 'clientes/cliente_add.html'
-	form = ClienteForm(request.POST or None)
-	if request.method == 'POST':
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect(reverse('contas:cliente_list'))
-	context = {'form': form	}
-	return render(request, template_name, context=context)
 # Listar Cliente
 def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
@@ -168,33 +155,68 @@ class funcionario_delete(DeleteView):
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
 
-#Registro 
-def register(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.username = new_user.email
-            # Save the User object
-            new_user.save()
-            # Create the user profile
-            profile = Profile.objects.create(user=new_user)
-            return render(request,'account/register_done.html',{'new_user': new_user})
-    else:
-        user_form = UserRegistrationForm()
-    return render(request,'account/register.html', {'user_form': user_form})
+#Registro Cliente 
+def register_cliente(request):
+	template_name = 'accounts/register.html'
+	if request.method == 'GET':
+		user_form = UserRegistrationForm()
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory()
+		context = {
+			'form_user':user_form,
+			'form_cliente': form_cliente,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		user_form = UserRegistrationForm(request.POST)
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory(request.POST)
+		if user_form.is_valid() and form_cliente.is_valid():
+		# Create a new user object but avoid saving it yet
+			new_user = user_form.save(commit=False)
+			# Set the chosen password
+			new_user.set_password(user_form.cleaned_data['password'])
+			new_user.username = new_user.email
+			# Save the User object
+			new_user.save()
+			# Create the user profile
+			form_cliente.instance = new_user
+			form_cliente.save()
+			context ={}
+			return render(request, 'accounts/register_done.html')
+		else:
+			user_form = UserRegistrationForm()
+			context = {'user_form': user_form,}
+			return render(request,template_name, context=context)
 #Editar Usuário
 def edit(request):
-    if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user, data=request.POST)
-        profile_form = ClienteEditForm( instance=request.user.profile,data=request.POST,files=request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-    else:
-        user_form = UserEditForm(instance=request.user)
-        profile_form = ClienteEditForm(instance=request.user.profile)
-    return render(request,  'account/edit.html', {'user_form': user_form,'profile_form': profile_form})
+	template_name = 'accounts/edit.html'
+	if request.method == 'GET':
+		user_form = UserEditForm(instance=request.user)
+
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=0, can_delete=False)
+		form_cliente = form_cliente_factory(instance=request.user)
+		context = {
+			'user_form': user_form,
+			'profile_form': form_cliente
+		}
+		return render(request, template_name, context=context)
+
+
+	elif request.method == 'POST':
+		user_form = UserEditForm(request.POST,instance=request.user)
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm)
+		form_cliente = form_cliente_factory(request.POST, request.FILES, instance=request.user)
+		
+		if user_form.is_valid() and form_cliente.is_valid():
+			edit_user = user_form.save()
+			form_cliente.instance = edit_user
+			form_cliente.save()
+			return HttpResponseRedirect(reverse('contas:cliente_list'))
+		else:
+			context = {
+				'user_form': user_form,
+				'profile_form': form_cliente
+			}
+			return render(request,  template_name, context=context)
+

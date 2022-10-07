@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+	{% if request.user.is_authenticated %}
+		<div>
+			<label>Bem-vindo {{ request.user.first_name }}</label>
+			<p>
+				<a href="{% url 'edit' %}">Editar</a>
+				<a href="{% url 'logout' %}">Sair</a>
+			</p>	
+		</div>
+	{% endif%}
+	<h3 class="session-title">Dashboard</h3>
+{% endblock %}
