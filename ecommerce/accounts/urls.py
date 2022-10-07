@@ -1,5 +1,5 @@
 from django.urls import path
-#from .views import form, listPet
+from django.conf.urls import include
 from . import views
 
 app_name = 'contas'
@@ -21,6 +21,6 @@ urlpatterns = [
     path('funcionario_detail/<int:pk>/', views.funcionario_detail, name='funcionario_detail'),
     path('funcionario_update/<int:pk>/', views.funcionario_update, name='funcionario_update'),
     path('funcionario_delete/<int:pk>/', views.funcionario_delete.as_view(), name='funcionario_delete'),
-   
-        
+       
+    path('accounts/', include('django.contrib.auth.urls')),    
 ] 

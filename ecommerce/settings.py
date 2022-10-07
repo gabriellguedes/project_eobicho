@@ -74,7 +74,6 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -88,6 +87,22 @@ DATABASES = {
         }
     }
 }
+
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sistema',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'Chock@1001',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': 'SET default_storage_engine=InnoDB'
+        }
+    }
+}
+"""
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

@@ -1,8 +1,9 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
 class Cliente(models.Model):
-	nome = models.CharField('Nome', max_length=150)
+	nome = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
 	email = models.EmailField('Email')
 	telefone = models.CharField('Telefone', max_length=16)

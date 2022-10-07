@@ -15,26 +15,10 @@
 <div class="tab-content d-flex justify-content-end" id="myTabContent">
 	<!-- Histórico -->	
 	<section class="col-6 tab-pane fade show active " id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-		<form name="form-users" id="formUsers" method="post" action=".">
-        <div class="mt-4 m-auto">
-            {% if msg %}
-                <div class="alert {{class}}">
-                    {{msg}}
-                </div>
-            {% endif %}
-
-            {% csrf_token %}
-            <input class="form-control mt-4" type="text" name="name" id="name" placeholder="Nome:">
-            <input class="form-control mt-4" type="text" name="user" id="user" placeholder="Nome do Usuário:">
-            <input class="form-control mt-4" type="password" name="password" id="password" placeholder="Senha:">
-            <input class="form-control mt-4" type="password" name="password-conf" id="password-conf" placeholder="Repita a Senha:">
-            <input class="form-control mt-4" type="email" name="email" id="email" placeholder="Email:">
-            <input class="btn btn-primary mt-4" type="submit" value="Cadastrar">
-        </div>
-    </form>
+	
 	</section>
 	<section class="tab-pane fade col-6" id="login" role="tabpanel" aria-labelledby="login-tab">
-			
+			{% include 'site/block-login.html' %}
 	</section>
 </div>	
 {% endblock %}

@@ -9,7 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
 from .models import Cliente, Funcionario
-from .forms import ClienteForm, FuncionarioForm
+from .forms import ClienteForm, FuncionarioForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteEditForm
 
 def home(request):
 	template_name = 'accounts/home.html'
@@ -26,7 +26,6 @@ def cliente_add(request):
 			return HttpResponseRedirect(reverse('contas:cliente_list'))
 	context = {'form': form	}
 	return render(request, template_name, context=context)
-
 # Listar Cliente
 def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
@@ -55,7 +54,6 @@ def cliente_list(request):
 		'lista': lista,
 	}
 	return render(request, template_name, context=context)
-
 # Detail CLiente
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
@@ -68,7 +66,6 @@ def cliente_detail(request, pk):
 		'pet': pet,
 	}
 	return render(request, template_name, context=context)
-
 # Atualização Cliente
 def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
@@ -86,9 +83,6 @@ def cliente_update(request, pk):
     	else:
     		context = {'form': form, 'pet': pet,}
     		return render(request, template_name, context=context)
-
-
-
 #Apagar Cliente   
 class cliente_delete(DeleteView):
 	template_name = 'clientes/cliente_delete.html'
@@ -114,7 +108,6 @@ def funcionario_add(request):
 			'form': form
 			}	
 			return render(request, template_name, context=context)
-
 #Detail funcionario
 def funcionario_detail(request, pk):
 	template_name = 'funcionarios/funcionario_detail.html'
@@ -122,7 +115,6 @@ def funcionario_detail(request, pk):
 
 	context = { 'funcionario': obj_funcionario,}
 	return render(request, template_name, context=context)
-
 # Lista de todos os funcionários
 def funcionario_list(request):
 	template_name = 'funcionarios/funcionario_list.html'
@@ -150,7 +142,6 @@ def funcionario_list(request):
 		'form': objeto,
 	}
 	return render(request, template_name, context=context)
-
 # Atualizar Funcionário
 def funcionario_update(request, pk):
 	template_name = 'funcionarios/funcionario_update.html'
@@ -171,10 +162,39 @@ def funcionario_update(request, pk):
 				'form': form
 			}
 			return render(request, template_name, context=context)
-
 # Deletar Funcionário
 class funcionario_delete(DeleteView):
 	template_name = 'funcionarios/funcionario_delete.html'
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
 
+#Registro 
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.username = new_user.email
+            # Save the User object
+            new_user.save()
+            # Create the user profile
+            profile = Profile.objects.create(user=new_user)
+            return render(request,'account/register_done.html',{'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request,'account/register.html', {'user_form': user_form})
+#Editar Usuário
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ClienteEditForm( instance=request.user.profile,data=request.POST,files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ClienteEditForm(instance=request.user.profile)
+    return render(request,  'account/edit.html', {'user_form': user_form,'profile_form': profile_form})
