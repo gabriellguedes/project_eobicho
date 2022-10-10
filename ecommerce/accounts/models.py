@@ -1,9 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+import uuid
+
+def upload_image_formater(instance, filename):
+	return f'{str(uuid.uuid4())}-{filename}'
 
 class Cliente(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	photo = models.ImageField('Foto de Perfil',  upload_to=upload_image_formater, blank=True, null=True)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
 	telefone = models.CharField('Telefone', max_length=16)
 

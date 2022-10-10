@@ -3,14 +3,13 @@
 {% block content %}
 
 <h4 class="alert alert-info"><i class="fa-solid fa-user text-info"></i> Criar um novo Cliente</h4>
-<form action="." method="POST" class="container">
+<form action="." method="POST" class="container" enctype="multipart/form-data">
     <div class="row">
         {% for item in form_user %}
             <div class="col-md-4">              
                 {{ item|bootstrap }}
             </div>
         {% endfor %}
-        {{ form_cliente.management_form }}
         {% for fields in form_cliente %}
             <div class="col-md-4">
                 {{ fields|bootstrap }}

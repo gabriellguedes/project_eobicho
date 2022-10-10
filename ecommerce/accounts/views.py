@@ -156,7 +156,7 @@ class funcionario_delete(DeleteView):
 	success_url = reverse_lazy('contas:funcionario_list')
 
 #Registro Cliente 
-def register_cliente(request):
+def cliente_add(request):
 	template_name = 'accounts/register.html'
 	if request.method == 'GET':
 		user_form = UserRegistrationForm()
@@ -168,12 +168,14 @@ def register_cliente(request):
 		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
-		user_form = UserRegistrationForm(request.POST)
+		user_form = UserRegistrationForm(request.POST, request.FILES)
 		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=1, can_delete=False)
-		form_cliente = form_cliente_factory(request.POST)
+		form_cliente = form_cliente_factory(request.POST, request.FILES)
+		context ={}
+		
 		if user_form.is_valid() and form_cliente.is_valid():
 		# Create a new user object but avoid saving it yet
-			new_user = user_form.save(commit=False)
+			new_user = user_form.save()
 			# Set the chosen password
 			new_user.set_password(user_form.cleaned_data['password'])
 			new_user.username = new_user.email
@@ -182,19 +184,30 @@ def register_cliente(request):
 			# Create the user profile
 			form_cliente.instance = new_user
 			form_cliente.save()
-			context ={}
 			return render(request, 'accounts/register_done.html')
 		else:
-			user_form = UserRegistrationForm()
-			context = {'user_form': user_form,}
-			return render(request,template_name, context=context)
+			if user_form.is_valid():
+				new_user = user_form.save()
+				# Set the chosen password
+				new_user.set_password(user_form.cleaned_data['password'])
+				new_user.username = new_user.email
+				# Save the User object
+				new_user.save()
+				
+			context = {
+				'user_form': user_form,
+				'form_cliente': form_cliente,
+				'msg': 'Erro: Cliente não cadastrado',
+				'class': 'alert alert-danger',
+			}
+			return render(request, template_name, context=context)
 #Editar Usuário
 def edit(request):
 	template_name = 'accounts/edit.html'
 	if request.method == 'GET':
 		user_form = UserEditForm(instance=request.user)
 
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=0, can_delete=False)
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteEditForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory(instance=request.user)
 		context = {
 			'user_form': user_form,
