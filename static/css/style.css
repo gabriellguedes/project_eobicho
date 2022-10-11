@@ -29,6 +29,7 @@ body{
  
 }
 #wrap-header img{
+	float: left;
 	display: block;
 	max-width: 175px;
 	margin-top: 15px;
@@ -55,6 +56,13 @@ body{
 	}
 	#login-section label{
 		text-shadow: 2px 2px 5px blanchedalmond; !important;
+	}
+	#form-login div i{
+		
+	}
+	#form-login div input{
+		max-width: 90%;
+		display: inline-block;
 	}
 /****************************
  1.2 - Nav
@@ -151,19 +159,22 @@ main{
 	width: 100%;
 	min-height: 50px;
 }
-@media only screen and (max-width:  400px){
+@media only screen and (max-width:  600px){
+	#wrap-header img{
+		float: none !important;
+	}
+	
 	body{
 		max-width: 100%;
 	}
 	/* Page -  Login  */
-	#myTab{
-		width: 90% !important;
-	}
+	
 }
 
-@media only screen and (max-width: 400px){
-	#myTab{
-		width: 90% !important;
+@media screen and (max-width: 480px){
+
+	#wrap-header img{
+		float: none !im: qportant;
 	}
 	.logo{
 		align-content: center;

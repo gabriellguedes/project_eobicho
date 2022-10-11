@@ -6,24 +6,24 @@
             {{ msg }}
         </div>
     {% endif %}
-    <div class="col-md-4">
-        <input class="mb-3 pl-2" type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Nome">
+    <div class="col-md-6">
+        <input class="form-control mb-3 pl-2" type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Nome">
     </div>    
    
-    <div class="col-md-4">
-        <input class="mb-3 pl-2" type="text" name="last_name" maxlength="30" id="id_last_name" placeholder="Sobrenome">
+    <div class="col-md-6">
+        <input class="form-control mb-3 pl-2" type="text" name="last_name" maxlength="30" id="id_last_name" placeholder="Sobrenome">
     </div>
    
-    <div class="col-md-4">
-        <input class="mb-3 pl-2" type="email" name="email" maxlength="254" id="id_email" placeholder="Email">
+    <div class="col-md-6">
+        <input class="form-control mb-3 pl-2" type="email" name="email" maxlength="254" id="id_email" placeholder="Email">
     </div>
       
-    <div class="col-md-4">
-        <input class="mb-3 pl-2" type="password" name="password" id="id_password" placeholder="Senha">
+    <div class="col-md-6">
+        <input class="form-control mb-3 pl-2" type="password" name="password" id="id_password" placeholder="Senha">
     </div>    
     
-    <div class="col-md-4">
-        <input class="mb-3 pl-2" type="password" name="password2" id="id_password2" placeholder="Confirmar Senha">
+    <div class="col-md-6">
+        <input class="form-control mb-3 pl-2" type="password" name="password2" id="id_password2" placeholder="Confirmar Senha">
     </div>
     {% if form.errors %}
     <label class="alert alert-warning">Erro!!</label>

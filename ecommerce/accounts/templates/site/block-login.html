@@ -1,15 +1,15 @@
-<form id="form-login" action="." method="POST">
+<form id="form-login" class="mt-3" action="." method="POST">
     {% if form.errors %}
     <label class="alert alert-warning">Usuário e Senha não coincidem. Por favor, tente novamente.</label>
     {% endif %}
-    <div class="">
-        <i class="fa-solid fa-user"></i>
-        <input class="mb-3" type="text" name="username" maxlength="30" id="id_username" placeholder="Email">
+    <div class="col-md-6">
+        <i class="fa-solid fa-user text-info mr-2"></i>
+        <input class="form-control mb-3 pl-2" type="text" name="username" maxlength="30" id="id_username" placeholder="Email">
     </div>
 
-    <div class="">
-        <i class="fa-solid fa-lock"></i>
-        <input class="mb-3" type="password" name="password" id="id_password" placeholder="Senha">
+    <div class="col-md-6">
+        <i class="fa-solid fa-lock text-info mr-2"></i>
+        <input class="form-control mb-3 pl-2" type="password" name="password" id="id_password" placeholder="Senha">
       
     </div>     
         {% csrf_token %}
@@ -17,7 +17,7 @@
         <p><a href="{% url 'contas:password_reset' %}">Esqueceu sua senha?</a></p>
         {% endif %}
         <input type="hidden" name="next" value="{{ next }}"/>
-        <button class="btn btn-info" type="submit">Entrar</button>
+        <button class="btn btn-info ml-3" type="submit">Entrar</button>
         
     
 </form>
