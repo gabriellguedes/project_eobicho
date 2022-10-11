@@ -29,17 +29,23 @@
         <div class="container">
           {% if request.user.is_authenticated %}
           {% else %}
-          <div class="col-md-6">
-            <a href="{% url 'pet:pet_list' %}">
-              <img class="m-auto pt-2" alt="logo" src="{% static 'img/logo.png'%}">
-            </a>
-          </div>  
+            <div class="col-md-6">
+              <a href="{% url 'pet:pet_list' %}">
+                <img class="m-auto pt-2" alt="logo" src="{% static 'img/logo.png'%}">
+              </a>
+            </div>  
           {% endif %}
           <div class="col">
             {% include 'includes/user_block.html'%}
           </div>  
         </div>
+        {% if request.user.is_authenticated %}
+          <div id="nav_reponsive">
+            {% include 'includes/navbar.html' %}
+          </div>
+        {% endif %}
     </header><!-- /HEADER -->
+
     <main>
     
       {% block content %} 

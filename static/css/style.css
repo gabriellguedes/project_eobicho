@@ -67,6 +67,9 @@ body{
 /****************************
  1.2 - Nav
 *****************************/
+#nav_reponsive{
+	display: none;
+}
 .wrap-nav{
 	width: 90%;
 	margin: 0 auto;
@@ -160,15 +163,22 @@ main{
 	width: 100%;
 	min-height: 50px;
 }
+/******************************************************************
+ 4.0 - RESPONSIVE
+*******************************************************************/
 @media only screen and (max-width:  600px){
 	#wrap-header img{
 		float: none !important;
 	}
-	
+	#nav_reponsive{
+		display: block;
+	}
 	body{
 		max-width: 100%;
 	}
-	/* Page -  Login  */
+	.block-none{
+		display: none;
+	}
 	
 }
 
@@ -176,6 +186,9 @@ main{
 
 	#wrap-header img{
 		float: none !im: qportant;
+	}
+	#nav_reponsive{
+		display: block;
 	}
 	.logo{
 		align-content: center;
