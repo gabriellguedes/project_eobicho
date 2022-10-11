@@ -1,0 +1,76 @@
+<div class="card-header bg-dark">
+	<h3 class="text-white"><i class="bi bi-journal-text text-info"></i> Prontuário</h3>
+	<div class="col row">
+		<div class="col-sm-3">
+			<label class="text-white">Nº Ficha: </label>
+			<label class="text-white"> {{ ficha.id }}</label>
+		</div>
+			<div class="col-sm-4">
+			<small class="font-weight-bold text-white ">
+				<i class="fa-solid fa-user"></i> Criado por: 
+			</small>
+			<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
+		</div>
+		<div class="col-sm-5">
+			<small class="font-weight-bold text-white">
+				<i class="fa-regular fa-calendar"></i> Data: 
+			</small>
+			<small class="text-monospace text-white">{{ficha.created}}</small>
+		</div>
+	</div>	
+</div>
+<div class="card-text px-3 py-3">
+	<div class="col">
+		<label class="font-weight-bold">Unhas: </label>
+		<label class="text-monospace">{{ficha.unhas.unhas}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Ectoparasitas: </label>
+		<label class="text-monospace">{{ficha.ectoparasitas.ectoparasitas}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Pele: </label>
+		<label class="text-monospace">{{ficha.peleInfeccionada.peleInfeccionada}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Pelos: </label>
+		<label class="text-monospace">{{ficha.pelos.pelos}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Estado dos pelos: </label>
+		<label class="text-monospace">{{ficha.pelosEstado.pelosEstado}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Condição dos Pelos: </label>
+		<label class="text-monospace">{{ficha.pelosCondicao.pelosCondicao}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Boca: </label>
+		<label class="text-monospace">{{ficha.boca.boca}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Olhos: </label>
+		<label class="text-monospace">{{ficha.olhos.olhos}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Patas: </label>
+		<label class="text-monospace">{{ficha.patas.patas}}</label> 
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Orelhas: </label>
+		<label class="text-monospace">{{ficha.orelhas.orelhas}}</label>
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Doenças: </label>
+		<label class="text-monospace">{{ficha.doenca.doenca}}</label>
+	</div>
+	<div class="col">
+		<label class="font-weight-bold">Observações: </label>
+		<label class="text-monospace">{{ficha.obs}}</label>
+	</div>
+	<div class="col d-flex justify-content-end">
+		<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
+			<i class="fa-solid fa-plus"></i> Nova Anamnese
+		</a>
+	</div>
+</div>

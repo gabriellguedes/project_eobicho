@@ -1,0 +1,38 @@
+{% load bootstrap %}
+<div class="row my-3">
+	<div class="col-4">
+		<div class="border box-peso">
+			<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
+				<i class="fa-solid fa-ball-pile text-info"></i> Peso
+			</h4>
+			<form class="px-3" method="POST" action=".">
+				{% csrf_token %}
+				{{peso.management_form}}
+				{% for t in peso %}
+				<p>{{t.peso|bootstrap}}</p>
+				{% endfor %}
+				<div class="d-flex justify-content-center">
+					<button type="submit" class="btn btn-lg btn-info btn-peso my-3">
+						<i class="fa-solid fa-plus"></i>
+					</button>
+				</div>		
+			</form>	
+		</div>
+	</div>
+	<div class="col-7">
+		<div class="">
+			<h4 class="text-secondary font-weight-bold ml-3 mt-3">
+				<i class="bi bi-journal-text text-info"></i> Histórico Peso
+			</h4>
+				<div class="card-body">
+					{% for item in listpeso %}
+					<div class="text-secondary border-bottom pt-2">
+						<label><span class="text-info"> Peso(Kg):</span> {{ item.peso }}<span class="text-info"> em </span>
+						{{item.created}}
+						</label>
+					</div>
+					{% endfor %}
+				</div>
+		</div>
+	</div>
+</div>

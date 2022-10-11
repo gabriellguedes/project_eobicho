@@ -3,9 +3,15 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
+from ecommerce.accounts.models import Cliente
 
 
 def login(request):
 	return HttpResponseRedirect(reverse('contas:login'))
 
-
+def photo_user(request):
+	template_name = 'includes/user_block.html'
+	user = request.user
+	obj = Cliente.objects.get(user=user)
+	context = {'user_obj': obj}
+	return render(request, template_name, context=context)

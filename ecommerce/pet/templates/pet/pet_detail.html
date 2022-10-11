@@ -7,142 +7,12 @@
 {% block content %}
 
 <section class="container py-4">
-<div class="border dados-pet mb-5">
-	<div class="bg-dark dados-pet-header pt-2">
-		<div class="row">
-			<div class="col-md-9">
-				<h6 class="font-weight-bold text-white pl-5">Dados do animal</h6>
-			</div>
-			<div class="col-md-2 text-white text-center">
-				<h6 class="font-weight-bold">Id: {{pet.id}}</h6>					
-			</div>	
-		</div>	
+	<div class="mb-3">
+		<button class="btn btn-outline-warning">Agendar Banho/Tosa</button>
+		<button class="btn btn-outline-info">Agendar Consulta</button>
 	</div>
-	<div class="px-3 py-4">	
-		<div class=" row">
-			<div class="col-md-2">
-				{% if pet.photo.url != None %}
-				<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-					<img class="pet-img mb-2 mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
-				</div>	
-		  							
-		  	{% else %}
-		  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-		  			{% if pet.sexo  != 'Macho' %}
-							<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	
-								<label class="text-center w-100 font-weight-bold text-uppercase">{{pet.nome}}</label> 	
-		  			{% else %}
-		  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	<label class="text-center w-100 font-weight-bold text-uppercase">{{pet.nome}}</label>
-		  			{% endif%}
-					</div>	
-		  	{% endif %}	
-		  	</div>	
-		  	
-		   
-		    <div class="col-md-8 row">
-		    		<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-user text-info"></i> Tutor: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.tutor.user.first_name}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-venus-mars text-info"></i> Sexo: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.sexo}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-paw text-info"></i> Especie: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.especie}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-shield-cat text-info"></i> Raça: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.raca.raca}}</label> 
-					</div>
-					
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-dog text-info"></i> Pelagem: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.pelagem}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-droplet text-info"></i> Coloração: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.coloracao}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-face-smile text-info"></i> Temperamento: 
-						</label>
-						<label class="text-monospace text-secondary">{{pet.temperamento}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-heart text-info"></i> Data de Nascimento:
-						</label>
-						<label class="text-monospace text-secondary">{{pet.aniversario}}</label> 
-					</div>
-					<div class="col-sm-4">
-						<label class="font-weight-bold">
-							<i class="fa-solid fa-staff-snake text-info"></i> Castrado(a)
-						</label>
-						{% if pet.castracao == False %}
-							<label class="text-monospace text-secondary"> Não</label> 
-						{% else %}
-							<label class="text-monospace text-secondary"> Sim</label>
-						{% endif %}	
-					</div>
-					
-
-		    </div>
-		    <div class="col-md-2">
-		    	<button class="btn btn-lg btn-outline-info" onclick="location.href='{% url 'pet:pet_update' pk=pet.id %}'">
-		    		<i class="fa-solid fa-pen"></i> Editar
-		    	</button>
-		    </div>	
-
-  		</div>
-	</div>
-</div>
-<!-- Observações sobre o pet -->
-	
-<div class="d-flex justify-content-end">
-	
-	<a class="btn btn-secondary" data-toggle="collapse" href="#petCaracteristica" role="button" aria-expanded="false" aria-controls="petCaracteristica">
-    	<i class="fa-solid fa-list"></i> Observações
- 	</a>
-</div>
-<section class="collapse border rounded" id="petCaracteristica">
-  <div class="row my-3">
-  	<div class="col-4">
-		<form class="col" method="POST" action=".">
-		
-			<legend class="text-secondary border-bottom font-weight-bold">
-				<i class="fa-solid fa-list text-info"></i> Nova observação
-			</legend>
-				
-			<button class="btn btn-success" type="submit">
-				<i class="fa-solid fa-plus"></i> Adicionar
-			</button>
-		</form>
-	</div>
-	{% if ficha.observacoes %}
-		
-	{% else %}	
-		<div class="col-7 border-left">
-			
-			<p class="alert alert-warning mt-5">Nenhuma observação cadastrada!</p>
-				
-		</div>
-	{% endif %}
-</section><!-- /Observações -->
+	{% include 'pet/includes/pet_detail_block.html' %}
+	{% include 'pet/includes/pet_obs_block.html' %}
 
 <!-- NAV - FINAL DA PÁGINA -->
 <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
@@ -184,43 +54,7 @@
 	</section>
 	<!-- Peso -->
 	<section class="tab-pane fade " id="peso" role="tabpanel" aria-labelledby="peso-tab">
-		<div class="row my-3">
-			<div class="col-4">
-				<div class="border box-peso">
-					<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
-						<i class="fa-solid fa-ball-pile text-info"></i> Peso
-					</h4>
-					<form class="px-3" method="POST" action=".">
-						{% csrf_token %}
-						{{peso.management_form}}
-						{% for t in peso %}
-						<p>{{t.peso|bootstrap}}</p>
-						{% endfor %}
-						<div class="d-flex justify-content-center">
-							<button type="submit" class="btn btn-lg btn-info btn-peso my-3">
-								<i class="fa-solid fa-plus"></i>
-							</button>
-						</div>		
-					</form>	
-				</div>
-			</div>
-			<div class="col-7">
-				<div class="">
-					<h4 class="text-secondary font-weight-bold ml-3 mt-3">
-						<i class="bi bi-journal-text text-info"></i> Histórico Peso
-					</h4>
-						<div class="card-body">
-							{% for item in listpeso %}
-							<div class="text-secondary border-bottom pt-2">
-								<label><span class="text-info"> Peso(Kg):</span> {{ item.peso }}<span class="text-info"> em </span>
-								{{item.created}}
-								</label>
-							</div>
-							{% endfor %}
-						</div>
-				</div>
-			</div>
-		</div>		
+		{% include 'pet/includes/pet_peso_block.html' %}		
 	</section>
 	<!-- Vacinas -->
 	<section class="tab-pane fade " id="vacinas" role="tabpanel" aria-labelledby="vacinas-tab">
@@ -244,120 +78,11 @@
 	</section>	
     <!-- Prontuário  -->
     <section class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
-  	<div class="card-header bg-dark">
-				<h3 class="text-white"><i class="bi bi-journal-text text-info"></i> Prontuário</h3>
-				<div class="col row">
-					<div class="col-sm-3">
-						<label class="text-white">Nº Ficha: </label>
-						<label class="text-white"> {{ ficha.id }}</label>
-					</div>
- 					<div class="col-sm-4">
-						<small class="font-weight-bold text-white ">
-							<i class="fa-solid fa-user"></i> Criado por: 
-						</small>
-						<small class="text-monospace text-uppercase text-white">{{ficha.funcionario}}</small>
-					</div>
-					<div class="col-sm-5">
-						<small class="font-weight-bold text-white">
-							<i class="fa-regular fa-calendar"></i> Data: 
-						</small>
-						<small class="text-monospace text-white">{{ficha.created}}</small>
-					</div>
-				</div>	
-			</div>
-			<div class="card-text px-3 py-3">
-	    		<div class="col">
-	    			<label class="font-weight-bold">Unhas: </label>
-					<label class="text-monospace">{{ficha.unhas.unhas}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Ectoparasitas: </label>
-					<label class="text-monospace">{{ficha.ectoparasitas.ectoparasitas}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Pele: </label>
-					<label class="text-monospace">{{ficha.peleInfeccionada.peleInfeccionada}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Pelos: </label>
-					<label class="text-monospace">{{ficha.pelos.pelos}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Estado dos pelos: </label>
-					<label class="text-monospace">{{ficha.pelosEstado.pelosEstado}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Condição dos Pelos: </label>
-					<label class="text-monospace">{{ficha.pelosCondicao.pelosCondicao}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Boca: </label>
-					<label class="text-monospace">{{ficha.boca.boca}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Olhos: </label>
-					<label class="text-monospace">{{ficha.olhos.olhos}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Patas: </label>
-					<label class="text-monospace">{{ficha.patas.patas}}</label> 
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Orelhas: </label>
-					<label class="text-monospace">{{ficha.orelhas.orelhas}}</label>
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Doenças: </label>
-					<label class="text-monospace">{{ficha.doenca.doenca}}</label>
-				</div>
-				<div class="col">
-					<label class="font-weight-bold">Observações: </label>
-					<label class="text-monospace">{{ficha.obs}}</label>
-				</div>
-				<div class="col d-flex justify-content-end">
-					<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
-						<i class="fa-solid fa-plus"></i> Nova Anamnese
-					</a>
-				</div>
-			</div>
+    	{% include 'pet/includes/pet_prontuario_block.html' %}
     </section>
     <!-- Fichas Antigas -->
     <section class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
-  	<div class="col mt-3">
-	    	<p class="font-weight-bold">
-	    		<i class="bi bi-journal-text"></i> Fichas Antigas:
-	    	</p>	
-	    	<table class="table table-hover">
-	    		<thead>
-	    			<tr class="text-center">
-		    			<th scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
-		    			<th class="block-none" scope="col"><i class="fa-regular fa-calendar text-info"></i> Data</th>
-		    			<th class="block-none" scope="col"><i class="fa-solid fa-user text-info"></i> Funcionário</th>
-		    			<th scope="col"><i class="fa-solid fa-gears text-info"></i> Ações</th>
-		    		</tr>	
-	    		</thead>	
-	    		{% for iten in last_fichas %}
-	    			<tbody>
-	    				<tr class="text-center">
-				    		<th scope="row">
-				    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=iten.id %}">{{iten.id}}</a>
-				    		</th>
-				    		<td class="block-none">
-				    			<small>
-				    				{{iten.created}}
-				    			</small>	
-				    		</td>
-				    		<td class="block-none">{{iten.funcionario}}</td>
-				    		<td>
-				    			<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=pet.id  n=iten.id %}">
-				    				<i class="fa-regular fa-eye"></i>
-				    			</a>
-				    		</td>
-			    		</tr>
-			    	</tbody>	
-			    {% endfor%}							    	
-	    	</table>
-	    </div>
+    	{% include 'pet/includes/pet_old_prontuario_block.html' %}
     </section>
     <!-- Anexo -->
     <section class="tab-pane fade " id="anexo" role="tabpanel" aria-labelledby="anexo-tab">

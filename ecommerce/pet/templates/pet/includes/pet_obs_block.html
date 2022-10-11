@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-end">
+	
+	<a class="btn btn-secondary" data-toggle="collapse" href="#petCaracteristica" role="button" aria-expanded="false" aria-controls="petCaracteristica">
+    	<i class="fa-solid fa-list"></i> Observações
+ 	</a>
+</div>
+<section class="collapse border rounded" id="petCaracteristica">
+  <div class="row my-3">
+  	<div class="col-4">
+		<form class="col" method="POST" action=".">
+		
+			<legend class="text-secondary border-bottom font-weight-bold">
+				<i class="fa-solid fa-list text-info"></i> Nova observação
+			</legend>
+				
+			<button class="btn btn-success" type="submit">
+				<i class="fa-solid fa-plus"></i> Adicionar
+			</button>
+		</form>
+	</div>
+	{% if ficha.observacoes %}
+		
+	{% else %}	
+		<div class="col-7 border-left">
+			
+			<p class="alert alert-warning mt-5">Nenhuma observação cadastrada!</p>
+				
+		</div>
+	{% endif %}
+</section><!-- /Observações -->

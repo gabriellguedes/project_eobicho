@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'fontawesomefree',
     'bootstrapform',
-    'django_extensions',
     # Meus Apps 
     'ecommerce.accounts',
     'ecommerce.core',

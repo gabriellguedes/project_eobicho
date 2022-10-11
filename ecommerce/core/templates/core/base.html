@@ -27,26 +27,14 @@
     <div class="col p-0">  
       <header id="wrap-header">
         <div class="container">
+          {% if request.user.is_authenticated %}
+          {% else %}
+            <a href="{% url 'pet:pet_list' %}">
+              <img class="m-auto pt-2" alt="logo" src="{% static 'img/logo.png'%}">
+            </a>
+          {% endif %}
           <div class="col">
-            {% if request.user.is_authenticated %}
-              <div class="d-flex justify-content-end py-3 mr-4" id="login-section">
-                <div class="col-sm-2 mt-2">
-                  <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
-                  <label class="text-center font-weight-bold text-uppercase w-100">{{user.first_name}}</label>
-                </div> 
-                
-                <div class="dropdown">
-                  <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
-                  
-                  <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
-                    
-                  </div>
-                </div>
-              </div>  
-            {% endif %}
+            {% include 'includes/user_block.html'%}
           </div>  
         </div>
     </header><!-- /HEADER -->

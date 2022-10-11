@@ -151,9 +151,20 @@ main{
 	width: 100%;
 	min-height: 50px;
 }
-
+@media only screen and (max-width:  400px){
+	body{
+		max-width: 100%;
+	}
+	/* Page -  Login  */
+	#myTab{
+		width: 90% !important;
+	}
+}
 
 @media only screen and (max-width: 400px){
+	#myTab{
+		width: 90% !important;
+	}
 	.logo{
 		align-content: center;
 	}
