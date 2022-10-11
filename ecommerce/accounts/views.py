@@ -185,22 +185,23 @@ def cliente_add(request):
 			form_cliente.instance = new_user
 			form_cliente.save()
 			return render(request, 'accounts/register_done.html')
-		else:
-			if user_form.is_valid():
+		elif user_form.is_valid():
 				new_user = user_form.save()
 				# Set the chosen password
 				new_user.set_password(user_form.cleaned_data['password'])
 				new_user.username = new_user.email
 				# Save the User object
 				new_user.save()
-				
+							
+				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
+		else:
 			context = {
-				'user_form': user_form,
-				'form_cliente': form_cliente,
-				'msg': 'Erro: Cliente não cadastrado',
-				'class': 'alert alert-danger',
-			}
-			return render(request, template_name, context=context)
+					'user_form': user_form,
+					'form_cliente': form_cliente,
+					'msg': 'Erro: Cliente não cadastrado',
+					'class': 'alert alert-danger',
+				}
+			return render(request, template_name, context=context)	
 #Editar Usuário
 def edit(request):
 	template_name = 'accounts/edit.html'
