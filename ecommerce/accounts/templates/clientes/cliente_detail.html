@@ -29,7 +29,7 @@
 		<div class="px-3 py-4">	
 			<div class=" row">
 				{% for item in pet %}
-				<div class="row col-5 ml-4">
+				<div class="row col-md-5 ml-4">
 					<a href="{% url 'pet:pet_detail' pk=item.id %}">
 			  				<div class="col-md-2">
 								{% if item.photo.url != None %}
