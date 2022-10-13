@@ -8,14 +8,14 @@
     </div> 
     
     <div class="dropdown">
-      {% if user_obj.photo != None %}
-        <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{{ user_obj.photo.url }}">  
+      {% if cliente.photo != None %}
+        <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{{ cliente.photo.url }}">  
       {% else %}
         <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
       {% endif %}
       <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
-        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Alterar Senha</a>
         <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
         
       </div>

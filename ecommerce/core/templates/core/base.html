@@ -35,9 +35,14 @@
               </a>
             </div>  
           {% endif %}
-          <div class="col">
+          <div class="col block-none">
             {% include 'includes/user_block.html'%}
-          </div>  
+          </div>
+          <div id="logo_responsive" class="col-md-6">
+              <a href="{% url 'pet:pet_list' %}">
+                <img class="m-auto py-4" alt="logo" src="{% static 'img/logo.png'%}">
+              </a>
+            </div>
         </div>
         {% if request.user.is_authenticated %}
           <div id="nav_reponsive">
