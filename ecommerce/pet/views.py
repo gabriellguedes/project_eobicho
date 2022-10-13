@@ -124,6 +124,8 @@ def detailPet(request, pk):
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
+    tutor = obj.tutor.id
+    obj_cliente = Cliente.objects.get(id=tutor)
     # Listar Peso        
     list_peso = Peso.objects.filter(pet=obj.pk)    
     
@@ -139,6 +141,7 @@ def detailPet(request, pk):
             'last_fichas': last_fichas,
             'peso': form_peso,
             'listpeso': list_peso,
+            'cliente': obj_cliente,
         }
         return render(request, template_name, context=context)
         
@@ -159,6 +162,7 @@ def detailPet(request, pk):
                 'last_fichas': last_fichas,
                 'peso': form_peso,
                 'listpeso': list_peso,
+                'cliente': obj_cliente,
              }
             return render(request, template_name, context=context) 
 #Atualização

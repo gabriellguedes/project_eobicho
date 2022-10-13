@@ -9,7 +9,7 @@ urlpatterns = [
     path('cliente_list/', views.cliente_list, name='cliente_list'),
     path('cliente_detail/<int:pk>/', views.cliente_detail, name='cliente_detail'),
     path('cliente_update/<int:pk>/', views.cliente_update, name='cliente_update'),
-    path('cliente_delete<int:pk>/', views.cliente_delete.as_view(), name='cliente_delete'),
+    path('cliente_delete/<int:pk>/', views.cliente_delete.as_view(), name='cliente_delete'),
    
     # Funcionários
     path('funcionario_add/', views.funcionario_add, name='funcionario_add'),
