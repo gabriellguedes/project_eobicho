@@ -10,6 +10,7 @@
                 {{ item|bootstrap }}
             </div>
         {% endfor %}
+        {{ form_cliente.management_form}}
         {% for fields in form_cliente %}
             <div class="col-md-4">
                 {{ fields|bootstrap }}

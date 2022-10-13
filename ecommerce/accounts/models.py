@@ -10,7 +10,7 @@ class Cliente(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	photo = models.ImageField('Foto de Perfil',  upload_to=upload_image_formater, blank=True, null=True)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
-	telefone = models.CharField('Telefone', max_length=16)
+	telefone = models.CharField('Telefone', max_length=16, null=True, blank=True)
 
 	class Meta:
 		ordering = ('pk',)

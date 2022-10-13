@@ -16,7 +16,7 @@ class Especie(models.Model):
 	especie = models.CharField(max_length=100, unique=True)
 
 	class Meta:
-		ordering = ('especie',)
+		ordering = ('pk',)
 
 	def __str__(self):
 		return self.especie
@@ -26,7 +26,7 @@ class Raca(models.Model):
 	raca = models.CharField(max_length=100, unique=True)
 
 	class Meta:
-		ordering = ('raca',)
+		ordering = ('pk',)
 	
 	def __str__(self):
 		return '{} - {}'.format(self.especie, self.raca)
