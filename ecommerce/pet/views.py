@@ -127,7 +127,7 @@ def detailPet(request, pk):
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
     tutor = obj.tutor.id
-    obj_cliente = Cliente.objects.get(id=tutor)
+    obj_cliente = User.objects.get(id=tutor)
     # Listar Peso        
     list_peso = Peso.objects.filter(pet=obj.pk)    
     
