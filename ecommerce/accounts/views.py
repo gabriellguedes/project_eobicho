@@ -53,7 +53,10 @@ def cliente_list(request):
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
-	cliente = Cliente.objects.get(user=user)
+	try:
+		cliente = Cliente.objects.get(user=user)
+	except ObjectDoesNotExist:
+		pass
 	pet = Pet.objects.filter(tutor=user.id)
 	pet_last = pet.last()
 
