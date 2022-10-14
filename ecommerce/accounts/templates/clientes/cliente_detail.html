@@ -32,7 +32,7 @@
 				<div class="row col-md-5 ml-4">
 					<a href="{% url 'pet:pet_detail' pk=item.id %}">
 			  				<div class="col-md-2">
-								{% if item.photo.url == None %}
+								{% if item.photo.url != None %}
 								<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
 										<img class="pet-img mb-2 mask" src="{{item.photo.url}}" alt="Foto de perfil do pet">
 									</div>	

@@ -28,10 +28,10 @@ def cliente_list(request):
 	if not (parametro_limit.isdigit() and int(parametro_limit)>0):
 		parametro_lim
 
-	clientes = Cliente.objects.get_queryset().order_by('id')
+	clientes = User.objects.get_queryset().order_by('id')
 	clientes_paginator = Paginator(clientes, parametro_limit)
 
-	lista = Cliente.objects.all()
+	lista = User.objects.all()
 
 	try:
 		page = clientes_paginator.page(parametro_page)
