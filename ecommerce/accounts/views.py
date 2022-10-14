@@ -52,12 +52,14 @@ def cliente_list(request):
 # Detail CLiente
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
-	obj_cliente = User.objects.get(id=pk)
-	pet = Pet.objects.filter(tutor=obj_cliente.id)
+	user = User.objects.get(id=pk)
+	cliente = Cliente.objects.get(user=user)
+	pet = Pet.objects.filter(tutor=user.id)
 	pet_last = pet.last()
 
 	context = {
-		'cliente': obj_cliente,
+		'cliente': cliente,
+		'user': user,
 		'pet': pet,
 	}
 	return render(request, template_name, context=context)
