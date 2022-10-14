@@ -49,15 +49,28 @@ def cliente_list(request):
 		'user': user,
 	}
 	return render(request, template_name, context=context)
-# Detail CLiente
-def cliente_detail(request, pk):
+# Detail CLiente acesso pelo admin
+def cliente_detail_admin(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
-	try:
-		cliente = Cliente.objects.get(user=user)
-	except ObjectDoesNotExist:
-		pass
+	cliente = Cliente.objects.get(user=user)
+
 	pet = Pet.objects.filter(tutor=user.id)
+	pet_last = pet.last()
+
+	context = {
+		'cliente': cliente,
+		'user': user,
+		'pet': pet,
+	}
+	return render(request, template_name, context=context)
+# Detail Cliente acesso pelo cliente
+def cliente_detail(request, pk):
+	template_name = 'clientes/cliente_detail.html'
+	user = request.user
+	cliente = Cliente.objects.get(user=user)
+
+	pet = Pet.objects.filter(tutor=user)
 	pet_last = pet.last()
 
 	context = {
@@ -302,7 +315,7 @@ def edit(request):
 			edit_user = user_form.save()
 			form_cliente.instance = edit_user
 			form_cliente.save()
-			return HttpResponseRedirect(reverse('contas:cliente_list'))
+			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': user.id}))
 		else:
 			context = {
 				'user_form': user_form,

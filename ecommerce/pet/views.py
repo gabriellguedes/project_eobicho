@@ -56,7 +56,7 @@ def pet_add(request):
 #Cadastro Pet feito pelo cliente 
 def cliente_pet_add(request, pk):
     template_name = 'pet/cliente_pet_add.html'
-    obj = User.objects.get(id=pk)
+    obj = request.user
     especie = Especie.objects.all().order_by('especie')
     raca = []
 

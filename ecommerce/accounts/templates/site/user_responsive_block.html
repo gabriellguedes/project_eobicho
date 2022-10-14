@@ -7,7 +7,7 @@
 	    <img class="dropdown-toggle photo_cliente" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
 	  {% endif %}
 	  <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-	    <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
+	    <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id %}">Editar Perfil</a>
 	    <a class="dropdown-item" href="#">Alterar Senha</a>
 	    <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
 	  </div>
