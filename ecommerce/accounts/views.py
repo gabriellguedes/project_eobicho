@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -63,24 +64,52 @@ def cliente_detail(request, pk):
 # Atualização Cliente
 def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
-    obj = Cliente.objects.get(id=pk)
-    pet = Pet.objects.get(tutor=obj)
+    if request.user.is_authenticated:
+    	user = request.user
+
+    obj = User.objects.get(id=pk)
+    try:
+        cliente =  Cliente.objects.get(user=obj)
+        if cliente != None:
+            a = 0
+        else:
+            a = 1
+    except ObjectDoesNotExist:
+        a = 1
+
+
     if request.method == 'GET':
-    	form = ClienteForm(instance=obj)
-    	context = {'form': form,'pet': pet}
+    	user_form = UserEditForm(instance=obj)
+    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=a, can_delete=False)
+    	form_cliente = form_cliente_factory(instance=obj)
+    	context = {
+    		'user_form': user_form,
+    		'profile_form': form_cliente,
+    		'cliente': user,
+    		
+    	}
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
-    	form = ClienteForm(request.POST, request.FILES, instance=obj)
-    	if form.is_valid():
-    		form.save()
-    		return HttpResponseRedirect(reverse('contas:cliente_list'))
+    	user_form = UserEditForm(request.POST,instance=obj)
+    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm)
+    	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
+    	if user_form.is_valid() and form_cliente.is_valid():
+    		edit_user = user_form.save()
+    		form_cliente.instance = edit_user
+    		form_cliente.save()
+    		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
     	else:
-    		context = {'form': form, 'pet': pet,}
-    		return render(request, template_name, context=context)
+    		context = {
+    			'user_form': user_form,
+    			'profile_form': form_cliente,
+    			'cliente': user,
+    			
+    		}
+    		return render(request,  template_name, context=context)
 #Apagar Cliente   
 class cliente_delete(DeleteView):
 	template_name = 'clientes/cliente_delete.html'
-	queryset = Cliente.objects.all()
+	queryset = User.objects.all()
 	success_url = reverse_lazy('contas:cliente_list')
 
 # Add Funcionário
@@ -293,6 +322,7 @@ def user_new(request):
 
 			user = authenticate(username=new_user.username, password=request.POST['password'])
 			if user is not None:
+				login(request, user)
 				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
 			else:
 				return 'Deu erro!'

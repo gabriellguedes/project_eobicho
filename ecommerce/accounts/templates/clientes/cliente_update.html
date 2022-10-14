@@ -12,10 +12,17 @@
 		<form method="POST" action=".">
 			{% csrf_token %}
 
-			 <p>{{form.nome|bootstrap}}</p>
-			 <p>{{form.cpf|bootstrap}}</p>
-			 <p>{{form.telefone|bootstrap}}</p>
-			 <p>{{form.email|bootstrap}}</p>
+			{% for item in user_form %}
+				<div class="">
+					{{item|bootstrap}}
+				</div>	
+			{% endfor %}
+			{{profile_form.management_form}}
+			{% for fields in profile_form %}
+				<div class="">
+					{{fields|bootstrap}}
+				</div>	
+			{% endfor %} 
 			
 			<button class="btn btn-info" type="submit">Atualizar</button>
 			<button class="btn btn-danger" onclick="location.href='{% url 'contas:cliente_list'%}'">Cancelar</button>

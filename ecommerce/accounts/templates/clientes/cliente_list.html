@@ -33,16 +33,16 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	 {% for item in lista %}
+		  	 {% for item in users %}
 			    <tr>
 			   	  <th scope="row">{{item.pk}}</th>
 			      
 			      <td class="">
 			      	<a href="{% url 'contas:cliente_detail' pk=item.id %}">
-			      		{{ item.user.first_name}}
+			      		{{ item.first_name}}
 			  		</a>
 			  	  </td>
-			      <td class="text-uppercase">{{item.cpf}}</td>
+			      <td class="text-uppercase"></td>
 			      <td>
 			      	<div class="text-center">
 			      		<a class="btn btn-primary mr-2" href="{% url 'contas:cliente_detail' pk=item.id %}">
