@@ -8,7 +8,11 @@ from ecommerce.accounts.forms import ClienteForm
 
 
 def login(request):
-	return HttpResponseRedirect(reverse('contas:login'))
+	if request.user.is_authenticated:
+		user = request.user
+		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': user.id }))
+	else:
+		return HttpResponseRedirect(reverse('contas:login'))
 
 def photo_user(request):
 	template_name = 'includes/user_block.html'

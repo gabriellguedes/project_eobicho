@@ -30,7 +30,7 @@
           {% if request.user.is_authenticated %}
           {% else %}
             <div class="row aligns-items-center pt-2 block-none">
-              <a href="{% url 'pet:pet_list' %}">
+              <a href="{% url 'core:home' %}">
                 <img class="block-none" alt="logo" src="{% static 'img/logo.png'%}">
               </a>
             </div>  
@@ -41,7 +41,7 @@
           </div>
 
           <div id="logo_responsive" class="col-md-6">
-              <a href="{% url 'pet:pet_list' %}">
+              <a href="{% url 'core:home' %}">
                 <img class="m-auto py-4" alt="logo" src="{% static 'img/logo.png'%}">
               </a>
             </div>
