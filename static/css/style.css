@@ -200,7 +200,7 @@ main{
 		max-width: 100%;
 	}
 	.block-none{
-		display: none;
+		display: none !important;
 	}
 	
 }
@@ -223,6 +223,6 @@ main{
 		align-content: center;
 	}
 	.block-none{
-		display: none;
+		display: none !important;
 	}
 }
