@@ -3,7 +3,13 @@
   <div class="d-flex justify-content-end py-3 mr-4" id="login-section">
     <div class="col-sm-2 mt-2">
       <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
-      <label class="text-center font-weight-bold text-uppercase w-100">{{cliente.user.first_name}}</label>
+      <label class="text-center font-weight-bold text-uppercase w-100">
+        {% if cliente.user.first_name != None %}
+          {{ cliente.user.first_name}}
+        {% else %}
+          {{user.first_name}}
+        {% endif %}
+      </label>
       
     </div> 
     
@@ -14,7 +20,11 @@
         <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
       {% endif %}
       <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
+        {% if cliente.cpf != None %}
+          <a class="dropdown-item" href="{% url 'contas:edit_profile'%}">Editar Perfil</a>
+        {% else %}
+          <a class="dropdown-item" href="{% url 'contas:cliente_new'%}">Editar Perfil</a>
+        {% endif %}
         <a class="dropdown-item" href="#">Alterar Senha</a>
         <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
         

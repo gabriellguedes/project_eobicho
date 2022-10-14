@@ -1,10 +1,11 @@
 from django.shortcuts import render, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from ecommerce.accounts.models import Cliente
-from ecommerce.accounts.forms import ClienteForm
+from ecommerce.accounts.forms import ClienteForm, UserRegistrationForm
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm, PesoForm, RacaForm, EspecieForm
@@ -55,14 +56,14 @@ def pet_add(request):
 #Cadastro Pet feito pelo cliente 
 def cliente_pet_add(request, pk):
     template_name = 'pet/cliente_pet_add.html'
-    obj = Cliente.objects.get(id=pk)
+    obj = User.objects.get(id=pk)
     especie = Especie.objects.all().order_by('especie')
     raca = []
 
     if request.method == 'GET':
-        form = ClienteForm()
+        form = UserRegistrationForm()
 
-        form_pet_factory = inlineformset_factory(Cliente, Pet, form=PetForm, extra=1)
+        form_pet_factory = inlineformset_factory(User, Pet, form=PetForm, extra=1)
         form_pet = form_pet_factory()
 
         context = {
@@ -74,13 +75,14 @@ def cliente_pet_add(request, pk):
         return render(request, template_name, context=context)
 
     elif request.method == 'POST':
-        form = ClienteForm(request.POST)
-        form_pet_factory = inlineformset_factory(Cliente, Pet, form=PetForm)
+        form = UserRegistrationForm(request.POST)
+        form_pet_factory = inlineformset_factory(User, Pet, form=PetForm)
         form_pet = form_pet_factory(request.POST, request.FILES)
                
         if form_pet.is_valid():
             form_pet.instance = obj
             form_pet.save()
+
             return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
         else:
             context = {

@@ -22,5 +22,5 @@ urlpatterns = [
     path('accounts/register/', views.cliente_add, name='cliente_add'),
     path('new_cliente/', views.cliente_new, name='cliente_new'),
     path('accounts/edit/', views.edit, name='edit_profile'), 
-    path('teste/', views.teste, name='teste'),  
+    path('new_user/', views.user_new, name='new_user'),  
 ] 

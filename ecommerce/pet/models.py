@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 from ecommerce.accounts.models import Cliente
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.pet.tuplas import Tuplas
@@ -33,7 +35,7 @@ class Raca(models.Model):
 
 class Pet(models.Model):
 	photo = models.ImageField('Foto do Pet', upload_to=upload_image_formater, blank=True, null=True)
-	tutor = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
+	tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 	nome = models.CharField('Nome',max_length=150)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
 	pelagem = models.CharField('Pelagem',max_length=150, choices=t.PELAGEM_CHOICES)

@@ -18,7 +18,12 @@
 <div class="tab-content d-flex justify-content-end" id="myTabContent">
 	<!-- Histórico -->	
 	<section class="col-md-6 tab-pane fade show active " id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-   		{% include 'site/block-cadastro.html' %}
+		{% if msg %}
+        <div class="{{class}}">
+            {{ msg }}
+        </div>
+    {% endif %}
+   		{% include 'site/block_cadastro.html' %}
 	</section>
 	<section class="tab-pane fade col-md-6" id="login" role="tabpanel" aria-labelledby="login-tab">
 		{% include 'site/block-login.html' %}
