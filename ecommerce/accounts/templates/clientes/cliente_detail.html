@@ -4,6 +4,14 @@
 {% load widget_tweaks %}
 {% block content %}
 <div class="container py-4">
+	{% if cliente.cpf != None %}
+	{% else %}
+		<div>
+			<p class="alert alert-warning"> 
+				Perfil Incompleto, <a href="{% url 'contas:cliente_update' pk=user.id %}">clique aqui</a> para adicionar as informções que faltam!
+			</p>
+		</div>
+	{% endif %}
 	<section class="mb-3">
 		<div class="row py-3">
 			<div class="col-md-6 mb-3" id="user_responsive_block">
