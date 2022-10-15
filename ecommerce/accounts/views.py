@@ -19,6 +19,8 @@ def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
 	if request.user.is_authenticated:
 		user = request.user
+	else:
+		user = ''
 
 	obj_users= User.objects.all()
 
