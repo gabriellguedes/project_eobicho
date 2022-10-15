@@ -70,7 +70,10 @@ def cliente_detail_admin(request, pk):
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = request.user
-	cliente = Cliente.objects.get(user=user)
+	try:
+		cliente = Cliente.objects.get(user=user)
+	except ObjectDoesNotExist:
+		cliente =''
 
 	pet = Pet.objects.filter(tutor=user)
 	pet_last = pet.last()
