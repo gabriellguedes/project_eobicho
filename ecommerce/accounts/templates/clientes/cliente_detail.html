@@ -3,7 +3,16 @@
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
+{% if perms.admin.can_add_pet %}
+<div>
+	<p>Tem permissão </p>
+	{% if perms.admin.can_add_pet %}
+		Tem permisão de add pet
+	{% endif%}
+</div>
+{% endif %}
 <div class="container py-4">
+
 	{% if cliente.cpf != None %}
 	{% else %}
 		<div>

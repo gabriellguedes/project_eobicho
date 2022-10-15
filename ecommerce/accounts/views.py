@@ -342,7 +342,7 @@ def user_new(request):
 			new_user.set_password(form.cleaned_data['password'])
 			new_user.username = new_user.email
 			new_user.save()
-
+			user.groups.add(cliente_group)
 			user = authenticate(username=new_user.username, password=request.POST['password'])
 			if user is not None:
 				login(request, user)

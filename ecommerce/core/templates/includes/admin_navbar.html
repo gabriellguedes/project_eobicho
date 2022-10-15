@@ -1,5 +1,5 @@
 {% load static %}
-
+{% if perms.admin %}
 <nav class="col-lg-2 bg-dark block-none" id="navbarTogglerDemo01">
      <ul class="navbar-nav flex-column pl-3 mb-3">
           <li>
@@ -8,7 +8,7 @@
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'contas:funcionario_detail' pk=1 %}">
+            <a class="nav-link" href="{% url 'contas:cliente_detail' pk=user.id %}">
               <span class="text-white font-weight-bold">
                 <i class="fa-solid fa-house-chimney text-info"></i>
                 Home
@@ -86,3 +86,4 @@
           </li>
         </ul>
   </nav> 
+{% endif %}
