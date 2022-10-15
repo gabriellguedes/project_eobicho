@@ -28,7 +28,7 @@ def cliente_list(request):
 	parametro_limit = request.GET.get('limit', '5')
 
 	if not (parametro_limit.isdigit() and int(parametro_limit)>0):
-		parametro_lim
+		parametro_limit = '10'
 
 	clientes = User.objects.get_queryset().order_by('id')
 	clientes_paginator = Paginator(clientes, parametro_limit)
