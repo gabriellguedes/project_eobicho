@@ -145,8 +145,8 @@ STATICFILES_DIRS =(os.path.join(BASE_DIR, 'static')),
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = 'contas:cliente_list'
-LOGIN_REDIRECT_URL = 'contas:cliente_list'
+LOGIN_URL = 'core:home'
+LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 
