@@ -13,7 +13,9 @@ from ecommerce.pet.models import Pet
 from .models import Cliente, Funcionario
 from .forms import ClienteForm, FuncionarioForm, LoginForm, UserRegistrationForm, UserEditForm
 from django.contrib.auth.decorators import login_required, permission_required
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rolepermissions.roles import assign_role
+from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 
 
 # Listar Cliente
@@ -134,7 +136,8 @@ def cliente_update(request, pk):
     		}
     		return render(request,  template_name, context=context)
 #Apagar Cliente   
-class cliente_delete(DeleteView):
+class cliente_delete(LoginRequiredMixin, DeleteView):
+	login_url= reverse_lazy('core:home')
 	template_name = 'clientes/cliente_delete.html'
 	queryset = User.objects.all()
 	success_url = reverse_lazy('contas:cliente_list')
@@ -213,7 +216,8 @@ def funcionario_update(request, pk):
 			}
 			return render(request, template_name, context=context)
 # Deletar Funcionário
-class funcionario_delete(DeleteView):
+class funcionario_delete(LoginRequiredMixin, DeleteView):
+	login_url= reverse_lazy('core:home')
 	template_name = 'funcionarios/funcionario_delete.html'
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
@@ -346,7 +350,7 @@ def user_new(request):
 			new_user.set_password(form.cleaned_data['password'])
 			new_user.username = new_user.email
 			new_user.save()
-			user.groups.add(cliente_group)
+			assign_role(new_user, 'cliente')
 			user = authenticate(username=new_user.username, password=request.POST['password'])
 			if user is not None:
 				login(request, user)

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'fontawesomefree',
     'bootstrapform',
+    'rolepermissions',
     # Meus Apps 
     'ecommerce.accounts',
     'ecommerce.core',
@@ -148,6 +149,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = 'core:home'
 LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+ROLEPERMISSIONS_MODULE = "ecommerce.roles"
 
 
 # Default primary key field type

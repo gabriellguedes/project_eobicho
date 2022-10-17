@@ -12,10 +12,11 @@ from .forms import PetForm, PesoForm, RacaForm, EspecieForm
 from .models import Pet, Peso, Raca, Especie
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from PIL import Image
 
 @login_required
-
 def pet_add(request):
     template_name = 'pet/pet_add.html'
     especie = Especie.objects.all().order_by('especie')
@@ -39,8 +40,7 @@ def pet_add(request):
             return render(request, template_name, context=context)
 
 #Cadastro Pet feito pelo cliente
-@login_required 
-@permission_required('ecommerce.pet_can_add')
+@login_required
 def cliente_pet_add(request, pk):
     template_name = 'pet/cliente_pet_add.html'
     obj = request.user

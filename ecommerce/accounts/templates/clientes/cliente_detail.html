@@ -2,15 +2,10 @@
 {% load static %}
 {% load bootstrap %}
 {% load widget_tweaks %}
+{% load permission_tags %}
 {% block content %}
-{% if perms.ecommerce.can_view_cliente %}
-<div>
-	<p>Tem permissão de visualizar </p>
-	{% if perms.admin.can_add_pet %}
-		Tem permisão de add pet
-	{% endif%}
-</div>
-{% endif %}
+
+{% if user|has_role:'cliente' %}
 <div class="container py-4">
 
 	{% if cliente.cpf != None %}
@@ -75,8 +70,13 @@
 			</div>
 		</div>
 		{% else %}
-			<p class="mt-3 alert alert-warning">Ainda não existe nenhum pet cadastrado!</p>
+			<p class="mt-3 alert alert-info">Ainda não existe nenhum pet cadastrado!</p>
 		{% endif %}	
 	</section>
 </div>	
+{% else %}
+<div class="my-4">
+	<p class="alert alert-danger text-center"><i class="fa-solid fa-triangle-exclamation"></i> Você não tem permissão</p>
+</div>
+{% endif %}
 {% endblock %}
