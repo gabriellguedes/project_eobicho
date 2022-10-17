@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import inlineformset_factory
@@ -19,6 +18,7 @@ from rolepermissions.decorators import has_role_decorator, has_permission_decora
 
 
 # Listar Cliente
+@login_required
 def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
 	if request.user.is_authenticated:
@@ -56,6 +56,7 @@ def cliente_list(request):
 	}
 	return render(request, template_name, context=context)
 # Detail CLiente acesso pelo admin
+@login_required
 def cliente_detail_admin(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
@@ -71,6 +72,7 @@ def cliente_detail_admin(request, pk):
 	}
 	return render(request, template_name, context=context)
 # Detail Cliente acesso pelo cliente
+@login_required
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = request.user
@@ -143,6 +145,7 @@ class cliente_delete(LoginRequiredMixin, DeleteView):
 	success_url = reverse_lazy('contas:cliente_list')
 
 # Add Funcionário
+@login_required
 def funcionario_add(request):
 	template_name = 'funcionarios/funcionario_add.html'
 	if request.method == 'GET':
@@ -162,6 +165,7 @@ def funcionario_add(request):
 			}	
 			return render(request, template_name, context=context)
 #Detail funcionario
+@login_required
 def funcionario_detail(request, pk):
 	template_name = 'funcionarios/funcionario_detail.html'
 	obj_funcionario = Funcionario.objects.get(id=pk)
@@ -169,6 +173,7 @@ def funcionario_detail(request, pk):
 	context = { 'funcionario': obj_funcionario,}
 	return render(request, template_name, context=context)
 # Lista de todos os funcionários
+@login_required
 def funcionario_list(request):
 	template_name = 'funcionarios/funcionario_list.html'
 	parametro_page = request.GET.get('page', '1')
@@ -196,6 +201,7 @@ def funcionario_list(request):
 	}
 	return render(request, template_name, context=context)
 # Atualizar Funcionário
+@login_required
 def funcionario_update(request, pk):
 	template_name = 'funcionarios/funcionario_update.html'
 	objeto = Funcionario.objects.get(id=pk)
@@ -222,7 +228,8 @@ class funcionario_delete(LoginRequiredMixin, DeleteView):
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
 
-# Registro Cliente 
+# Registro Cliente
+@login_required 
 def cliente_add(request):
 	template_name = 'accounts/register.html'
 	if request.method == 'GET':
@@ -265,6 +272,7 @@ def cliente_add(request):
 			return render(request, 'site/block-cadastro.html', context=context)	
 
 # Novo cliente
+@login_required
 def cliente_new(request):
 	template_name = 'accounts/edit.html'
 	if request.user.is_authenticated:
@@ -301,6 +309,7 @@ def cliente_new(request):
 			}
 			return render(request,  template_name, context=context)
 # Editar Usuário
+@login_required
 def edit(request):
 	template_name = 'accounts/edit.html'
 	if request.user.is_authenticated:
