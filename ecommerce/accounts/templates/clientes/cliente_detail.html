@@ -3,9 +3,9 @@
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
-{% if perms.admin.can_add_pet %}
+{% if perms.ecommerce.can_view_cliente %}
 <div>
-	<p>Tem permissão </p>
+	<p>Tem permissão de visualizar </p>
 	{% if perms.admin.can_add_pet %}
 		Tem permisão de add pet
 	{% endif%}

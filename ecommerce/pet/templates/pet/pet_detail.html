@@ -7,6 +7,9 @@
 {% block content %}
 
 <section class="container py-4">
+	<div class="my-3">
+		<a href="{% url 'contas:cliente_detail' pk=user.id %}" class="text-info font-weight-bold"><i class="fa-solid fa-user"></i> Ir para tutor</a>
+	</div>
 	<div class="mb-3">
 		<button class="btn btn-outline-warning">
 			<i class="fa-solid fa-calendar"></i> Agendar Banho/Tosa

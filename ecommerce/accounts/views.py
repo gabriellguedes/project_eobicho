@@ -12,6 +12,8 @@ from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
 from .models import Cliente, Funcionario
 from .forms import ClienteForm, FuncionarioForm, LoginForm, UserRegistrationForm, UserEditForm
+from django.contrib.auth.decorators import login_required, permission_required
+
 
 
 # Listar Cliente
@@ -85,6 +87,8 @@ def cliente_detail(request, pk):
 	}
 	return render(request, template_name, context=context)
 # Atualização Cliente
+@login_required
+@permission_required('ecommerce.can_update_cliente', login_url='core:home')
 def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
     if request.user.is_authenticated:

@@ -8,7 +8,7 @@ urlpatterns = [
     # Cliente 
     path('cliente_list/', views.cliente_list, name='cliente_list'),
     path('cliente_detail/<int:pk>/', views.cliente_detail, name='cliente_detail'),    
-    path('cliente_detail/<int:pk>/', views.cliente_detail_admin, name='cliente_detail_admin'),
+    path('cliente_detail_view/<int:pk>/', views.cliente_detail_admin, name='cliente_detail_admin'),
     path('cliente_update/<int:pk>/', views.cliente_update, name='cliente_update'),
     path('cliente_delete/<int:pk>/', views.cliente_delete.as_view(), name='cliente_delete'),
    

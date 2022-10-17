@@ -11,27 +11,11 @@ from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm, PesoForm, RacaForm, EspecieForm
 from .models import Pet, Peso, Raca, Especie
 from django.views.generic import UpdateView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from PIL import Image
 
-# Cadastrar Pet - Feito por funcionário
-"""def photo_add(request):
-    template_name = 'pet/pet_test.html'
-    if request.method == 'GET':
-        form = PhotoForm()
-        context = {
-            'form': form
-        }
-        return render(request, template_name, context=context)
-    elif request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('pet:pet_list'))
-        else:
-            context = {'form': form}
-            return render(request, template_name, context=context)"""
 @login_required
+
 def pet_add(request):
     template_name = 'pet/pet_add.html'
     especie = Especie.objects.all().order_by('especie')
@@ -56,6 +40,7 @@ def pet_add(request):
 
 #Cadastro Pet feito pelo cliente
 @login_required 
+@permission_required('ecommerce.pet_can_add')
 def cliente_pet_add(request, pk):
     template_name = 'pet/cliente_pet_add.html'
     obj = request.user
