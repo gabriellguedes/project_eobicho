@@ -30,16 +30,16 @@
         <div class="container">
           
           <div class="row block-none">
-            {% if request.user.is_authenticated %}
+          {% if request.user.is_authenticated %}
             {% if user|has_role:'cliente' %}
-              <div class="row w-50 aligns-items-center pt-2 block-none">
+              <div class="row cliente-view w-50 pt-2 block-none">
                 <a href="{% url 'core:home' %}">
                   <img class="ml-5 block-none" alt="logo" src="{% static 'img/logo.png'%}">
                 </a>
               </div>
             {% endif %}
           {% else %}
-            <div class="row aligns-items-center pt-2 block-none">
+            <div class="row teste-da-imagem pt-2 block-none">
               <a href="{% url 'core:home' %}">
                 <img class="ml-5 block-none" alt="logo" src="{% static 'img/logo.png'%}">
               </a>
@@ -55,7 +55,7 @@
             </div>
         </div>
         
-          <div id="nav_reponsive">
+          <div id="nav_responsive">
             {% include 'includes/navbar.html' %}
           </div>
      

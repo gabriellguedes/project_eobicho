@@ -79,11 +79,11 @@ body{
 		max-width: 90%;
 		display: inline-block;
 	}
-	#
+	
 /****************************
  1.2 - Nav
 *****************************/
-#nav_reponsive{
+#nav_responsive{
 	display: none;
 }
 .wrap-nav{
@@ -225,7 +225,7 @@ main{
 	#logo_responsive{
 		display: block;
 	}
-	#nav_reponsive{
+	#nav_responsive{
 		display: block;
 	}
 	#user_responsive_block{
@@ -276,7 +276,7 @@ main{
 	.logo{
 		align-content: center;
 	}
-	#nav_reponsive{
+	#nav_responsive{
 		display: block;
 	}
 	#user_responsive_block{

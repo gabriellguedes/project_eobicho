@@ -16,8 +16,35 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 
+# Novo Cliente(Cadastro Feito pelo próprio cliente)
+def user_new(request):
+	template_name='accounts/register.html'
+	if request.method == 'GET':
+		form = UserRegistrationForm()
+		context = {'form': form}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		form = UserRegistrationForm(request.POST)
+		if form.is_valid():
+			new_user = form.save(commit=False)
+			new_user.set_password(form.cleaned_data['password'])
+			new_user.username = new_user.email
+			new_user.save()
+			assign_role(new_user, 'cliente')
+			user = authenticate(username=new_user.username, password=request.POST['password'])
+			if user is not None:
+				login(request, user)
+				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
+			else:
+				return 'Deu erro!'
+			
+			
+			
 
-# Listar Cliente
+		else:
+			context = {'form': form}
+			return render(request, template_name, context=context)
+# Listar Clientes
 @login_required
 def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
@@ -348,30 +375,4 @@ def edit(request):
 			}
 			return render(request,  template_name, context=context)
 
-def user_new(request):
-	template_name='accounts/register.html'
-	if request.method == 'GET':
-		form = UserRegistrationForm()
-		context = {'form': form}
-		return render(request, template_name, context=context)
-	elif request.method == 'POST':
-		form = UserRegistrationForm(request.POST)
-		if form.is_valid():
-			new_user = form.save(commit=False)
-			new_user.set_password(form.cleaned_data['password'])
-			new_user.username = new_user.email
-			new_user.save()
-			assign_role(new_user, 'cliente')
-			user = authenticate(username=new_user.username, password=request.POST['password'])
-			if user is not None:
-				login(request, user)
-				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
-			else:
-				return 'Deu erro!'
-			
-			
-			
 
-		else:
-			context = {'form': form}
-			return render(request, template_name, context=context)

@@ -1,5 +1,8 @@
 {% load bootstrap %}
+{% load permission_tags %}
 <div class="row my-3">
+
+{% if user|can:'add_peso'%}
 	<div class="col-md-4 mb-4">
 		<div class="border box-peso">
 			<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
@@ -19,6 +22,7 @@
 			</form>	
 		</div>
 	</div>
+{% endif %}
 	<div class="col-md-6">
 		<div class="">
 			<h4 class="text-secondary font-weight-bold ml-3 mt-3">
