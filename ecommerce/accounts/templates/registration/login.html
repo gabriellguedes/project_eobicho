@@ -1,33 +1,24 @@
 {% extends "core/base.html" %}
-
-{% block title %}É o Bicho{% endblock %}
+{% load static %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-end">
-	<ul class="nav nav-tabs mt-3 col-md-6" id="myTab" role="tablist">
-		<li class="nav-item">
-	   		 <a class="nav-link active font-weight-bold" id="cadastrar-tab" data-toggle="tab" href="#cadastrar" role="tab" aria-controls="cadastrar" aria-selected="true">Cadastre-se</a>
-	   </li>
-		<li class="nav-item">
-	   		 <a class="nav-link font-weight-bold" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Entrar</a>
-	   </li>
-			
-	</ul>
+<div class="row max-100">
+	<div class="w-50">
+		<img class="mt-3" src="{% static 'img/login_img.svg' %}">
+	</div>
+	<div class="w -50 mt-3 p-3">
+		<section class="w-100 border p-4" id="box_login" >
+			<h3 class="text-center text-secondary pt-5 font-weight-bold border-bottom">Entre na <span class="text-info">É o Bicho</span></h3>
+			<p class="text-secondary text-center">Entre com seu email cadastrado</p>
+			<div class="mx-3 my-3">
+				{% include 'site/form_login.html' %}
+			</div>	
+			<p>
+				<small>Não tem uma conta?</small> <a class="text-info" href="#">Criar conta</a>
+			</p>
+
+		</section>
+	</div>	
 </div>
-
-<div class="tab-content d-flex justify-content-end" id="myTabContent">
-	<!-- Histórico -->	
-	<section class="col-md-6 tab-pane fade show active " id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-		{% if msg %}
-        <div class="{{class}}">
-            {{ msg }}
-        </div>
-    {% endif %}
-   		{% include 'site/block_cadastro.html' %}
-	</section>
-	<section class="tab-pane fade col-md-6" id="login" role="tabpanel" aria-labelledby="login-tab">
-		{% include 'site/block-login.html' %}
-	</section>
-</div>	
-
 {% endblock %}

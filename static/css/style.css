@@ -11,6 +11,9 @@ span.required:after{
 	content: "*";
 	color: red;
 }
+.max-100{
+	max-width: 100% !important;
+}
 /*
 body{
 	background: url('../img/bg.png') transparent;
@@ -41,8 +44,15 @@ body{
  1.1 - Login Seccion
 *****************************/
 
-#login-section{
-  
+#box_login{
+ box-shadow: 1px 1px 15px grey; !important;
+ border-radius: 10px !important;
+ background-color: white;
+ min-height: 500px;
+ min-width: 485px;
+ max-width: 485px;
+ position: relative;
+ top: -90px;
 }
 
 	.welcome{
@@ -68,6 +78,7 @@ body{
 		max-width: 90%;
 		display: inline-block;
 	}
+	#
 /****************************
  1.2 - Nav
 *****************************/
@@ -100,6 +111,29 @@ body{
 .wrap-nav li a{
 	color: white;
 }
+/****************************
+ 1.3 - Cadastro
+*****************************/
+#box_cadastro{
+ box-shadow: 1px 1px 15px grey; !important;
+ border-radius: 10px !important;
+ background-color: white;
+ min-height: 500px;
+ min-width: 413px;
+ max-width: 413px;
+ position: relative;
+ top: -90px;
+ left: 85px;
+}
+
+#form_cadastro div input{
+	display: inline-block;
+	width: 90%;
+}
+#email_market{
+	border: 2px solid greenyellow;
+}
+
 /********************************************************************
  2.0 - Main
 ********************************************************************/

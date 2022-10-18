@@ -1,27 +1,28 @@
 {% extends 'core/base.html' %}
-{% load bootstrap %}
+{% load static %}
 {% block content %}
 
-<h4 class="alert alert-info"><i class="fa-solid fa-user text-info"></i> Criar um novo Cliente</h4>
-<form action="." method="POST" class="container" enctype="multipart/form-data">
-    <div class="row">
-        {% for item in form_user %}
-            <div class="col-md-4">              
-                {{ item|bootstrap }}
-            </div>
-        {% endfor %}
-        {{ form_cliente.management_form}}
-        {% for fields in form_cliente %}
-            <div class="col-md-4">
-                {{ fields|bootstrap }}
-            </div>
-        {% endfor %}
+<div class="row max-100">
+    <div class="w-50 d-flex align-items-center block-none">
+        <img src="{% static 'img/cadastro_img.svg' %}">
     </div>
-    {% csrf_token %}
-    <button class="btn btn-primary" type="submit">Criar Conta</button>
-    <button class="btn btn-danger" type="button" onclick="location.href='{% url 'contas:cliente_list' %}'">Cancelar</button>
-</form>
+    <div class="w -50 mt-3 p-3">
+        <section class="w-100 border ml-3 p-4" id="box_cadastro" >
+            <h3 class="text-center text-secondary font-weight-bold border-bottom">Crie sua conta</h3>
+            <p class="text-secondary text-center">Bem vindo (a) a <span class="text-info">É o Bicho</span>. Vamos criar sua conta gratuita!</p>
+            <div class="mx-3 my-3">
+                {% include 'site/form_cadastro.html' %}
+            </div> 
+            <p class="text-center px-4">
+                <small>Para saber como tratamos os seus dados pessoais, acesse o nosso <a class="text-info text-center" href="#">Aviso de Privacidade</a>.</small>
+            </p> 
+            <p class="text-center">
+                <small class="d-block px-4">Já tem uma conta?<a class="text-info" href="{% url 'contas:login' %}"> clique para Entrar</a></small>
+            </p>     
+           
 
-
+        </section>
+    </div>  
+</div>
 
 {% endblock %}

@@ -60,8 +60,10 @@ def cliente_list(request):
 def cliente_detail_admin(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
-	cliente = Cliente.objects.get(user=user)
-
+	try:
+		cliente = Cliente.objects.get(user=user)
+	except ObjectDoesNotExist:
+		cliente = ''	
 	pet = Pet.objects.filter(tutor=user.id)
 	pet_last = pet.last()
 
@@ -92,7 +94,7 @@ def cliente_detail(request, pk):
 	return render(request, template_name, context=context)
 # Atualização Cliente
 @login_required
-@permission_required('ecommerce.can_update_cliente', login_url='core:home')
+@has_permission_decorator('update_user_cliente')
 def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
     if request.user.is_authenticated:
@@ -347,7 +349,7 @@ def edit(request):
 			return render(request,  template_name, context=context)
 
 def user_new(request):
-	template_name='site/block_cadastro.html'
+	template_name='accounts/register.html'
 	if request.method == 'GET':
 		form = UserRegistrationForm()
 		context = {'form': form}

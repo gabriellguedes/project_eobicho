@@ -27,8 +27,8 @@
 		  <thead>
 		    <tr>
 		      <th class="text-info" scope="col">#</th>
-		      <th class="" scope="col"><i class="fa-solid fa-user text-info"></i> Nome</th>
-		      <th class="" scope="col"><i class="fa-regular fa-circle text-info"></i> CPF</th>
+		      <th class="text-center" scope="col"><i class="fa-solid fa-user text-info"></i> Nome</th>
+		      <th class="text-center" scope="col"><i class="fa-solid fa-envelope text-info"></i> Email</th>
 		      <th class="text-center" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
 		    </tr>
 		  </thead>
@@ -37,12 +37,12 @@
 			    <tr>
 			   	  <th scope="row">{{item.pk}}</th>
 			      
-			      <td class="">
+			      <td class="text-center">
 			      	<a href="{% url 'contas:cliente_detail' pk=item.id %}">
 			      		{{ item.first_name}}
 			  		</a>
 			  	  </td>
-			      <td class="text-uppercase"></td>
+			      <td class="text-center">{{ item.email }}</td>
 			      <td>
 			      	<div class="text-center">
 			      		<a class="btn btn-primary mr-2" href="{% url 'contas:cliente_detail_admin' pk=item.id %}">
