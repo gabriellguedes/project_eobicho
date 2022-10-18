@@ -3,19 +3,21 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="row max-100">
+<div class="row max-100 m-0">
 	<div class="w-50">
 		<img class="mt-3 block-none" src="{% static 'img/login_img.svg' %}">
 	</div>
 	<div class="mt-3 p-3">
 		<section class="w-100 border ml-3 p-4" id="box_login" >
-			<h3 class="text-center text-secondary pt-5 font-weight-bold border-bottom">Entre na <span class="text-info">É o Bicho</span></h3>
-			<p class="text-secondary text-center">Entre com seu email cadastrado</p>
+			<div class="mb-3">
+				<h3 class="text-center text-secondary font-weight-bold border-bottom pb-3">Entre na <span class="text-info">É o Bicho</span></h3>
+				<p class="text-secondary text-center mt-3">Entre com seu email cadastrado</p>
+			</div>	
 			<div class="mx-3 my-3">
 				{% include 'site/form_login.html' %}
 			</div>	
-			<p>
-				<small>Não tem uma conta?</small> <a class="text-info" href="#">Criar conta</a>
+			<p class="mt-3">
+				<small>Ainda não tem uma conta?</small> <a class="text-info" href="#">Criar conta</a>
 			</p>
 
 		</section>

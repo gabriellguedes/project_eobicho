@@ -49,10 +49,11 @@ body{
  border-radius: 10px !important;
  background-color: white;
  min-height: 500px;
- min-width: 485px;
- max-width: 485px;
+ min-width: 413px;
+ max-width: 413px;
  position: relative;
  top: -90px;
+ left: 75px;
 }
 
 	.welcome{
@@ -238,6 +239,7 @@ main{
     top: 0;
     border: none !important;
     box-shadow: none;
+    min-height: 0;
     min-width: 100% !important;
     max-width: 100% !important;
 	}
