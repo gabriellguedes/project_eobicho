@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from ecommerce.accounts.models import Cliente
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.pet.tuplas import Tuplas
 import uuid

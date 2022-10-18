@@ -44,6 +44,48 @@ def user_new(request):
 		else:
 			context = {'form': form}
 			return render(request, template_name, context=context)
+# Registro Cliente
+@login_required 
+def cliente_add(request):
+	template_name = 'accounts/register.html'
+	if request.method == 'GET':
+		user_form = UserRegistrationForm()
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory()
+		context = {
+			'form_user':user_form,
+			'form_cliente': form_cliente,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		user_form = UserRegistrationForm(request.POST)
+
+		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory(request.POST, request.FILES)
+		context ={}
+		
+		if user_form.is_valid() and form_cliente.is_valid():
+		# Create a new user object but avoid saving it yet
+			new_user = user_form.save()
+			# Set the chosen password
+			new_user.set_password(user_form.cleaned_data['password'])
+			new_user.username = new_user.email
+			# Save the User object
+			new_user.save()
+			# Create the user profile
+			form_cliente.instance = new_user
+			cliente = form_cliente.save()
+			obj = cliente[0]
+			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.id}))
+		
+		else:
+			context = {
+					'user_form': user_form,
+					'form_cliente': form_cliente,
+					'msg': 'Erro: Cliente não cadastrado',
+					'class': 'alert alert-danger',
+				}
+			return render(request, 'site/block-cadastro.html', context=context)	
 # Listar Clientes
 @login_required
 def cliente_list(request):
@@ -178,19 +220,41 @@ class cliente_delete(LoginRequiredMixin, DeleteView):
 def funcionario_add(request):
 	template_name = 'funcionarios/funcionario_add.html'
 	if request.method == 'GET':
-		form = FuncionarioForm()
+		user_form = UserRegistrationForm()
+		funcionario_factory_form = inlineformset_factory(User,Funcionario, form=FuncionarioForm, extra=1, can_delete=False)
+		funcionario_form = funcionario_factory_form()
+		
 		context = {
-			'form': form
+			'user_form': user_form,
+			'form': funcionario_form,
 		}	
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
-		form = FuncionarioForm(request.POST)
-		if form.is_valid():
-			form.save()
+		user_form = UserRegistrationForm(request.POST)
+		funcionario_factory_form = inlineformset_factory(User,Funcionario, form=FuncionarioForm, extra=1, can_delete=False)
+		funcionario_form = funcionario_factory_form(request.POST)
+		if user_form.is_valid() and funcionario_form.is_valid():
+			new_user = user_form.save()
+			# Set the chosen password
+			new_user.set_password(user_form.cleaned_data['password'])
+			new_user.username = new_user.email
+			# Save the User object
+			new_user.save()
+			if request.POST['funcionario_set-0-cargo'] == 'Gerente':
+				assign_role(new_user, 'gerente')
+			elif request.POST['funcionario_set-0-cargo'] == 'MedicoVet':
+				assign_role(new_user, 'medicovet')
+			elif request.POST['funcionario_set-0-cargo'] == 'Colaborador':
+				assign_role(new_user, 'colaborador')
+			else:
+				assign_role(new_user, 'cliente')	
+
+
 			return HttpResponseRedirect(reverse('contas:funcionario_list'))
 		else:		
 			context = {
-			'form': form
+			'form': form,
+			'user_form': user_form,
 			}	
 			return render(request, template_name, context=context)
 #Detail funcionario
@@ -214,7 +278,7 @@ def funcionario_list(request):
 	funcionarios = Cliente.objects.get_queryset().order_by('id')
 	funcionarios_paginator = Paginator(funcionarios, parametro_limit)
 
-	objeto = Funcionario.objects.all()
+	objeto = User.objects.all()
 
 	try:
 		page = funcionarios_paginator.page(parametro_page)
@@ -257,122 +321,7 @@ class funcionario_delete(LoginRequiredMixin, DeleteView):
 	queryset = Funcionario.objects.all()
 	success_url = reverse_lazy('contas:funcionario_list')
 
-# Registro Cliente
-@login_required 
-def cliente_add(request):
-	template_name = 'accounts/register.html'
-	if request.method == 'GET':
-		user_form = UserRegistrationForm()
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
-		form_cliente = form_cliente_factory()
-		context = {
-			'form_user':user_form,
-			'form_cliente': form_cliente,
-		}
-		return render(request, template_name, context=context)
-	elif request.method == 'POST':
-		user_form = UserRegistrationForm(request.POST)
-
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
-		form_cliente = form_cliente_factory(request.POST, request.FILES)
-		context ={}
-		
-		if user_form.is_valid() and form_cliente.is_valid():
-		# Create a new user object but avoid saving it yet
-			new_user = user_form.save()
-			# Set the chosen password
-			new_user.set_password(user_form.cleaned_data['password'])
-			new_user.username = new_user.email
-			# Save the User object
-			new_user.save()
-			# Create the user profile
-			form_cliente.instance = new_user
-			cliente = form_cliente.save()
-			obj = cliente[0]
-			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.id}))
-		
-		else:
-			context = {
-					'user_form': user_form,
-					'form_cliente': form_cliente,
-					'msg': 'Erro: Cliente não cadastrado',
-					'class': 'alert alert-danger',
-				}
-			return render(request, 'site/block-cadastro.html', context=context)	
-
-# Novo cliente
-@login_required
-def cliente_new(request):
-	template_name = 'accounts/edit.html'
-	if request.user.is_authenticated:
-		user = request.user
-
-	if request.method == 'GET':
-		user_form = UserEditForm(instance=request.user)
-
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
-		form_cliente = form_cliente_factory(instance=request.user)
-		context = {
-			'user_form': user_form,
-			'profile_form': form_cliente,
-			'cliente': user,
-		}
-		return render(request, template_name, context=context)
 
 
-	elif request.method == 'POST':
-		user_form = UserEditForm(request.POST,instance=request.user)
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm)
-		form_cliente = form_cliente_factory(request.POST, request.FILES, instance=request.user)
-		
-		if user_form.is_valid() and form_cliente.is_valid():
-			edit_user = user_form.save()
-			form_cliente.instance = edit_user
-			form_cliente.save()
-			return HttpResponseRedirect(reverse('contas:cliente_list'))
-		else:
-			context = {
-				'user_form': user_form,
-				'profile_form': form_cliente,
-				'cliente': user,
-			}
-			return render(request,  template_name, context=context)
-# Editar Usuário
-@login_required
-def edit(request):
-	template_name = 'accounts/edit.html'
-	if request.user.is_authenticated:
-		user = request.user
-
-	if request.method == 'GET':
-		user_form = UserEditForm(instance=request.user)
-
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=0, can_delete=False)
-		form_cliente = form_cliente_factory(instance=request.user)
-		context = {
-			'user_form': user_form,
-			'profile_form': form_cliente,
-			'cliente': user,
-		}
-		return render(request, template_name, context=context)
-
-
-	elif request.method == 'POST':
-		user_form = UserEditForm(request.POST,instance=request.user)
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm)
-		form_cliente = form_cliente_factory(request.POST, request.FILES, instance=request.user)
-		
-		if user_form.is_valid() and form_cliente.is_valid():
-			edit_user = user_form.save()
-			form_cliente.instance = edit_user
-			form_cliente.save()
-			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': user.id}))
-		else:
-			context = {
-				'user_form': user_form,
-				'profile_form': form_cliente,
-				'cliente': user,
-			}
-			return render(request,  template_name, context=context)
 
 

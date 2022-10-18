@@ -1,7 +1,10 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from ecommerce.pet.models import Tuplas
 import uuid
+
+t = Tuplas()
 
 def upload_image_formater(instance, filename):
 	return f'{str(uuid.uuid4())}-{filename}'
@@ -29,8 +32,8 @@ class Cliente(models.Model):
 
 class Funcionario(models.Model):
 	status = models.BooleanField(default=True)
-	nome = models.CharField('Nome', max_length=150)
-	email = models.EmailField('Email')
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+	cargo = models.CharField('Cargo', max_length=50,choices=t.CARGOS_CHOICES)
 	telefone = models.CharField('Telefone', max_length=16)
 	
 	class Meta:

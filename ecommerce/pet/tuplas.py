@@ -1,6 +1,12 @@
 
 class Tuplas():
 
+	CARGOS_CHOICES = (
+		('Gerente', 'Gerente'),
+		('MedicoVet', 'Médico Veterinário'),
+		('Colaborador', 'Colaborador'),
+		('Cliente', 'Cliente'),
+	)
 	SEXO_CHOICES = (
 		('Macho','Macho'),
 		('Fêmia', 'Fêmia'),

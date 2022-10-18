@@ -8,15 +8,24 @@
 		<i class="fa-solid fa-user text-info"></i> Cadastrar novo funcionário
 	</h3>
 	
-	<div class="col-md-4">
-		<form method="POST" action=".">
+	<div class="w-100">
+		<form class="row" method="POST" action=".">
 			 {% csrf_token %}
+			 {% for i in user_form %}
+			 	<div class="col-md-4">
+			 		<p>{{i|bootstrap}}</p>
+			 	</div>
+			 {% endfor%}
+			 {{form.management_form}}
 			{% for iten in form %}
-
-			 <p>{{iten|bootstrap}}</p>
+				<div class="col-md-4">
+			 		<p>{{iten|bootstrap}}</p>
+			 	</div>
 			{% endfor %}
-			<button class="btn btn-info" type="submit">Criar</button>
-			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'contas:funcionario_list'%}'">Cancelar</button>
+			<div class="col">
+				<button class="btn btn-info" type="submit">Criar</button>
+				<button class="btn btn-danger" type="button" onclick="location.href='{% url 'contas:funcionario_list'%}'">Cancelar</button>
+			</div>
 		</form>
 	</div>	
 </section>

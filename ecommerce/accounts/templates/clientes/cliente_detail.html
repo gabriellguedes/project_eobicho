@@ -5,7 +5,7 @@
 {% load permission_tags %}
 {% block content %}
 
-{% if user|has_role:'cliente' %}
+{% if user|can:'view_user_cliente' %}
 <div class="container py-4">
 
 	{% if cliente.cpf != None %}

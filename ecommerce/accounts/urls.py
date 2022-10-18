@@ -6,6 +6,9 @@ app_name = 'contas'
 
 urlpatterns = [
     # Cliente 
+
+    path('new_user/', views.user_new, name='new_user'),    
+    path('accounts/register/', views.cliente_add, name='cliente_add'), 
     path('cliente_list/', views.cliente_list, name='cliente_list'),
     path('cliente_detail/<int:pk>/', views.cliente_detail, name='cliente_detail'),    
     path('cliente_detail_view/<int:pk>/', views.cliente_detail_admin, name='cliente_detail_admin'),
@@ -19,9 +22,5 @@ urlpatterns = [
     path('funcionario_update/<int:pk>/', views.funcionario_update, name='funcionario_update'),
     path('funcionario_delete/<int:pk>/', views.funcionario_delete.as_view(), name='funcionario_delete'),
        
-    path('', include('django.contrib.auth.urls')), 
-    path('accounts/register/', views.cliente_add, name='cliente_add'),
-    path('new_cliente/', views.cliente_new, name='cliente_new'),
-    path('accounts/edit/', views.edit, name='edit_profile'), 
-    path('new_user/', views.user_new, name='new_user'),  
+    path('', include('django.contrib.auth.urls')),  
 ] 
