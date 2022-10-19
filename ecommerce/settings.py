@@ -75,36 +75,20 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pecsebe6ggq6mqdn',
-        'HOST': 'qvti2nukhfiig51b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        'USER': 'u7n4yx9a28wbh3vf',
-        'PASSWORD': 'i3px6db92nh8dgso',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'HOST': config('DB_HOST'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'PORT': config('DB_PORT'),
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=InnoDB'
         }
     }
 }
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sistema',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Chock@1001',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=InnoDB'
-        }
-    }
-}
-"""
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
