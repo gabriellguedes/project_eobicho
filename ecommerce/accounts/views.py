@@ -9,8 +9,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
-from .models import Cliente, Funcionario
-from .forms import ClienteForm, FuncionarioForm, LoginForm, UserRegistrationForm, UserEditForm
+from .models import Profile
+from .forms import ProfileForm, LoginForm, UserRegistrationForm, UserEditForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
@@ -50,7 +50,7 @@ def cliente_add(request):
 	template_name = 'accounts/register.html'
 	if request.method == 'GET':
 		user_form = UserRegistrationForm()
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
+		form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory()
 		context = {
 			'form_user':user_form,
@@ -60,7 +60,7 @@ def cliente_add(request):
 	elif request.method == 'POST':
 		user_form = UserRegistrationForm(request.POST)
 
-		form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=1, can_delete=False)
+		form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory(request.POST, request.FILES)
 		context ={}
 		
@@ -131,7 +131,7 @@ def cliente_detail_admin(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
 	try:
-		cliente = Cliente.objects.get(user=user)
+		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
 		cliente = ''	
 	pet = Pet.objects.filter(tutor=user.id)
@@ -149,7 +149,7 @@ def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = request.user
 	try:
-		cliente = Cliente.objects.get(user=user)
+		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
 		cliente =''
 
@@ -172,7 +172,7 @@ def cliente_update(request, pk):
 
     obj = User.objects.get(id=pk)
     try:
-        cliente =  Cliente.objects.get(user=obj)
+        cliente =  Profile.objects.get(user=obj)
         if cliente != None:
             a = 0
         else:
@@ -183,7 +183,7 @@ def cliente_update(request, pk):
 
     if request.method == 'GET':
     	user_form = UserEditForm(instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm, extra=a, can_delete=False)
+    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ProfileForm, extra=a, can_delete=False)
     	form_cliente = form_cliente_factory(instance=obj)
     	context = {
     		'user_form': user_form,
@@ -194,7 +194,7 @@ def cliente_update(request, pk):
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
     	user_form = UserEditForm(request.POST,instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ClienteForm)
+    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ProfileForm)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
     	if user_form.is_valid() and form_cliente.is_valid():
     		edit_user = user_form.save()
@@ -217,7 +217,7 @@ class cliente_delete(LoginRequiredMixin, DeleteView):
 	success_url = reverse_lazy('contas:cliente_list')
 
 # Add Funcionário
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+"""
 def funcionario_add(request):
 	template_name = 'funcionarios/funcionario_add.html'
 	if request.method == 'GET':
@@ -258,69 +258,7 @@ def funcionario_add(request):
 			'user_form': user_form,
 			}	
 			return render(request, template_name, context=context)
-#Detail funcionario
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def funcionario_detail(request, pk):
-	template_name = 'funcionarios/funcionario_detail.html'
-	obj_funcionario = Funcionario.objects.get(id=pk)
-
-	context = { 'funcionario': obj_funcionario,}
-	return render(request, template_name, context=context)
-# Lista de todos os funcionários
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def funcionario_list(request):
-	template_name = 'funcionarios/funcionario_list.html'
-	parametro_page = request.GET.get('page', '1')
-	parametro_limit = request.GET.get('limit', '5')
-
-	if not (parametro_limit.isdigit() and int(parametro_limit)>0):
-		parametro_lim
-
-	funcionarios = Cliente.objects.get_queryset().order_by('id')
-	funcionarios_paginator = Paginator(funcionarios, parametro_limit)
-
-	objeto = User.objects.all()
-
-	try:
-		page = funcionarios_paginator.page(parametro_page)
-
-	except (EmptyPage, PageNotAnInteger):
-		page = funcionarios_paginator.page(1)
-
-	context= {
-		'items_list': ['5','10', '20', '30', '50'],
-        'qnt_page':parametro_limit,
-        'funcionarios': page,
-		'form': objeto,
-	}
-	return render(request, template_name, context=context)
-# Atualizar Funcionário
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def funcionario_update(request, pk):
-	template_name = 'funcionarios/funcionario_update.html'
-	objeto = Funcionario.objects.get(id=pk)
-	
-	if request.method == 'GET':
-		form = FuncionarioForm(instance=objeto)
-		context = { 'form': form}
-		return render(request, template_name, context=context)
-
-	elif request.method == 'POST':
-		form = FuncionarioForm(request.POST, instance=objeto)
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect(reverse('contas:funcionario_list'))
-		else:
-			context = {
-				'form': form
-			}
-			return render(request, template_name, context=context)
-# Deletar Funcionário
-class funcionario_delete(LoginRequiredMixin, DeleteView):
-	login_url= reverse_lazy('core:home')
-	template_name = 'funcionarios/funcionario_delete.html'
-	queryset = Funcionario.objects.all()
-	success_url = reverse_lazy('contas:funcionario_list')
+"""
 
 
 

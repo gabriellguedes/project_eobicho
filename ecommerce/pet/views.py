@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from ecommerce.accounts.models import Cliente
-from ecommerce.accounts.forms import ClienteForm, UserRegistrationForm
+from ecommerce.accounts.models import Profile
+from ecommerce.accounts.forms import ProfileForm, UserRegistrationForm
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
 from .forms import PetForm, PesoForm, RacaForm, EspecieForm

@@ -3,8 +3,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from ecommerce.accounts.models import Cliente
-from ecommerce.accounts.forms import ClienteForm
 
 
 def home(request):

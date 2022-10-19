@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Cliente, Funcionario
+from .models import Profile
 
 
-class ClienteForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
 	class Meta:
-		model = Cliente
+		model = Profile
 		fields = '__all__'
 
 	def __init__(self, *args, **kwargs):
@@ -13,10 +13,6 @@ class ClienteForm(forms.ModelForm):
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
-class FuncionarioForm(forms.ModelForm):
-	class Meta:
-		model = Funcionario
-		fields = '__all__'
 
 class LoginForm(forms.Form):
     username = forms.CharField()
