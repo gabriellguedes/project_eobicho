@@ -45,7 +45,7 @@ def user_new(request):
 			context = {'form': form}
 			return render(request, template_name, context=context)
 # Registro Cliente
-@login_required 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def cliente_add(request):
 	template_name = 'accounts/register.html'
 	if request.method == 'GET':
@@ -87,7 +87,8 @@ def cliente_add(request):
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
 # Listar Clientes
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('is_funcionario', redirect_to_login='core:permission')
 def cliente_list(request):
 	template_name = 'clientes/cliente_list.html'
 	if request.user.is_authenticated:
@@ -125,7 +126,7 @@ def cliente_list(request):
 	}
 	return render(request, template_name, context=context)
 # Detail CLiente acesso pelo admin
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def cliente_detail_admin(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = User.objects.get(id=pk)
@@ -143,7 +144,7 @@ def cliente_detail_admin(request, pk):
 	}
 	return render(request, template_name, context=context)
 # Detail Cliente acesso pelo cliente
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def cliente_detail(request, pk):
 	template_name = 'clientes/cliente_detail.html'
 	user = request.user
@@ -162,7 +163,7 @@ def cliente_detail(request, pk):
 	}
 	return render(request, template_name, context=context)
 # Atualização Cliente
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('update_user_cliente')
 def cliente_update(request, pk):
     template_name = 'clientes/cliente_update.html'
@@ -216,7 +217,7 @@ class cliente_delete(LoginRequiredMixin, DeleteView):
 	success_url = reverse_lazy('contas:cliente_list')
 
 # Add Funcionário
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def funcionario_add(request):
 	template_name = 'funcionarios/funcionario_add.html'
 	if request.method == 'GET':
@@ -258,7 +259,7 @@ def funcionario_add(request):
 			}	
 			return render(request, template_name, context=context)
 #Detail funcionario
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def funcionario_detail(request, pk):
 	template_name = 'funcionarios/funcionario_detail.html'
 	obj_funcionario = Funcionario.objects.get(id=pk)
@@ -266,7 +267,7 @@ def funcionario_detail(request, pk):
 	context = { 'funcionario': obj_funcionario,}
 	return render(request, template_name, context=context)
 # Lista de todos os funcionários
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def funcionario_list(request):
 	template_name = 'funcionarios/funcionario_list.html'
 	parametro_page = request.GET.get('page', '1')
@@ -294,7 +295,7 @@ def funcionario_list(request):
 	}
 	return render(request, template_name, context=context)
 # Atualizar Funcionário
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def funcionario_update(request, pk):
 	template_name = 'funcionarios/funcionario_update.html'
 	objeto = Funcionario.objects.get(id=pk)

@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from PIL import Image
 
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_add(request):
     template_name = 'pet/pet_add.html'
     especie = Especie.objects.all().order_by('especie')
@@ -40,7 +40,7 @@ def pet_add(request):
             return render(request, template_name, context=context)
 
 #Cadastro Pet feito pelo cliente
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def cliente_pet_add(request, pk):
     template_name = 'pet/cliente_pet_add.html'
     obj = request.user
@@ -80,7 +80,7 @@ def cliente_pet_add(request, pk):
             }
             return render(request, template_name, context=context)
 #Lista de Exibição Paginação
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def paginacao(request):
     template_name = 'pet/pet_list.html'
     parametro_page = request.GET.get('page', '1')
@@ -109,7 +109,7 @@ def paginacao(request):
     }
     return render(request, template_name, context=context)
 #Vizualizar Pet e Ficha
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def detailPet(request, pk):
     template_name ='pet/pet_detail.html'
     obj = Pet.objects.get(id=pk)
@@ -157,7 +157,7 @@ def detailPet(request, pk):
              }
             return render(request, template_name, context=context) 
 #Atualização
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_update(request, pk):
     template_name = 'pet/pet_update.html'
     obj = Pet.objects.get(id=pk)
@@ -187,7 +187,7 @@ def pet_update(request, pk):
             return render(request, template_name, context=context)
 
 # Add Espécie/Raça
-@login_required 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def especie_add(request):
     template_name = 'cad_pet/especie_add_form.html'
     
@@ -219,7 +219,7 @@ def especie_add(request):
             }
             return render(request, template_name, context=context)
 # Adicionar uma nova Especie
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def add_Especie(request):
     template_name = 'cad_pet/especie_add.html'
     form = EspecieForm(request.POST or None)
@@ -230,21 +230,21 @@ def add_Especie(request):
     context ={'especie': form}      
     return render(request, template_name, context=context)
 # Listar as Especies
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def list_Especie(request):
     template_name = 'cad_pet/especie_list.html'
     obj = Especie.objects.all()
     context = { 'especie': obj }
     return render(request, template_name, context=context)
 # Deletar uma Especie
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def delete_Especie(request, pk):
     obj = Especie.objects.get(id=pk)
     obj.delete()
     
     return HttpResponseRedirect(reverse('pet:especie_list'))
 # Atualizar/Alterar Espécies
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def update_Especie(request, pk):
     template_name = 'cad_pet/especie_update.html'
     obj_especie = Especie.objects.get(id=pk)
@@ -263,7 +263,7 @@ def update_Especie(request, pk):
 
 
 # Adicionar Raça
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def add_Raca(request):
     template_name = 'cad_pet/raca_add.html'
     form = RacaForm(request.POST)
@@ -276,7 +276,7 @@ def add_Raca(request):
     }
     return render(request, template_name, context)
 # Listar Todas as Raças
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def list_Raca(request):
     template_name ='cad_pet/raca_list.html'
     raca = Raca.objects.all()
@@ -285,7 +285,7 @@ def list_Raca(request):
     }
     return render(request, template_name, context=context)
 # Atualizar/Alterar Raças
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def update_Raca(request, pk):
     template_name = 'cad_pet/raca_update.html'
     obj_raca =  Raca.objects.get(id=pk)
@@ -302,7 +302,7 @@ def update_Raca(request, pk):
             context = { 'form': form}
             return render(request, template_name, context=context)
 # Deletar uma Raça
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def delete_Raca(request, pk):
     obj = Raca.objects.get(id=pk)
     obj.delete()
@@ -310,7 +310,7 @@ def delete_Raca(request, pk):
     return HttpResponseRedirect(reverse('pet:raca_list'))
 
 #Select Espécie e Raça Add Pet por um funcionário
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def load_funcoes(request):
     template_name = 'pet/funcao_ajax.html'
     especie_id = request.GET.get('id_especie')
@@ -320,7 +320,7 @@ def load_funcoes(request):
     }
     return render(request, template_name, context=context)
 # Select Espécie e Raça Add Pet por um Cliente
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def load_cliente(request):
     template_name = 'pet/cliente_ajax.html'
     especie_id = request.GET.get('id_pet_set-0-especie')
@@ -330,7 +330,7 @@ def load_cliente(request):
     }
     return render(request, template_name, context=context)
 # Select Espécie e Raça Add Pet por um Cliente
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def load_update_pet(request):
     template_name = 'pet/update_pet_ajax.html'
     especie_id = request.GET.get('id_especie')

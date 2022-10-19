@@ -10,7 +10,7 @@ from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
 # Criar uma nova ficha
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def prontuario_create(request, pk):
     template_name = 'ficha_add.html'
     obj = Pet.objects.get(pk=pk)
@@ -46,7 +46,7 @@ def prontuario_create(request, pk):
 
             return render(request, template_name, context=context)
 # Listar todas as fichas cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def prontuario_list(request):
     template_name = 'ficha_list.html'
     parametro_page = request.GET.get('page', '1')
@@ -76,7 +76,7 @@ def prontuario_list(request):
         }
     return render(request, template_name, context=context)
 # Visualizar ficha antiga
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def prontuario_detail(request, pk, n):
     template_name = 'ficha_detail.html'
     pet = Pet.objects.get(pk=pk)
@@ -90,7 +90,7 @@ def prontuario_detail(request, pk, n):
     return render(request, template_name, context)
 
 # Adicionar Novo Tipo de Pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_add(request):
     template_name = 'itens_ficha/pele/pele_add.html'
     if request.method == 'GET':
@@ -110,7 +110,7 @@ def pele_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar Tipos de peles cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_list(request):
     template_name='itens_ficha/pele/pele_list.html'
     objeto = Pele.objects.all()
@@ -119,7 +119,7 @@ def pele_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar Tipo de pele cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_update(request, pk):
     template_name = 'itens_ficha/pele/pele_update.html'
     objeto = Pele.objects.get(id=pk)
@@ -136,7 +136,7 @@ def pele_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_delete(request, pk):
     objeto = Pele.objects.get(id=pk)
     if objeto != None:
@@ -145,7 +145,7 @@ def pele_delete(request, pk):
         msg = 'Item não encotrado'
 
 # Criar uma Doença
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_add(request):
     template_name = 'itens_ficha/doenca/doenca_add.html'
     if request.method == 'GET':
@@ -161,14 +161,14 @@ def doenca_add(request):
             context = {'form': form}
             return render(request, template_name, context=context)
 # Listar todas as doenças
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_list(request):
     template_name = 'itens_ficha/doenca/doenca_list.html'
     objeto = Doenca.objects.all()
     context = {'form': objeto}
     return render(request, template_name, context=context)
 # Atualizar doença
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_update(request, pk):
     template_name = 'itens_ficha/doenca/doenca_update.html'
     objeto = Doenca.objects.get(id=pk)
@@ -185,7 +185,7 @@ def doenca_update(request, pk):
             context = {'form': form}
             return render(request, template_name, context=context)
 # Deletar doença
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_delete(request, pk):
     objeto = Doenca.objects.get(id=pk)
     if objeto != None:
@@ -197,7 +197,7 @@ def doenca_delete(request, pk):
         return render(request, context=context)
 
 # Adicionar Ectoparasitas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_add(request):
     template_name='itens_ficha/pele/ectoparasitas_add.html'
     if request.method == 'GET':
@@ -213,7 +213,7 @@ def ectoparasitas_add(request):
             context = { 'form': form}
             return render(request, template_name, context=context)
 # Listar ectoparasitas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_list(request):
     template_name = 'itens_ficha/pele/ectoparasitas_list.html'
     objeto = Ectoparasitas.objects.all()
@@ -222,7 +222,7 @@ def ectoparasitas_list(request):
     }
     return render(request, template_name, context=context)
 # Update ectoparasitas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_update(request, pk):
     template_name='itens_ficha/pele/ectoparasitas_update.html'
     objeto = Ectoparasitas.objects.get(id=pk)
@@ -239,7 +239,7 @@ def ectoparasitas_update(request, pk):
             context = {'form': form}
             return render(request, template_name, context=context)
 # Deletar ectoparasitas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_delete(request, pk):
     objeto = Ectoparasitas.objects.get(id=pk)
     if objeto != None:
@@ -250,7 +250,7 @@ def ectoparasitas_delete(request, pk):
         return render(request, context=context)
 
 # Add infec_pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def infec_pele_add(request):
     template_name = 'itens_ficha/pele/infec_pele_add.html'
     if request.method == 'GET':
@@ -266,14 +266,14 @@ def infec_pele_add(request):
             context = {'form': form}
             return render(request, template_name, context=context)
 # Listar infec_pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def infec_pele_list(request):
     template_name = 'itens_ficha/pele/infec_pele_list.html'
     objeto = Infec_pele.objects.all()
     context = {'form': objeto}
     return render(request, template_name, context=context)
 # Atualizar infec_pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def infec_pele_update(request, pk):
     template_name = 'itens_ficha/pele/infec_pele_update.html'
     objeto = Infec_pele.objects.get(id=pk)
@@ -290,7 +290,7 @@ def infec_pele_update(request, pk):
             context = {'form': form}
             return render(request,template_name, context=context)
 # Deletar infec_pele
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def infec_pele_delete(request, pk):
     objeto = Infec_pele.objects.get(id=pk)
     if objeto != '':
@@ -302,7 +302,7 @@ def infec_pele_delete(request, pk):
         return render(request, context=context)    
 
 # Adicionar Novo Tipo de Pelos
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_add(request):
     template_name = 'itens_ficha/pelos/pelos_add.html'
     if request.method == 'GET':
@@ -322,7 +322,7 @@ def pelos_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar Tipos de pelos cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_list(request):
     template_name='itens_ficha/pelos/pelos_list.html'
     objeto = Pelos.objects.all()
@@ -331,7 +331,7 @@ def pelos_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar Tipo de pelo cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_update(request, pk):
     template_name = 'itens_ficha/pelos/pelos_update.html'
     objeto = Pelos.objects.get(id=pk)
@@ -348,7 +348,7 @@ def pelos_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pelo
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_delete(request, pk):
     objeto = Pelos.objects.get(id=pk)
     if objeto != None:
@@ -361,7 +361,7 @@ def pelos_delete(request, pk):
    
 
 # Adicionar Novo condição de Pelos
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_add(request):
     template_name = 'itens_ficha/pelos/estado_pelos_add.html'
     if request.method == 'GET':
@@ -381,7 +381,7 @@ def estado_pelos_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar condição dos pelos cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_list(request):
     template_name='itens_ficha/pelos/estado_pelos_list.html'
     objeto = Estado_pelos.objects.all()
@@ -390,7 +390,7 @@ def estado_pelos_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar condição do pelo cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_update(request, pk):
     template_name = 'itens_ficha/pelos/estado_pelos_update.html'
     objeto = Estado_pelos.objects.get(id=pk)
@@ -407,7 +407,7 @@ def estado_pelos_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar um Condição de Pelo
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_delete(request, pk):
     objeto = Estado_pelos.objects.get(id=pk)
     if objeto != None:
@@ -420,7 +420,7 @@ def estado_pelos_delete(request, pk):
    
 
 # Adicionar Novo Tipo de Pelos
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_add(request):
     template_name = 'itens_ficha/pelos/condicao_pelos_add.html'
     if request.method == 'GET':
@@ -440,7 +440,7 @@ def condicao_pelos_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar Tipos de pelos cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_list(request):
     template_name='itens_ficha/pelos/condicao_pelos_list.html'
     objeto = Condicao_pelos.objects.all()
@@ -449,7 +449,7 @@ def condicao_pelos_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar Tipo de pelo cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_update(request, pk):
     template_name = 'itens_ficha/pelos/condicao_pelos_update.html'
     objeto = Condicao_pelos.objects.get(id=pk)
@@ -466,7 +466,7 @@ def condicao_pelos_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pelo
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_delete(request, pk):
     objeto = Condicao_pelos.objects.get(id=pk)
     if objeto != None:
@@ -479,7 +479,7 @@ def condicao_pelos_delete(request, pk):
    
 
 #Boca
-@login_required 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def boca_add(request):
     template_name = 'itens_ficha/boca/boca_add.html'
     if request.method == 'GET':
@@ -499,7 +499,7 @@ def boca_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar boca cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def boca_list(request):
     template_name='itens_ficha/boca/boca_list.html'
     objeto = Boca.objects.all()
@@ -508,7 +508,7 @@ def boca_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar boca cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def boca_update(request, pk):
     template_name = 'itens_ficha/boca/boca_update.html'
     objeto = Boca.objects.get(id=pk)
@@ -525,7 +525,7 @@ def boca_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar uma boca
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def boca_delete(request, pk):
     objeto = Boca.objects.get(id=pk)
     if objeto != None:
@@ -537,7 +537,7 @@ def boca_delete(request, pk):
         return render(request, context=context)
    
 #Unhas 
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def unhas_add(request):
     template_name = 'itens_ficha/unhas/unhas_add.html'
     if request.method == 'GET':
@@ -557,7 +557,7 @@ def unhas_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar unhas cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def unhas_list(request):
     template_name='itens_ficha/unhas/unhas_list.html'
     objeto = Unhas.objects.all()
@@ -566,7 +566,7 @@ def unhas_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar unhas cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def unhas_update(request, pk):
     template_name = 'itens_ficha/unhas/unhas_update.html'
     objeto = Unhas.objects.get(id=pk)
@@ -583,7 +583,7 @@ def unhas_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar uma unhas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def unhas_delete(request, pk):
     objeto = Unhas.objects.get(id=pk)
     if objeto != None:
@@ -595,7 +595,7 @@ def unhas_delete(request, pk):
         return render(request, context=context)
 
 #Olhos 
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def olhos_add(request):
     template_name = 'itens_ficha/olhos/olhos_add.html'
     if request.method == 'GET':
@@ -615,7 +615,7 @@ def olhos_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar boca cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def olhos_list(request):
     template_name='itens_ficha/olhos/olhos_list.html'
     objeto = Olhos.objects.all()
@@ -624,7 +624,7 @@ def olhos_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar boca cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def olhos_update(request, pk):
     template_name = 'itens_ficha/olhos/olhos_update.html'
     objeto = Olhos.objects.get(id=pk)
@@ -641,7 +641,7 @@ def olhos_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar uma boca
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def olhos_delete(request, pk):
     objeto = Olhos.objects.get(id=pk)
     if objeto != None:
@@ -653,7 +653,7 @@ def olhos_delete(request, pk):
         return render(request, context=context)
 
 #Orelhas 
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_add(request):
     template_name = 'itens_ficha/orelhas/orelhas_add.html'
     if request.method == 'GET':
@@ -673,7 +673,7 @@ def orelhas_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar orelhas cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_list(request):
     template_name='itens_ficha/orelhas/orelhas_list.html'
     objeto = Orelhas.objects.all()
@@ -682,7 +682,7 @@ def orelhas_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar orelhas cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_update(request, pk):
     template_name = 'itens_ficha/orelhas/orelhas_update.html'
     objeto = Orelhas.objects.get(id=pk)
@@ -699,7 +699,7 @@ def orelhas_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar uma orelhas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_delete(request, pk):
     objeto = Orelhas.objects.get(id=pk)
     if objeto != None:
@@ -711,7 +711,7 @@ def orelhas_delete(request, pk):
         return render(request, context=context)
 
 #Patas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_add(request):
     template_name = 'itens_ficha/patas/patas_add.html'
     if request.method == 'GET':
@@ -731,7 +731,7 @@ def patas_add(request):
             }    
             return render(request, template_name, context=context)
 # Listar patas cadastradas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_list(request):
     template_name='itens_ficha/patas/patas_list.html'
     objeto = Patas.objects.all()
@@ -740,7 +740,7 @@ def patas_list(request):
     }
     return render(request, template_name, context=context)
 # Atualizar patas cadastrada
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_update(request, pk):
     template_name = 'itens_ficha/patas/patas_update.html'
     objeto = Patas.objects.get(id=pk)
@@ -757,7 +757,7 @@ def patas_update(request, pk):
             context = { 'form': form }
             return render(request, template_name, context=context)    
 # Apagar uma patas
-@login_required
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_delete(request, pk):
     objeto = Patas.objects.get(id=pk)
     if objeto != None:

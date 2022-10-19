@@ -15,4 +15,6 @@ def home(request):
 	else:
 		return HttpResponseRedirect(reverse('contas:login'))
 
-	
+def permission(request):
+	template_name='core/permission.html'
+	return render(request, template_name)
