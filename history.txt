@@ -1,0 +1,1000 @@
+   45  heroku run python manage.py migrate 
+   46  heroku rolls
+   47  ls
+   48  kwrite history.txt 
+   49  heroku releases
+   50  heroku rollback v48
+   51  heroku rollback v49
+   52  heroku run python manage.py makemigrations
+   53  heroku run python manage.py migrate
+   54  git status
+   55  git status origin main
+   56  heroku config --app eobicho
+   57  history
+   58  sudo dnf install mysql-worbench-community
+   59  sudo dnf install mysql-workbench-community
+   60  cd Documentos/project_eobicho/
+   61  source .venv/bin/activate
+   62  git add .
+   63  git status
+   64  git commit -m"Config BD"
+   65  git push
+   66  heroku run python manage.py makemigrations
+   67  heroku run python manage.py migrate
+   68  heroku releases
+   69  heroku rollback v47
+   70  heroku run python manage.py makemigrations
+   71  heroku run python manage.py migrate
+   72  heroku rollback v49
+   73  heroku run python manage.py makemigrations
+   74  heroku releases
+   75  heroku rollback v53
+   76  heroku run python manage.py makemigrations
+   77  heroku run python manage.py migrate
+   78  heroku releases
+   79  heroku rollback v49
+   80  git push heroku main
+   81  git push 
+   82  git push origin main
+   83  git add .
+   84  git status
+   85  git commit -m"Config settings db"
+   86  git push
+   87  heroku run python manage.py makemigrations
+   88  heroku run python manage.py migrate
+   89  ls
+   90  cd ecommerce/
+   91  ls
+   92  ls ficha/migrations/
+   93  mkdir ficha/migrations/bkp
+   94  mv ficha/migrations/__pycache__/ ficha/migrations/bkp/
+   95  mv ficha/migrations/0002_boca_condicao_pelos_doenca_ectoparasitas_and_more.py ficha/migrations/bkp/
+   96  ls ficha/migrations/
+   97  mkdir pet/migrations/bkp
+   98  mv pet/migrations/000* pet/migrations/bkp/
+   99  ls pet/migrations/
+  100  mv pet/migrations/00* pet/migrations/bkp/
+  101  mv pet/migrations/__pycache__/ pet/migrations/bkp/
+  102  mv pet/migrations/bkp/0001_initial.py pet/migrations/
+  103  ls pet/migrations/
+  104  cd ..
+  105  git status
+  106  git commit -am"Config Db heroku"
+  107  git push
+  108  heroku run python manage.py makemigrations
+  109  heroku run python manage.py migrate
+  110  heroku run python manage.py migrate pet
+  111  heroku run bash
+  112  ls
+  113  mv ecommerce/pet/migrations/bkp/* ecommerce/pet/migrations/
+  114  mv ecommerce/ficha/migrations/bkp/* ecommerce/ficha/migrations/
+  115  git status 
+  116  git add .
+  117  git commit -m"Config makemigrations"
+  118  git push 
+  119  heroku run bash
+  120  heroku login
+  121  heroku git:remote -a eobicho
+  122  git status
+  123  git add .
+  124  git commit -m"Primeiro commit"
+  125  git push heroku main
+  126  [200~heroku config:set DISABLE_COLLECTSTATIC=1
+  127  heroku config:set DISABLE_COLLECTSTATIC=1
+  128  git push heroku main
+  129  git add .
+  130  git commit -m"Config Db"
+  131  git push
+  132  heroku run bash
+  133  heroku logs --tail
+  134  heroku run bash
+  135  exit
+  136  cd Documentos/project_eobicho/
+  137  source .venv/bin/activate
+  138  git add .
+  139  git commit -m"Config DB heroku"
+  140  git push
+  141  ll
+  142  heroku addons:create cleardb:ignite --version=5.7
+  143  heroku run python manage.py makemigrations
+  144  git commit -am"Config DB"
+  145  git push
+  146  heroku run bash
+  147  ls
+  148  ./manage.py runserver
+  149  heroku run bash
+  150  ./manage.py shell
+  151  heroku run bash
+  152  exit
+  153  cd Documentos/project_eobicho/
+  154   ll
+  155  touch script.py 
+  156  vi script.py 
+  157  python script.py 
+  158  vi script.py 
+  159  python script.py 
+  160  mv script.py ecommerce/
+  161  python ecommerce/script.py 
+  162  mv ecommerce/script.py ecommerce/pet/
+  163  python ecommerce/pet/script.py 
+  164  vi ecommerce/pet/script.py 
+  165  python ecommerce/pet/script.py 
+  166  pip install django-extensions
+  167  vi ecommerce/settings.py 
+  168  vi ecommerce/pet/script.py 
+  169  python ecommerce/pet/script.py 
+  170  vi ecommerce/pet/script.py 
+  171  python ecommerce/pet/script.py 
+  172  vi ecommerce/pet/script.py 
+  173  python ecommerce/pet/script.py 
+  174  ./manage.py runscript ecommerce/pet/script.py 
+  175  source .venv/bin/activate
+  176  ./manage.py runscript ecommerce/pet/script.py 
+  177  vi ecommerce/settings.py 
+  178  mkdir scripts
+  179  touch scripts/__init__.py
+  180  mv ecommerce/pet/script.py scripts/
+  181  ./manage.py runscript script
+  182  pip freeze
+  183  pip install django-extensions
+  184  pip freeze
+  185  ./manage.py runscript script
+  186  ./manage.py shell
+  187  git status
+  188  git add .
+  189  git commit -m"Update tuplas"
+  190  git push
+  191  heroku run bash
+  192  heroru run bash
+  193  heroku run bash
+  194  exit
+  195  cd Documentos/project_eobicho/
+  196  ls
+  197  source .venv/bin/activate
+  198  ls
+  199  pip freeze > requirements.txt 
+  200  heroku log --tail
+  201  git status
+  202  git commit -m"Requirements"
+  203  git status
+  204  git add .
+  205  git commit -m"Requirements"
+  206  git push
+  207  heroku plugins:install https://github.com/naaman/heroku-vim
+  208  heroku plugins:install @jasonheecs/heroku-vim
+  209  heroku vim
+  210  git status
+  211  git add .
+  212  git commti -m"gitignore"
+  213  git commit -m"gitignore"
+  214  git push
+  215  git commit -am"Alteração no Settings"
+  216  git push
+  217  git status
+  218  git commit -am"gitignore"
+  219  git push
+  220  ls
+  221  git staus
+  222  git status
+  223  git add .gitignore 
+  224  git status 
+  225  git commit -m"Settings no git ignore"
+  226  git push
+  227  git status
+  228  git status 
+  229  git add ecommerce/pet/tuplas.py 
+  230  git commit -m"Updata tuplas"
+  231  git push
+  232  init 0
+  233  sudo Documentos/project_eobicho/
+  234  cd Documentos/project_eobicho/
+  235  ls
+  236  source .venv/bin/activate
+  237  heroku run bash
+  238  ls
+  239  cd Documentos/conexao-esporte/
+  240  ll
+  241  cd conexao-esporte/
+  242  ll
+  243  vi apps/home/models.py 
+  244  vi apps/home/templates/account/dashboard.html 
+  245  vi apps/home/templates/account/register.html 
+  246  vi apps/home/templates/base.html 
+  247  vi apps/home/templates/site/block-login.html 
+  248  exit
+  249  cd Documentos/conexao-esporte/conexao-esporte/apps/
+  250  vi home/views.py 
+  251  exit
+  252  cd Documentos/
+  253  cd ambiente_de_teste/
+  254  ls
+  255  cd l
+  256  cd ..
+  257  ls
+  258  cd conexao-esporte/
+  259  ls
+  260  vi conexao-esporte/apps/cadastros/forms.py 
+  261  vi conexao-esporte/apps/home/
+  262  vi conexao-esporte/apps/home/forms.py 
+  263  cd /home/gabrielguedes/Documentos/project_eobicho/
+  264  ls
+  265  rm -r history.txt 
+  266  ls
+  267  exit
+  268  cd Documentos/project_eobicho/
+  269  source .venv/bin/activate
+  270  sudo dnf update -y
+  271  heroku run bash
+  272  git status
+  273  git add ecommerce/pet/templates/pet/cliente_pet_add.html 
+  274  git commit -m"Add campo foto em Add-pet-cliente"
+  275  git push
+  276  git status
+  277  git add .gitignore 
+  278  git commit m"Atualizar git ignore"
+  279  git commit -m"Atualizar git ignore"
+  280  git status
+  281  git push
+  282  git push origin main
+  283  git status
+  284  git rm -r --cached .
+  285  git status
+  286  git restore --staged .
+  287  git status
+  288  git rm -r --cached ecommerce/settings.py 
+  289  git status
+  290  git rm -r --cached lista_de_tarefas.txt 
+  291  git status
+  292  git add .
+  293  git status
+  294  git commit -m"Update campo add orelhas"
+  295  git push
+  296  git push origin main
+  297  heroku log --tail
+  298  ./manage.py runserver
+  299  heroku run bash
+  300  heroku releases
+  301  heroku rollback v26
+  302  heroku run bash
+  303  git status
+  304  git commit -am"Update campo Add-pet-cliente"
+  305  git push
+  306  herou run bash
+  307  heroku run bash
+  308  heroku releases
+  309  heroku rollback v28
+  310  heroku releases
+  311  heroku run bash
+  312  git status
+  313  git add .
+  314  git add ecommerce/settings.py 
+  315  git add -f ecommerce/settings.py 
+  316  git status
+  317  git commit -m"update add-pet-cliente"
+  318  git push
+  319  heroku run bash
+  320  ls
+  321  ./manage.py runserver
+  322  ls
+  323  heroku run bash
+  324  ./manage.py runserver
+  325   git status
+  326  ll
+  327  ls
+  328  git status
+  329  heroku run bash
+  330  exit
+  331  cd Documentos/project_eobicho/
+  332  ls
+  333  heroku run bash
+  334  source .venv/bin/activate
+  335  heroku run bash
+  336  exit
+  337  cd Documentos/project_eobicho/
+  338  source .venv/bin/activate
+  339  heroku run bash
+  340  heroku ps
+  341  heroku ps:stop web.1
+  342  heroku run bash
+  343  heroku ps
+  344  heroku ps:stop run.3471
+  345  heroku ps
+  346  heroku run bash
+  347  heroku ps
+  348  ./manage.py runserver
+  349  vi ../conexao-esporte/conexao-esporte/apps/home/forms.py 
+  350  vi ../conexao-esporte/conexao-esporte/apps/home/views.py 
+  351  vi ../conexao-esporte/conexao-esporte/apps/home/urls.py 
+  352  cp ../conexao-esporte/conexao-esporte/apps/home/templates/site/ ecommerce/accounts/templates/
+  353  cp -rf ../conexao-esporte/conexao-esporte/apps/home/templates/site/ ecommerce/accounts/templates/
+  354  ./manage.py makemigrations
+  355  ./manage.py migrate
+  356  systemctl httpd
+  357  deactivate 
+  358  systemctl start  httpd
+  359  source .venv/bin/activate
+  360  ls
+  361  ./manage.py shell
+  362  ./manage.py migrate
+  363  ./manage.py makemigrations
+  364  ./manage.py migrate
+  365  mysql -u root -p
+  366  mysql -u root -p sistema
+  367  ./manage.py migrate
+  368  systemctl stop httpd
+  369  vi ../conexao-esporte/conexao-esporte/conexao_esporte/settings.py
+  370  ls
+  371  vi ../conexao-esporte/conexao-esporte/apps/static/css/styles.css 
+  372  exit
+  373  cd Documentos/project_eobicho/
+  374  source .venv/bin/activate
+  375  ./manage.py runserver
+  376  ./manage.py makemigrations
+  377  ./manage.py migrate
+  378  heroku run python manage.py makemigrations
+  379  heroku run python manage.py migrate
+  380  heroku run bash
+  381  deactivate
+  382  exit
+  383  cd Documentos/project_eobicho/
+  384  source .venv/bin/activate
+  385  ./manage.py runserver
+  386  sudo systemctl start httpd
+  387  ./manage.py runserver
+  388  vi ../ambiente_de_teste/estoque/projeto/estoque/views.py 
+  389  ./manage.py runserver
+  390  ./manage.py shell
+  391  ./manage.py runserver
+  392  ./manage.py makemigrations
+  393  ./manage.py migrate
+  394  ./manage.py shell
+  395  ./manage.py runserver
+  396  vi ../ambiente_de_teste/estoque/projeto/settings.py 
+  397  ./manage.py runserver
+  398  vi ../ambiente_de_teste/estoque/projeto/settings.py 
+  399  vi ../conexao-esporte/conexao-esporte/conexao_esporte/settings.py
+  400  ./manage.py runserver
+  401  vi ../conexao-esporte/conexao-esporte/conexao_esporte/settings.py
+  402  ./manage.py runserver
+  403  sudo systemctl stop httpd
+  404  git status
+  405  ./manage.py runserver
+  406  ./manage.py shell
+  407  ls
+  408  ./manage.py shell
+  409  git status
+  410  git commit -m"Criando Usuário Cliente"
+  411  git add .
+  412  git commit -m"Criando usuário cliente"
+  413  git push
+  414  heroku run bash
+  415  mysql -u u7n4yx9a28wbh3vf -p -h qvti2nukhfiig51b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  416  mysql -u u7n4yx9a28wbh3vf -p pecsebe6ggq6mqdn -h qvti2nukhfiig51b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  417  ./manage.py runserver
+  418  git status
+  419  git add .
+  420  git status
+  421  git commit -m"Update url home"
+  422  git push
+  423  deactivate
+  424  init 0
+  425  sudo dnf update -y
+  426  sudo dnf install weechat
+  427  weechat
+  428  cd Documentos/project_eobicho/
+  429  source .venv/bin/activate
+  430  ./manage.py shell
+  431  heroku run bash
+  432  exit
+  433  cd Documentos/project_eobicho/ && source .venv/bin/activate && heroku run bash
+  434  ./manage.py shell
+  435  ls
+  436  Tree ecommerce/accounts/
+  437  tre ecommerce/accounts/
+  438  tree ecommerce/accounts/
+  439  ./manage.py runserver
+  440  ./manage.py shell
+  441  ifconfig
+  442  ifconfig wp1s0 
+  443  ifconfig wlp1s0 
+  444  ifconfig wlp1s0 -a
+  445  ifconfig -a  wlp1s0 
+  446  ifconfig --help
+  447  ifconfig -v  wlp1s0 
+  448  ifconfig -s  wlp1s0 
+  449  ifconfig
+  450  netstat
+  451  whois 192.168.1.129
+  452  netstat 192.168.1.1
+  453  ping 192.168.1.1
+  454  ping 192.168.1.2
+  455  whois 192.168.1.1
+  456  who 192.168.1.1
+  457  netstat 192.168.1.1
+  458  ifconfig
+  459  ifconfig
+  460  ./manage.py shell
+  461  heroku run bash
+  462  weechat
+  463  exit
+  464  cd Documentos/project_eobicho/
+  465  source .venv/bin/activate
+  466  ifconfig
+  467  ifconfig wlp1s0
+  468  netstat
+  469  ./manage.py runserver
+  470  ./manage.py makemigrations
+  471  ./manage.py migrate
+  472  ./manage.py runserver
+  473  ./manage.py makemigrations
+  474  ./manage.py migrate
+  475  ./manage.py runserver
+  476  ls
+  477  heroku run bash 
+  478  ls
+  479  rm -r media/*
+  480  git status
+  481  ls
+  482  cd media/
+  483  ls
+  484  ll
+  485  ls
+  486  cd ..
+  487  ls
+  488  ./manage.py shell
+  489  ./manage.py runserver
+  490  git status
+  491  ./manage.py shell
+  492  pip freeze
+  493  deactivate
+  494  source .venv/bin/activate
+  495  git status
+  496  git add .
+  497  git status
+  498  git commit -m"Update client/user"
+  499  git push 
+  500  heroku run python manage.py makemigrations
+  501  herou run python manage.py migrate
+  502  heroku run python manage.py migrate
+  503  deactivate
+  504  init 0
+  505  cd Documentos/project_eobicho/ && source .venv/bin/activate
+  506  ./manage.py shell 
+  507  cd Documentos/
+  508  cd project_eobicho/
+  509  source .venv/bin/activate
+  510  ./manage.py runserver
+  511  ./ma
+  512  ./manage.py runserver
+  513  cd Documentos/project_eobicho/
+  514  source .venv/bin/activate
+  515  ls
+  516  ll
+  517  ifconfig
+  518  exit
+  519  cd Documentos/project_eobicho/ && source .venv/bin/activate
+  520  ls
+  521  ls media/
+  522  ls
+  523  ll
+  524  systemctl status service
+  525  systemctl status sssd.service
+  526  startx
+  527  memtester 4096 1
+  528  sudo dnf update -y
+  529  su root
+  530  startx
+  531  cd Documentos/project_eobicho/
+  532  source .venv/bin/activate
+  533  ls
+  534  git status
+  535  ifconfig
+  536  vi ecommerce/accounts/views.py 
+  537  exit
+  538  weechat
+  539  exit
+  540  memtester
+  541  sudo dnf install memtester
+  542  memtester 4096 1
+  543  cd Documentos/project_eobicho/ && source .venv/bin/activate
+  544  rm -r ecommerce/accounts/templates/site/header.html 
+  545  rm -r ecommerce/accounts/templates/site/footer.html 
+  546  rm -r ecommerce/accounts/templates/site/redes-sociais.html 
+  547  ls
+  548  tree ecommerce/
+  549  vi ecommerce/accounts/templates/accounts/dashboard.html 
+  550  pip help
+  551  pip --help
+  552  pip freeze
+  553  pip unistall django-extensions
+  554  pip uninstall django-extensions
+  555  pip freeze > requirements.txt 
+  556  ll
+  557  rm -r scripts/
+  558  ls
+  559  ll
+  560  ./manage.py runserver
+  561  git status
+  562  git add .
+  563  git status
+  564  ./manage.py runserver
+  565  rm -r ecommerce/accounts/templates/accounts/dashboard.html 
+  566  ./manage.py runserver
+  567  mkdir ecommerce/pet/templates/pet/includes
+  568  touch ecommerce/pet/templates/pet/includes/pet_detail_block.html
+  569  ./manage.py runserver
+  570  touch ecommerce/pet/templates/pet/includes/pet_peso_block.html
+  571  ./manage.py runserver
+  572  touch ecommerce/pet/templates/pet/includes/pet_prontuario_block.html
+  573  ./manage.py runserver
+  574  touch ecommerce/pet/templates/pet/includes/pet_o_old_prontuario_block.html
+  575  mv ecommerce/pet/templates/pet/includes/pet_o_old_prontuario_block.html ecommerce/pet/templates/pet/includes/pet_old_prontuario_block.html 
+  576  ./manage.py runserver
+  577  mv ecommerce/pet/templates/pet/includes/pet_o_old_prontuario_block.html ecommerce/pet/templates/pet/includes/pet_obs_block.html 
+  578  touch ecommerce/pet/templates/pet/includes/pet_obs_block.html 
+  579  ./manage.py runserver
+  580  git status
+  581  ./manage.py runserver
+  582  git status
+  583  git add .
+  584  git status
+  585  git add ecommerce/settings.py 
+  586  git status
+  587  git commit -m"Update layout responsive"
+  588  git push
+  589  ./manage.py runserver
+  590  vi ../conexao-esporte/conexao-esporte/apps/static/
+  591  vi ../conexao-esporte/conexao-esporte/apps/static/css/styles.css 
+  592  ls
+  593  ll
+  594  vi ../conexao-esporte/conexao-esporte/apps/static/css/styles.css 
+  595  ./manage.py runserver
+  596  git status
+  597  git add .
+  598  git commit -m"Update template login"
+  599  git push
+  600  git commit am"update settings"
+  601  git add .
+  602  git commit -am"Update settings"
+  603  git push
+  604  ls
+  605  ./manage.py runserver
+  606  heroku run bash
+  607  git status
+  608  git add . 
+  609  git commit -m"Update detail cliente"
+  610  git push
+  611  ./manage.py runserver
+  612  git status
+  613  git commit -am"Update navbar responsive"
+  614  git push
+  615  ./manage.py runserver
+  616  git status
+  617  git commit -am"Update views add user"
+  618  git push
+  619  heroru run bash
+  620  heroku run bash
+  621  deactivate
+  622  exit
+  623  sudo dnf update -y
+  624  cd Documentos/project_eobicho/ && source .venv/bin/activate
+  625  ./manage.py runserver
+  626  exit
+  627  weechat
+  628  exit
+  629  su root
+  630  exit
+  631  cd Documentos/project_eobicho/ 
+  632  source .venv/bin/activate
+  633  ./manage.py runserver
+  634  ./manage.py shell
+  635  ./manage.py runserver
+  636  git commit -am"Correção de erro Foto de perfil usuário"
+  637  git status
+  638  gti commit -am"aletração no settings"
+  639  git commit -am"aletração no settings"
+  640  git push
+  641  ./manage.py runserver
+  642  ./manage.py makemigrations
+  643  ./manage.py migrate
+  644  ./manage.py runserver
+  645  git status
+  646  git add .
+  647  gti commit -am"Update add new client"
+  648  git commit -am"Update add new client"
+  649  git push
+  650  git status
+  651  git commit -am"Update settings"
+  652  git push
+  653  git push origin main
+  654  exit
+  655  cd Documentos/project_eobicho/
+  656  source .venv/bin/activate
+  657  ./manage.py runserver
+  658  sudo systemctl start  httpd
+  659  ./manage.py runserver
+  660  vi .gitignore 
+  661  git status
+  662  git add .gitignore 
+  663  git commit -m"Add pasta media no git ignore"
+  664  git push
+  665  git status
+  666  git add .
+  667  git commit -m"Update responsive layout"
+  668  git push
+  669  heroku run bash
+  670  git status
+  671  git add ecommerce/pet/templates/pet/pet_detail.html 
+  672  git commit -m"Update botões em pet detail"
+  673  git push
+  674  ./manage.py shell
+  675  heroku run bash 
+  676  ./manage.py runserver
+  677  ./manage.py shell
+  678  vi ../conexao-esporte/conexao-esporte/apps/home/templates/base.html 
+  679  vi ../conexao-esporte/conexao-esporte/apps/home/templates/site/header.html 
+  680  vi ../conexao-esporte/conexao-esporte/apps/home/templates/site/redes-sociais.html 
+  681  vi ../conexao-esporte/conexao-esporte/apps/home/templates/site/block-login.html 
+  682  vi ../conexao-esporte/conexao-esporte/apps/home/templates/site/block-cadastro.html 
+  683  vi ../conexao-esporte/conexao-esporte/apps/home/templates/site/
+  684  vi ../conexao-esporte/conexao-esporte/apps/home/templates/account/dashboard.html 
+  685  deactivate
+  686  exit
+  687  cd Documentos/project_eobicho/ && sourcer .venv/bin/activate
+  688  source .venv/bin/activate
+  689  ll
+  690  startx
+  691  cd Documentos/project_eobicho/
+  692  source .venv/bin/activate
+  693  ./manage.py shell
+  694  vi ../conexao-esporte/conexao-esporte/apps/home/views.py 
+  695  ./manage.py shell
+  696  heroku run bash
+  697  exit
+  698  vi Documentos/project_eobicho/ecommerce/accounts/views.py 
+  699  exit
+  700  cd Documentos/project_eobicho/ && source .venv/bin/activate
+  701  heroku run bash
+  702  wget https://eobicho.herokuapp.com/
+  703  ls
+  704  rm -r index.html 
+  705  heroku run bash
+  706  heroku --help
+  707  heroku ps
+  708  exit
+  709  cd Documentos/project_eobicho/ && source .venv/bin/activate 
+  710  ./manage.py runserver
+  711  memtest 4096 2
+  712  deactivate 
+  713  memtester 4096 2
+  714  ./manage.py runserver
+  715  source .venv/bin/activate
+  716  ./manage.py runserver
+  717  ./manage.py createsuperuser
+  718  ./manage.py runserver
+  719  ls
+  720  ./manage.py runserver
+  721  ./manage.py shell
+  722  ./manage.py runserver
+  723  ./manage.py shell
+  724  ./manage.py runserver
+  725  ./manage.py makemigrations
+  726  ./manage.py migrate
+  727  ./manage.py runserver
+  728  git status
+  729  git -am"Update Cadastro Inicial dos Clientes"
+  730  git commit -am"Update Cadastro Inicial dos Clientes"
+  731  git push
+  732  git status
+  733  git add .
+  734  git commit -am"Alterando Settings"
+  735  git push
+  736  heroku run python manage.py makemigrations
+  737  heroku run python manage.py migrate
+  738  git status
+  739  git add ecommerce/settings.py 
+  740  git commit -am"Update tutor em pet views"
+  741  git push
+  742  git add .
+  743  git commit -m"Settings"
+  744  git push
+  745  ./manage.py 
+  746  ./manage.py runserver
+  747  git status
+  748  git add .
+  749  git commit -m"Criação de um novo usuário"
+  750  git push
+  751  ./manage.py runserver
+  752  git status
+  753  git add .
+  754  git commit -m"Menu requerid"
+  755  git push
+  756  ./manage.py runserver
+  757  git status
+  758  gti commit -am"Update responsive"
+  759  git commit -am"Update responsive"
+  760  git push
+  761  ./manage.py runserver
+  762  git status
+  763  git commit -am"Correção foto usuário"
+  764  git push
+  765  ./manage.py runserver
+  766  git commit -am"update client detail"
+  767  git push
+  768  ./manage.py runserver
+  769  git status
+  770  git commit -am"Update cadastro pet for client"
+  771  git push
+  772  ./manage.py runserver
+  773  heroku run bash
+  774  rm -r media/*
+  775  git status
+  776  ./manage.py runserver
+  777  rm -r media/*
+  778  ./manage.py runserver
+  779  git status
+  780  git commit -am"Update photo perfil"
+  781  git push
+  782  git commit -am"Settings"
+  783  git push
+  784  ./manage.py runserver
+  785  git status
+  786  git add .
+  787  git commit -am"Update perfil pet em detail cliente"
+  788  git push
+  789  init 0
+  790  cd Documentos/project_eobicho/
+  791  ls
+  792  source .venv/bin/activate
+  793  ./manage.py runserver
+  794  git status
+  795  ./manage.py runserver
+  796  [A
+  797  ./manage.py runserver
+  798  cd Documentos/project_eobicho/
+  799  source .venv/bin/activate
+  800  ls
+  801  git status
+  802  git add .
+  803  git commit -am"Alterações feitas de cliente para user"
+  804  git push
+  805  ./manage.py runserver
+  806  heroku run python makemigrations
+  807  heroku run python manage.py  makemigrations
+  808  heroku run bash
+  809  ./manage.py runserver
+  810  git status
+  811  git commit -am"Update views accounts"
+  812  git push
+  813  ./manage.py runserver
+  814  git status
+  815  git commit -am"Alteração em cliente detail"
+  816  gti push
+  817  git push
+  818  ./manage.py 
+  819  ./manage.py runserver
+  820  git status
+  821  git commit -am"alteção da redirecionamento de login e add url cliente_detail_admin"
+  822  git push
+  823  ./manage.py runserver
+  824  git status
+  825  git commit -am"Correções de pequenos erros"
+  826  git push
+  827  ./manage.py runserver
+  828  git status
+  829  git add .
+  830  git commit -m"Add msg p/ completar perfil "
+  831  git push
+  832  ./manage.py runserver
+  833  git status
+  834  git -am"Add e teste permissões"
+  835  git commit -am"Add e teste permissões"
+  836  git push
+  837  exit
+  838  cd Documentos/project_eobicho/
+  839  source .venv/bin/activate
+  840  ./manage.py runserver
+  841  ./manage.py shell
+  842  cd Documentos/project_eobicho/
+  843  source .venv/bin/activate
+  844  ./manage.py runserver
+  845  exit
+  846  cd Documentos/project_eobicho/
+  847  source .venv/bin/activate
+  848  git push origin main
+  849  weechat
+  850  ls
+  851  ./manage.py runserver
+  852  ls
+  853  git status
+  854  git add .
+  855  git commit -m"Add perms of user"
+  856  git push
+  857  ./manage.py runserver
+  858  pip install django-role-permissions
+  859  pip install --upgrade pip
+  860  pip freeze > requirements.txt 
+  861  ll
+  862  touch ecommerce/roles.py
+  863  ./manage.py runserver
+  864  git status
+  865  git add .
+  866  git commit -m"Add permissions and create users"
+  867  git push
+  868  ./manage.py runserver
+  869  git status
+  870  git add .
+  871  git commit -m"Add login required"
+  872  git push 
+  873  ./manage.py runserver
+  874  git status
+  875  git add .
+  876  heroku run bash
+  877  vi ecommerce/ficha/views.py 
+  878  deactivate
+  879  sudo dnf update -y
+  880  sudo dnf install libreoffice
+  881  memtester 4096 2
+  882  memtester 4096 15
+  883  ll
+  884  ls Documentos/
+  885  tree Downloads/
+  886  rm -r Downloads/dotnet-*
+  887  rm -r Downloads/aspnetcore-runtime-*
+  888  exit
+  889  memtester 4096 5
+  890  cd Documentos/project_eobicho/
+  891  source .venv/bin/activate
+  892  git status
+  893  ./manage.py runserver
+  894  sudo ifconfig wlp0s1 down
+  895  ifconfig
+  896  sudo ifconfig wlp1s0 down
+  897  sudo ifconfig wlp1s0 up
+  898  ./manage.py runserver
+  899  ssh
+  900  ssh SERVIDOR
+  901  ssh 192.168.1.129
+  902  ssh 192.168.1.129 -l gabriel -p
+  903  ssh 192.168.1.129 -l gabriel 
+  904  ./manage.py runserver
+  905  git status
+  906  git add .
+  907  git commit -m"Alteração no Layout de Login e Cadastro"
+  908  git push
+  909  ./manage.py runserver
+  910  git status
+  911  git add .
+  912  git commit -m"Atualição Layout Responsive Login/Cadastro"
+  913  git push
+  914  ./manage.py runserver
+  915  git status
+  916  git add .
+  917  git commit -m" Atualização layout responsivo Login"
+  918  git push
+  919  ./manage.py runserver
+  920  git status
+  921  git add .
+  922  git commit -m"Alteção css e add permissões"
+  923  git push
+  924  ./manage.py runserver
+  925  ./manage.py makemigrations
+  926  ./manage migrate
+  927  ./manage.py migrate
+  928  ./manage.py runserver
+  929  git status
+  930  git add .
+  931  git commit -m"Add new worked"
+  932  git push
+  933  heroku run python manage.py makemigrations
+  934  heroku run python manage.py migrate
+  935  git status
+  936  ./manage.py runserver
+  937  git add .
+  938  git commit -m"Alterações no layout"
+  939  git push origin main
+  940  git push
+  941  exit
+  942  sudo dnf upgrade --refresh
+  943  sudo dnf install remmina remmina-gnome-session -y
+  944  sudo dnf install remmina-plugins-kwallet remmina-plugins-spice remmina-plugins-www remmina-plugins-x2g0 -y
+  945  sudo dnf install remmina-plugins-kwallet remmina-plugins-spice remmina-plugins-www remmina-plugins-x2go -y
+  946  cd Documentos/project_eobicho/
+  947  source .venv/bin/activate
+  948  ./manage.py runserver
+  949  git status
+  950  git add .
+  951  git commit -m"Update DB"
+  952  git push
+  953  git push origin main
+  954  git commit -am"update settings"
+  955  git push 
+  956  git push origin main
+  957  ./manage.py runserver
+  958  deactivate
+  959  exit
+  960  cd Documentos/project_eobicho/
+  961  source .venv/bin/activate
+  962  ls
+  963  ./manage.py runserver
+  964  touch ecommerce/core/templates/core/permission.html
+  965  ./manage.py runserver
+  966  git status
+  967  git add .
+  968  git commit -m"Bloqueando Urls para acesso sem esta logado"
+  969  git push
+  970  git push origin main
+  971  ./manage.py runserver
+  972  git commit -am"Page permission denied"
+  973  git push
+  974  ./manage.py runserver
+  975  git commit -am"update page permission denied"
+  976  git push
+  977  git status
+  978  git commit -am"alteração no prontuario"
+  979  git push
+  980  git commit -am"Alteração layout cliente dashboard"
+  981  git push
+  982  ./manage.py runserver
+  983  git commit -am"Alteração de layout"
+  984  git push
+  985  ./manage.py runserver
+  986  ./manage.py makemigrations
+  987  ./manage.py migrate
+  988  vi ../conexao-esporte/conexao-esporte/apps/home/models.py 
+  989  ./manage.py runserver
+  990  ./manage.py makemigrations
+  991  ./manage.py migrate
+  992  git status
+  993  git add .
+  994  git commit -am"Alteração nos usuários e no banco de dados"
+  995  git push
+  996  git commit -am"settings"
+  997  git push
+  998  deactivate
+  999  exit
+ 1000  cd Documentos/project_eobicho/
+ 1001  source .venv/bin/activate
+ 1002  ./manage.py runserver
+ 1003  git status
+ 1004  sudo ifconfig wls1p0
+ 1005  ifocnfig
+ 1006  ifconfig
+ 1007  sudo ifconfig wlp1s0
+ 1008  sudo ifconfig wlp1s0 down
+ 1009  sudo ifconfig wlp1s0 up
+ 1010  ./manage.py runserver
+ 1011  mv ecommerce/accounts/templates/clientes/*.html ecommerce/accounts/templates/accounts/
+ 1012  rm -r ecommerce/accounts/templates/clientes/
+ 1013  mv ecommerce/accounts/templates/accounts/cliente_add.html ecommerce/accounts/templates/accounts/user_add.html
+ 1014  mv ecommerce/accounts/templates/accounts/cliente_delete.html ecommerce/accounts/templates/accounts/user_delete.html
+ 1015  mv ecommerce/accounts/templates/accounts/cliente_detail.html ecommerce/accounts/templates/accounts/user_detail.html
+ 1016  mv ecommerce/accounts/templates/accounts/cliente_list.html ecommerce/accounts/templates/accounts/user_list.html
+ 1017  mv ecommerce/accounts/templates/accounts/cliente_update.html ecommerce/accounts/templates/accounts/user_update.html
+ 1018  rm -r ecommerce/accounts/templates/accounts/home.html 
+ 1019  rm -r ecommerce/accounts/templates/accounts/register_done.html 
+ 1020  rm -r ecommerce/accounts/templates/funcionarios/
+ 1021  mv ecommerce/accounts/templates/site/ ecommerce/accounts/templates/includes
+ 1022  rm -r ecommerce/accounts/templates/teste.html 
+ 1023  ./manage.py runserver
+ 1024  ./manage.py makemigrations
+ 1025  ./manage.py migrate
+ 1026  ./manage.py runserver
+ 1027  ./manage.py makemigratiosn
+ 1028  ./manage.py makemigrations
+ 1029  ./manage.py migrate
+ 1030  ./manage.py runserver
+ 1031  ./manage.py makemigrations
+ 1032  ./manage.py migrate
+ 1033  ./manage.py runserver
+ 1034  ./manage.py shell
+ 1035  ./manage.py runserver
+ 1036  ifconfig
+ 1037  ./manage.py runserver
+ 1038  ./manage.py makemigrations
+ 1039  ./manage.py migrate
+ 1040  ./manage.py makemigrations
+ 1041  ./manage.py migrate
+ 1042  systemctl start httpd
+ 1043  systemctl stop httpd
+ 1044  history > history.txt

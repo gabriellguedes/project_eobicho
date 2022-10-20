@@ -9,15 +9,15 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
-from .models import Profile
-from .forms import ProfileForm, LoginForm, UserRegistrationForm, UserEditForm
+from .models import Profile, Endereco
+from .forms import ProfileForm, ProfileUpdateForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 
 # Novo Cliente(Cadastro Feito pelo próprio cliente)
-def user_new(request):
+def new_client(request):
 	template_name='accounts/register.html'
 	if request.method == 'GET':
 		form = UserRegistrationForm()
@@ -44,10 +44,11 @@ def user_new(request):
 		else:
 			context = {'form': form}
 			return render(request, template_name, context=context)
+
 # Registro Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
-def cliente_add(request):
-	template_name = 'accounts/register.html'
+def user_add(request):
+	template_name = 'accounts/user_add.html'
 	if request.method == 'GET':
 		user_form = UserRegistrationForm()
 		form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=1, can_delete=False)
@@ -72,6 +73,14 @@ def cliente_add(request):
 			new_user.username = new_user.email
 			# Save the User object
 			new_user.save()
+			if request.POST['profile_set-0-cargo'] == 'Gerente':
+				assign_role(new_user, 'gerente')
+			elif request.POST['profile_set-0-cargo'] == 'MedicoVet':
+				assign_role(new_user, 'medicovet')
+			elif request.POST['profile_set-0-cargo'] == 'Colaborador':
+				assign_role(new_user, 'colaborador')
+			else:
+				assign_role(new_user, 'cliente')	
 			# Create the user profile
 			form_cliente.instance = new_user
 			cliente = form_cliente.save()
@@ -86,17 +95,18 @@ def cliente_add(request):
 					'class': 'alert alert-danger',
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
+
 # Listar Clientes
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('is_funcionario', redirect_to_login='core:permission')
-def cliente_list(request):
-	template_name = 'clientes/cliente_list.html'
+def user_list(request):
+	template_name = 'accounts/user_list.html'
 	if request.user.is_authenticated:
 		user = request.user
 	else:
 		user = ''
 
-	obj_users= User.objects.all()
+	obj_users = User.objects.all()
 
 	parametro_page = request.GET.get('page', '1')
 	parametro_limit = request.GET.get('limit', '5')
@@ -108,7 +118,7 @@ def cliente_list(request):
 	clientes_paginator = Paginator(clientes, parametro_limit)
 
 	lista = User.objects.all()
-
+	profile = Profile.objects.all()
 	try:
 		page = clientes_paginator.page(parametro_page)
 
@@ -121,14 +131,15 @@ def cliente_list(request):
         'qnt_page':parametro_limit,
         'clientes': page,
 		'lista': lista,
-		'users': obj_users,
 		'user': user,
+		'profile': profile,
 	}
 	return render(request, template_name, context=context)
+
 # Detail CLiente acesso pelo admin
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def cliente_detail_admin(request, pk):
-	template_name = 'clientes/cliente_detail.html'
+def user_detail_admin(request, pk):
+	template_name = 'accounts/user_detail.html'
 	user = User.objects.get(id=pk)
 	try:
 		cliente = Profile.objects.get(user=user)
@@ -143,10 +154,11 @@ def cliente_detail_admin(request, pk):
 		'pet': pet,
 	}
 	return render(request, template_name, context=context)
+
 # Detail Cliente acesso pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def cliente_detail(request, pk):
-	template_name = 'clientes/cliente_detail.html'
+def user_detail(request, pk):
+	template_name = 'accounts/user_detail.html'
 	user = request.user
 	try:
 		cliente = Profile.objects.get(user=user)
@@ -162,15 +174,18 @@ def cliente_detail(request, pk):
 		'pet': pet,
 	}
 	return render(request, template_name, context=context)
-# Atualização Cliente
+
+# Atualização Cliente Feita pelo Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('update_user_cliente')
-def cliente_update(request, pk):
-    template_name = 'clientes/cliente_update.html'
+def user_update(request, pk):
+    template_name = 'accounts/user_update.html'
     if request.user.is_authenticated:
     	user = request.user
 
     obj = User.objects.get(id=pk)
+    obj_profile = Profile.objects.get(user=obj)
+
     try:
         cliente =  Profile.objects.get(user=obj)
         if cliente != None:
@@ -180,87 +195,136 @@ def cliente_update(request, pk):
     except ObjectDoesNotExist:
         a = 1
 
+    try:
+        endereco = Endereco.objects.get(user=obj_profile)
+        if  endereco != None:
+            b = 0 
+        else:
+            b = 1
+    except ObjectDoesNotExist:
+        b =1   
+
 
     if request.method == 'GET':
     	user_form = UserEditForm(instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ProfileForm, extra=a, can_delete=False)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm, extra=a, can_delete=False)
     	form_cliente = form_cliente_factory(instance=obj)
+
+    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=b, can_delete=False)
+    	form_endereco = form_endereco_factory(instance=obj_profile)
+
     	context = {
     		'user_form': user_form,
     		'profile_form': form_cliente,
+    		'endereco': form_endereco,
     		'cliente': user,
     		
     	}
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
     	user_form = UserEditForm(request.POST,instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Cliente, form=ProfileForm)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
-    	if user_form.is_valid() and form_cliente.is_valid():
+    	
+    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=a, can_delete=False)
+    	form_endereco = form_endereco_factory(request.POST ,instance=obj_profile)
+
+    	if user_form.is_valid() and form_cliente.is_valid() and form_endereco.is_valid():
     		edit_user = user_form.save()
-    		form_cliente.instance = edit_user
-    		form_cliente.save()
+    		form_cliente.instance = edit_user 
+    		profile = form_cliente.save()
+    		print(profile)
+    	
+    		form_endereco.save()
     		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
     	else:
     		context = {
     			'user_form': user_form,
     			'profile_form': form_cliente,
+    			'endereco': form_endereco,
     			'cliente': user,
     			
     		}
+    		print('Deu erro!')
     		return render(request,  template_name, context=context)
+
+# Atualização Cliente Feito por Adm ou Gerente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('update_user_cliente')
+def user_update_for_adm(request, pk):
+    template_name = 'accounts/user_update.html'
+    if request.user.is_authenticated:
+    	user = request.user
+
+    obj = User.objects.get(id=pk)
+    obj_profile = Profile.objects.get(user=obj)
+
+    try:
+        cliente =  Profile.objects.get(user=obj)
+        if cliente != None:
+            a = 0
+        else:
+            a = 1
+    except ObjectDoesNotExist:
+        a = 1
+
+    try:
+        endereco = Endereco.objects.get(user=obj_profile)
+        if  endereco != None:
+            b = 0 
+        else:
+            b = 1
+    except ObjectDoesNotExist:
+        b =1   
+
+
+    if request.method == 'GET':
+    	user_form = UserEditForm(instance=obj)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=a, can_delete=False)
+    	form_cliente = form_cliente_factory(instance=obj)
+
+    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=b, can_delete=False)
+    	form_endereco = form_endereco_factory(instance=obj_profile)
+
+    	context = {
+    		'user_form': user_form,
+    		'profile_form': form_cliente,
+    		'endereco': form_endereco,
+    		'cliente': user,
+    		
+    	}
+    	return render(request, template_name, context=context)
+    elif request.method == 'POST':
+    	user_form = UserEditForm(request.POST,instance=obj)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm)
+    	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
+    	
+    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=a, can_delete=False)
+    	form_endereco = form_endereco_factory(request.POST ,instance=obj_profile)
+
+    	if user_form.is_valid() and form_cliente.is_valid() and form_endereco.is_valid():
+    		edit_user = user_form.save()
+    		form_cliente.instance = edit_user 
+    		profile = form_cliente.save()
+    		print(profile)
+    	
+    		form_endereco.save()
+    		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
+    	else:
+    		context = {
+    			'user_form': user_form,
+    			'profile_form': form_cliente,
+    			'endereco': form_endereco,
+    			'cliente': user,
+    			
+    		}
+    		print('Deu erro!')
+    		return render(request,  template_name, context=context)
+
 #Apagar Cliente   
-class cliente_delete(LoginRequiredMixin, DeleteView):
+class user_delete(LoginRequiredMixin, DeleteView):
 	login_url= reverse_lazy('core:home')
-	template_name = 'clientes/cliente_delete.html'
+	template_name = 'accounts/user_delete.html'
 	queryset = User.objects.all()
 	success_url = reverse_lazy('contas:cliente_list')
-
-# Add Funcionário
-"""
-def funcionario_add(request):
-	template_name = 'funcionarios/funcionario_add.html'
-	if request.method == 'GET':
-		user_form = UserRegistrationForm()
-		funcionario_factory_form = inlineformset_factory(User,Funcionario, form=FuncionarioForm, extra=1, can_delete=False)
-		funcionario_form = funcionario_factory_form()
-		
-		context = {
-			'user_form': user_form,
-			'form': funcionario_form,
-		}	
-		return render(request, template_name, context=context)
-	elif request.method == 'POST':
-		user_form = UserRegistrationForm(request.POST)
-		funcionario_factory_form = inlineformset_factory(User,Funcionario, form=FuncionarioForm, extra=1, can_delete=False)
-		funcionario_form = funcionario_factory_form(request.POST)
-		if user_form.is_valid() and funcionario_form.is_valid():
-			new_user = user_form.save()
-			# Set the chosen password
-			new_user.set_password(user_form.cleaned_data['password'])
-			new_user.username = new_user.email
-			# Save the User object
-			new_user.save()
-			if request.POST['funcionario_set-0-cargo'] == 'Gerente':
-				assign_role(new_user, 'gerente')
-			elif request.POST['funcionario_set-0-cargo'] == 'MedicoVet':
-				assign_role(new_user, 'medicovet')
-			elif request.POST['funcionario_set-0-cargo'] == 'Colaborador':
-				assign_role(new_user, 'colaborador')
-			else:
-				assign_role(new_user, 'cliente')	
-
-
-			return HttpResponseRedirect(reverse('contas:funcionario_list'))
-		else:		
-			context = {
-			'form': form,
-			'user_form': user_form,
-			}	
-			return render(request, template_name, context=context)
-"""
-
-
-
-
 

@@ -85,7 +85,7 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'PORT': config('DB_PORT'),
         'OPTIONS': {
-            'init_command': 'SET default_storage_engine=InnoDB'
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
     }
 }
@@ -143,4 +143,4 @@ ROLEPERMISSIONS_MODULE = "ecommerce.roles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
 
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']

@@ -12,7 +12,7 @@ def upload_image_formater(instance, filename):
 class Profile(models.Model):
 	status = models.BooleanField(default=True)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-	cargo = models.CharField('Cargo', max_length=50,choices=t.CARGOS_CHOICES)
+	cargo = models.CharField('', max_length=50,choices=t.CARGOS_CHOICES, default='Cliente')
 	photo = models.ImageField('Foto de Perfil',  upload_to=upload_image_formater, blank=True, null=True)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
 	telefone = models.CharField('Telefone', max_length=16, null=True, blank=True)
@@ -27,8 +27,13 @@ class Profile(models.Model):
 	def __str__(self):
 		return '{} - {}'.format(self.pk, self.user.first_name) 
 
-	def id_formated(self):
-		if self.pk:
-			return str(self.pk).zfill(3)
-		return '---'
-	
+class Endereco(models.Model):
+	user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+	cep = models.CharField(max_length=8)
+	uf = models.CharField(max_length=2)
+	cidade = models.CharField(max_length=100)
+	bairro = models.CharField(max_length=100)
+	Endereço = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.pk

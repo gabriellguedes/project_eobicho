@@ -5,17 +5,21 @@
 {% block content %}
 <section class="container py-4">
 	<h3 class="border-bottom pb-2 text-secondary">
-		<i class="fa-solid fa-user text-info"></i> Cadastro Cliente
+		<i class="fa-solid fa-user text-info mr-2"></i> Cadastrar novo usuário
 	</h3>
 	
 	<div class="col-md-4">
 		<form method="POST" action=".">
 			 {% csrf_token %}
-			{% for iten in form %}
-
+			{% for iten in form_user %}
 			 <p>{{iten|bootstrap}}</p>
 			{% endfor %}
-			<button class="btn btn-info" type="submit">Criar</button>
+			{{ form_cliente.management_form }}
+
+			{% for field in form_cliente %}
+				<p>{{field|bootstrap}}</p>
+			{% endfor %}
+			<button class="btn btn-info" type="submit">Criar Usuário</button>
 			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'contas:cliente_list'%}'">Cancelar</button>
 		</form>
 	</div>	

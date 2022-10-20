@@ -1,7 +1,8 @@
 {% load static %}
 {% if request.user.is_authenticated %}
-  <div class="w-50 d-flex justify-content-end py-3 mr-4" id="login-section">
-    <div class="w-25 mt-2">
+<div class="w-50 d-flex justify-content-end pr-4">
+  <div class="w-50 d-flex justify-content-end py-3" id="login-section">
+    <div class="w-100 mt-2">
       <h6 class="text-center font-weight-bold text-secondary welcome w-100" >Bem vindo </h6>
       <label class="text-center font-weight-bold text-uppercase w-100">
         {% if cliente.user.first_name != None %}
@@ -31,4 +32,5 @@
       </div>
     </div>
   </div>  
+</div>  
 {% endif %}

@@ -1,6 +1,0 @@
-{% extends "core/base.html" %}
-{% block title %}Welcome{% endblock %}
-{% block content %}
-<h3 class="session-title">Bem-vindo <b>{{ new_user.first_name }}</b>!</h3>
-<p>Sua conta foi criada com sucesso.<a href="{% url 'contas:login' %}">login</a>.</p>
-{% endblock %}
