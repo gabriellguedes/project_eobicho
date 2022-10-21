@@ -95,7 +95,7 @@ def user_add(request):
 
 # Listar Clientes
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-@has_permission_decorator('is_funcionario', redirect_to_login='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def user_list(request):
 	template_name = 'accounts/user_list.html'
 	if request.user.is_authenticated:
@@ -133,31 +133,14 @@ def user_list(request):
 	}
 	return render(request, template_name, context=context)
 
-# Detail CLiente acesso pelo admin
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def user_detail_admin(request, pk):
-	template_name = 'accounts/user_detail.html'
-	user = User.objects.get(id=pk)
-	try:
-		cliente = Profile.objects.get(user=user)
-	except ObjectDoesNotExist:
-		cliente = ''	
-	pet = Pet.objects.filter(tutor=user.id)
-	pet_last = pet.last()
-
-	context = {
-		'cliente': cliente,
-		'user': user,
-		'pet': pet,
-	}
-	return render(request, template_name, context=context)
 
 # Detail Cliente acesso pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_detail(request, pk):
 	template_name = 'accounts/user_detail.html'
 	user = request.user
-	
+	tutor = User.objects.get(id=pk)
+
 	try:
 		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
@@ -168,6 +151,8 @@ def user_detail(request, pk):
 	except (ObjectDoesNotExist, ValueError):
 		endereco = ''
 
+	pet_cliente = Pet.objects.filter(tutor=tutor)
+
 	pet = Pet.objects.filter(tutor=user)
 	pet_last = pet.last()
 
@@ -176,6 +161,8 @@ def user_detail(request, pk):
 		'endereco': endereco,
 		'user': user,
 		'pet': pet,
+		'tutor': tutor,
+		'pet_cliente': pet_cliente,
 	}
 	return render(request, template_name, context=context)
 

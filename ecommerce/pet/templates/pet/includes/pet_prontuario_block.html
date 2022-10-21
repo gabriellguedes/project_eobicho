@@ -1,3 +1,4 @@
+{% load permission_tags %}
 <div class="card-header bg-dark">
 	<h3 class="text-white"><i class="bi bi-journal-text text-info"></i> Prontuário</h3>
 	<div class="col row">
@@ -69,8 +70,10 @@
 		<label class="text-monospace">{{ficha.obs}}</label>
 	</div>
 	<div class="col d-flex justify-content-end">
-		<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
-			<i class="fa-solid fa-plus"></i> Nova Anamnese
-		</a>
+		{% if user|can:'add_ficha' %}
+			<a class="btn btn-success mb-3" href="{% url 'fichas:ficha_add' pk=pet.id %}">
+				<i class="fa-solid fa-plus"></i> Nova Anamnese
+			</a>
+		{% endif %}	
 	</div>
 </div>

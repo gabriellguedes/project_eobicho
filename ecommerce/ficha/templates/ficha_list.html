@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load permission_tags %}
 {% block title%}
 {{block.super}} - Pets
 {% endblock title %}
@@ -53,9 +54,11 @@
 		      <td class="text-center block-none">{{iten.created}}</td>
 		      <td>
 		      	<div class="d-flex justify-content-center">
-			      	<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=iten.pet.pk n=iten.pk%}">
-			      		<i class="fa-regular fa-eye"></i>
-			      	</a>
+		      		{% if user|can:'view_ficha' %}
+				      	<a class="btn btn-primary" href="{% url 'fichas:ficha_detail' pk=iten.pet.pk n=iten.pk%}">
+				      		<i class="fa-regular fa-eye"></i>
+				      	</a>
+				    {% endif %}
 			    </div>  	
 		      </td>
 		    </tr>
@@ -97,11 +100,11 @@
 			  <ul class="pagination">
 			  	{% if fichas.has_previous %}
 				  	<li class="page-item">
-				      <a class="page-link" href="{% url 'fichas:ficha_list'%}?limit={{qnt_page}}&page={{fichas.previous_page_number}}">Anterior</a>
+				      <a class="page-link" href="{% url 'fichas:ficha_list'%}?limit={{qnt_page}}&page={{fichas.previous_page_number}}"><i class="fa-solid fa-chevron-left"></i></a>
 				    </li>
 			    {% else %}
 				    <li class="page-item disabled">
-				      <a class="page-link"  href="#">Anterior</a>
+				      <a class="page-link"  href="#"><i class="fa-solid fa-chevron-left"></i></a>
 				    </li>
 			    {% endif %}
 			    
@@ -119,11 +122,11 @@
 
 				{% if fichas.has_next %}	    
 				    <li class="page-item">
-				      <a class="page-link" href="{% url 'fichas:ficha_list'%}?limit={{qnt_page}}&page={{fichas.next_page_number}}">Próximo</a>
+				      <a class="page-link" href="{% url 'fichas:ficha_list'%}?limit={{qnt_page}}&page={{fichas.next_page_number}}"><i class="fa-solid fa-chevron-right"></i></a>
 				    </li>
 				{% else %}
 					<li class="page-item disabled">
-				      <a class="page-link" href="#">Próximo</a>
+				      <a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a>
 				    </li>    
 				{% endif %}
 			  </ul>

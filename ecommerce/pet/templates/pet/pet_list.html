@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load permission_tags %}
 {% block title%}
 {{block.super}} - Pets
 {% endblock title %}
@@ -6,16 +7,18 @@
 
 <section class="container py-4">
 	<div class="row border-bottom">
-		<div class="col-md-6">
+		<div class="w-75 pl-3">
 			<h2 class="font-weight-bold text-secondary">
 				<i class="fa-solid fa-paw text-info"></i>
 				Pets Cadastrados
 			</h2>
 		</div>	
-		<div class="col-md-6">
-			<div class="d-flex justify-content-end">
-				<a class="btn btn-info mb-3" href="{% url 'pet:pet_add' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
-			</div>	
+		<div class="w-25 pr-3">
+			{% if user|can:'add_pet' %}
+				<div class="d-flex justify-content-end">
+					<a class="btn btn-info mb-3" href="{% url 'pet:pet_add' %}">Novo Pet <i class="fa-solid fa-paw"></i></a>
+				</div>
+			{% endif %}	
 		</div>
 	</div>
 
@@ -42,7 +45,7 @@
 		  	 {% for pet in pets %}
 			    <tr>
 			   	  <th scope="row">{{pet.id}}</th>
-			      <td class="block-none text-center">{{pet.tutor.user.first_name}}</td>
+			      <td class="block-none text-center">{{pet.tutor.first_name}}</td>
 			      <td class="block-none text-center">
 			      	{% if pet.status %}
 	                  <i class="fa fa-check-circle ok"></i> 
@@ -57,14 +60,18 @@
 			      <td class="text-uppercase text-center block-none">{{pet.especie}}</td>
 			      <td>
 			      	<div class="d-flex justify-content-center">
-			      		<a class="btn btn-primary mr-2" href="{% url 'pet:pet_detail' pk=pet.id %}">
-			      			<i class="fa-regular fa-eye"></i> 
-			      			
-			      		</a>
-			      		<a class="btn btn-warning text-white" href="{% url 'pet:pet_update' pk=pet.id %}">
-			      			<i class="fa-regular fa-pen-to-square"></i>
-			      			
-			      		</a>
+			      		{% if user|can:'view_pet' %}
+				      		<a class="btn btn-primary mr-2" href="{% url 'pet:pet_detail' pk=pet.id %}">
+				      			<i class="fa-regular fa-eye"></i> 
+				      			
+				      		</a>
+				      	{% endif %}
+				      	{% if user|can:'update_pet' %}
+				      		<a class="btn btn-warning text-white" href="{% url 'pet:pet_update' pk=pet.id %}">
+				      			<i class="fa-regular fa-pen-to-square"></i>
+				      			
+				      		</a>
+				      	{% endif %}
 			      	</div>	
 			      </td>
 			    </tr>
@@ -106,11 +113,11 @@
 			  <ul class="pagination">
 			  	{% if pets.has_previous %}
 				  	<li class="page-item">
-				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.previous_page_number}}">Anterior</a>
+				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.previous_page_number}}"><i class="fa-solid fa-chevron-left"></i></a>
 				    </li>
 			    {% else %}
 				    <li class="page-item disabled">
-				      <a class="page-link"  href="#">Anterior</a>
+				      <a class="page-link"  href="#"><i class="fa-solid fa-chevron-left"></i></a>
 				    </li>
 			    {% endif %}
 			    
@@ -128,11 +135,11 @@
 
 				{% if pets.has_next %}	    
 				    <li class="page-item">
-				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}">Próximo</a>
+				      <a class="page-link" href="{% url 'pet:pet_list'%}?limit={{qnt_page}}&page={{pets.next_page_number}}"><i class="fa-solid fa-chevron-right"></i></a>
 				    </li>
 				{% else %}
 					<li class="page-item disabled">
-				      <a class="page-link" href="#">Próximo</a>
+				      <a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a>
 				    </li>    
 				{% endif %}
 			  </ul>
