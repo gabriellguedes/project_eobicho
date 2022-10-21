@@ -41,6 +41,13 @@
               </a>
             </li>
           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contas:logout' %}">
+              <span class="text-white font-weight-bold">
+                <i class="fa-solid fa-power-off text-info mr-1"></i> Sair
+              </span>
+            </a>
+          </li>
           {% if user|has_role:'gerente' %}    
           <li class="nav-item my-3 border-bottom">
             <span class="text-white font-weight-bold  ml-2">
