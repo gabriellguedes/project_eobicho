@@ -8,28 +8,42 @@
 		<i class="fa-solid fa-user text-info mr-2"></i> Atualizar Dados do Perfil
 	</h3>
 	
-	<div class="col-md-4">
-		<form method="POST" action="."  enctype="multipart/form-data">
+	<div class="container">
+		<form id="form_update_user" method="POST" action="."  enctype="multipart/form-data">
 			{% csrf_token %}
+			<div class="row mb-5">
+				{{profile_form.management_form}}
+				
+				<div id="form_update_01" class="w-50">
+					{% for fields in profile_form %}
 
-			{% for item in user_form %}
-				<div class="">
-					{{item|bootstrap}}
-				</div>	
-			{% endfor %}
-			{{profile_form.management_form}}
-			{% for fields in profile_form %}
-
-				<div class="">
-					{{fields|bootstrap}}
+						<div class="col-md-8">
+							{{fields|bootstrap}}
+						</div>
+					{% endfor %} 
 				</div>
-			{% endfor %} 
+				<div id="form_update_02" class="w-50">
+					{% for item in user_form %}
+						<div class="col-md-8">
+							{{item|bootstrap}}
+						</div>	
+					{% endfor %}
+				</div>
+						
+			</div>	
 			{{endereco.management_form}}
-			{% for i in endereco %}
-				<div>
-					{{i|bootstrap}}
+			<div id="form_endereco" class="mb-5">
+				<legend class="border-bottom pb-3 mb-5 text-secondary">
+					<i class="fa-solid fa-location-dot text-info mr-1"></i> Endereço
+				</legend>
+				<div class="form-inline">
+					{% for i in endereco %}
+						<div id="itens_form_endereco" class="form-group w-100 mw-100 mb-2">
+							{{i|bootstrap}}
+						</div>
+					{% endfor %}
 				</div>
-			{% endfor %}
+			</div>
 			
 			<button class="btn btn-info" type="submit">Atualizar</button>
 			<button class="btn btn-danger" onclick="location.href='{% url 'contas:cliente_detail' pk=cliente.id%}'">Cancelar</button>

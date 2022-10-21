@@ -37,10 +37,7 @@ def new_client(request):
 				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
 			else:
 				return 'Deu erro!'
-			
-			
-			
-
+		
 		else:
 			context = {'form': form}
 			return render(request, template_name, context=context)
@@ -160,16 +157,23 @@ def user_detail_admin(request, pk):
 def user_detail(request, pk):
 	template_name = 'accounts/user_detail.html'
 	user = request.user
+	
 	try:
 		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
 		cliente =''
+
+	try:
+		endereco = Endereco.objects.get(user=cliente)
+	except (ObjectDoesNotExist, ValueError):
+		endereco = ''
 
 	pet = Pet.objects.filter(tutor=user)
 	pet_last = pet.last()
 
 	context = {
 		'cliente': cliente,
+		'endereco': endereco,
 		'user': user,
 		'pet': pet,
 	}
@@ -223,7 +227,7 @@ def user_update(request, pk):
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
     	user_form = UserEditForm(request.POST,instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm, can_delete=False)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
     	
     	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=a, can_delete=False)

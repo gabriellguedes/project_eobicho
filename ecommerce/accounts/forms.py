@@ -43,4 +43,7 @@ class EnderecoForm(forms.ModelForm):
 	class Meta:
 		model = Endereco
 		fields = '__all__'
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['cep'].widget.attrs.update({'class':'mask-cep'})
 

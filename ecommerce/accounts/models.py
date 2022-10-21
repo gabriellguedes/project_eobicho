@@ -29,11 +29,12 @@ class Profile(models.Model):
 
 class Endereco(models.Model):
 	user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-	cep = models.CharField(max_length=8)
-	uf = models.CharField(max_length=2)
-	cidade = models.CharField(max_length=100)
-	bairro = models.CharField(max_length=100)
-	Endereço = models.CharField(max_length=200)
+	cep = models.CharField('CEP',max_length=10)
+	uf = models.CharField('UF',max_length=2, choices=t.UF_CHOICES)
+	cidade = models.CharField('Cidade', max_length=100)
+	bairro = models.CharField('Bairro', max_length=100)
+	endereco = models.CharField('Endereço', max_length=200)
+	complemento = models.CharField('Complemento', max_length=200)
 
 	def __str__(self):
 		return self.pk

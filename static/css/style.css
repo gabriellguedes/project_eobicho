@@ -199,7 +199,7 @@ main{
 	
 }
 /**********************************************************
- 2.3 - Cliente Detail
+ 2.3 - User Detail
  *********************************************************/
 #user_responsive_block{
 	display: none;
@@ -210,6 +210,47 @@ main{
 	border: 2px solid greenyellow;
 	box-shadow: 1px 1px 15px greenyellow; !important;
   border-radius: 50%;
+}
+
+/**********************************************************
+ 2.4 - User Update
+ *********************************************************/
+
+#form_update_user{
+	max-width: 100%;
+}
+	#form_update_01 div>label{
+		color: #6c757d!important
+	}
+	#form_update_01 div>div>div>input{
+		border: 1px solid #1fb9b1 !important;
+	}
+	#form_update_02 div>label{
+		color: #6c757d!important
+	}
+	#form_update_02 div>div>div>input{
+		border: 1px solid #1fb9b1 !important;
+	}
+
+
+#form_endereco{
+	max-width: 100%;
+}
+#itens_form_endereco label{
+	margin-right: 5px;
+	color: #6c757d!important
+}
+#itens_form_endereco div>div>input{
+	border: 1px solid #1fb9b1 !important;
+  text-align: center;  
+}
+#itens_form_endereco div>div>select{
+	border: 1px solid #1fb9b1 !important;
+  text-align: center; 
+}
+#itens_form_endereco div{
+	margin-bottom: 10px;
+	margin-right: 10px;
 }
 /********************************************************************
  3.0 - Footer
@@ -257,7 +298,12 @@ main{
 	.block-none{
 		display: none !important;
 	}
-	
+	#form_update_01{
+		width: 100% !important;
+	}
+	#form_update_02{
+		width: 100% !important;
+	}
 }
 
 @media screen and (max-width: 480px){
@@ -304,5 +350,12 @@ main{
     min-width: 100% !important;
     max-width: 100% !important;
 	}
+	#form_update_01{
+		width: 100% !important;
+	}
+	#form_update_02{
+		width: 100% !important;
+	}
 	
 }
+
