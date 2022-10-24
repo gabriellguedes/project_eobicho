@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login
@@ -15,6 +16,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
+from django.core.mail import send_mail
 
 # Novo Cliente(Cadastro Feito pelo próprio cliente)
 def new_client(request):
@@ -26,20 +28,38 @@ def new_client(request):
 	elif request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
 		if form.is_valid():
-			new_user = form.save(commit=False)
-			new_user.set_password(form.cleaned_data['password'])
-			new_user.username = new_user.email
-			new_user.save()
-			assign_role(new_user, 'cliente')
-			user = authenticate(username=new_user.username, password=request.POST['password'])
-			if user is not None:
-				login(request, user)
-				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
-			else:
-				return 'Deu erro!'
-		
+			try:
+				new_user = form.save(commit=False)
+				new_user.set_password(form.cleaned_data['password'])
+				new_user.username = new_user.email
+				new_user.save()
+				assign_role(new_user, 'cliente')
+				user = authenticate(username=new_user.username, password=request.POST['password'])
+				if user is not None:
+					login(request, user)
+					return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': new_user.id}))
+				else:
+					form = UserRegistrationForm()
+					context = {
+						'form': form,
+						'msg': 'Algo deu errado!',
+						'class': 'alert alert-primary',
+					}
+					return render(request, template_name, context=context)
+			except IntegrityError:
+				form = UserRegistrationForm()
+				context = {
+					'form': form,
+					'msg': 'Email já cadastrado.',
+					'class': 'alert alert-info',
+				}
+				return render(request, template_name, context=context)
 		else:
-			context = {'form': form}
+			context = {
+				'form': form,
+				'msg': 'Usuário não foi cadastrado!',
+				'class': 'alert alert-primary',
+			}
 			return render(request, template_name, context=context)
 
 # Registro Cliente
@@ -88,7 +108,7 @@ def user_add(request):
 			context = {
 					'user_form': user_form,
 					'form_cliente': form_cliente,
-					'msg': 'Erro: Cliente não cadastrado',
+					'msg': 'Erro: Cliente não cadastrado!',
 					'class': 'alert alert-danger',
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
@@ -133,13 +153,14 @@ def user_list(request):
 	}
 	return render(request, template_name, context=context)
 
-
 # Detail Cliente acesso pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_detail(request, pk):
 	template_name = 'accounts/user_detail.html'
 	user = request.user
 	tutor = User.objects.get(id=pk)
+
+	#send_mail('Django teste', 'Este é um email teste', 'lojamyitens@gmail.com', ['gguedes10@gmail.com'])
 
 	try:
 		cliente = Profile.objects.get(user=user)
@@ -168,7 +189,7 @@ def user_detail(request, pk):
 
 # Atualização Cliente Feita pelo Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-@has_permission_decorator('update_user_cliente')
+@has_permission_decorator('update_user_cliente, update_user')
 def user_update(request, pk):
     template_name = 'accounts/user_update.html'
     if request.user.is_authenticated:

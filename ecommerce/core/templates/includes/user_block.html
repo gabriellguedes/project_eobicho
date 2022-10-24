@@ -26,7 +26,7 @@
         {% else %}
           <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id%}">Editar Perfil</a>
         {% endif %}
-        <a class="dropdown-item" href="#">Alterar Senha</a>
+        <a class="dropdown-item" href="{% url 'contas:change_password' %}">Alterar Senha</a>
         <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
         
       </div>

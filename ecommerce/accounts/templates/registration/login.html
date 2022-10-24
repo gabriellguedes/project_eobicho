@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row max-100 m-0">
-	<div class="w-50">
+	<div class="w-50 d-flex justify-content-center">
 		<img class="mt-3 block-none" src="{% static 'img/login_img.svg' %}">
 	</div>
 	<div class="mt-3 p-3">
@@ -15,9 +15,17 @@
 			</div>	
 			<div class="mx-3 my-5">
 				{% include 'includes/form_login.html' %}
-			</div>	
-			<p class="mt-3">
-				<small>Ainda não tem uma conta?</small> <a class="text-info" href="{% url 'contas:new_user' %}">Criar conta</a>
+			</div>
+		
+			<small>
+				<a href="{% url 'contas:senha_reset' %}">Esqueceu sua senha?</a>
+			</small>
+		
+			<p>
+				<small>
+					Ainda não tem uma conta? 
+					<a class="text-info" href="{% url 'contas:new_user' %}">Criar conta</a>
+				</small>
 			</p>
 
 		</section>

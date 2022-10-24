@@ -17,14 +17,16 @@ class MedicoVet(AbstractUserRole):
 		'add_pet': True, 'view_pet': True, 'update_pet': True,
 		'add_ficha': True, 'view_ficha': True,
 		'add_peso': True, 
-		'view_user_cliente': True, 'view_funcionario': True,
+		'view_user_cliente': True, 'update_user_cliente': True,
+		'view_funcionario': True,
 	}
 
 class Colaborador(AbstractUserRole):
 	available_permissions = {
 		'add_pet': True, 'view_pet': True, 'update_pet': True,
 		'add_ficha': True, 'view_ficha': True, 
-		'view_user_cliente': True, 'view_funcionario': True,
+		'view_user_cliente': True, 'update_user_cliente': True, 
+		'view_funcionario': True,
 	}
 
 class Cliente(AbstractUserRole):
