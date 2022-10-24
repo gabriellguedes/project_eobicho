@@ -13,7 +13,7 @@
 			<a href="{% url 'contas:cliente_update' pk=user.id %}">
 				<p class="alert alert-primary text-center"> 
 					<i class="fa-solid fa-triangle-exclamation"></i>
-					Perfil Incompleto, clique aqui para adicionar as informções que faltam!
+					{{ request.user.first_name }} seu perfil está incompleto, clique aqui para adicionar as informções que faltam!
 				</p>
 			</a>
 		</div>
