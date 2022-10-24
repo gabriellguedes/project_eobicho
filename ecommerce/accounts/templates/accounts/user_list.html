@@ -61,7 +61,7 @@
 			      			
 			      			</a>
 			      		{% endif %}
-			      		{% if user|can:'update_user_cliente' %}
+			      		{% if user|can:'update_user' %}
 				      		<a class="btn btn-warning text-white mr-2" href="{% url 'contas:user_update_for_adm' pk=item.id %}">
 				      			<i class="fa-regular fa-pen-to-square"></i>
 				      		
