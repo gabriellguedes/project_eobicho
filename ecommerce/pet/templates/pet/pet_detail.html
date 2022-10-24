@@ -24,26 +24,26 @@
 
 <!-- NAV - FINAL DA PÁGINA -->
 <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-	<li class="nav-item">
-   		 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Histórico</a>
+	<li class="nav-item" disabled>
+   		 <a class="nav-link disabled" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Histórico</a>
    </li>
    <li class="nav-item">
-    	<a class="nav-link" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
+    	<a class="nav-link active" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
+    	<a class="nav-link disabled" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
+    	<a class="nav-link disabled" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="solicitacoes-tab" data-toggle="tab" href="#solicitacoes" role="tab" aria-controls="solicitacoes" aria-selected="false">Solicitações</a>
+    	<a class="nav-link disabled" id="solicitacoes-tab" data-toggle="tab" href="#solicitacoes" role="tab" aria-controls="solicitacoes" aria-selected="false">Solicitações</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="retornos-tab" data-toggle="tab" href="#retornos" role="tab" aria-controls="retornos" aria-selected="false">Retornos</a>
+    	<a class="nav-link disabled" id="retornos-tab" data-toggle="tab" href="#retornos" role="tab" aria-controls="retornos" aria-selected="false">Retornos</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
+    	<a class="nav-link disabled" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
   </li>										
   <li class="nav-item">
     	<a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Prontuário</a>
@@ -52,16 +52,16 @@
     	<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Avaliações Antigas</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
+    	<a class="nav-link disabled" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
   </li>		
 </ul>
 <div class="tab-content" id="myTabContent">
 	<!-- Histórico -->	
-	<section class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+	<section class="tab-pane fade  " id="home" role="tabpanel" aria-labelledby="home-tab">
 		<h4 class="text-secondary">Histórico</h4>
 	</section>
 	<!-- Peso -->
-	<section class="tab-pane fade " id="peso" role="tabpanel" aria-labelledby="peso-tab">
+	<section class="tab-pane fade show active" id="peso" role="tabpanel" aria-labelledby="peso-tab">
 		{% include 'pet/includes/pet_peso_block.html' %}		
 	</section>
 	<!-- Vacinas -->

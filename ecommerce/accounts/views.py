@@ -189,7 +189,7 @@ def user_detail(request, pk):
 
 # Atualização Cliente Feita pelo Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-@has_permission_decorator('update_user_cliente, update_user')
+@has_permission_decorator('update_user_cliente')
 def user_update(request, pk):
     template_name = 'accounts/user_update.html'
     if request.user.is_authenticated:
@@ -262,7 +262,7 @@ def user_update(request, pk):
 
 # Atualização Cliente Feito por Adm ou Gerente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-@has_permission_decorator('update_user_cliente')
+@has_permission_decorator('update_user')
 def user_update_for_adm(request, pk):
     template_name = 'accounts/user_update.html'
     if request.user.is_authenticated:
