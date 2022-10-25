@@ -7,7 +7,10 @@
             <label class=" {{class}} w-100 text-center">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{msg}}
             </label>
-        {% endif %}    
+        {% endif %} 
+        {% if error %}
+            {{ error }}
+        {% endif %}   
 
     <div id="form_cadastro">
         <div class="">
