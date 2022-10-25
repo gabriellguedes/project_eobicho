@@ -6,8 +6,7 @@
 <section class="container py-4">
 	<h3 class="border-bottom pb-3  mb-4 text-secondary">
 		<i class="fa-solid fa-user text-info mr-2"></i> Atualizar Dados do Perfil
-	</h3>
-	
+	</h3>	
 	<div class="container">
 		<form id="form_update_user" method="POST" action="."  enctype="multipart/form-data">
 			{% csrf_token %}
@@ -19,6 +18,9 @@
 
 						<div class="col-md-8">
 							{{fields|bootstrap}}
+							{% for error in field.errors %}
+			                  <span class="text-muted">{{ error }}</span>
+			                {% endfor %}
 						</div>
 					{% endfor %} 
 				</div>

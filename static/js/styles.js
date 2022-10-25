@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('.mask-cpf').mask('000.000.000-00', {reverse: true});
   $('.mask-tel').mask('(00) 00000-0000');
   $('.mask-peso').mask('00.000', {reverse: true});
-  $('.mask-cep').mask('00.000-000');
+  $('.mask-cep').mask('00000-000');
 
   $('.dropdown-toggle').dropdown();
   
@@ -93,6 +93,9 @@ $('#add-doenca').click(function(ev) {
     }, 800);
 });
 
+
+
+    
 jQuery(document).ready(function(){
 
     var btn = 'form[name=form_cadastro] button';      /*INFORME O SELETOR DO BOTÃO*/

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Apps de terceiros
+    'localflavor',
     'widget_tweaks',
     'fontawesomefree',
     'bootstrapform',

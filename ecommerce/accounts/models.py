@@ -1,4 +1,5 @@
 from django.db import models
+from localflavor.br.models import BRCPFField
 from django.conf import settings
 from django.contrib.auth.models import User
 from ecommerce.pet.models import Tuplas
@@ -29,7 +30,7 @@ class Profile(models.Model):
 
 class Endereco(models.Model):
 	user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-	cep = models.CharField('CEP',max_length=10)
+	cep = models.CharField('CEP',max_length=9)
 	uf = models.CharField('UF',max_length=2, choices=t.UF_CHOICES)
 	cidade = models.CharField('Cidade', max_length=100)
 	bairro = models.CharField('Bairro', max_length=100)

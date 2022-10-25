@@ -257,7 +257,6 @@ def user_update(request, pk):
     			'cliente': user,
     			
     		}
-    		print('Deu erro!')
     		return render(request,  template_name, context=context)
 
 # Atualização Cliente Feito por Adm ou Gerente
@@ -330,7 +329,6 @@ def user_update_for_adm(request, pk):
     			'cliente': user,
     			
     		}
-    		print('Deu erro!')
     		return render(request,  template_name, context=context)
 
 #Apagar Cliente   
