@@ -338,6 +338,10 @@ main{
  4.0 - RESPONSIVE
 *******************************************************************/
 @media only screen and (max-width:  600px){
+	#wrap-header{
+    background-size: 650px;
+    background-position: 85px 381px;
+	}
 	#wrap-header img{
 		float: none !important;
 	}
@@ -391,6 +395,10 @@ main{
 /***********************************
  * HEADER - 1.0
  **********************************/
+	#wrap-header{
+    background-size: 650px;
+    background-position: 85px 381px;
+	}
 	#wrap-header img{
 		float: none !im: qportant;
 	}

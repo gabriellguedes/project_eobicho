@@ -46,6 +46,9 @@
 					{% if user|can:'add_pet' %}	
 						<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
 					{% endif %}
+					{% if user|can:'add_user' %}
+						<button class="btn btn-info mr-2" onclick="location.href='{% url 'contas:cliente_add' %}'"><i class="fa-solid fa-user"></i> Novo Usuário</button>
+					{% endif %}
 				</div>	
 			</div>	
 		</section>

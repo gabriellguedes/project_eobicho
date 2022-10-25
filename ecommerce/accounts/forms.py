@@ -38,8 +38,7 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(
     	label='Senha',
     	strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
-        help_text=password_validation.password_validators_help_text_html(),
+        widget=forms.PasswordInput(),
     	)
 
     class Meta:
