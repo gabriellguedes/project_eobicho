@@ -67,9 +67,10 @@ class UserRegistrationForm(forms.ModelForm):
     		return password
     
 class UserEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'email')
+	first_name = forms.CharField(label='Nome')
+	class Meta:
+		model = User
+		fields = ('first_name', 'email')
 
 class EnderecoForm(forms.ModelForm):
 	cep = BRZipCodeField(label='CEP')

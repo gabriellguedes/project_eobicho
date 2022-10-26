@@ -196,8 +196,7 @@ def user_update(request, pk):
     	user = request.user
 
     obj = User.objects.get(id=pk)
-    obj_profile = Profile.objects.get(user=obj)
-
+   
     try:
         cliente =  Profile.objects.get(user=obj)
         if cliente != None:
@@ -208,7 +207,7 @@ def user_update(request, pk):
         a = 1
 
     try:
-        endereco = Endereco.objects.get(user=obj_profile)
+        endereco = Endereco.objects.get(user=obj)
         if  endereco != None:
             b = 0 
         else:
@@ -221,9 +220,8 @@ def user_update(request, pk):
     	user_form = UserEditForm(instance=obj)
     	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm, extra=a, can_delete=False)
     	form_cliente = form_cliente_factory(instance=obj)
-
-    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=b, can_delete=False)
-    	form_endereco = form_endereco_factory(instance=obj_profile)
+    	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=b, can_delete=False)
+    	form_endereco = form_endereco_factory(instance=obj)
 
     	context = {
     		'user_form': user_form,
@@ -237,9 +235,8 @@ def user_update(request, pk):
     	user_form = UserEditForm(request.POST,instance=obj)
     	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateForm, can_delete=False)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
-    	
-    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=a, can_delete=False)
-    	form_endereco = form_endereco_factory(request.POST ,instance=obj_profile)
+    	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=a, can_delete=False)
+    	form_endereco = form_endereco_factory(request.POST ,instance=obj)
 
     	if user_form.is_valid() and form_cliente.is_valid() and form_endereco.is_valid():
     		edit_user = user_form.save()
@@ -268,7 +265,6 @@ def user_update_for_adm(request, pk):
     	user = request.user
 
     obj = User.objects.get(id=pk)
-    obj_profile = Profile.objects.get(user=obj)
 
     try:
         cliente =  Profile.objects.get(user=obj)
@@ -280,7 +276,7 @@ def user_update_for_adm(request, pk):
         a = 1
 
     try:
-        endereco = Endereco.objects.get(user=obj_profile)
+        endereco = Endereco.objects.get(user=obj)
         if  endereco != None:
             b = 0 
         else:
@@ -294,8 +290,8 @@ def user_update_for_adm(request, pk):
     	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=a, can_delete=False)
     	form_cliente = form_cliente_factory(instance=obj)
 
-    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=b, can_delete=False)
-    	form_endereco = form_endereco_factory(instance=obj_profile)
+    	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=b, can_delete=False)
+    	form_endereco = form_endereco_factory(instance=obj)
 
     	context = {
     		'user_form': user_form,
@@ -310,8 +306,8 @@ def user_update_for_adm(request, pk):
     	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
     	
-    	form_endereco_factory = inlineformset_factory(Profile, Endereco, form=EnderecoForm, extra=a, can_delete=False)
-    	form_endereco = form_endereco_factory(request.POST ,instance=obj_profile)
+    	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=a, can_delete=False)
+    	form_endereco = form_endereco_factory(request.POST ,instance=obj)
 
     	if user_form.is_valid() and form_cliente.is_valid() and form_endereco.is_valid():
     		edit_user = user_form.save()

@@ -29,7 +29,7 @@ class Profile(models.Model):
 		return '{} - {}'.format(self.pk, self.user.first_name) 
 
 class Endereco(models.Model):
-	user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 	cep = models.CharField('CEP',max_length=9)
 	uf = models.CharField('UF',max_length=2, choices=t.UF_CHOICES)
 	cidade = models.CharField('Cidade', max_length=100)
