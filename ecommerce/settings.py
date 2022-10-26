@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     # Meus Apps 
     'ecommerce.accounts',
     'ecommerce.core',
-    'ecommerce.consulta',
+    'ecommerce.consultorio',
     'ecommerce.pet',
     'ecommerce.ficha',
     'ecommerce.services',
