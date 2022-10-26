@@ -73,6 +73,8 @@ class Pet(models.Model):
 class Peso(TimeStampedModel):
 	peso = models.DecimalField('Peso(kg)', max_digits=6, decimal_places=3)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+	obs = models.TextField('Anotações')
+	funcionario = models.ForeignKey(User, on_delete=models.CASCADE)
 	class Meta:
 		ordering = ('created',)
 

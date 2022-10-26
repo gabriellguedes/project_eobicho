@@ -1,42 +1,93 @@
 {% load bootstrap %}
 {% load permission_tags %}
-<div class="row my-3">
-
-{% if user|can:'add_peso'%}
+<div class="row py-4">
 	<div class="col-md-4 mb-4">
 		<div class="border box-peso">
-			<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
-				<i class="fa-solid fa-ball-pile text-info"></i> Peso
-			</h4>
-			<form class="px-3" method="POST" action=".">
-				{% csrf_token %}
-				{{peso.management_form}}
-				{% for t in peso %}
-				<p>{{t.peso|bootstrap}}</p>
-				{% endfor %}
-				<div class="d-flex justify-content-center">
-					<button type="submit" class="btn btn-lg btn-outline-info btn-peso my-3">
-						<i class="fa-solid fa-plus"></i>
-					</button>
-				</div>		
-			</form>	
+			<div class="px-3">
+				<h4 class=" text-secondary font-weight-bold box-peso-title py-3 pl-3">
+					<i class="fa-solid fa-ball-pile text-info"></i> Peso
+				</h4>
+				{% if user|can:'add_peso'%}
+					<div>
+						<button type="submit" class="btn btn-lg btn-outline-info btn-peso my-3">
+							<i class="fa-solid fa-plus"></i>
+						</button>
+						<span class="ml-3 text-secondary">Adicionar novo peso</span>
+					</div>
+				{% endif %}
+			</div>
+			<div class="">
+				<h4 class="text-secondary font-weight-bold ml-3 mt-3">
+					 Histórico Peso
+				</h4>
+				<div class="">
+					{% if last_fichas %}
+						<table class="table table-hover">
+							{% for item in listpeso %}
+								<tbody>
+									<tr>
+										<td class="pt-3">
+											<div class="d-flex justify-content-center mt-2">
+												<i class="fa-solid fa-stethoscope text-info"></i>
+											</div>
+											
+										</td>
+										<td>
+											<label class="d-block m-0 text-left">{{item.peso}}</label>
+											<small class="text-secondary text-left d-block">{{item.created}}</small>
+										</td>
+										<td class="w-25">
+											<div class="d-flex justify-content-center">
+												<button type="button" data-toggle="collapse" href="#consultaAccions" role="button" aria-expanded="True" aria-controls="consultaAccions" class="btn btn-outline-secondary rounded-circle">
+													<i class="fa-solid fa-ellipsis"></i>
+												</button>
+											</div>
+											<div class="collapse" id="consultaAccions" aria-labelledby="consultaAccions">
+												<div class=" d-flex justify-content-center align-items-center">
+													<a class="btn btn-outline-info rounded-circle mt-2" href="#">
+									    				<i class="fa-regular fa-eye"></i>
+									    			</a>
+									    		</div>	
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							{% endfor %}
+						</table>
+					{% else %}
+						<div >
+							<label class="alert alert-warning w-100">Nenhuma registro de peso encontrado!</label>
+						</div>
+					{% endif %}
+				</div>
+			</div>
 		</div>
 	</div>
-{% endif %}
-	<div class="col-md-6">
-		<div class="">
-			<h4 class="text-secondary font-weight-bold ml-3 mt-3">
-				<i class="bi bi-journal-text text-info"></i> Histórico Peso
-			</h4>
-				<div class="card-body">
-					{% for item in listpeso %}
-					<div class="text-secondary border-bottom pt-2">
-						<label><span class="text-info"> Peso(Kg):</span> {{ item.peso }}<span class="text-info"> em </span>
-						{{item.created}}
-						</label>
+
+	<div class="col-md-8">
+		<div class="border box-peso p-4">
+			{% if last_peso %}
+				<div class="row px-4">
+					<h4 class="font-weight-bold text-uppercase text-secondary w-75">
+						Peso em {{last_peso.created}}
+					</h4>
+					<div class="w-25 d-flex justify-content-end">
+						<a class="text-info" href="#">
+							<i class="fa-solid fa-pen"></i> Editar
+						</a>
 					</div>
-					{% endfor %}
 				</div>
+				<div class="mt-3">
+					<label class="text-info d-block">Criado em</label>
+					<label class="d-block text-secondary">{{last_peso.created}}</label>
+					<label class="text-info d-block">Peso</label>
+					<label class="d-block text-secondary">{{last_peso.peso}}</label>
+					<label class="text-info d-block">Anotações</label>
+					<label class="d-block text-secondary">{{last_peso.obs}}</label>
+				</div>
+			{% else %}
+				<p class="alert alert-warning"> Ainda não foi registrado nenhuma peso! </p>
+			{% endif %}
 		</div>
 	</div>
 </div>

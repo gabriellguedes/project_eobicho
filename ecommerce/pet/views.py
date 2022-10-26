@@ -118,7 +118,8 @@ def detailPet(request, pk):
     tutor = obj.tutor.id
     obj_cliente = User.objects.get(id=tutor)
     # Listar Peso        
-    list_peso = Peso.objects.filter(pet=obj.pk)    
+    list_peso = Peso.objects.filter(pet=obj.pk)
+    last_peso = Peso.objects.last()    
     
     # Add Peso
     if request.method == 'GET':
@@ -131,6 +132,7 @@ def detailPet(request, pk):
             'ficha': ficha,
             'last_fichas': last_fichas,
             'peso': form_peso,
+            'last_peso': last_peso,
             'listpeso': list_peso,
             'cliente': obj_cliente,
         }
@@ -152,6 +154,7 @@ def detailPet(request, pk):
                 'ficha': ficha,
                 'last_fichas': last_fichas,
                 'peso': form_peso,
+                'last_peso': last_peso,
                 'listpeso': list_peso,
                 'cliente': obj_cliente,
              }
