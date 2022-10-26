@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Meus Apps 
     'ecommerce.accounts',
     'ecommerce.core',
+    'ecommerce.consulta',
     'ecommerce.pet',
     'ecommerce.ficha',
     'ecommerce.services',
@@ -153,4 +154,4 @@ ROLEPERMISSIONS_MODULE = "ecommerce.roles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
 
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']

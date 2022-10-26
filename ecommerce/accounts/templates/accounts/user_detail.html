@@ -72,8 +72,8 @@
 					<a href="{% url 'pet:pet_detail' pk=item.id %}">
 			  				<div class="d-flex justify-content-center">
 								{% if item.photo.url != None %}
-								<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-										<img class="pet-img mb-2 mask" src="{{item.photo.url}}" alt="Foto de perfil do pet">
+								<div class="bg-image">
+										<img class="pet-img mb-2" src="{{item.photo.url}}" alt="Foto de perfil do pet">
 									</div>	
 						  							
 						  		{% else %}

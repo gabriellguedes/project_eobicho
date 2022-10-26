@@ -255,6 +255,11 @@ main{
 	border-radius: 10px;
 	box-shadow: 2px 5px 10px #a4a4a4; ;
 }
+/**** 2.2.3 - Consulta - Detail Pet ****/
+.consulta-title{
+	font-size: 16px;
+}
+
 .status-color{
 	color: green !important;
 }
