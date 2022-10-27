@@ -56,19 +56,19 @@
 			      <td>
 			      	<div class="text-center">
 			      		{% if user|can:'view_user_cliente' %}
-			      			<a class="btn btn-primary mr-2" href="{% url 'contas:cliente_detail' pk=item.id %}">
+			      			<a class="btn btn-outline-info rounded-circle mr-2" href="{% url 'contas:cliente_detail' pk=item.id %}">
 			      			<i class="fa-regular fa-eye"></i> 
 			      			
 			      			</a>
 			      		{% endif %}
 			      		{% if user|can:'update_user' %}
-				      		<a class="btn btn-warning text-white mr-2" href="{% url 'contas:user_update_for_adm' pk=item.id %}">
+				      		<a class="btn btn-outline-info rounded-circle mr-2" href="{% url 'contas:user_update_for_adm' pk=item.id %}">
 				      			<i class="fa-regular fa-pen-to-square"></i>
 				      		
 				      		</a>
 				      	{% endif %}
 				      	{% if user|can:'delete_user' %}
-				      		<a class="btn btn-danger text-white" href="{% url 'contas:cliente_delete' pk=item.id %}">
+				      		<a class="btn btn-outline-info rounded-circle" href="{% url 'contas:cliente_delete' pk=item.id %}">
 				      			<i class="fa-solid fa-trash"></i>
 				      			
 				      		</a>
