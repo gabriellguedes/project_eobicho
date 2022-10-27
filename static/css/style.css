@@ -242,6 +242,9 @@ main{
 	.dados-pet-header{
 		border-radius: 9px 9px 0 0;
 	}
+.title-detail{
+	font-size: 1.2rem;
+}
 /**** 2.2.1 - Peso - Detail Pet ****/
 .btn-peso{
 	min-height: 50px;
@@ -257,7 +260,7 @@ main{
 }
 /**** 2.2.3 - Consulta - Detail Pet ****/
 .consulta-title{
-	font-size: 16px;
+	font-size: 1.1rem;
 }
 
 .status-color{

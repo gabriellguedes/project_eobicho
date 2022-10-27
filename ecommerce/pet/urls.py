@@ -12,6 +12,9 @@ urlpatterns = [
     path('list_pet/', views.paginacao, name='pet_list'),
     path('update_pet/<int:pk>/', views.pet_update, name='pet_update'),
     path('detail_pet/<int:pk>/', views.detailPet, name='pet_detail'),
+    # Peso
+    path('add_peso/<int:pk>/', views.peso_add, name='peso_add'),
+    path('change_peso/<int:pk>/', views.peso_update, name='peso_update'),
     # Especies
     path('add_especie/', views.especie_add, name='especie_add'),
     path('addespecie/', views.add_Especie, name='add_Especie'),

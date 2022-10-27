@@ -5,10 +5,12 @@ from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from ecommerce.accounts.models import Profile
-from ecommerce.accounts.forms import ProfileForm, UserRegistrationForm
+from ecommerce.accounts.forms import ProfileForm, UserRegistrationForm, UserEditForm
+from ecommerce.core.models import TimeStampedModel
+from ecommerce.core.forms import TimeStampedForm
 from ecommerce.ficha.models import Ficha
 from ecommerce.ficha.forms import FichaForm
-from .forms import PetForm, PesoForm, RacaForm, EspecieForm
+from .forms import PetForm, PesoForm, PesoUpdateForm, RacaForm, EspecieForm
 from .models import Pet, Peso, Raca, Especie
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
@@ -112,53 +114,28 @@ def paginacao(request):
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def detailPet(request, pk):
     template_name ='pet/pet_detail.html'
+    
     obj = Pet.objects.get(id=pk)
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
     tutor = obj.tutor.id
     obj_cliente = User.objects.get(id=tutor)
-    # Listar Peso        
-    list_peso = Peso.objects.filter(pet=obj.pk)
-    last_peso = Peso.objects.last()    
     
-    # Add Peso
-    if request.method == 'GET':
-        form = PetForm()
-        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, extra=1)
-        form_peso = form_peso_factory()
-
-        context={
-            'pet': obj,
-            'ficha': ficha,
-            'last_fichas': last_fichas,
-            'peso': form_peso,
-            'last_peso': last_peso,
-            'listpeso': list_peso,
-            'cliente': obj_cliente,
-        }
-        return render(request, template_name, context=context)
-        
-    elif request.method == 'POST':
-        form = PetForm(request.POST)
-        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm)
-        form_peso = form_peso_factory(request.POST)
-        
-        if form_peso.is_valid():
-            form_peso.instance = obj
-            form_peso.save()
-            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
-        else:
-           
-            context = { 
-                'pet': obj,
-                'ficha': ficha,
-                'last_fichas': last_fichas,
-                'peso': form_peso,
-                'last_peso': last_peso,
-                'listpeso': list_peso,
-                'cliente': obj_cliente,
-             }
-            return render(request, template_name, context=context) 
+    # Listar Peso        
+    list_peso = Peso.objects.filter(pet=obj)
+    last_peso = list_peso.last()    
+    
+   
+   
+    context = { 
+        'pet': obj,
+        'ficha': ficha,
+        'last_fichas': last_fichas,
+        'last_peso': last_peso,
+        'listpeso': list_peso,
+        'cliente': obj_cliente,
+     }
+    return render(request, template_name, context=context) 
 #Atualização
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_update(request, pk):
@@ -188,6 +165,67 @@ def pet_update(request, pk):
                 'raca': raca
             }
             return render(request, template_name, context=context)
+
+#Adicionar peso ao pet 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+def peso_add(request, pk):
+    template_name='pet/peso_add.html'
+    
+    obj = Pet.objects.get(pk=pk)
+
+     # Add Peso
+    if request.method == 'GET':
+        form = PetForm()
+
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, extra=1, can_delete=False)
+        form_peso = form_peso_factory()
+
+        context={
+            'pet': form,
+            'form': form_peso,
+        }
+        return render(request, template_name, context=context)
+        
+    elif request.method == 'POST':
+        form = PetForm(request.POST)
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, can_delete=False)
+        form_peso = form_peso_factory(request.POST)
+        
+        if form_peso.is_valid():
+            form = form_peso.save(commit=False)
+            form[0].user = request.user
+            form_peso.instance = obj
+            form_peso.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
+        else:
+            context = {
+                'form': form_peso,
+            }
+            print('Deu erro! Caiu no else ...')
+            return render(request, template_name, context=context)
+
+def peso_update(request, pk):
+    template_name = 'pet/peso_update.html'
+    obj = Peso.objects.get(id=pk)
+
+    if request.method == 'GET':
+        form = PesoUpdateForm(instance=obj)
+        context = { 'form': form }
+        return render(request, template_name, context=context)
+    
+    elif request.method == 'POST':
+        form = PesoUpdateForm(request.POST, instance=obj) 
+
+        if form.is_valid():
+            form.user = request.user
+            form.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': obj.pet.id }))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)
+
+
+
 
 # Add Espécie/Raça
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 

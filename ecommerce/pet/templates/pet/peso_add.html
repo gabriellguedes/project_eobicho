@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% block title %}
+	Adicionar Peso
+{% endblock title %}
+{% block content %}
+<section class="container">
+	<div class="col-md-4">
+		<form action="." method="POST">
+			{% csrf_token %}
+			<legend class="text-secondary">Adicionar peso</legend>
+			{{form.management_form}}
+			{% for item in form %}
+				<p>{{item.peso|bootstrap}}</p>
+				<p>{{item.obs|bootstrap}}</p>
+
+			{% endfor %}
+			<button class="btn btn-info" type="submit">Adicionar</button>
+		</form>
+	</div>		
+</section>
+{% endblock %}
