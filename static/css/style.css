@@ -22,6 +22,9 @@ body{
 .help-block {
 	color: red !important;
 }
+.button_accion{
+	display: none;
+}
 /********************************************************************
  1.0 - Header
 ********************************************************************/
@@ -385,6 +388,9 @@ main{
 	.block-none{
 		display: none !important;
 	}
+	.button_accion{
+		display: block !important;
+	}
 	#form_update_01{
 		width: 100% !important;
 	}
@@ -400,6 +406,9 @@ main{
 .block-none{
 		display: none !important;
 	}
+.button_accion{
+	display: block !important;
+}
 /***********************************
  * HEADER - 1.0
  **********************************/

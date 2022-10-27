@@ -12,7 +12,7 @@ class Doenca(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.doenca)
+		return  self.doenca
 
 class Pele(models.Model):
 	tipo_pele = models.CharField('Outros', max_length=100)
@@ -21,7 +21,7 @@ class Pele(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.tipo_pele)		
+		return self.tipo_pele
 
 class Ectoparasitas(models.Model):
 	ectoparasitas = models.CharField('Ectoparasitas',  max_length=100)
@@ -30,7 +30,7 @@ class Ectoparasitas(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.ectoparasitas)	
+		return self.ectoparasitas
 
 class Infec_pele(models.Model):
 	peleInfeccionada = models.CharField('Infecção na Pele', max_length=100)
@@ -38,7 +38,7 @@ class Infec_pele(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.peleInfeccionada)		
+		return self.peleInfeccionada		
 
 class Pelos(models.Model):
 	pelos = models.CharField('Pelos', max_length=100)
@@ -47,7 +47,7 @@ class Pelos(models.Model):
 		ordering =('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.pelos)
+		return self.pelos
 
 class Estado_pelos(models.Model):	
 	pelosEstado = models.CharField('Estado do Pelo', max_length=100)
@@ -55,7 +55,7 @@ class Estado_pelos(models.Model):
 		ordering =('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.pelosEstado)
+		return self.pelosEstado
 
 class Condicao_pelos(models.Model):
 	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100)
@@ -63,34 +63,34 @@ class Condicao_pelos(models.Model):
 		ordering =('pk',)
 
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.pelosCondicao)
+		return self.pelosCondicao
 
 class Boca(models.Model):
 	boca = models.CharField('', max_length=100)
 	class Meta:
 		ordering = ('pk',)
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.boca)	
+		return self.boca	
 
 class Unhas(models.Model):
 	unhas = models.CharField('', max_length=100)
 	class Meta:
 		ordering = ('pk',)
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.unhas)
+		return self.unhas
 
 class Olhos(models.Model):
 	olhos = models.CharField('', max_length=100)
 	class Meta:
 		ordering = ('pk',)
 	def __str__(self):
-		return '{}-{}'.format(self.pk, self.olhos)
+		return self.olhos
 class Patas(models.Model):
 	patas = models.CharField('', max_length=100)
 	class Meta:
 		ordering = ('pk',)
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.patas)
+		return self.patas
 
 class Orelhas(models.Model):
 	orelhas = models.CharField('', max_length=100)
@@ -98,7 +98,7 @@ class Orelhas(models.Model):
 		ordering = ('pk',)
 	
 	def __str__(self):
-		return '{} - {}'.format(self.pk, self.orelhas)
+		return self.orelhas
 
 class Ficha(models.Model):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')

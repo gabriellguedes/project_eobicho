@@ -33,4 +33,4 @@ class PesoForm(forms.ModelForm):
 class PesoUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Peso
-		fields = ('peso', 'obs', 'user')
+		fields = ('peso', 'obs')

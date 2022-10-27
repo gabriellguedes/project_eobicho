@@ -1,15 +1,21 @@
 {% extends 'core/base.html' %}
 {% load bootstrap %}
 {% block content %}
-<section class="container">
+<section class="container mt-4">
+	<h3 class="border-bottom pb-2 mb-4">
+		<i class="fa-solid fa-weight-hanging text-info"></i>
+		<span class="font-weight-bold text-secondary text-uppercase text-monospace">
+			Alterar Peso
+		</span>
+	</h3>
 	<div class="col-md-4">
 		<form action="." method="POST">
-			<legend class="text-secondary">Alterar Peso</legend>
 			{% csrf_token %}
 			{% for item in form %}
 				<div disabled>{{item|bootstrap}}</div>
 			{% endfor %}
 			<button type="submit" class="btn btn-info">Alterar</button>
+			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:pet_detail' pk=pet.id %}'">Cancelar</button>
 		</form>
 	</div>
 </section>
