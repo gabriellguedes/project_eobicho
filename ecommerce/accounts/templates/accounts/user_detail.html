@@ -8,7 +8,7 @@
 {% if user|can:'view_user_cliente' %}
 <div class="container py-4">
 
-	{% if cliente.cpf == None or endereco.cep == None  %}
+	{% if cliente.cpf == '' or endereco.cep == ''  %}
 		<div>
 			<a href="{% url 'contas:cliente_update' pk=user.id %}">
 				<p class="alert alert-primary text-center"> 
