@@ -55,7 +55,7 @@
 		      <td>
 		      	<div class="d-flex justify-content-center">
 		      		{% if user|can:'view_ficha' %}
-				      	<a class="btn btn-outline-info rounded-circle" href="{% url 'fichas:ficha_detail' pk=iten.pet.pk n=iten.pk%}">
+				      	<a class="btn btn-outline-info rounded-circle py-2" href="{% url 'fichas:ficha_detail' pk=iten.pet.pk n=iten.pk%}">
 				      		<i class="fa-regular fa-eye"></i>
 				      	</a>
 				    {% endif %}
