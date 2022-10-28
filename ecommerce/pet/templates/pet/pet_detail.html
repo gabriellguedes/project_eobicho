@@ -34,7 +34,7 @@
     	<a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
   </li>
   <li class="nav-item">
-    	<a class="nav-link disabled" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
+    	<a class="nav-link" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
   </li>
   <li class="nav-item">
     	<a class="nav-link disabled" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
@@ -67,7 +67,7 @@
     </section>
 	<!-- Vacinas -->
 	<section class="tab-pane fade " id="vacinas" role="tabpanel" aria-labelledby="vacinas-tab">
-		<h4 class="text-secondary">Vacinas</h4>
+		{% include 'pet/includes/pet_vacinas.html' %}
 	</section>
 	<!-- Prescrições -->
 	<section class="tab-pane fade " id="prescricoes" role="tabpanel" aria-labelledby="prescricoes-tab">

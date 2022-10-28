@@ -157,6 +157,7 @@ def user_list(request):
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_detail(request, pk):
 	template_name = 'accounts/user_detail.html'
+	context={}
 	user = request.user
 	tutor = User.objects.get(id=pk)
 
@@ -165,13 +166,12 @@ def user_detail(request, pk):
 	try:
 		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
-		cliente =''
+		cliente = ''
 
-	try:
+	try:		
 		endereco = Endereco.objects.get(user=cliente)
 	except (ObjectDoesNotExist, ValueError):
-		endereco = ''
-
+		endereco = Endereco()		
 	pet_cliente = Pet.objects.filter(tutor=tutor)
 
 	pet = Pet.objects.filter(tutor=user)
@@ -185,6 +185,8 @@ def user_detail(request, pk):
 		'tutor': tutor,
 		'pet_cliente': pet_cliente,
 	}
+	
+
 	return render(request, template_name, context=context)
 
 # Atualização Cliente Feita pelo Cliente

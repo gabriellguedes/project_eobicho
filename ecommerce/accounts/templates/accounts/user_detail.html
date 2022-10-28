@@ -7,13 +7,14 @@
 
 {% if user|can:'view_user_cliente' %}
 <div class="container py-4">
+	
+	{% if endereco.cep == None %}
 
-	{% if cliente.cpf == '' or endereco.cep == ''  %}
 		<div>
 			<a href="{% url 'contas:cliente_update' pk=user.id %}">
 				<p class="alert alert-primary text-center"> 
 					<i class="fa-solid fa-triangle-exclamation"></i>
-					{{ request.user.first_name }} seu perfil está incompleto, clique aqui para adicionar as informações que faltam!
+					Olá <span class="font-weight-bold">{{ request.user.first_name }} </span> seu perfil está incompleto, clique aqui para adicionar as informações que faltam! 
 				</p>
 			</a>
 		</div>

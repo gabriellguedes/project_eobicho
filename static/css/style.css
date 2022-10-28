@@ -22,6 +22,12 @@ body{
 .help-block {
 	color: red !important;
 }
+.text-shadow-info{
+	text-shadow: 1px 1px 1px #17a2b8 !important;
+}
+.bg-lightgray{
+	background-color: lightgray !important;
+}
 .button_accion{
 	display: none;
 }
