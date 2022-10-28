@@ -10,7 +10,7 @@
 	<div class="row my-5 mw-100">
 		<!-- AREA 01 - VACINAS -->
 		<!-- BOTÕES PARA ADICIONAR LEMBRETE/VACINA -->
-		<div class="col-md-4 px-4">
+		<div class="col-md-4 px-4 mb-4">
 			<div class="pl-4">
 				<button type="button" class="btn btn-lg btn-outline-info btn-peso ml-3 " onclick="location.href='{% url 'pet:peso_add' pk=pet.id %}'">
 					<i class="fa-solid fa-plus"></i>
@@ -27,7 +27,7 @@
 		<!-- AREA 02 - VACINAS -->
 		<!-- HISTORICO DE VACINAS -->
 		<div class="col-md-8 px-4">
-			<div class="mb-4 pt-3">
+			<div class="mb-4 pt-3 pl-5">
 				<input type="checkbox" name="lembrete" id="lembrete_vacina"> 
 				<label class="text-info" for="lembrete_vacina"> Mostrar lembretes </label>
 			</div>
@@ -35,19 +35,19 @@
 				<table class="table table-hover mw-100">
 					<thead>
 						<tr>
-							<th scope="col">Programação</th>
+							<th class="block-none" scope="col">Programação</th>
 							<th scope="col">Vacina</th>
 							<th scope="col">Dose</th>
-							<th scope="col">Aplicação</th>
+							<th class="block-none" scope="col">Aplicação</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="col"></th>
-							<td></td>
-							<td></td>
-							<td></td>
+							<th class="block-none" scope="col"></th>
+							<td ></td>
+							<td ></td>
+							<td class="block-none"></td>
 							<td>
 								<button type="button" data-toggle="collapse" href="#consultaAccions{{item.id}}" role="button" aria-expanded="True" aria-controls="consultaAccions" class="btn btn-outline-info rounded-circle">
 													<i class="fa-solid fa-ellipsis"></i>
