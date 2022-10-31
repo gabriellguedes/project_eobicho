@@ -77,26 +77,26 @@
             </a>
                   
             <div class="collapse" id="ItensProntuario" aria-labelledby="ItensProntuario">
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:boca_list' %}">Boca</a>
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:doenca_list' %}">Doenças</a>
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:olhos_list' %}">Olhos</a>
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:orelhas_list' %}">Orelhas</a>
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:patas_list' %}">Patas</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:boca:boca_list' %}">Boca</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:doenca:doenca_list' %}">Doenças</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:olhos:olhos_list' %}">Olhos</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:orelhas:orelhas_list' %}">Orelhas</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:patas:patas_list' %}">Patas</a>
               <a class="dropdown-item bg-secondary text-white" data-toggle="collapse" href="#Pele" role="button" aria-expanded="false" aria-controls="pele">Pele</a>
              
                 <div class="collapse" id="Pele" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pele_list' %}">Tipos de Pele</a>
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:infec_pele_list' %}">Doenças de Pele</a>
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:ectoparasitas_list' %}">Ectoparasitas</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pele:pele_list' %}">Tipos de Pele</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pele:infec_pele_list' %}">Doenças de Pele</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pele:ectoparasitas_list' %}">Ectoparasitas</a>
                 </div> 
               
               <a class="dropdown-item bg-secondary text-white" data-toggle="collapse" href="#Pelos" role="button" aria-expanded="false" aria-controls="Pelos">Pelos</a>
                 <div class="collapse" id="Pelos" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos_list' %}">Tipos de Pelos</a>
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:estado_pelos_list' %}">Estado dos Pelos</a>
-                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:condicao_pelos_list' %}">Condição dos Pelos</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:pelos_list' %}">Tipos de Pelos</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:estado_pelos_list' %}">Estado dos Pelos</a>
+                  <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:condicao_pelos_list' %}">Condição dos Pelos</a>
                 </div> 
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:unhas_list' %}">Unhas</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:unhas:unhas_list' %}">Unhas</a>
             </div> 
           </li>
           
@@ -107,8 +107,8 @@
               </span>
             </a>
             <div class="collapse" id="ItensCadastroPet" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:especie_list' %}"> Espécies</a>
-              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:raca_list' %}">Raças</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:especie:especie_list' %}"> Espécies</a>
+              <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:raca:raca_list' %}">Raças</a>
             </div> 
           </li>
           {% endif %}

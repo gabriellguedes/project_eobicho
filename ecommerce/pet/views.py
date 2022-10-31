@@ -9,7 +9,9 @@ from ecommerce.accounts.forms import ProfileForm, UserRegistrationForm, UserEdit
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.core.forms import TimeStampedForm
 from ecommerce.ficha.models import Ficha
+from ecommerce.ficha.peso.models import Peso
 from ecommerce.ficha.forms import FichaForm
+from ecommerce.ficha.peso.forms import PesoForm
 from .forms import PetForm
 from .models import Pet
 from django.views.generic import UpdateView
@@ -165,3 +167,34 @@ def pet_update(request, pk):
                 'raca': raca
             }
             return render(request, template_name, context=context)
+
+#Select Espécie e Raça Add Pet por um funcionário
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_funcoes(request):
+    template_name = 'pet/funcao_ajax.html'
+    especie_id = request.GET.get('id_especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+# Select Espécie e Raça Add Pet por um Cliente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_cliente(request):
+    template_name = 'pet/cliente_ajax.html'
+    especie_id = request.GET.get('id_pet_set-0-especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+# Select Espécie e Raça Add Pet por um Cliente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_update_pet(request):
+    template_name = 'pet/update_pet_ajax.html'
+    especie_id = request.GET.get('id_especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)

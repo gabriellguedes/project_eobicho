@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="container py-4">
+	<form method="POST" action=".">
+		<legend class="border-bottom text-secondary font-weight-bold pb-3">
+			<i class="bi bi-card-checklist text-info"></i> Atualizar Raça
+		</legend>
+		{% csrf_token %}
+		
+		<div class="col-sm-4 my-4">
+			{% for field in raca %}
+				<p>{{field|bootstrap}}</p>
+			{% endfor %}
+
+			{{caracteristicas.management_form}}
+			{% for item in caracteristicas %}
+				<p>{{ item|bootstrap}}</p>
+			{% endfor %}
+			
+			<div class="d-flex justify-content-end mx-3 my-3">
+				<button class="btn btn-info mr-3" type="submit">
+					<i class="fa-solid fa-plus"></i> Atualizar
+				</button>
+				
+				<button class="btn btn-danger" type="button" onclick="location.href='{% url 'fichas:raca:raca_list' %}'">
+	  				<i class="fa-solid fa-xmark"></i> Cancelar
+				</button>
+			</div>	
+		</div>
+		
+				
+	</form>
+</section>
+{% endblock %}
