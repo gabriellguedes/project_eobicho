@@ -4,11 +4,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from ecommerce.pet.models import Pet
-from .models import Ficha, Pele, Doenca, Ectoparasitas, Infec_pele, Pelos, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
-from .forms import FichaForm, PeleForm, DoencaForm, EctoparasitasForm, Infec_peleForm, PelosForm, Estado_pelosForm, Condicao_pelosForm, BocaForm, UnhasForm, OlhosForm, OrelhasForm, PatasForm
+from .models import *
+from .forms import *
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
+################################################################################
 # Criar uma nova ficha
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def prontuario_create(request, pk):
@@ -89,6 +90,7 @@ def prontuario_detail(request, pk, n):
      }
     return render(request, template_name, context)
 
+#################################################################################
 # Adicionar Novo Tipo de Pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_add(request):
@@ -144,6 +146,7 @@ def pele_delete(request, pk):
     else:
         msg = 'Item não encotrado'
 
+#################################################################################
 # Criar uma Doença
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_add(request):
@@ -196,6 +199,7 @@ def doenca_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
 
+#################################################################################
 # Adicionar Ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_add(request):
@@ -249,6 +253,7 @@ def ectoparasitas_delete(request, pk):
         context = {'form':form}
         return render(request, context=context)
 
+#################################################################################
 # Add infec_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def infec_pele_add(request):
@@ -301,6 +306,7 @@ def infec_pele_delete(request, pk):
         context = {'msg': msg }
         return render(request, context=context)    
 
+#################################################################################
 # Adicionar Novo Tipo de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_add(request):
@@ -359,7 +365,7 @@ def pelos_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
    
-
+#################################################################################
 # Adicionar Novo condição de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_add(request):
@@ -418,7 +424,7 @@ def estado_pelos_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
    
-
+#################################################################################
 # Adicionar Novo Tipo de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_add(request):
@@ -477,7 +483,7 @@ def condicao_pelos_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
    
-
+#################################################################################
 #Boca
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def boca_add(request):
@@ -535,7 +541,8 @@ def boca_delete(request, pk):
         msg = 'Item não encotrado'
         context = {'msg': msg}
         return render(request, context=context)
-   
+
+#################################################################################   
 #Unhas 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def unhas_add(request):
@@ -594,6 +601,7 @@ def unhas_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
 
+#################################################################################
 #Olhos 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def olhos_add(request):
@@ -652,6 +660,7 @@ def olhos_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
 
+#################################################################################
 #Orelhas 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_add(request):
@@ -710,6 +719,7 @@ def orelhas_delete(request, pk):
         context = {'msg': msg}
         return render(request, context=context)
 
+#################################################################################
 #Patas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_add(request):
@@ -767,3 +777,236 @@ def patas_delete(request, pk):
         msg = 'Item não encotrado'
         context = {'msg': msg}
         return render(request, context=context)
+
+#################################################################################
+#Adicionar peso ao pet 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+def peso_add(request, pk):
+    template_name='itens_ficha/peso/peso_add.html'
+    
+    obj = Pet.objects.get(pk=pk)
+
+     # Add Peso
+    if request.method == 'GET':
+        form = PetForm()
+
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, extra=1, can_delete=False)
+        form_peso = form_peso_factory()
+
+        context={
+            'pet': obj,
+            'form': form_peso,
+        }
+        return render(request, template_name, context=context)
+        
+    elif request.method == 'POST':
+        form = PetForm(request.POST)
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, can_delete=False)
+        form_peso = form_peso_factory(request.POST)
+        
+        if form_peso.is_valid():
+            form = form_peso.save(commit=False)
+            form[0].user = request.user
+            form_peso.instance = obj
+            form_peso.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
+        else:
+            context = {
+                'form': form_peso,
+                'pet': obj,
+            }
+            return render(request, template_name, context=context)
+# Alterar Peso do Pet            
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+def peso_update(request, pk):
+    template_name = 'itens_ficha/peso/peso_update.html'
+    obj = Peso.objects.get(id=pk)
+    pet = obj.pet
+
+    if request.method == 'GET':
+        form = PesoUpdateForm(instance=obj)
+        context = { 'form': form, 'pet': pet }
+        return render(request, template_name, context=context)
+    
+    elif request.method == 'POST':
+        form = PesoUpdateForm(request.POST, instance=obj) 
+
+        if form.is_valid():
+            
+            form.user = request.user
+            form.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': obj.pet.id }))
+        else:
+            context = { 'form': form, 'pet': pet }
+            return render(request, template_name, context=context)
+
+#################################################################################
+# Add Espécie/Raça
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+def especie_add(request):
+    template_name = 'cad_pet/especie_add.html'
+    
+    if request.method == 'GET':
+        form = EspecieForm()
+        form_raca_factory = inlineformset_factory(Especie, Raca, form=RacaForm, extra=1, can_delete=False)
+        form_raca = form_raca_factory()
+
+        context = {
+            'form': form,
+            'form_raca': form_raca,
+        }
+        return render(request, template_name, context=context)
+
+    elif request.method == 'POST':
+        form = EspecieForm(request.POST)
+        form_raca_factory = inlineformset_factory(Especie, Raca, form=RacaForm, extra=1)
+        form_raca = form_raca_factory(request.POST)
+        
+        if form.is_valid() and form_raca.is_valid():
+            especie = form.save()
+            form_raca.instance = especie
+            form_raca.save()
+            return HttpResponseRedirect(reverse('fichas:especie_list'))
+        else:
+            context = {
+             'form': form,
+             'form_raca': form_raca
+            }
+            return render(request, template_name, context=context)
+# Adicionar uma nova Especie
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def add_Especie(request):
+    template_name = 'cad_pet/especie_add.html'
+    form = EspecieForm(request.POST or None)
+    if request.method=='POST':
+        if form.is_valid():
+            form = form.save()
+            return HttpResponseRedirect(reverse('fichas:especie_list'))
+    context ={'form': form}      
+    return render(request, template_name, context=context)
+# Listar as Especies
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def list_Especie(request):
+    template_name = 'cad_pet/especie_list.html'
+    obj = Especie.objects.all()
+    context = { 'especie': obj }
+    return render(request, template_name, context=context)
+# Deletar uma Especie
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def delete_Especie(request, pk):
+    obj = Especie.objects.get(id=pk)
+    obj.delete()
+    
+    return HttpResponseRedirect(reverse('fichas:especie_list'))
+# Atualizar/Alterar Espécies
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def update_Especie(request, pk):
+    template_name = 'cad_pet/especie_update.html'
+    obj_especie = Especie.objects.get(id=pk)
+    if request.method == 'GET':
+        form = EspecieForm(instance=obj_especie)
+        context = { 'form': form }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = EspecieForm(request.POST, instance=obj_especie)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:especie_list'))
+        else:
+            context = { 'form': form }
+            return render(request, template_name, context=context)
+
+#################################################################################
+# Adicionar Raça
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def add_Raca(request):
+    template_name = 'cad_pet/raca_add.html'
+    if request.method == 'GET':
+
+        form = RacaForm()
+        caracteristicas_factory_form = inlineformset_factory(Raca, Caracteristicas_Raca, form=Caracteristicas_RacaForm, extra=1, can_delete=False )
+        caracteristicas_form = caracteristicas_factory_form()
+        context = { 
+            'raca': form,
+            'caracteristicas': caracteristicas_form,
+        }
+        return render(request, template_name, context=context)
+    if request.method=='POST':        
+        form = RacaForm(request.POST)
+        caracteristicas_factory_form = inlineformset_factory(Raca, Caracteristicas_Raca, form=Caracteristicas_RacaForm, extra=1, can_delete=False )
+        caracteristicas_form = caracteristicas_factory_form(request.POST)
+        if form.is_valid() and caracteristicas_form.is_valid():
+            raca = form.save()
+            caracteristicas_form.instance = raca
+            caracteristicas_form.save()
+            return HttpResponseRedirect(reverse_lazy('fichas:raca_list'))
+        else:
+            context = {
+                'raca': form,
+                'caracteristicas': caracteristicas_form,
+            }
+            return render(request, template_name, context)
+# Listar Todas as Raças
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def list_Raca(request):
+    template_name ='cad_pet/raca_list.html'
+    raca = Raca.objects.all()
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+# Atualizar/Alterar Raças
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def update_Raca(request, pk):
+    template_name = 'cad_pet/raca_update.html'
+    obj_raca =  Raca.objects.get(id=pk)
+    if request.method == 'GET':
+        form = RacaForm(instance=obj_raca)
+        context = { 'form': form }
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = RacaForm(request.POST, instance=obj_raca)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:raca_list'))
+        else:
+            context = { 'form': form}
+            return render(request, template_name, context=context)
+# Deletar uma Raça
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def delete_Raca(request, pk):
+    obj = Raca.objects.get(id=pk)
+    obj.delete()
+
+    return HttpResponseRedirect(reverse('fichas:raca_list'))
+
+#Select Espécie e Raça Add Pet por um funcionário
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_funcoes(request):
+    template_name = 'pet/funcao_ajax.html'
+    especie_id = request.GET.get('id_especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+# Select Espécie e Raça Add Pet por um Cliente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_cliente(request):
+    template_name = 'pet/cliente_ajax.html'
+    especie_id = request.GET.get('id_pet_set-0-especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)
+# Select Espécie e Raça Add Pet por um Cliente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def load_update_pet(request):
+    template_name = 'pet/update_pet_ajax.html'
+    especie_id = request.GET.get('id_especie')
+    raca = Raca.objects.filter(especie=especie_id)
+    context = {
+        'raca': raca,
+    }
+    return render(request, template_name, context=context)

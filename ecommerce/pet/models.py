@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.pet.tuplas import Tuplas
+
 import uuid
 import os 
 
@@ -11,26 +12,8 @@ t = Tuplas()
 
 def upload_image_formater(instance, filename):
 	return f'{str(uuid.uuid4())}-{filename}'
- 
 
-class Especie(models.Model):
-	especie = models.CharField(max_length=100, unique=True)
 
-	class Meta:
-		ordering = ('pk',)
-
-	def __str__(self):
-		return self.especie
-
-class Raca(models.Model):
-	especie = models.ForeignKey(Especie, on_delete=models.CASCADE, related_name='raças')
-	raca = models.CharField(max_length=100, unique=True)
-
-	class Meta:
-		ordering = ('pk',)
-	
-	def __str__(self):
-		return '{} - {}'.format(self.especie, self.raca)
 
 class Pet(models.Model):
 	photo = models.ImageField('Foto do Pet', upload_to=upload_image_formater, blank=True, null=True)
@@ -41,8 +24,6 @@ class Pet(models.Model):
 	type_pelo = models.CharField('Pelo', max_length=150, blank=True, null=True, choices=t.TYPE_PELO_CHOICES)
 	coloracao = models.CharField('Coloração',max_length=60, blank=True, null=True, choices=t.COLORACAO_CHOICES)
 	temperamento = models.CharField('Temperamento', max_length=60, choices=t.TEMPERAMENTO_CHOICES, default=None, null=True)
-	especie = models.ForeignKey(Especie, on_delete=models.SET_NULL, null=True, blank=True)
-	raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, null=True, blank=True)
 	sexo = models.CharField('Sexo', max_length=10, choices=t.SEXO_CHOICES,default=True)
 	castracao = models.BooleanField('Castrado(a)', default=False)
 	status = models.BooleanField(default=True)
@@ -70,15 +51,5 @@ class Pet(models.Model):
 		return '{} - {} - {}'.format(self.nome, self.id, self.status)
 
 
-class Peso(TimeStampedModel):
-	peso = models.DecimalField('Peso(kg)', max_digits=6, decimal_places=3)
-	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-	obs = models.TextField('Anotações', null=True, blank=True)
-	user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
 
-	class Meta:
-		ordering = ('created',)
-
-	def __str__(self):
-		return '{} - {}'.format(self.peso, self.created.strftime('%d-%m-%Y'))
 

@@ -6,6 +6,51 @@ from ecommerce.core.models import TimeStampedModel
 
 t = Tuplas()
 
+class Peso(TimeStampedModel):
+	peso = models.DecimalField('Peso(kg)', max_digits=6, decimal_places=3)
+	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+	obs = models.TextField('Anotações', null=True, blank=True)
+	user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
+
+	class Meta:
+		ordering = ('created',)
+
+	def __str__(self):
+		return '{} - {}'.format(self.peso, self.created.strftime('%d-%m-%Y'))
+
+
+
+class Especie(models.Model):
+	especie = models.CharField('Espécie', max_length=100, unique=True)
+
+	class Meta:
+		ordering = ('pk',)
+
+	def __str__(self):
+		return self.especie
+
+class Raca(models.Model):
+	especie = models.ForeignKey(Especie, on_delete=models.CASCADE, verbose_name='Espécie', related_name='raças')
+	raca = models.CharField('Raça',max_length=100, unique=True)
+
+	class Meta:
+		ordering = ('pk',)
+	
+	def __str__(self):
+		return '{} - {}'.format(self.especie, self.raca)
+
+class Caracteristicas_Raca(models.Model):
+	raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
+	porte = models.CharField('Porte', max_length=15, choices=t.PORTE_RACAS_CHOICES)
+	altura = models.PositiveIntegerField('Altura (cm)',)
+	comprimento = models.PositiveIntegerField('Comprimento (cm)',)
+
+	class Meta:
+		ordering = ('pk',)
+
+	def __str__(self):
+		return self.pk 
+
 class Doenca(models.Model):
 	doenca = models.CharField(max_length=150)
 	class Meta:

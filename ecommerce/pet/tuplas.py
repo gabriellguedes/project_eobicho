@@ -1,5 +1,11 @@
 
 class Tuplas():
+	PORTE_RACAS_CHOICES = (
+		('Pequeno', 'Pequeno'),
+		('Medio', 'Médio'),
+		('Grande', 'Grande'),
+		('Gigante', 'Gigante'),
+	)
 
 	CARGOS_CHOICES = (
 		('Gerente', 'Gerente'),

@@ -1,5 +1,34 @@
 from django import forms
-from .models import Ficha, Pele, Pelos, Doenca, Ectoparasitas, Infec_pele, Estado_pelos, Condicao_pelos, Boca, Unhas, Olhos, Orelhas, Patas
+from .models import *
+
+class Caracteristicas_RacaForm(forms.ModelForm):
+	class Meta:
+		model= Caracteristicas_Raca
+		fields = '__all__'
+
+class PesoForm(forms.ModelForm):
+	class Meta:
+		model = Peso
+		fields = ('peso', 'obs')
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['peso'].widget.attrs.update({'class': 'mask-peso'})
+
+class PesoUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Peso
+		fields = ('peso', 'obs')
+
+class EspecieForm(forms.ModelForm):
+	class Meta:
+		model = Especie
+		fields = '__all__'
+
+class RacaForm(forms.ModelForm):
+	class Meta:
+		model = Raca
+		fields = '__all__'
 
 class DoencaForm(forms.ModelForm):
 	class Meta:

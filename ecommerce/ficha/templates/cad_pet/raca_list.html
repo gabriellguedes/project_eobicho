@@ -6,22 +6,24 @@
 	<div class="row border-bottom">
 		<div class="col-md-6">
 			<h2 class="text-secondary font-weight-bold">
-				<i class="fa-solid fa-paw text-info"></i> <span class="text-uppercase">Espécies cadastradas</span>
+				<i class="fa-solid fa-shield-dog text-info"></i>
+				<span class="text-uppercase"> Raças cadastradas</span>
 			</h2>
 		</div>	
 		<div class="col-md-6">
 			  <div class="d-flex justify-content-end">
-				<a class="btn btn-info mb-3 text-white" href="{% url 'pet:especie_add'  %}"><i class="fa-regular fa-plus"></i> Nova Espécie</a>
+				<a class="btn btn-info mb-3" href="{% url 'fichas:raca_add' %}">
+					<i class="fa-solid fa-plus"></i> Nova Raça</a>
 			</div>	
 		</div>
 	</div>	
+	
 	<div class="row">
 		<!-- MENSAGEM DE ALERTA -->
-		<div class="col-md-6 mt-4">
+		<div class="col-md-5 mt-4">
 			<div class="card">
-				<h3 class="card-header bg-primary text-white text-center mb-3 font-weight-bold">
-					<i class="fa-solid fa-triangle-exclamation"></i>  Atenção!
-				</h3>
+				<h3 class="card-header bg-primary text-white mb-3 text-center font-weight-bold">
+					<i class="fa-solid fa-triangle-exclamation"></i> Atenção!</h3>
 				<div class="card-text px-3">
 					<label class="text-justify pb-3">Cuidado ao <span class="text-primary font-weight-bold">excluir</span> ou <span class="text-primary font-weight-bold">editar</span> uma <span class="text-primary font-weight-bold">espécie</span>,  pois serão<span class="text-primary font-weight-bold"> apagados todas as raças</span> a ela vinculada e se  houver algum animal já cadastrado com alguma das raças, ocorrerá<span class="text-primary font-weight-bold"> erro de integridade</span> no banco de dados.
 					</label>
@@ -29,29 +31,31 @@
 			</div>	
 		</div>
 		<!-- TABELA DE EXIBIÇÃO DAS ESPÉCIES CADASTRADAS -->
-		<div class="col-md-6 mt-4">
+		<div class="col-md-7 mt-4">
 			<table class="table">
 				<thead>
 					<th scope="col">#</th>
-					<th scope="col"><i class="fa-solid fa-paw"></i> Espécie:</th>
+					<th class="block-none" scope="col"><i class="fa-solid fa-paw"></i> Espécie</th>
+					<th scope="col"><i class="fa-solid fa-shield-dog"></i> Raça</th>
 					<th class="text-center" scope="col">
 						<i class="fa-solid fa-gears"></i> Ações:
 					</th>
 				</thead>
 				<tbody>
-					{% for iten in especie %}
+					{% for iten in raca %}
 					<tr>
 						<th scope="col">{{iten.id}}</th>
+						<td class="block-none">{{iten.especie}}</td>
 						<td>
-							<a href="{% url 'pet:especie_update' pk=iten.id %}">{{iten.especie}}</a>
+							<a href="{% url 'fichas:raca_update' pk=iten.id %}">{{iten.raca}}</a>
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">
-								<a class="btn btn-warning text-white mr-3" href="{% url 'pet:especie_update' pk=iten.id %}">
+								<a class="btn btn-warning text-white mr-3" href="{% url 'fichas:raca_update' pk=iten.id %}">
 									<i class="fa-regular fa-pen-to-square"></i>
 								</a>
-								<a class="btn btn-danger" href="{% url 'pet:especie_delete' pk=iten.id %}">
-									<i class="fa-solid fa-trash"></i>
+								<a class="btn btn-danger" href="{% url 'fichas:raca_delete' pk=iten.id %}">
+									<i class="fa-solid fa-trash"></i> 
 								</a>
 							</div>
 						</td>
