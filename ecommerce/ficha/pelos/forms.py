@@ -6,6 +6,16 @@ class PelosForm(forms.ModelForm):
 		model = Pelos
 		fields = '__all__'
 
+class PelagemForm(forms.ModelForm):
+	class Meta:
+		model = Pelagem
+		fields = '__all__'
+
+class ColoracaoForm(forms.ModelForm):
+	class Meta:
+		model = Coloracao
+		fields = '__all__'
+
 class Estado_pelosForm(forms.ModelForm):
 	class Meta:
 		model = Estado_pelos

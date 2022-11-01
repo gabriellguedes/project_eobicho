@@ -182,4 +182,107 @@ def condicao_pelos_delete(request, pk):
         msg = 'Item não encotrado'
         context = {'msg': msg}
         return render(request, context=context)
-   
+
+# PELAGEM - CRIAR UM NOVO TIPO DE PELAGEM
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def pelagem_add(request):
+    template_name = 'pelos/pelagem_add.html'
+    if request.method == 'GET':
+        form = PelagemForm()
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = PelagemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos:pelagem_list'))
+        else:
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# ATUALIZAR/ALTERAR UM TIPODE PELAGEM
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def pelagem_update(request, pk):
+    template_name = 'pelos/pelagem_update.html'
+    obj = Pelagem.objects.get(id=pk)
+    if request.method == 'GET':
+        form = PelagemForm(instance=obj)
+        context = {'form':form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = PelagemForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos:pelagem_list'))
+        else:
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# LISTAR TODOS OS TIPOS DE PELAGEM CADASTRADOS
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def pelagem_list(request):
+    template_name = 'pelos/pelagem_list.html'
+    obj = Pelagem.objects.all()
+    context = {'form': obj}
+    return render(request, template_name, context=context)
+# DELETAR/APAGAR UM TIPO DE PELAGEM
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def pelagem_delete(request, pk):
+    objeto = Pelagem.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:pelos:pelagem_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)
+
+# COLORAÇÃO - ADICIONAR UMA NOVA COLORAÇÃO DOS PELOS
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def coloracao_add(request):
+    template_name = 'pelos/coloracao_add.html'
+    if request.method == 'GET':
+        form = ColoracaoForm()
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = ColoracaoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos:coloracao_list'))
+        else:
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# ATUALIZAR/ALTERAR UMA COLORAÇÃO CADASTRADA
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def coloracao_update(request, pk):
+    template_name = 'pelos/coloracao_update.html'
+    obj = Coloracao.objects.get(id=pk)
+    if request.method == 'GET':
+        form = ColoracaoForm(instance=obj)
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = ColoracaoForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:pelos:coloracao_list'))
+        else:
+            context = {'form': form}
+            return render(request, template_name, context=context)
+# LISTAR TODAS AS COLORAÇÕES CADASTRADAS    
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def coloracao_list(request):
+    template_name = 'pelos/coloracao_list.html'
+    obj = Coloracao.objects.all()
+    context = {'form': obj}
+    return render(request, template_name, context=context)
+# DELETAR/APAGAR UMA COLORAÇÃO CADASTRADA
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def coloracao_delete(request, pk):
+    objeto = Coloracao.objects.get(id=pk)
+    if objeto != None:
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:pelos:coloracao_list')) 
+    else:
+        msg = 'Item não encotrado'
+        context = {'msg': msg}
+        return render(request, context=context)

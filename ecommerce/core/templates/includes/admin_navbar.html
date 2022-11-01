@@ -65,6 +65,8 @@
                 <a class="dropdown-item bg-secondary text-white" data-toggle="collapse" href="#Pelos" role="button" aria-expanded="false" aria-controls="Pelos">Pelos</a>
                   <div class="collapse" id="Pelos" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:pelos_list' %}">Tipos de Pelos</a>
+                    <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:pelagem_list' %}">Pelagem</a>
+                    <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:coloracao_list' %}">Coloração</a>
                     <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:estado_pelos_list' %}">Estado dos Pelos</a>
                     <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:pelos:condicao_pelos_list' %}">Condição dos Pelos</a>
                   </div> 
@@ -81,6 +83,7 @@
               <div class="collapse" id="ItensCadastroPet" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:especie:especie_list' %}"> Espécies</a>
                 <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:raca:raca_list' %}">Raças</a>
+                <a class="dropdown-item bg-secondary text-white" href="{% url 'fichas:temperamento:temperamento_list' %}">Temperamento</a>
               </div> 
             </li>
           {% endif %}

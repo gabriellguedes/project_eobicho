@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'ecommerce.ficha.pele',
     'ecommerce.ficha.pelos',
     'ecommerce.ficha.peso',
+    'ecommerce.ficha.temperamento',
     'ecommerce.ficha.raca',
     'ecommerce.ficha.unhas',
     'ecommerce.pet',

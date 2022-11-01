@@ -19,5 +19,14 @@ urlpatterns = [
     path('list_condicao_pelos/', views.condicao_pelos_list, name='condicao_pelos_list'),
     path('update_condicao_pelos/<int:pk>/', views.condicao_pelos_update, name='condicao_pelos_update'),
     path('delete_condicao_pelos/<int:pk>/', views.condicao_pelos_delete, name='condicao_pelos_delete'),
-    
+    # PELAGEM
+    path('add_pelagem/', views.pelagem_add, name='pelagem_add'),
+    path('list_pelagens/', views.pelagem_list, name='pelagem_list'),
+    path('update_pelagem/<int:pk>/', views.pelagem_update, name='pelagem_update'),
+    path('delete_pelagem/<int:pk>/', views.pelagem_delete, name='pelagem_delete'),
+    #Colorações
+    path('add_coloracao/', views.coloracao_add, name='coloracao_add'),
+    path('list_coloracoes/', views.coloracao_list, name='coloracao_list'),
+    path('update_coloracao/<int:pk>/', views.coloracao_update, name='coloracao_update'),
+    path('delete_coloracao/<int:pk>/', views.coloracao_delete, name='coloracao_delete'),
 ]

@@ -2,6 +2,10 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from ecommerce.core.models import TimeStampedModel
+from ecommerce.ficha.raca.models import Raca
+from ecommerce.ficha.especie.models import Especie
+from ecommerce.ficha.pelos.models import Pelos, Pelagem, Coloracao
+from ecommerce.ficha.temperamento.models import Temperamento
 from ecommerce.pet.tuplas import Tuplas
 
 import uuid
@@ -13,17 +17,17 @@ t = Tuplas()
 def upload_image_formater(instance, filename):
 	return f'{str(uuid.uuid4())}-{filename}'
 
-
-
 class Pet(models.Model):
 	photo = models.ImageField('Foto do Pet', upload_to=upload_image_formater, blank=True, null=True)
 	tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 	nome = models.CharField('Nome',max_length=150)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
-	pelagem = models.CharField('Pelagem',max_length=150, choices=t.PELAGEM_CHOICES)
-	type_pelo = models.CharField('Pelo', max_length=150, blank=True, null=True, choices=t.TYPE_PELO_CHOICES)
-	coloracao = models.CharField('Coloração',max_length=60, blank=True, null=True, choices=t.COLORACAO_CHOICES)
-	temperamento = models.CharField('Temperamento', max_length=60, choices=t.TEMPERAMENTO_CHOICES, default=None, null=True)
+	especie = models.ForeignKey(Especie, on_delete=models.PROTECT)
+	raca = models.ForeignKey(Raca, on_delete=models.PROTECT)
+	temperamento = models.ForeignKey(Temperamento, on_delete=models.PROTECT)
+	coloracao = models.ForeignKey(Coloracao, on_delete=models.PROTECT)
+	type_pelo = models.ForeignKey(Pelos, on_delete=models.PROTECT)
+	pelagem = models.ForeignKey(Pelagem, on_delete=models.PROTECT)
 	sexo = models.CharField('Sexo', max_length=10, choices=t.SEXO_CHOICES,default=True)
 	castracao = models.BooleanField('Castrado(a)', default=False)
 	status = models.BooleanField(default=True)

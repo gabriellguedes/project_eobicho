@@ -21,6 +21,7 @@ urlpatterns = [
     path('pele/', include('ecommerce.ficha.pele.urls')),
     path('pelos/', include('ecommerce.ficha.pelos.urls')),
     path('peso/', include('ecommerce.ficha.peso.urls')),
+    path('temperamento/', include('ecommerce.ficha.temperamento.urls')),
     path('raca/', include('ecommerce.ficha.raca.urls')),
     path('unhas/', include('ecommerce.ficha.unhas.urls')),  
 ]
