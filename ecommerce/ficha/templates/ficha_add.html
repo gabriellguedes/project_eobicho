@@ -5,7 +5,7 @@
 <section class="container py-4">
   <form method="POST" action=".">
     {% csrf_token %}
-      <legend class="text-secondary font-weight-bold border-bottom pb-3 mb-4">
+      <legend class="text-secondary title-2 font-weight-bold border-bottom pb-3 mb-4">
         <i class="fa-solid fa-file text-info"></i>
         Inspeção {% if pet.sexo != 'Macho' %} da{% else %} do {% endif %} 
         <span class="text-info"> {{pet.nome}} </span>
