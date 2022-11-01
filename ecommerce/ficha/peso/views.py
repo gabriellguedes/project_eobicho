@@ -9,11 +9,10 @@ from .forms import *
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
-#################################################################################
 #Adicionar peso ao pet 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def peso_add(request, pk):
-    template_name='itens_ficha/peso/peso_add.html'
+    template_name='peso/peso_add.html'
     
     obj = Pet.objects.get(pk=pk)
 
@@ -50,7 +49,7 @@ def peso_add(request, pk):
 # Alterar Peso do Pet            
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def peso_update(request, pk):
-    template_name = 'itens_ficha/peso/peso_update.html'
+    template_name = 'peso/peso_update.html'
     obj = Peso.objects.get(id=pk)
     pet = obj.pet
 
