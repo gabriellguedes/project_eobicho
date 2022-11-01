@@ -33,7 +33,7 @@ $(document).ready(function(){
       });
 
     });
-
+/*
   $('#id_especie').change(function(){
       const url = $('#FormUpdatePet').attr("data-funcoes-url");
       especieId =  $(this).val();
@@ -45,20 +45,9 @@ $(document).ready(function(){
         }
       });
 
-    });
+    });*/
 
-  $('#id_especie').change(function(){
-      const url = $('#FormUpdatePet').attr("data-funcoes-url");
-      especieId =  $(this).val();
-      $.ajax({
-        url : url,
-        data : { 'id_especie': especieId},
-        success: function(data){
-          $("#id_raca").html(data);
-        }
-      });
 
-    });
 });
 
 $('#add-item').click(function(ev) {

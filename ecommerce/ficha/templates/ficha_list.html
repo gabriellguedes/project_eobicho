@@ -21,19 +21,19 @@
 	  <thead>
 	    <tr>
 	      <th class="text-center block-none" scope="col"><span class="font-weight-bold text-info">#</span></th>
-	      <th class="text-center block-none" scope="col"><i class="fa-regular fa-circle text-info"></i> Status</th>
-	      <th class="text-center" scope="col">
+	      <th class="text-center block-none text-secondary" scope="col"><i class="fa-regular fa-circle text-info"></i> Status</th>
+	      <th class="text-center text-secondary" scope="col">
 	      	<i class="fa-sharp fa-solid fa-shield-cat text-info"></i> Pet
 	      </th>
-	      <th class="text-center" scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
-	      <th class="text-center block-none" scope="col"><i class="fa-regular fa-calendar text-info"></i> Criado em:</th>
-	      <th class="text-center" scope="col"><i class="fa-solid fa-gears text-info"></i> Ações</th>
+	      <th class="text-center text-secondary" scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
+	      <th class="text-center text-secondary block-none" scope="col"><i class="fa-regular fa-calendar text-info"></i> Criado em:</th>
+	      <th class="text-center text-secondary" scope="col"><i class="fa-solid fa-gears text-info"></i> Ações</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  	 {% for iten in lista %}
 		    <tr>
-		   	  <th class="text-center block-none" scope="col">{{iten.pet.pk}}</th>
+		   	  <th class="text-center text-secondary text-secondary block-none" scope="col">{{iten.pet.pk}}</th>
 		   	  
 		      	<td class="text-center block-none">
 		      		{% if iten.pet.status %}
@@ -50,8 +50,8 @@
 		      		{{iten.pet.nome}} 
 		      	</a>
 		      </td>
-		      <td class="text-center">{{iten.pk}}</td>
-		      <td class="text-center block-none">{{iten.created}}</td>
+		      <td class="text-center text-secondary">{{iten.pk}}</td>
+		      <td class="text-center text-secondary block-none">{{iten.created}}</td>
 		      <td>
 		      	<div class="d-flex justify-content-center">
 		      		{% if user|can:'view_ficha' %}
@@ -73,7 +73,7 @@
 	<div class="row">
 		<!-- ITENS POR PÁGINA -->
 		<div class="col w-50">
-			<p class="">Itens por página:</p>
+			<p class="text-secondary">Itens por página:</p>
 			<nav>
 				<ul class="pagination pagination-sm">
 				{% for qnt in items_list %}

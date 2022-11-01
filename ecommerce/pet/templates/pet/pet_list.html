@@ -30,23 +30,23 @@
 		  <thead>
 		    <tr>
 		      <th class="text-info" scope="col">#</th>
-		      <th class="block-none text-center" scope="col">
+		      <th class="block-none text-center text-secondary" scope="col">
 		      	<i class="fa-solid fa-user text-info"></i> Tutor
 		      </th>
-		      <th class="block-none text-center" scope="col">
+		      <th class="block-none text-center text-secondary" scope="col">
 		      	<i class="fa-regular fa-circle text-info"></i> Status
 		      </th>
-		      <th class="text-center" scope="col"><i class="fa-sharp fa-solid fa-shield-cat text-info"></i> Pet</th>
-		      <th class="block-none text-center" scope="col"><i class="fa-solid fa-paw text-info"></i> Espécie</th>
-		      <th class="text-center" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
+		      <th class="text-center text-secondary" scope="col"><i class="fa-sharp fa-solid fa-shield-cat text-info"></i> Pet</th>
+		      <th class="block-none text-center text-secondary" scope="col"><i class="fa-solid fa-paw text-info"></i> Espécie</th>
+		      <th class="text-center text-secondary" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	 {% for pet in pets %}
 			    <tr>
-			   	  <th scope="row">{{pet.id}}</th>
-			      <td class="block-none text-center">{{pet.tutor.first_name}}</td>
-			      <td class="block-none text-center">
+			   	  <th class="text-secondary text-secondary" scope="row">{{pet.id}}</th>
+			      <td class="block-none text-center text-secondary">{{pet.tutor.first_name}}</td>
+			      <td class="block-none text-center text-secondary">
 			      	{% if pet.status %}
 	                  <i class="fa fa-check-circle ok"></i> 
 	                  <span class="font-weight-bold ok"> Ativo</span>
@@ -57,7 +57,7 @@
 
 			      </td>
 			      <td class="text-center"><a href="{% url 'pet:pet_detail' pk=pet.id %}">{{pet.nome}}</a></td>
-			      <td class="text-uppercase text-center block-none">{{pet.especie}}</td>
+			      <td class="text-uppercase text-center text-secondary block-none">{{pet.especie}}</td>
 			      <td>
 			      	<div class="d-flex justify-content-center">
 			      		{% if user|can:'view_pet' %}
@@ -81,13 +81,13 @@
 		</table>
 
 {% else %}
-	<p class="alert alert-warning mt-3">Sem itens na lista.</p>
+	<p class="alert alert-warning mt-3">Ainda não existem animais cadastrados.</p>
 {% endif%}	
 	<!-- PAGINATOR -->
 	<div class="row">
 		<!-- ITENS POR PÁGINA -->
 		<div class="col w-50">
-			<p class="">Itens por página:</p>
+			<p class="text-secondary">Itens por página:</p>
 			<nav>
 				<ul class="pagination pagination-sm">
 				{% for qnt in items_list %}

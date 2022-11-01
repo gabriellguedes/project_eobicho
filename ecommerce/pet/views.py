@@ -14,7 +14,7 @@ from ecommerce.ficha.forms import FichaForm
 from ecommerce.ficha.peso.forms import PesoForm
 from ecommerce.ficha.especie.models import Especie
 from ecommerce.ficha.raca.models import Raca
-from .forms import PetForm
+from .forms import PetForm, PetClienteAddForm
 from .models import Pet
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
@@ -56,7 +56,7 @@ def cliente_pet_add(request, pk):
     if request.method == 'GET':
         form = UserRegistrationForm()
 
-        form_pet_factory = inlineformset_factory(User, Pet, form=PetForm, extra=1)
+        form_pet_factory = inlineformset_factory(User, Pet, form=PetClienteAddForm, extra=1)
         form_pet = form_pet_factory()
 
         context = {
@@ -69,7 +69,7 @@ def cliente_pet_add(request, pk):
 
     elif request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-        form_pet_factory = inlineformset_factory(User, Pet, form=PetForm)
+        form_pet_factory = inlineformset_factory(User, Pet, form=PetClienteAddForm)
         form_pet = form_pet_factory(request.POST, request.FILES)
                
         if form_pet.is_valid():
@@ -158,6 +158,35 @@ def pet_update(request, pk):
         return render(request, template_name, context=context)
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES, instance=obj)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
+        else:
+            context = { 
+                'form_pet': form,
+                'especie': especie,
+                'raca': raca
+            }
+            return render(request, template_name, context=context)
+
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def cliente_pet_update(request, pk):
+    template_name = 'pet/cliente_pet_update.html'
+    obj = Pet.objects.get(id=pk)
+    especie = Especie.objects.all().order_by('especie')
+    raca = []
+
+    if request.method == 'GET':
+        form = PetClienteAddForm(instance=obj)
+        context = {
+            'form_pet': form,
+            'especie': especie,
+            'raca': raca,
+        }
+        return render(request, template_name, context=context)
+    if request.method == 'POST':
+        form = PetClienteAddForm(request.POST, request.FILES, instance=obj)
 
         if form.is_valid():
             form.save()

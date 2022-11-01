@@ -7,7 +7,7 @@
 
 <section class="container py-4">
 	<div class="row border-bottom">
-		<div class="w-75 pl-3">
+		<div class="w-75 pl-3 d-block">
 			<h2 class="font-weight-bold title-2 text-secondary">
 				<i class="fa-solid fa-user text-info"></i>
 				Usuários Cadastrados
@@ -30,16 +30,16 @@
 		  <thead>
 		    <tr>
 		      <th class="text-info" scope="col">#</th>
-		      <th class="text-center" scope="col"><i class="fa-solid fa-user text-info"></i> Nome</th>
-		      <th class="text-center block-none" scope="col"><i class="fa-solid fa-envelope text-info"></i> Email</th>
-		      <th class="text-center block-none" scope="col"><i class="fa-solid fa-plus text-info"></i> Conta</th>
-		      <th class="text-center" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
+		      <th class="text-center text-secondary" scope="col"><i class="fa-solid fa-user text-info"></i> Nome</th>
+		      <th class="text-center text-secondary block-none" scope="col"><i class="fa-solid fa-envelope text-info"></i> Email</th>
+		      <th class="text-center text-secondary block-none" scope="col"><i class="fa-solid fa-plus text-info"></i> Conta</th>
+		      <th class="text-center text-secondary" scope="col"><i class="fa-solid fa-gears text-info"></i>  Ações</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	 {% for item in clientes %}
 			    <tr>
-			   	  <th scope="row">{{item.pk}}</th>
+			   	  <th class="text-secondary" scope="row">{{item.pk}}</th>
 			      
 			      <td class="text-center">
 			      	<a href="{% url 'contas:cliente_detail' pk=item.id %}">
@@ -47,10 +47,10 @@
 			  		</a>
 			  	  </td>
 			  	 
-			      <td class="text-center block-none">{{ item.email }}</td>
+			      <td class="text-center text-secondary block-none">{{ item.email }}</td>
 			      {% for i in profile %}
 			      	{% if item.pk == i.user.pk %}
-			       		<td class="text-center block-none">{{ i.cargo }}</td>
+			       		<td class="text-center text-secondary block-none">{{ i.cargo }}</td>
 			       	{% endif %}
 			      {% endfor %}
 			      <td>
@@ -87,7 +87,7 @@
 	<div class="row">
 		<!-- ITENS POR PÁGINA -->
 		<div class="col w-50">
-			<p class="">Itens por página:</p>
+			<p class="text-secondary">Itens por página:</p>
 			<nav>
 				<ul class="pagination pagination-sm">
 				{% for qnt in items_list %}
