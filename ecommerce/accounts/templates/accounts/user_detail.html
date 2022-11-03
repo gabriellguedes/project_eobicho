@@ -37,6 +37,7 @@
 						<div class="col-md-6 mt-2" >
 							{% if user|can:'add_pet' %}	
 								<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
+								
 							{% endif %}
 						</div>	
 					</div>	
@@ -49,9 +50,6 @@
 											
 						</div>
 						<div class="col mt-2" >
-							{% if user|can:'add_pet' %}	
-								<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
-							{% endif %}
 							{% if user|can:'add_user' %}
 								<button class="btn btn-info mr-2" onclick="location.href='{% url 'contas:cliente_add' %}'"><i class="fa-solid fa-user"></i> Novo Usuário</button>
 							{% endif %}
@@ -80,12 +78,33 @@
 						<div class="col-md-9">
 							<h6 class="font-weight-bold text-white pl-5"><i class="fa-solid fa-paw"></i> Meus Pets</h6>
 						</div>
+						<div>
+							<a data-toggle="collapse"role="button" aria-expanded="True" aria-controls="AddPetExistente" href="#AddPetExistente">
+								<i class="fa-solid fa-plus"></i>
+								<span class="font-weight-bold"> Adicionar Pet </span>
+							</a>
+						</div>
 					</div>	
 				</div>
 				<!-- Mostra todos os animais cadastrados do Usuário -->
 				{% if pet_cliente %}
 				<div class="px-3 py-4 mw-100">	
 					<div class="row px-4">
+						<div class="collapse w-100 mb-4" id="AddPetExistente" aria-labelledby="AddPetExistente">
+							{% if user|can:'add_pet' %}
+								<div class="row">
+									<div class="col-md-6">	
+										<label class="d-block text-secondary">Cadastrar um novo animal</label>
+										<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
+									</div>
+									<div class="col-md-6">
+										<label class="d-block text-secondary">Adicionar um animal já cadastrado:</label>
+										<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'contas:tutor_add' %}'">
+											<i class="fa-solid fa-paw"></i>	Add Pet</button>
+									</div>
+								</div>
+							{% endif %}
+						</div>
 						{% for item in pet_cliente %}
 						<div class="ml-3 mb-3">
 							<a href="{% url 'pet:pet_detail' pk=item.id %}">

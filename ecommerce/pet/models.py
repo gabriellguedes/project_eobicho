@@ -19,7 +19,7 @@ def upload_image_formater(instance, filename):
 
 class Pet(models.Model):
 	photo = models.ImageField('Foto do Pet', upload_to=upload_image_formater, blank=True, null=True)
-	tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+	tutor = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='tutores')
 	nome = models.CharField('Nome',max_length=150)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
 	especie = models.ForeignKey(Especie, on_delete=models.PROTECT, verbose_name='Espécie')
@@ -35,16 +35,7 @@ class Pet(models.Model):
 	def has_image(self):
 		return self.photo != None and self.image != ''
 
-	def remove_image(self):
-		if self.has_image():
-			if os.path.isfile(self.photo.path):
-				os.remove(self.photo.path)
-		self.photo = None
-
-	def delete(self):
-		self.remove_image()
-		super().delete()
-				
+					
 	class Meta:
 		ordering=('nome',)
 

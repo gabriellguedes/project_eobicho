@@ -357,3 +357,22 @@ class user_delete(LoginRequiredMixin, DeleteView):
 	queryset = User.objects.all()
 	success_url = reverse_lazy('contas:cliente_list')
 
+# Adicionar um pet já existem ao tutor 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def tutor_add(request):
+	template_name = 'accounts/tutor_add.html'
+	context ={}
+	if request.method == 'GET':
+		return render(request,template_name)
+	elif request.method == 'POST':
+		try:
+			obj = request.POST['idPetcadastrado']
+			tutor = request.user
+			pet = Pet.objects.get(id=obj)
+			tutor.tutores.add(pet)
+		except ValueError:
+			context['msg'] = 'O Id do Pet é composto apenas por números.'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
+		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': tutor.id }))
+

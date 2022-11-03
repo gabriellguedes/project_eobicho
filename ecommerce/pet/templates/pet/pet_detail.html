@@ -3,15 +3,29 @@
 {% load bootstrap %}
 {% load permission_tags %}
 {% block title%}
-{{block.super}} - Ficha técnica
+	{{block.super}} - Ficha técnica
 {% endblock title %}
 {% block content %}
 
 <section class="container py-4">
 	<div class="mb-3">
-		<a href="{% url 'contas:cliente_detail' pk=pet.tutor.id %}" class="text-info font-weight-bold"><i class="fa-solid fa-user mx-2"></i> Ir para tutor</a>
+		{% for item in cliente%}
+			{% if request.user.id == item.id %}
+				<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="mr-3 text-info font-weight-bold">
+					<i class="fa-solid fa-user"></i> Ir para tutor 
+				</a>
+			{% else %}
+				{% if user|has_role:'colaborador' %}
+					<label class="font-weight-bold text-secondary mr-3">					
+						<i class="fa-solid fa-user text-info"></i> Ir para tutor(a) 
+						<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="text-info font-weight-normal">{{item.first_name}}</a>
+					</label>
+				{% endif %}
+			{% endif %}
+			
+		{% endfor %}
 	</div>
-	
+
 	{% include 'pet/includes/pet_detail.html' %}
 	{% include 'pet/includes/pet_obs.html' %}
 

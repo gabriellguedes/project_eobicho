@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Add New Tutor
+{% endblock title %}
+{% load permission_tags %}
+
+{% block content %}
+	{% if user|has_role:'cliente' %}
+		<section class="container">
+			<form class="my-4" name="FormAddNewTutor" method="POST" action=".">
+				{% csrf_token %}
+				<legend class="border-bottom  pb-2 text-secondary">
+					<i class="fa-solid fa-paw text-info"></i> Adicionar Pet
+				</legend>
+				{% if msg %}
+					<p class="{{class}}">{{msg}}</p>
+				{% endif %}
+				<div class="col-md-4 px-4 mb-4">
+					<label class="font-weight-bold text-info" for="idPetcadastrado">Id do Pet</label>
+					<input class="form-control" type="text" name="idPetcadastrado" id="idPetcadastrado" placeholder="Ex: 15" />
+				</div>
+				<button type="submit" class="btn btn-info">Adicionar</button>	
+				<button type="button" class="btn btn-outline-info" onclick="location.href='{% url 'contas:cliente_detail' pk=request.user.id %}'">Cancelar</button>			
+			</form>
+		</section>
+	{% else %}
+		<p class="alert alert-danger">Você não tem permissão!</p>
+	{% endif %}
+{% endblock %}

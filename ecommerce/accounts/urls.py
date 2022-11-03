@@ -17,8 +17,9 @@ urlpatterns = [
     path('user_update/<int:pk>/', views.user_update, name='cliente_update'),
     path('user_update_for_adm/<int:pk>/', views.user_update_for_adm, name='user_update_for_adm'),
     path('user_delete/<int:pk>/', views.user_delete.as_view(), name='cliente_delete'),
-   
-    
+       
+    path('add_new_tutor/', views.tutor_add, name='tutor_add'),
+
     # Login and Logout
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True, template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

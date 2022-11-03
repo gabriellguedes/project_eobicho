@@ -98,9 +98,7 @@ def paginacao(request):
     pets = Pet.objects.get_queryset().order_by('id')
     pets_paginator = Paginator(pets, parametro_limit)
 
-    objects = Pet.objects.all()
-    
-  
+
     try:
         page = pets_paginator.page(parametro_page)
     except (EmptyPage, PageNotAnInteger):
@@ -111,7 +109,7 @@ def paginacao(request):
         'items_list': ['5','10', '20', '30', '50'],
         'qnt_page':parametro_limit,
         'pets': page,
-        'object_list':objects
+        
     }
     return render(request, template_name, context=context)
 #Vizualizar Pet e Ficha
@@ -120,10 +118,11 @@ def detailPet(request, pk):
     template_name ='pet/pet_detail.html'
     
     obj = Pet.objects.get(id=pk)
+    tutor = obj.tutor.all()
     ficha = obj.fichaPets.last()
     last_fichas = obj.fichaPets.all()
-    tutor = obj.tutor.id
-    obj_cliente = User.objects.get(id=tutor)
+    #obj_cliente = User.objects.get(id=tutor)
+
     
     # Listar Peso        
     list_peso = Peso.objects.filter(pet=obj)
@@ -137,7 +136,7 @@ def detailPet(request, pk):
         'last_fichas': last_fichas,
         'last_peso': last_peso,
         'listpeso': list_peso,
-        'cliente': obj_cliente,
+        'cliente': tutor,
      }
     return render(request, template_name, context=context) 
 #Atualização
@@ -169,7 +168,7 @@ def pet_update(request, pk):
                 'raca': raca
             }
             return render(request, template_name, context=context)
-
+# Atualização feita pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def cliente_pet_update(request, pk):
     template_name = 'pet/cliente_pet_update.html'
@@ -198,6 +197,7 @@ def cliente_pet_update(request, pk):
                 'raca': raca
             }
             return render(request, template_name, context=context)
+# Adicionar um novo tutor ao pet já existente
 
 #Select Espécie e Raça Add Pet por um funcionário
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')

@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load permission_tags %}
 {% block title%}
-{{block.super}} - Pets
+{{block.super}} - Animais cadastrados
 {% endblock title %}
 {% block content %}
 
@@ -43,9 +43,14 @@
 		  </thead>
 		  <tbody>
 		  	 {% for pet in pets %}
-			    <tr>
+		  	 	<tr>
 			   	  <th class="text-secondary text-secondary" scope="row">{{pet.id}}</th>
-			      <td class="block-none text-center text-secondary">{{pet.tutor.first_name}}</td>
+			      <td class="block-none text-center text-secondary">
+			       		{% for item in pet.tutor.all %}
+			     			{{item.first_name}}; 
+			      			
+			      		{% endfor %}
+			      </td>
 			      <td class="block-none text-center text-secondary">
 			      	{% if pet.status %}
 	                  <i class="fa fa-check-circle ok"></i> 

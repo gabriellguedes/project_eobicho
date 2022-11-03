@@ -37,56 +37,66 @@
 		   
 		    <div class="col-md-8 my-2 row">
 		    		<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-user text-info"></i> Tutor: 
 						</label>
-						<label class="text-monospace text-secondary">{{pet.tutor.first_name}}</label> 
+						<label class="text-monospace text-secondary">
+							{% for item in cliente %}
+								{% if request.user.id == item.id %}
+									{{item.first_name}}
+								{% else %}
+									{% if user|has_role:'colaborador'%}
+										, {{item.first_name}}
+									{% endif%} 
+								{% endif %}
+							{% endfor %}
+						</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-venus-mars text-info"></i> Sexo: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.sexo}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-paw text-info"></i> Especie: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.especie}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-shield-cat text-info"></i> Raça: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.raca.raca}}</label> 
 					</div>
 					
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-dog text-info"></i> Pelagem: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.pelagem}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-droplet text-info"></i> Coloração: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.coloracao}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-face-smile text-info"></i> Temperamento: 
 						</label>
 						<label class="text-monospace text-secondary">{{pet.temperamento}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-heart text-info"></i> Data de Nascimento:
 						</label>
 						<label class="text-monospace text-secondary">{{pet.aniversario}}</label> 
 					</div>
 					<div class="col-sm-4">
-						<label class="font-weight-bold">
+						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-staff-snake text-info"></i> Castrado(a)
 						</label>
 						{% if pet.castracao == False %}
