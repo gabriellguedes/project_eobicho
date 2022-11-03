@@ -1,4 +1,7 @@
 {% extends 'core/base.html' %}
+{% block title %}
+	Dashboard 
+{% endblock title %}
 {% load static %}
 {% load bootstrap %}
 {% load widget_tweaks %}
@@ -7,7 +10,7 @@
 
 {% if user|can:'view_user_cliente' %}
 <div class="container py-4">
-	
+	<!-- MSG de Perfil Incompleto -->
 	{% if endereco == 'None' or cliente == 'None' %}
 		<div>
 			<a href="{% url 'contas:cliente_update' pk=user.id %}">
@@ -18,103 +21,110 @@
 			</a>
 		</div>
 	{% endif %}
-	{% if user.pk != tutor.id %}
-	 	<section class="mb-3">
-			<div class="row py-3">
-				<div class="col-md-6 mb-3" id="user_responsive_block">
-					<h3 class="mb-5">
-						<i class="fa-solid fa-user text-info"></i> 
-						<span class="text-secondary font-weight-bold">Tutor(a): </span>
-						<span class="text-info">{{ tutor.first_name }}</span>
-					</h3>															
+	<div class="row">
+		<div class="col-md-8">
+			<!-- Block User - Mostra perfil de Usuário Logado/ Cliente que esta cadastro. -->
+			{% if user.pk != tutor.id %}
+			 	<section class="mb-3">
+					<div class="row py-3">
+						<div class="col-md-6 mb-3" id="user_responsive_block">
+							<h3 class="mb-5">
+								<i class="fa-solid fa-user text-info"></i> 
+								<span class="text-secondary font-weight-bold">Tutor(a): </span>
+								<span class="text-info">{{ tutor.first_name }}</span>
+							</h3>															
+						</div>
+						<div class="col-md-6 mt-2" >
+							{% if user|can:'add_pet' %}	
+								<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
+							{% endif %}
+						</div>	
+					</div>	
+				</section>
+			{% else %}
+		 		<section class="mb-3">
+					<div class="row py-3">
+						<div class="col-md-6 mb-3" id="user_responsive_block">
+							{% include 'includes/user_responsive_block.html' %}
+											
+						</div>
+						<div class="col mt-2" >
+							{% if user|can:'add_pet' %}	
+								<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
+							{% endif %}
+							{% if user|can:'add_user' %}
+								<button class="btn btn-info mr-2" onclick="location.href='{% url 'contas:cliente_add' %}'"><i class="fa-solid fa-user"></i> Novo Usuário</button>
+							{% endif %}
+						</div>	
+					</div>	
+				</section>
+			{% endif %}
+			<!-- Botões de agendamento de Banho, Tosa e Consulta Veterinária -->
+			{% if pet_cliente %}
+				<div class="mb-3">
+					<label class="text-secondary font-weight-bold d-block">
+						<i class="fa-solid fa-calendar text-info"></i> Agendar:
+					</label>
+					<button class="btn btn-outline-info">
+						<i class="fa-solid fa-shower"></i> Banho/Tosa
+					</button>
+					<button class="btn btn-outline-info ml-1">
+						<i class="fa-solid fa-stethoscope"></i> Consulta
+					</button>
 				</div>
-				<div class="col-md-6 mt-2" >
-					{% if user|can:'add_pet' %}	
-						<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
-					{% endif %}
-				</div>	
-			</div>	
-		</section>
-	{% else %}
- 		<section class="mb-3">
-			<div class="row py-3">
-				<div class="col-md-6 mb-3" id="user_responsive_block">
-					{% include 'includes/user_responsive_block.html' %}
-									
+			{% endif %}
+			<!-- AREA DE APRESENTAÇÃO DOS PETS CADASTRADOS -->
+			<section class="border dados-pet mb-5">
+				<div class="bg-dark dados-pet-header pt-2">
+					<div class="row">
+						<div class="col-md-9">
+							<h6 class="font-weight-bold text-white pl-5"><i class="fa-solid fa-paw"></i> Meus Pets</h6>
+						</div>
+					</div>	
 				</div>
-				<div class="col-md-6 mt-2" >
-					{% if user|can:'add_pet' %}	
-						<button class="btn btn-info mr-2" onclick="location.href='{% url 'pet:cliente_pet_add' pk=user.id%}'"><i class="fa-solid fa-paw"></i> Novo Pet</button>
-					{% endif %}
-					{% if user|can:'add_user' %}
-						<button class="btn btn-info mr-2" onclick="location.href='{% url 'contas:cliente_add' %}'"><i class="fa-solid fa-user"></i> Novo Usuário</button>
-					{% endif %}
-				</div>	
-			</div>	
-		</section>
-	{% endif %}
-
-	{% if pet_cliente %}
-		<div class="mb-3">
-			<label class="text-secondary font-weight-bold d-block">
-				<i class="fa-solid fa-calendar text-info"></i> Agendar:
-			</label>
-			<button class="btn btn-outline-info">
-				<i class="fa-solid fa-shower"></i> Banho/Tosa
-			</button>
-			<button class="btn btn-outline-info ml-1">
-				<i class="fa-solid fa-stethoscope"></i> Consulta
-			</button>
-		</div>
-	{% endif %}
-<!-- AREA DE APRESENTAÇÃO DOS PETS CADASTRADOS -->
-	<section class="border dados-pet mb-5">
-		<div class="bg-dark dados-pet-header pt-2">
-			<div class="row">
-				<div class="col-md-9">
-					<h6 class="font-weight-bold text-white pl-5"><i class="fa-solid fa-paw"></i> Meus Pets</h6>
-				</div>
-			</div>	
-		</div>
-
-		{% if pet_cliente %}
-		<div class="px-3 py-4 mw-100">	
-			<div class="row d-flex align-items-center">
-				{% for item in pet_cliente %}
-				<div class="col-md-3">
-					<a href="{% url 'pet:pet_detail' pk=item.id %}">
-			  				<div class="d-flex justify-content-center">
-								{% if item.photo.url != None %}
-								<div class="bg-image">
-										<img class="pet-img mb-2" src="{{item.photo.url}}" alt="Foto de perfil do pet">
-									</div>	
-						  							
-						  		{% else %}
-						  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
-						  			{% if item.sexo  != 'Macho' %}
-											<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
-						  			{% else %}
-						  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
-						  			{% endif%}
-									</div>	
-						  		{% endif %}	
+				<!-- Mostra todos os animais cadastrados do Usuário -->
+				{% if pet_cliente %}
+				<div class="px-3 py-4 mw-100">	
+					<div class="row px-4">
+						{% for item in pet_cliente %}
+						<div class="ml-5 mb-3">
+							<a href="{% url 'pet:pet_detail' pk=item.id %}">
+					  				<div class="d-flex justify-content-center">
+										{% if item.photo.url != None %}
+										<div class="bg-image">
+												<img class="pet-img mb-2" src="{{item.photo.url}}" alt="Foto de perfil do pet">
+											</div>	
+								  							
+								  		{% else %}
+								  		<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+								  			{% if item.sexo  != 'Macho' %}
+													<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+								  			{% else %}
+								  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
+								  			{% endif%}
+											</div>	
+								  		{% endif %}	
+								  	</div>	
+					  		</a>
+					  		<div class="col m-auto">
+						  		<label class="text-monospace text-center w-100">
+						  			<a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> 
+						  		</label>
+						  		
 						  	</div>	
-			  		</a>
-			  		<div class="col m-auto">
-				  		<label class="text-monospace text-center w-100">
-				  			<a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> 
-				  		</label>
-				  		
-				  	</div>	
-			  	</div>	
-			  	{% endfor %}
-			</div>
+					  	</div>	
+					  	{% endfor %}
+					</div>
+				</div>
+				<!-- Msg inicial para mostrar que aindo não existem animais cadastrados -->
+				{% else %}
+					<p class="mt-3 alert alert-info">Você ainda não tem nenhum pet cadastrado!</p>
+				{% endif %}	
+			</section>
 		</div>
-		{% else %}
-			<p class="mt-3 alert alert-info">Você ainda não tem nenhum pet cadastrado!</p>
-		{% endif %}	
-	</section>
-</div>	
+	</div>
+</div>		
+<!-- Msg para usuários que não estão logados ou não tem acesso -->
 {% else %}
 	<div class="my-4">
 		<p class="alert alert-danger text-center"><i class="fa-solid fa-triangle-exclamation"></i> Você não tem permissão para acessar essa página.</p>
