@@ -5,35 +5,40 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from .models import Profile, Endereco
+from ecommerce.pet.forms import DateInput
 
-
+# Dados do Usuário
 class ProfileForm(forms.ModelForm):
 	cpf = BRCPFField(label='CPF', required='True')
 	class Meta:
 		model = Profile
 		fields = '__all__'
+		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)	
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
+# Atualização dos dados do perfil
 class ProfileUpdateForm(forms.ModelForm):
 	cpf = BRCPFField(label='CPF', required='True')
 	class Meta:
 		model = Profile
-		fields = ('photo','telefone', 'cpf')
+		fields = ('photo','telefone', 'cpf', 'aniversario')
+		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
-		
+
+# Formulário de Login		
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-
+# Cadastro de um novo Usuário 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(
     	label='Senha',
@@ -65,13 +70,15 @@ class UserRegistrationForm(forms.ModelForm):
     		raise ValidationError("Insira uma senha.")
     	else:
     		return password
-    
+
+# Editar Usuário no Sistema
 class UserEditForm(forms.ModelForm):
 	first_name = forms.CharField(label='Nome')
 	class Meta:
 		model = User
 		fields = ('first_name', 'email')
 
+#Cadastro do Endereço dos usuários
 class EnderecoForm(forms.ModelForm):
 	cep = BRZipCodeField(label='CEP')
 	class Meta:

@@ -113,7 +113,7 @@ def user_add(request):
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
 
-# Listar Clientes
+# Listar Todos os Clientes Cadastrados no Sistema
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def user_list(request):
@@ -153,6 +153,26 @@ def user_list(request):
 	}
 	return render(request, template_name, context=context)
 
+# Visualizar Dados do cliente	
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def user_profile(request):
+	template_name = 'accounts/user_profile.html'
+	user = request.user
+	try:
+		profile = Profile.objects.get(user=user)
+	except ObjectDoesNotExist:
+		profile = ''
+	try:
+		endereco = Endereco.objects.get(user=user)
+	except ObjectDoesNotExist:
+		endereco = ''
+	context = {
+		'user': user,
+		'profile': profile,
+		'endereco': endereco,
+	}
+	return render(request, template_name, context=context)
+
 # Detail Cliente acesso pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_detail(request, pk):
@@ -166,12 +186,13 @@ def user_detail(request, pk):
 	try:
 		cliente = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:
-		cliente = ''
+		cliente = 'None'
 
 	try:		
-		endereco = Endereco.objects.get(user=cliente)
+		endereco = Endereco.objects.get(user=user)
 	except (ObjectDoesNotExist, ValueError):
-		endereco = Endereco()		
+		endereco = 'None'		
+	
 	pet_cliente = Pet.objects.filter(tutor=tutor)
 
 	pet = Pet.objects.filter(tutor=user)

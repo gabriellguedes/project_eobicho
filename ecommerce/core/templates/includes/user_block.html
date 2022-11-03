@@ -21,14 +21,18 @@
         <img class="dropdown-toggle img-user-login" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
       {% endif %}
       <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
-        {% if cliente.cpf != None %}
-          <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id %}">Editar Perfil</a>
-        {% else %}
-          <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id%}">Editar Perfil</a>
-        {% endif %}
-        <a class="dropdown-item" href="{% url 'contas:change_password' %}">Alterar Senha</a>
-        <a class="dropdown-item" href="{% url 'contas:logout' %}">Sair</a>
-        
+        <a class="dropdown-item" href="{% url 'contas:user_profile' %}">
+          <i class="fa-solid fa-user text-info"></i><span class="text-secondary"> Visualizar Perfil</span>
+        </a>
+        <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id %}">
+          <i class="fa-solid fa-pen text-info"></i><span class="text-secondary"> Editar Perfil</span>
+        </a>
+        <a class="dropdown-item" href="{% url 'contas:change_password' %}">
+          <i class="fa-solid fa-lock text-info"></i><span class="text-secondary"> Alterar Senha</span>
+        </a>
+        <a class="dropdown-item" href="{% url 'contas:logout' %}">
+          <i class="fa-solid fa-power-off text-info"></i><span class="text-secondary"> Sair</span>
+        </a>        
       </div>
     </div>
   </div>  

@@ -8,11 +8,10 @@
 {% if user|can:'view_user_cliente' %}
 <div class="container py-4">
 	
-	{% if endereco.cep == None %}
-
+	{% if endereco == 'None' or cliente == 'None' %}
 		<div>
 			<a href="{% url 'contas:cliente_update' pk=user.id %}">
-				<p class="alert alert-primary text-center"> 
+				<p class="alert alert-warning text-center"> 
 					<i class="fa-solid fa-triangle-exclamation"></i>
 					Olá <span class="font-weight-bold">{{ request.user.first_name }} </span> seu perfil está incompleto, clique aqui para adicionar as informações que faltam! 
 				</p>
@@ -36,7 +35,7 @@
 				</div>	
 			</div>	
 		</section>
-	 {% else %}
+	{% else %}
  		<section class="mb-3">
 			<div class="row py-3">
 				<div class="col-md-6 mb-3" id="user_responsive_block">
@@ -53,15 +52,18 @@
 				</div>	
 			</div>	
 		</section>
-	 {% endif %}
-	<div class="mb-3">
-		<button class="btn btn-outline-info">
-			<i class="fa-solid fa-calendar"></i> Agendar Banho/Tosa
-		</button>
-		<button class="btn btn-outline-info ml-1">
-			<i class="fa-solid fa-calendar"></i> Agendar Consulta
-		</button>
-	</div>
+	{% endif %}
+
+	{% if pet %}
+		<div class="mb-3">
+			<button class="btn btn-outline-info">
+				<i class="fa-solid fa-calendar"></i> Agendar Banho/Tosa
+			</button>
+			<button class="btn btn-outline-info ml-1">
+				<i class="fa-solid fa-calendar"></i> Agendar Consulta
+			</button>
+		</div>
+	{% endif %}
 <!-- AREA DE APRESENTAÇÃO DOS PETS CADASTRADOS -->
 	<section class="border dados-pet mb-5">
 		<div class="bg-dark dados-pet-header pt-2">
