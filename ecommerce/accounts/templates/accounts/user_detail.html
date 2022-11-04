@@ -122,7 +122,9 @@
 					  		</a>
 					  		<div class="col m-auto">
 						  		<label class="text-monospace text-center w-100">
-						  			<a href="{% url 'pet:pet_detail' pk=item.id %}"> <span class="font-weight-bold"> {{item.nome}}</span></a> 
+						  			<a href="{% url 'pet:pet_detail' pk=item.id %}"> 
+						  				<span class=" text-info font-weight-bold"> {{item.nome}}</span>
+						  			</a> 
 						  		</label>
 						  		{% if user|has_role:'colaborador' %}
 								  	<div>
