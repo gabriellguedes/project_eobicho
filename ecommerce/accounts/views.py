@@ -366,12 +366,10 @@ class user_delete(LoginRequiredMixin, DeleteView):
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def tutor_add(request, pk):
 	template_name = 'accounts/tutor_add.html'
-	context ={}
 	tutor = User.objects.get(id=pk)
+	context = {'tutor': tutor,}
 	if request.method == 'GET':
-
-		context['tutor'] = tutor
-		return render(request,template_name)
+		return render(request,template_name, context=context)
 	elif request.method == 'POST':
 		try:
 			obj = request.POST['idPetcadastrado']

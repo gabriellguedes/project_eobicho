@@ -30,10 +30,10 @@
 	{% else %}
 		<section class="container">
 			<div class="my-4">
-				<p class="alert alert-danger">Você não tem permissão!</p>
+				<p class="alert alert-danger text-center">Você não tem permissão de acesso para essa área!</p>
 			</div>
 			<div class="d-flex justify-content-end">
-				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'contas:cliente_detail' pk=tutor.id %}'">Voltar</button>
+				<button class="btn btn-outline-info btn-lg" type="button" onclick="location.href='{% url 'contas:cliente_detail' pk=tutor.id %}'"><i class="fa-solid fa-arrow-left mr-2"></i>Voltar</button>
 			</div>
 		</section>
 	{% endif %}
