@@ -20,7 +20,7 @@ $(document).ready(function(){
       });
 
     });
-  
+  /*
   $('#id_pet_set-0-especie').change(function(){
       const url = $('#FormAddPetCliente').attr("data-funcoes-url");
       especieId =  $(this).val();
@@ -33,7 +33,7 @@ $(document).ready(function(){
       });
 
     });
-/*
+
   $('#id_especie').change(function(){
       const url = $('#FormUpdatePet').attr("data-funcoes-url");
       especieId =  $(this).val();

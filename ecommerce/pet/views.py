@@ -54,34 +54,29 @@ def cliente_pet_add(request, pk):
     raca = []
 
     if request.method == 'GET':
-        form = UserRegistrationForm()
-
-        form_pet_factory = inlineformset_factory(User, Pet, form=PetClienteAddForm, extra=1)
-        form_pet = form_pet_factory()
+        form = PetClienteAddForm()
 
         context = {
             'especie': especie,
             'raca': raca,
-            'form': form_pet,
+            'form': form,
             'cliente': obj,
         }
         return render(request, template_name, context=context)
 
     elif request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        form_pet_factory = inlineformset_factory(User, Pet, form=PetClienteAddForm)
-        form_pet = form_pet_factory(request.POST, request.FILES)
+        form = PetClienteAddForm(request.POST, request.FILES)
                
-        if form_pet.is_valid():
-            form_pet.instance = obj
-            form_pet.save()
+        if form.is_valid():
+            new_pet = form.save()
+            obj.tutores.add(new_pet)
 
             return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
         else:
             context = {
                 'especie': especie,
                 'raca': raca,
-                'form': form_pet,
+                'form': form,
                 'cliente': obj,
             }
             return render(request, template_name, context=context)
