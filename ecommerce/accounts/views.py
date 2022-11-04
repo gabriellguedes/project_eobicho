@@ -367,12 +367,14 @@ class user_delete(LoginRequiredMixin, DeleteView):
 def tutor_add(request, pk):
 	template_name = 'accounts/tutor_add.html'
 	context ={}
+	tutor = User.objects.get(id=pk)
 	if request.method == 'GET':
+
+		context['tutor'] = tutor
 		return render(request,template_name)
 	elif request.method == 'POST':
 		try:
 			obj = request.POST['idPetcadastrado']
-			tutor = User.objects.get(id=pk)
 			pet = Pet.objects.get(id=obj)
 			tutor.tutores.add(pet)
 		except ValueError:
