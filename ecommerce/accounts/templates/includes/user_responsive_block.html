@@ -7,6 +7,12 @@
 	    <img class="dropdown-toggle photo_cliente" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
 	  {% endif %}
 	  <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
+	  	<a class="dropdown-item disabled">
+	  		<small>
+		  		<span class="text-info font-weight-bold">Id:</span>
+		  		<span class="text-secondary">{{request.user.id}}</span>
+		  	</small>
+	  	</a>
 	  	<a class="dropdown-item" href="{% url 'contas:user_profile' %}">
 	  		<i class="fa-solid fa-user text-info"></i><span class="text-secondary"> Visualizar Perfil</span>
 	  	</a>

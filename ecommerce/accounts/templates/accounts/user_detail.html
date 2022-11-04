@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% block title %}
-	Dashboard 
+	{{block.super}} - Dashboard 
 {% endblock title %}
 {% load static %}
 {% load bootstrap %}
@@ -76,7 +76,7 @@
 						<div class="w-50 d-flex justify-content-center">
 							<a data-toggle="collapse"role="button" aria-expanded="True" aria-controls="AddPetExistente" href="#AddPetExistente" class="text-info">
 								<i class="fa-solid fa-plus"></i>
-								<span class="font-weight-bold text-shadow-white"> Adicionar Pet </span>
+								<span class="font-weight-bold"> Adicionar Pet </span>
 							</a>
 						</div>
 					</div>	
