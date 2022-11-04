@@ -97,7 +97,7 @@
 		<div class="row m-0 align-items-end w-50">
 			
 			<nav  class="col m-0 d-flex justify-content-end" >
-			  <ul class="pagination">
+			  <ul class="pagination pagination-sm">
 			  	{% if fichas.has_previous %}
 				  	<li class="page-item">
 				      <a class="page-link" href="{% url 'fichas:ficha_list'%}?limit={{qnt_page}}&page={{fichas.previous_page_number}}"><i class="fa-solid fa-chevron-left"></i></a>

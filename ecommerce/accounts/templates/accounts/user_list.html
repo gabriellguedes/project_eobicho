@@ -16,7 +16,9 @@
 		<div class="w-25 pr-3">
 			{% if user|can:'add_user' %}
 				<div class="d-flex justify-content-end">
-					<a class="btn btn-info btn-sm mb-3" href="{% url 'contas:cliente_add' %}">Novo Usuário <i class="fa-solid fa-user"></i></a>
+					<a class="btn btn-info mb-3" href="{% url 'contas:cliente_add' %}">
+						Usuário <i class="fa-solid fa-user-plus ml-2"></i>
+					</a>
 				</div>
 			{% endif %}	
 		</div>
@@ -111,7 +113,7 @@
 		<div class="row m-0 align-items-end w-50">
 			
 			<nav  class="col m-0 d-flex justify-content-end" >
-			  <ul class="pagination">
+			  <ul class="pagination pagination-sm">
 			  	{% if clientes.has_previous %}
 				  	<li class="page-item">
 				      <a class="page-link" href="{% url 'contas:cliente_list'%}?limit={{qnt_page}}&page={{clientes.previous_page_number}}"><i class="fa-solid fa-chevron-left"></i></a>
