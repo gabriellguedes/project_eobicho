@@ -126,7 +126,7 @@
 						  				<span class=" text-info font-weight-bold"> {{item.nome}}</span>
 						  			</a> 
 						  		</label>
-						  		{% if user|has_role:'colaborador' %}
+						  		{% if user|can:'view_funcionario' %}
 								  	<div>
 								  		<a class="text-danger" href="{% url 'contas:tutor_remove' pk=tutor.id n=item.id %}">
 								  			<i class="fa-solid fa-trash mr-2"></i> Remover
