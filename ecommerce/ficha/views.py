@@ -41,9 +41,11 @@ def prontuario_create(request, pk):
             return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = {
-                'form':form_ficha
+                'form':form_ficha,
+                'pet': obj,
             }
-
+            context['msg'] = 'Erro! Avalição não foi salva.'
+            context['class'] = 'alert alert-danger'
             return render(request, template_name, context=context)
 # Listar todas as fichas cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
