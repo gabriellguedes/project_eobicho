@@ -16,3 +16,7 @@ def home(request):
 def permission(request):
 	template_name='core/permission.html'
 	return render(request, template_name)
+
+def newsletter_list(nome, email):
+	pass
+		

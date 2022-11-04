@@ -1,15 +1,21 @@
 {% extends 'core/base.html'%}
 {% load bootstrap %}
-{% load widget_tweaks %}
 {% block content %}
 <form class="container" method="POST" action=".">
 	{% csrf_token %}
 	<div class="row w-100">
-	{% for item in form%}
+	
 		<div class="col-4">
-			<p class="w-100">{{ item|bootstrap }}</p>
+			<select>
+				{% for item in form.doenca %}
+					<option value="{{item.id}}">{{item.id}}</option>
+				{% endfor %}
+			</select>
+			<select style="border:10px solid red;">
+				<option value="{{form.id}}">{{ form.doenca|bootstrap }}</option><br>
+			</select>
 		</div>
-	{% endfor %}
+	
 	</div>
 </form>
 {% endblock %}

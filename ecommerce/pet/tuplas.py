@@ -1,3 +1,18 @@
+from ecommerce.ficha.doenca.models import Doenca
+
+def Cadastro(itens):
+	lista = []
+	doenca = Doenca.objects.all()
+	for x in itens:
+		for y in x:
+			if y in lista:
+				pass
+			else:
+				lista.append(y)
+				doenca.create(doenca=y)
+				
+
+
 
 class Tuplas():
 	PORTE_RACAS_CHOICES = (

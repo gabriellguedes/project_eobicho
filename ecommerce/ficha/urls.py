@@ -10,6 +10,7 @@ urlpatterns = [
     path('list-ficha/', views.prontuario_list, name='ficha_list'),
     path('add_ficha/<int:pk>/', views.prontuario_create, name='ficha_add'),
     path('oldficha/<int:pk>/<int:n>/', views.prontuario_detail, name='ficha_detail'),
+    path('teste/', views.add_test, name='test_ficha'),
 
     #Includes
     path('boca/', include('ecommerce.ficha.boca.urls')),

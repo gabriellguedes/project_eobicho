@@ -17,6 +17,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from django.core.mail import send_mail
+from ecommerce.core.views import newsletter_list
 
 # Novo Cliente(Cadastro Feito pelo próprio cliente)
 def new_client(request):
@@ -33,6 +34,10 @@ def new_client(request):
 				new_user.set_password(form.cleaned_data['password'])
 				new_user.username = new_user.email
 				new_user.save()
+				if request.POST['email_market'] == True:
+					pass
+					"""email = new_user.email
+																				newsletter_list(email)"""
 				assign_role(new_user, 'cliente')
 				user = authenticate(username=new_user.username, password=request.POST['password'])
 				if user is not None:

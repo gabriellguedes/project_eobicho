@@ -9,7 +9,6 @@ from .forms import *
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
-################################################################################
 # Criar uma nova ficha
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def prontuario_create(request, pk):
@@ -89,6 +88,22 @@ def prontuario_detail(request, pk, n):
         'last_fichas': last_fichas
      }
     return render(request, template_name, context)
+
+def add_test(request):
+    template_name = 'add_test.html'
+    if request.method == 'GET':
+        form = TestForm()
+        context = {'form': form}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        form = TestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('fichas:ficha_list'))
+        else:
+            context = {'form':form}
+            return render(request, template_name, context=context)
+
 
 
 
