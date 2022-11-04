@@ -374,6 +374,10 @@ def tutor_add(request, pk):
 			context['msg'] = 'O Id do Pet é composto apenas por números.'
 			context['class'] = 'alert alert-info'
 			return render(request, template_name, context=context)
+		except ObjectDoesNotExist:
+			context['msg'] = 'Id não existe!'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': tutor.id }))
 
 
