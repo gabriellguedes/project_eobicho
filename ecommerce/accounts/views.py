@@ -359,7 +359,7 @@ class user_delete(LoginRequiredMixin, DeleteView):
 
 # Adicionar um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def tutor_add(request):
+def tutor_add(request, pk):
 	template_name = 'accounts/tutor_add.html'
 	context ={}
 	if request.method == 'GET':
@@ -367,7 +367,7 @@ def tutor_add(request):
 	elif request.method == 'POST':
 		try:
 			obj = request.POST['idPetcadastrado']
-			tutor = request.user
+			tutor = User.objects.get(id=pk)
 			pet = Pet.objects.get(id=obj)
 			tutor.tutores.add(pet)
 		except ValueError:
@@ -375,4 +375,21 @@ def tutor_add(request):
 			context['class'] = 'alert alert-info'
 			return render(request, template_name, context=context)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': tutor.id }))
+
+
+# Remover um pet já existem ao tutor 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def tutor_remove(request, pk, n):
+	template_name = 'accounts/tutor_remove.html'
+	tutor = User.objects.get(id=pk)
+	pet = Pet.objects.get(id=n)
+	if request.method == 'GET':
+		context = { 
+			'pet': pet,
+			'tutor': tutor,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		tutor.tutores.remove(pet)
+		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
 

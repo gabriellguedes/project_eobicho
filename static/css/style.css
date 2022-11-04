@@ -25,6 +25,19 @@ body{
 .text-shadow-info{
 	text-shadow: 1px 1px 1px #17a2b8 !important;
 }
+@keyframes neon{
+	from{
+		filter: drop-shadow(0 0 5px var(--cor-neon));
+	}
+	to{
+		filter: drop-shadow(0 0 15px var(--cor-neon));
+	}
+
+}
+.text-shadow-white{
+	animation: neon 3s alternate infinite ease-in-out;
+	--cor-neon: #FFF;
+}
 .bg-lightgray{
 	background-color: lightgray !important;
 }
