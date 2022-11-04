@@ -16,7 +16,7 @@
 		<div class="w-25 pr-3">
 			{% if user|can:'add_user' %}
 				<div class="d-flex justify-content-end">
-					<a class="btn btn-info mb-3" href="{% url 'contas:cliente_add' %}">Novo Usuário <i class="fa-solid fa-user"></i></a>
+					<a class="btn btn-info btn-sm mb-3" href="{% url 'contas:cliente_add' %}">Novo Usuário <i class="fa-solid fa-user"></i></a>
 				</div>
 			{% endif %}	
 		</div>

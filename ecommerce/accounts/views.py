@@ -380,7 +380,6 @@ def tutor_add(request, pk):
 			return render(request, template_name, context=context)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': tutor.id }))
 
-
 # Remover um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def tutor_remove(request, pk, n):
