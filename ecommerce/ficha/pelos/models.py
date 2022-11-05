@@ -1,42 +1,42 @@
 from django.db import models
 
 class Pelos(models.Model):
-	pelos = models.CharField('Pelos', max_length=100)
+	nome = models.CharField('Pelos', max_length=100)
 
 	class Meta:
 		ordering =('pk',)
 
 	def __str__(self):
-		return self.pelos
+		return self.nome
 
 class Pelagem(models.Model):
-	pelagem = models.CharField('Pelagem', max_length=50)
+	nome = models.CharField('Pelagem', max_length=50)
 	class Meta:
 		ordering = ('pk',)
 
 	def __str__(self):
-		return self.pelagem
+		return self.nome
 
 class Coloracao(models.Model):
-	coloracao = models.CharField('Coloração', max_length=50)
+	nome = models.CharField('Coloração', max_length=50)
 	class Meta:
 		ordering = ('pk',)
 	
 	def __str__(self):
-		return self.coloracao
+		return self.nome
 		
 class Estado_pelos(models.Model):	
-	pelosEstado = models.CharField('Estado do Pelo', max_length=100)
+	nome = models.CharField('Estado do Pelo', max_length=100)
 	class Meta:
 		ordering =('pk',)
 
 	def __str__(self):
-		return self.pelosEstado
+		return self.nome
 
 class Condicao_pelos(models.Model):
-	pelosCondicao = models.CharField('Condição dos Pelos', max_length=100)
+	nome = models.CharField('Condição dos Pelos', max_length=100)
 	class Meta:
 		ordering =('pk',)
 
 	def __str__(self):
-		return self.pelosCondicao
+		return self.nome
