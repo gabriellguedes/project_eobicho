@@ -1,4 +1,7 @@
 {% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Alterar
+{% endblock %}
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
@@ -13,14 +16,14 @@
 			<label>
 				<i class="fa-solid fa-shield-dog text-info"></i>
 				<span class="font-weight-bold text-secondary">Coloração</span>
-			</label> {{form.coloracao|bootstrap}}
+			</label> {{form.nome|bootstrap}}
 			
 			<div class="d-flex justify-content-end mx-3 my-3">
 				<button class="btn btn-info mr-3" type="submit">
 					<i class="fa-solid fa-plus"></i> Atualizar
 				</button>
 				
-				<button class="btn btn-danger" type="button" onclick="location.href='{% url 'fichas:pelos:coloracao_list' %}'">
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:pelos:coloracao_list' %}'">
 	  				<i class="fa-solid fa-xmark"></i> Cancelar
 				</button>
 			</div>	

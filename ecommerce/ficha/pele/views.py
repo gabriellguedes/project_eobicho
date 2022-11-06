@@ -25,9 +25,7 @@ def pele_add(request):
             form.save()
             return HttpResponseRedirect(reverse('fichas:pele:pele_list'))
         else:
-            context = {
-                'form': form
-            }    
+            context = {'form': form }    
             return render(request, template_name, context=context)
 # Listar Tipos de peles cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
@@ -118,53 +116,53 @@ def ectoparasitas_delete(request, pk):
         context = {'form':form}
         return render(request, context=context)
 
-# Add infec_pele
+# Add doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def infec_pele_add(request):
-    template_name = 'pele/infec_pele_add.html'
+def doenca_pele_add(request):
+    template_name = 'pele/doenca_pele_add.html'
     if request.method == 'GET':
-        form = Infec_peleForm()
+        form = DoencaPeleForm()
         context = {'form':form}
         return render(request, template_name, context=context)
     elif request.method == 'POST':
-        form = Infec_peleForm(request.POST)
+        form = DoencaPeleForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('fichas:pele:infec_pele_list'))
+            return HttpResponseRedirect(reverse('fichas:pele:doenca_pele_list'))
         else: 
             context = {'form': form}
             return render(request, template_name, context=context)
-# Listar infec_pele
+# Listar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def infec_pele_list(request):
-    template_name = 'pele/infec_pele_list.html'
-    objeto = Infec_pele.objects.all()
+def doenca_pele_list(request):
+    template_name = 'pele/doenca_pele_list.html'
+    objeto = DoencaPele.objects.all()
     context = {'form': objeto}
     return render(request, template_name, context=context)
-# Atualizar infec_pele
+# Atualizar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def infec_pele_update(request, pk):
-    template_name = 'pele/infec_pele_update.html'
-    objeto = Infec_pele.objects.get(id=pk)
+def doenca_pele_update(request, pk):
+    template_name = 'pele/doenca_pele_update.html'
+    objeto = DoencaPele.objects.get(id=pk)
     if request.method == 'GET':
-        form = Infec_peleForm(instance=objeto)
+        form = DoencaPeleForm(instance=objeto)
         context = {'form': form}
         return render(request, template_name, context=context)
     elif request.method == 'POST':
-        form = Infec_peleForm(request.POST, instance=objeto)
+        form = DoencaPeleForm(request.POST, instance=objeto)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('fichas:pele:infec_pele_list'))
+            return HttpResponseRedirect(reverse('fichas:pele:doenca_pele_list'))
         else:
             context = {'form': form}
             return render(request,template_name, context=context)
-# Deletar infec_pele
+# Deletar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def infec_pele_delete(request, pk):
-    objeto = Infec_pele.objects.get(id=pk)
+def doenca_pele_delete(request, pk):
+    objeto = DoencaPele.objects.get(id=pk)
     if objeto != '':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pele:infec_pele_list'))
+        return HttpResponseRedirect(reverse('fichas:pele:doenca_pele_list'))
     else:
         msg = 'Item não existe!'
         context = {'msg': msg }

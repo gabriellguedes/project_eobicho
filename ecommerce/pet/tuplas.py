@@ -1,15 +1,21 @@
-from ecommerce.ficha.doenca.models import Doenca
 
-def Cadastro(itens):
+def Cadastro(tupla):
+	bd = input('Digite o caminho até o models: ')
+	tabela = input('Digite o models que deseja importar: ')
+	print(bd)
+	from bd import tabela
+	
 	lista = []
-	doenca = Doenca.objects.all()
-	for x in itens:
+	objeto = tabela.objects.all()
+	for x in tupla:
 		for y in x:
 			if y in lista:
+				print('O item ', y, ' já existe na lista.')
 				pass
 			else:
 				lista.append(y)
-				doenca.create(doenca=y)
+				objeto.create(nome=y)
+				print(y, 'foi cadastrado no banco de dados!')
 				
 
 

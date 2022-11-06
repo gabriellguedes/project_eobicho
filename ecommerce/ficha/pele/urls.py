@@ -15,9 +15,9 @@ urlpatterns = [
     path('update_ectoparasitas/<int:pk>/', views.ectoparasitas_update, name='ectoparasitas_update'),
     path('delete_ectoparasitas/<int:pk>/', views.ectoparasitas_delete, name='ectoparasitas_delete'),
     #infec_pele
-    path('add_infec_pele/', views.infec_pele_add, name='infec_pele_add'),
-    path('list_infec_pele/', views.infec_pele_list, name='infec_pele_list'),
-    path('update_infec_pele/<int:pk>/', views.infec_pele_update, name='infec_pele_update'),
-    path('delete_infec_pele/<int:pk>/', views.infec_pele_delete, name='infec_pele_delete'),
+    path('add_infec_pele/', views.doenca_pele_add, name='doenca_pele_add'),
+    path('list_infec_pele/', views.doenca_pele_list, name='doenca_pele_list'),
+    path('update_infec_pele/<int:pk>/', views.doenca_pele_update, name='doenca_pele_update'),
+    path('delete_infec_pele/<int:pk>/', views.doenca_pele_delete, name='doenca_pele_delete'),
     
 ]

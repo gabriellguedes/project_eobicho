@@ -1,4 +1,7 @@
 {% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Cadastrados
+{% endblock %}
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
@@ -47,7 +50,7 @@
 					<tr>
 						<th class="text-secondary" scope="col">{{iten.id}}</th>
 						<td>
-							<a href="{% url 'fichas:pele:ectoparasitas_update' pk=iten.id %}">{{iten.ectoparasitas}}</a>
+							<a href="{% url 'fichas:pele:ectoparasitas_update' pk=iten.id %}">{{iten.nome}}</a>
 						</td>
 						<td>
 							<div class="d-flex justify-content-center">

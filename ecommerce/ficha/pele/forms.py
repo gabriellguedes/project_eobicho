@@ -11,7 +11,7 @@ class PeleForm(forms.ModelForm):
 		model = Pele
 		fields =  '__all__'
 
-class Infec_peleForm(forms.ModelForm):
+class DoencaPeleForm(forms.ModelForm):
 	class Meta:
-		model = Infec_pele
+		model = DoencaPele
 		fields = '__all__'

@@ -7,7 +7,7 @@ from ecommerce.ficha.especie.models import Especie
 from ecommerce.ficha.olhos.models import Olhos
 from ecommerce.ficha.orelhas.models import Orelhas
 from ecommerce.ficha.patas.models import Patas
-from ecommerce.ficha.pele.models import Pele, Ectoparasitas, Infec_pele
+from ecommerce.ficha.pele.models import Pele, Ectoparasitas, DoencaPele 
 from ecommerce.ficha.pelos.models import Pelos, Estado_pelos, Condicao_pelos
 from ecommerce.ficha.unhas.models import Unhas
 from django.contrib.auth.models import User
@@ -18,7 +18,7 @@ t = Tuplas()
 class Ficha(models.Model):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
 	pele = models.ManyToManyField(Pele, verbose_name='Tipo de Pele')
-	peleInfeccionada = models.ManyToManyField(Infec_pele, verbose_name='Doença na Pele')
+	peleInfeccionada = models.ManyToManyField(DoencaPele, verbose_name='Doença na Pele')
 	pelos = models.ManyToManyField(Pelos, verbose_name='Pelos')
 	pelosEstado = models.ManyToManyField(Estado_pelos, verbose_name='Estado dos Pelos')
 	pelosCondicao = models.ManyToManyField(Condicao_pelos, verbose_name='Condição dos Pelos')

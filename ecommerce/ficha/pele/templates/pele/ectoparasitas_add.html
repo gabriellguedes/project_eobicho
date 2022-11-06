@@ -1,4 +1,7 @@
 {% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Adicionar
+{% endblock %}
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block content %}
@@ -11,14 +14,14 @@
 		<div class="col-sm-4">
 			<label><i class="fa-solid fa-shield-dog text-info"></i>
 				<span class="font-weight-bold text-secondary"> Ectoparasita </span>
-			</label> {{ form.ectoparasitas|bootstrap }}
+			</label> {{ form.nome|bootstrap }}
 			
 			<div class="d-flex justify-content-end mx-3 my-3">
 				<button class="btn btn-info mr-3" type="submit">
 					<i class="fa-solid fa-plus"></i> Adicionar
 				</button>
 				
-				<button class="btn btn-danger" type="button" onclick="location.href='{% url 'fichas:pele:ectoparasitas_list' %}'">
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:pele:ectoparasitas_list' %}'">
 	  				<i class="fa-solid fa-xmark"></i> Cancelar
 				</button>
 			</div>	
