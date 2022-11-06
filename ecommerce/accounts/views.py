@@ -18,26 +18,34 @@ from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from django.core.mail import send_mail
 from ecommerce.core.views import newsletter_list
+from django.contrib import messages
 
 # Novo Cliente(Cadastro Feito pelo próprio cliente)
 def new_client(request):
 	template_name='accounts/register.html'
+	context={}
 	if request.method == 'GET':
 		form = UserRegistrationForm()
 		context = {'form': form}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
+		if len(request.POST['password']) < 6:
+			context['msg'] = 'Senha deve conter no mínimo 6 caracteres.'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
 		if form.is_valid():
 			try:
 				new_user = form.save(commit=False)
 				new_user.set_password(form.cleaned_data['password'])
 				new_user.username = new_user.email
 				new_user.save()
-				if request.POST['email_market'] == True:
+				if request.POST.get('email_market', False):
+					nome = new_user.first_name
+					email = new_user.email
+					newsletter_list(nome, email)
+				else:
 					pass
-					"""email = new_user.email
-																				newsletter_list(email)"""
 				assign_role(new_user, 'cliente')
 				user = authenticate(username=new_user.username, password=request.POST['password'])
 				if user is not None:
@@ -63,7 +71,7 @@ def new_client(request):
 			context = {
 				'form': form,
 				'msg': 'Usuário não foi cadastrado!',
-				'class': 'alert alert-primary',
+				'class': 'alert alert-warning',
 			}
 			return render(request, template_name, context=context)
 

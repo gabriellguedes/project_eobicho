@@ -68,6 +68,9 @@ class UserRegistrationForm(forms.ModelForm):
     	password = self.cleaned_data['password']
     	if password == '':
     		raise ValidationError("Insira uma senha.")
+    	elif len(password) < 6:
+    		raise ValidationError("Mínimo de 6 caracteres.")
+
     	else:
     		return password
 
