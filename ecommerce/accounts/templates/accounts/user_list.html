@@ -7,15 +7,15 @@
 
 <section class="container py-4">
 	<div class="row border-bottom">
-		<div class="w-75 pl-3 d-block">
+		<div class="col-md-9 pl-3 d-block">
 			<h2 class="font-weight-bold title-2 text-secondary">
 				<i class="fa-solid fa-user text-info"></i>
 				Usuários Cadastrados
 			</h2>
 		</div>	
-		<div class="w-25 pr-3">
+		<div class="col-md-3 pr-3">
 			
-				<div class="d-flex justify-content-end">
+				<div>
 					{% if user|has_role:'gerente' %}
 						<a class="btn btn-info mb-3 mr-3" href="{% url 'contas:cliente_add' %}">
 							<i class="fa-solid fa-user-plus mr-2"></i>Usuário
