@@ -17,6 +17,13 @@ def permission(request):
 	template_name='core/permission.html'
 	return render(request, template_name)
 
-def newsletter_list(nome, email):
-	pass
+def newsletter_add(nome, email):
+	arquivo = open('email_list.txt', 'a')
+	lista = []
+	lista.append("('")
+	lista.append(nome)
+	lista.append("', '")
+	lista.append(email)
+	lista.append("'), \n")
+	arquivo.writelines(lista)
 		

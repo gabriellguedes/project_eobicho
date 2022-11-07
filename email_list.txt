@@ -1,0 +1,3 @@
+('Teste 05', 'teste05@gmail.com'), 
+('teste 09', 'teste09@gmail.com'), 
+('teste 09', 'gabrielguedes@gmail.com'), 
