@@ -52,11 +52,11 @@ def doenca_update(request, pk):
 # Deletar doença
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_delete(request, pk):
+    template_name ='doenca/doenca_delete.html'
     objeto = Doenca.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
         return HttpResponseRedirect(reverse('fichas:doenca:doenca_list'))
-    else: 
-        msg = 'Item não existe!' 
-        context = {'msg': msg}
-        return render(request, context=context)

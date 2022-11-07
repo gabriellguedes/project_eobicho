@@ -1,12 +1,16 @@
 
 def Cadastro(tupla):
 	bd = input('Digite o caminho até o models: ')
-	tabela = input('Digite o models que deseja importar: ')
-	print(bd)
-	from bd import tabela
+	
+	if bd == 'Boca': 
+		from ecommerce.ficha.boca.models import Boca
+	elif bd == 'Patas':
+		from ecommerce.ficha.patas.models import Patas
+	else:
+		pass
 	
 	lista = []
-	objeto = tabela.objects.all()
+	objeto = bd.objects.all()
 	for x in tupla:
 		for y in x:
 			if y in lista:

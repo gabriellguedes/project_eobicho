@@ -62,8 +62,14 @@ def list_Especie(request):
 # Deletar uma Especie
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def delete_Especie(request, pk):
-    obj = Especie.objects.get(id=pk)
-    obj.delete()
+    template_name = 'especie_delete.html'
+    objeto  = Especie.objects.get(id=pk)
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:especie:especie_list'))
     
     return HttpResponseRedirect(reverse('fichas:especie:especie_list'))
 # Atualizar/Alterar Espécies

@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Apagar
+{% endblock title %}
+{% block content %}
+<section class="container py-4">
+		<form method="POST" action="." name="FormRemovePetTutor" id="FormRemovePetTutor">
+			{% csrf_token %}
+			<legend class="border-bottom pb-2 text-secondary">
+				<i class="fa-solid fa-trash text-info mr-2"></i>
+				<span class="font-weight-bold"> Apagar</span>
+			</legend>
+			<div class="py-4 px-2">
+				<label class="d-block text-secondary">
+					Tem certeza que deseja apagar <span class="text-info">{{form.nome}}?
+				</label>
+			</div>
+			<div class="px-2">
+				<button class="btn btn-info" type="submit">Sim, Tenho certeza!</button>
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:temperamento:temperamento_list' %}'">Não, desejo voltar.</button>
+			</div>
+		</form>
+</section>
+{% endblock %}

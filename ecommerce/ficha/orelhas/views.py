@@ -58,11 +58,11 @@ def orelhas_update(request, pk):
 # Apagar uma orelhas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def orelhas_delete(request, pk):
+    template_name = 'orelhas/orelhas_delete.html'
     objeto = Orelhas.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:orelhas:orelhas_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:orelhas:orelhas_list'))

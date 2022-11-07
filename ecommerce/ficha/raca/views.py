@@ -82,7 +82,11 @@ def update_Raca(request, pk):
 # Deletar uma Raça
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def delete_Raca(request, pk):
-    obj = Raca.objects.get(id=pk)
-    obj.delete()
-
-    return HttpResponseRedirect(reverse('fichas:raca:raca_list'))
+    template_name = 'raca/raca_delete.html'
+    objeto = Raca.objects.get(id=pk)
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
+        objeto.delete()
+        return HttpResponseRedirect(reverse('fichas:raca:raca_list'))

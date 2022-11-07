@@ -56,12 +56,14 @@ def pele_update(request, pk):
 # Apagar um Tipo de Pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pele_delete(request, pk):
+    template_name = 'pele/pele_delete.html'
     objeto = Pele.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-    else:
-        msg = 'Item não encotrado'
-    return HttpResponseRedirect(reverse('fichas:pele:pele_list'))
+        return HttpResponseRedirect(reverse('fichas:pele:pele_list'))
 
 # Adicionar Ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
@@ -108,13 +110,14 @@ def ectoparasitas_update(request, pk):
 # Deletar ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def ectoparasitas_delete(request, pk):
+    template_name = 'pele/ectoparasitas_delete.html'
     objeto = Ectoparasitas.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
         return HttpResponseRedirect(reverse('fichas:pele:ectoparasitas_list'))
-    else:
-        context = {'form':form}
-        return render(request, context=context)
 
 # Add doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
@@ -159,11 +162,11 @@ def doenca_pele_update(request, pk):
 # Deletar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def doenca_pele_delete(request, pk):
+    template_name = 'pele/doenca_pele_delete.html'
     objeto = DoencaPele.objects.get(id=pk)
-    if objeto != '':
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
         return HttpResponseRedirect(reverse('fichas:pele:doenca_pele_list'))
-    else:
-        msg = 'Item não existe!'
-        context = {'msg': msg }
-        return render(request, context=context)    

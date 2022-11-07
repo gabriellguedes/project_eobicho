@@ -58,11 +58,11 @@ def patas_update(request, pk):
 # Apagar uma patas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def patas_delete(request, pk):
+    template_name = 'patas/patas_delete.html'
     objeto = Patas.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:patas:patas_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:patas:patas_list'))

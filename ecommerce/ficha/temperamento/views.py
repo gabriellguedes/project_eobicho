@@ -48,8 +48,12 @@ def temperamento_update(request, pk):
 # Deletar um Temperamento cadastrado
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def temperamento_delete(request, pk):
-	obj = Temperamento.objects.get(id=pk)
-	obj.delete()
-	return HttpResponseRedirect(reverse('fichas:temperamento:temperamento_list'))
-
+	template_name = 'temperamento/temperamento_delete.html'
+	objeto = Temperamento.objects.get(id=pk)
+	if request.method == 'GET':
+		context ={'form':objeto}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		objeto.delete()
+		return HttpResponseRedirect(reverse('fichas:temperamento:temperamento_list'))
 

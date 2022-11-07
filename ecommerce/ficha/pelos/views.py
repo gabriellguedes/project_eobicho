@@ -58,14 +58,14 @@ def pelos_update(request, pk):
 # Apagar um Tipo de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelos_delete(request, pk):
+    template_name = 'pelos/pelos_delete.html'
     objeto = Pelos.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pelos:pelos_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:pelos:pelos_list'))
    
 # Adicionar Novo condição de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
@@ -116,14 +116,14 @@ def estado_pelos_update(request, pk):
 # Apagar um Condição de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def estado_pelos_delete(request, pk):
+    template_name = 'pelos/estado_pelos_delete.html'
     objeto = Estado_pelos.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pelos:estado_pelos_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:pelos:estado_pelos_list'))
    
 # Adicionar Novo Tipo de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
@@ -174,19 +174,19 @@ def condicao_pelos_update(request, pk):
 # Apagar um Tipo de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def condicao_pelos_delete(request, pk):
+    template_name = 'pelos/condicao_pelos_delete.html'
     objeto = Condicao_pelos.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pelos:condicao_pelos_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:pelos:condicao_pelos_list'))
 
 # PELAGEM - CRIAR UM NOVO TIPO DE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelagem_add(request):
-    template_name = 'pelos/pelagem_add.html'
+    template_name = 'pelagem/pelagem_add.html'
     if request.method == 'GET':
         form = PelagemForm()
         context = {'form': form}
@@ -202,7 +202,7 @@ def pelagem_add(request):
 # ATUALIZAR/ALTERAR UM TIPODE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelagem_update(request, pk):
-    template_name = 'pelos/pelagem_update.html'
+    template_name = 'pelagem/pelagem_update.html'
     obj = Pelagem.objects.get(id=pk)
     if request.method == 'GET':
         form = PelagemForm(instance=obj)
@@ -219,26 +219,26 @@ def pelagem_update(request, pk):
 # LISTAR TODOS OS TIPOS DE PELAGEM CADASTRADOS
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelagem_list(request):
-    template_name = 'pelos/pelagem_list.html'
+    template_name = 'pelagem/pelagem_list.html'
     obj = Pelagem.objects.all()
     context = {'form': obj}
     return render(request, template_name, context=context)
 # DELETAR/APAGAR UM TIPO DE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pelagem_delete(request, pk):
+    template_name = 'pelagem/pelagem_delete.html'
     objeto = Pelagem.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pelos:pelagem_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:pelos:pelagem_list'))
 
 # COLORAÇÃO - ADICIONAR UMA NOVA COLORAÇÃO DOS PELOS
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def coloracao_add(request):
-    template_name = 'pelos/coloracao_add.html'
+    template_name = 'coloracao/coloracao_add.html'
     if request.method == 'GET':
         form = ColoracaoForm()
         context = {'form': form}
@@ -254,7 +254,7 @@ def coloracao_add(request):
 # ATUALIZAR/ALTERAR UMA COLORAÇÃO CADASTRADA
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def coloracao_update(request, pk):
-    template_name = 'pelos/coloracao_update.html'
+    template_name = 'coloracao/coloracao_update.html'
     obj = Coloracao.objects.get(id=pk)
     if request.method == 'GET':
         form = ColoracaoForm(instance=obj)
@@ -271,18 +271,18 @@ def coloracao_update(request, pk):
 # LISTAR TODAS AS COLORAÇÕES CADASTRADAS    
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def coloracao_list(request):
-    template_name = 'pelos/coloracao_list.html'
+    template_name = 'coloracao/coloracao_list.html'
     obj = Coloracao.objects.all()
     context = {'form': obj}
     return render(request, template_name, context=context)
 # DELETAR/APAGAR UMA COLORAÇÃO CADASTRADA
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def coloracao_delete(request, pk):
+    template_name = 'coloracao/coloracao_delete.html'
     objeto = Coloracao.objects.get(id=pk)
-    if objeto != None:
+    if request.method == 'GET':
+        context ={'form':objeto}
+        return render(request, template_name, context=context)
+    elif request.method == 'POST':
         objeto.delete()
-        return HttpResponseRedirect(reverse('fichas:pelos:coloracao_list')) 
-    else:
-        msg = 'Item não encotrado'
-        context = {'msg': msg}
-        return render(request, context=context)
+        return HttpResponseRedirect(reverse('fichas:pelos:coloracao_list'))
