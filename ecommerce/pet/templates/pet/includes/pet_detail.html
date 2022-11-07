@@ -16,9 +16,13 @@
 		<div class=" row">
 			<div class="col-md-2">
 				{% if pet.photo.url != None %}
-				<div class="">
-					<img class="pet-img d-flex justify-content-center m-auto mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
-					<label class="mt-3 text-center w-100 font-weight-bold text-info text-uppercase">{{pet.nome}}</label> 	
+				<div class="row">
+					<div class="w-100 d-flex justify-content-center">
+						<span class="circle-img">					
+							<img class="mask" src="{{pet.photo.url}}" alt="Foto de perfil do pet">
+						</span>
+					</div>
+					<label class="mt-3 w-100 text-center font-weight-bold text-info text-uppercase">{{pet.nome}}</label> 	
 				</div>	
 		  							
 		  	{% else %}
@@ -35,7 +39,7 @@
 		  	</div>	
 		  	
 		   
-		    <div class="col-md-8 my-2 row">
+		    <div class="col-md-8 my-2 ml-2 row">
 		    		<div class="col-sm-4">
 						<label class="font-weight-bold d-block">
 							<i class="fa-solid fa-user text-info"></i> Tutor: 
