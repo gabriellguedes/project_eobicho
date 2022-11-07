@@ -14,8 +14,8 @@
 			{% for item in form %}
 				<div disabled>{{item|bootstrap}}</div>
 			{% endfor %}
-			<button type="submit" class="btn btn-info">Alterar</button>
-			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:pet_detail' pk=pet.id %}'">Cancelar</button>
+			<button type="submit" class="btn btn-info mr-3">Alterar</button>
+			<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'pet:pet_detail' pk=pet.id %}'">Cancelar</button>
 		</form>
 	</div>
 </section>

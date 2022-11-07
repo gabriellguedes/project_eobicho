@@ -18,8 +18,8 @@
 				<p>{{item.obs|bootstrap}}</p>
 
 			{% endfor %}
-			<button class="btn btn-info" type="submit">Adicionar</button>
-			<button class="btn btn-danger" type="button" onclick="location.href='{% url 'pet:pet_detail' pk=pet.id %}'">Cancelar</button>
+			<button class="btn btn-info mr-3" type="submit">Adicionar</button>
+			<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'pet:pet_detail' pk=pet.id %}'">Cancelar</button>
 		</form>
 	</div>		
 </section>
