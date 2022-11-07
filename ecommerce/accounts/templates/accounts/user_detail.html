@@ -112,9 +112,13 @@
 								  		{% else %}
 								  			<div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
 									  			{% if item.sexo  != 'Macho' %}
-														<img class="pet-img mb-2 mask" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+														<span class="circle-img">
+															<img class="mb-2" src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">	 	
+														</span>
 									  			{% else %}
-									  				<img class="pet-img mb-2 mask" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">	 	
+									  				<span class="circle-img">
+									  					<img class="mb-2" src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">
+									  				</span>
 									  			{% endif%}
 											</div>	
 								  		{% endif %}	
