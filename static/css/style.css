@@ -42,7 +42,7 @@ body{
 	background-color: lightgray !important;
 }
 .button_accion{
-	display: none;
+	display: none !important;
 }
 .title-2{
 	font-size: 1.45rem;
