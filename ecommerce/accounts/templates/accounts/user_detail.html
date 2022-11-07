@@ -50,7 +50,7 @@
 									<i class="fa-solid fa-user-plus mr-2"></i>Usuário
 								</button>
 							{% endif %}
-							{% if user|can:'add_cliente' %}
+							{% if user|can:'add_user_cliente' %}
 								<button class="btn btn-info" onclick="location.href='{% url 'contas:new_cliente_add' %}'" type="button">
 									<i class="fa-solid fa-user-plus mr-2"></i> Cliente
 								</button>
