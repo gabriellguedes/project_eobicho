@@ -12,7 +12,7 @@
 	</h2>
 	
 	<div class="container">
-		<form method="POST" action=".">
+		<form class="py-4" method="POST" action=".">
 			 {% csrf_token %}
 			 <div class="row">
 			 	<div class="col-md-4">{{form.first_name|bootstrap}}</div>
@@ -28,7 +28,7 @@
 				{% endfor %}
 			 </div>
 			
-			<button class="btn btn-info" type="submit">Criar Usuário</button>
+			<button class="btn btn-info mr-3" type="submit">Criar Usuário</button>
 			<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'contas:cliente_list'%}'">Cancelar</button>
 		</form>
 	</div>	
