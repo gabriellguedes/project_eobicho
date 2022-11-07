@@ -2,9 +2,13 @@
 <div class="row">
 	<div class="dropdown ml-3">
 	  {% if cliente.photo.url != None %}
-	    <img class="dropdown-toggle photo_cliente" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{{ cliente.photo.url }}">  
+	    <span class="photo_cliente">
+	    	<img class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{{ cliente.photo.url }}">  
+	    </span>
 	  {% else %}
-	    <img class="dropdown-toggle photo_cliente" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
+	    <span class="photo_cliente">
+	    	<img class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" src="{% static 'img/user-default.png' %}">  
+	    </span>
 	  {% endif %}
 	  <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
 	  	<a class="dropdown-item disabled">
