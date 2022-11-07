@@ -10,7 +10,8 @@ urlpatterns = [
     # Cliente 
 
     path('new_client/', views.new_client, name='new_user'),    
-    path('new_user/', views.user_add, name='cliente_add'), 
+    path('new_user/', views.user_add, name='cliente_add'),
+    path('novo_cliente/', views.cliente_add, name='new_cliente_add'), 
     path('user_list/', views.user_list, name='cliente_list'),
     path('use_profile/', views.user_profile, name='user_profile'),
     path('user_detail/<int:pk>/', views.user_detail, name='cliente_detail'),

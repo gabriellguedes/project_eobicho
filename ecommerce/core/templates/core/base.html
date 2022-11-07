@@ -32,9 +32,9 @@
           <div class="row block-none">
           {% if request.user.is_authenticated %}
             {% if user|can:'view_user_cliente' %}
-              <div class="row cliente-view w-50 pt-2 block-none">
+              <div class="row cliente-view w-50 d-flex align-items-center block-none">
                 <a href="{% url 'core:home' %}">
-                  <img class="ml-5 block-none" alt="logo" src="{% static 'img/logo.png'%}">
+                  <img class="ml-5 m-0 block-none" alt="logo" src="{% static 'img/logo.png'%}">
                 </a>
               </div>
             {% endif %}

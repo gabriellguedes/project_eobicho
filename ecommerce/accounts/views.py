@@ -11,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
 from .models import Profile, Endereco
-from .forms import ProfileForm, ProfileUpdateForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm
+from .forms import ProfileForm, ProfileUpdateForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteAddForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
@@ -74,7 +74,7 @@ def new_client(request):
 			}
 			return render(request, template_name, context=context)
 
-# Registro Cliente
+# Registro Novo Usuário
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def user_add(request):
 	template_name = 'accounts/user_add.html'
@@ -124,6 +124,44 @@ def user_add(request):
 					'class': 'alert alert-danger',
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
+
+# Registro Cliente
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+def cliente_add(request):
+	template_name = 'accounts/new_cliente_add.html'
+	context={}
+	if request.method == 'GET':
+		form = UserRegistrationForm()
+		form_cliente_factory = inlineformset_factory(User, Profile, form=ClienteAddForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory()
+		context = {
+			'form': form,
+			'form_user': form_cliente,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		form = UserRegistrationForm(request.POST)
+		form_cliente_factory = inlineformset_factory(User, Profile, form=ClienteAddForm, extra=1, can_delete=False)
+		form_cliente = form_cliente_factory(request.POST)
+		if form.is_valid() and form_cliente.is_valid():
+			new_user = form.save(commit=False)
+			new_user.set_password(form.cleaned_data['password'])
+			new_user.username = new_user.email
+			new_user.save()
+			
+			form_cliente.instance = new_user
+			form_cliente.cargo = 'Cliente'
+			new_cliente = form_cliente.save()
+			
+			assign_role(new_user, 'cliente')
+			return HttpResponseRedirect(reverse('contas:cliente_list'))
+		else:
+			context['form'] = form
+			context['form_user'] = form_cliente
+			context['msg'] = 'Algo deu errado! Cliente não foi cadastrado.'
+			context['class'] = 'alert alert-warning'
+			return render(request, template_name, context=context)
+
 
 # Listar Todos os Clientes Cadastrados no Sistema
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')

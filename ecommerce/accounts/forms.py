@@ -45,7 +45,7 @@ class UserRegistrationForm(forms.ModelForm):
     	strip=False,
         widget=forms.PasswordInput(),
     	)
-
+    first_name = forms.CharField(label='Nome')
     class Meta:
         model = User
         fields = ('first_name', 'email')
@@ -90,5 +90,16 @@ class EnderecoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields['cep'].widget.attrs.update({'class':'mask-cep', 'onblur':'IsCEP()'})
+
+class ClienteAddForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		fields = ('aniversario','cargo', 'cpf', 'telefone', 'user',)
+		widgets = {'aniversario': DateInput()}
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)	
+		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
+		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
 

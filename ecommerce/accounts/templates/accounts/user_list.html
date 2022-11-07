@@ -14,13 +14,20 @@
 			</h2>
 		</div>	
 		<div class="w-25 pr-3">
-			{% if user|can:'add_user' %}
+			
 				<div class="d-flex justify-content-end">
-					<a class="btn btn-info mb-3" href="{% url 'contas:cliente_add' %}">
-						Usuário <i class="fa-solid fa-user-plus ml-2"></i>
-					</a>
+					{% if user|has_role:'gerente' %}
+						<a class="btn btn-info mb-3 mr-3" href="{% url 'contas:cliente_add' %}">
+							<i class="fa-solid fa-user-plus mr-2"></i>Usuário
+						</a>
+					{% endif %}
+					{% if user|can:'add_cliente' %}
+						<a class="btn btn-info mb-3" href="{% url 'contas:new_cliente_add' %}">
+							<i class="fa-solid fa-user-plus mr-2"></i>Cliente
+						</a>
+					{% endif %}
 				</div>
-			{% endif %}	
+				
 		</div>
 	</div>
 
