@@ -146,6 +146,7 @@ def pet_update(request, pk):
         form = PetForm(instance=obj)
         context = {
             'form_pet': form,
+            'obj': obj,
             'especie': especie,
             'raca': raca,
         }
@@ -159,6 +160,7 @@ def pet_update(request, pk):
         else:
             context = { 
                 'form_pet': form,
+                'obj': obj,
                 'especie': especie,
                 'raca': raca
             }
@@ -175,6 +177,7 @@ def cliente_pet_update(request, pk):
         form = PetClienteAddForm(instance=obj)
         context = {
             'form_pet': form,
+            'obj': obj,
             'especie': especie,
             'raca': raca,
         }
@@ -188,6 +191,7 @@ def cliente_pet_update(request, pk):
         else:
             context = { 
                 'form_pet': form,
+                'obj': obj,
                 'especie': especie,
                 'raca': raca
             }

@@ -2,6 +2,17 @@
 {% load bootstrap %}
 {% block content %}
 <section class="container py-4">
+	<div>
+		 <div class="w-100 d-flex justify-content-center mb-4">
+        <span class="circle-pet-update">         
+          <img class="mask" src="{{profile.photo.url}}" alt="Foto de perfil do pet">
+        </span>
+      </div>
+      <div class="d-flex justify-content-center mb-4">
+        <input  type="file" name="photo" accept="image/*" id="id_photo" style="display: none;">
+        <input type="button" value="Alterar Foto" class="btn btn-outline-info" onclick="document.getElementById('id_photo').click();" />
+      </div>
+	</div>
 	<h2 class="border-bottom text-secondary title-2 pb-2 mb-3 row">
 		<label class="w-75 d-block pl-4">
 			<i class="fa-solid fa-file text-info"></i> Dados Pessoais
