@@ -446,3 +446,25 @@ def tutor_remove(request, pk, n):
 		tutor.tutores.remove(pet)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
 
+# Adicionar um tutor ao pet
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def pet_add_tutor(request, pk):
+	template_name ='accounts/pet_add_tutor.html'
+	pet = Pet.objects.get(id=pk)
+	context = {'pet':pet}
+	if request.method == 'GET':
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		try:
+			obj = request.POST['idTutorCadastrado']
+			tutor = User.objects.get(id=obj)
+			tutor.tutores.add(pet)
+		except ValueError:
+			context['msg'] = 'O Id do Tutor é composto apenas por números.'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
+		except ObjectDoesNotExist:
+			context['msg'] = 'Id não existe!'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
+		return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': pk }))

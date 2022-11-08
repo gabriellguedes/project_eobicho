@@ -55,15 +55,27 @@
 							<i class="fa-solid fa-user text-info"></i> Tutor: 
 						</label>
 						<label class="text-monospace text-secondary">
-							{% for item in cliente %}
-								{% if request.user.id == item.id %}
-									{{item.first_name}}
-								{% else %}
-									{% if user|has_role:'colaborador'%}
-										, {{item.first_name}}
-									{% endif%} 
+							<!-- Verificar se existe algum tutor -->
+							{% if pet.tutor.all %}
+								<!-- Verificar se o pet pertence ao usuário logado -->
+								{% for item in pet.tutor.all %}
+									{% if request.user.id == item.id %}
+										{{item.first_name}}
+									{% else %}
+										{% if user|has_role:'colaborador'%}
+											, {{item.first_name}}
+										{% endif%} 
+									{% endif %}
+								{% endfor %}
+							<!-- Senão existir um tutor -->
+							{% else %}
+								{% if user|can:'view_funcionario' %}<!-- verificar se é um funcionário -->
+									<button class="btn btn-outline-info btn-sm" type="button" onclick="location.href='{% url 'contas:pet_add_tutor' pk=pet.pk %}'">
+										<i class="fa-solid fa-user-plus mr-2"></i> Add Tutor
+									</button>
 								{% endif %}
-							{% endfor %}
+							{% endif %}
+				
 						</label> 
 					</div>
 					<div class="col-sm-4">

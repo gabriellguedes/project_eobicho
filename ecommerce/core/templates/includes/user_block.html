@@ -20,15 +20,17 @@
     </div> 
     
     <div class="dropdown">
-      {% if cliente.photo.url != None %}
-       <span class="photo_cliente dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-          <img src="{{ cliente.photo.url }}">  
-        </span>
-      {% else %}
-        <span class="photo_cliente dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-          <img src="{% static 'img/user-default.png' %}">  
-        </span>
-      {% endif %}
+      {% for item in request.user.profile.all %}
+        {% if item.photo.url != None %}
+         <span class="photo_cliente dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+            <img src="{{ item.photo.url }}">  
+          </span>
+        {% else %}
+          <span class="photo_cliente dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+            <img src="{% static 'img/user-default.png' %}">  
+          </span>
+        {% endif %}
+      {% endfor %}
       <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item disabled">
           <small>
