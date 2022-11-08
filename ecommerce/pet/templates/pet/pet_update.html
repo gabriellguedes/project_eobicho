@@ -40,10 +40,14 @@
               
             {% endif%}
       {% endif %}
-
-      <div class="d-flex justify-content-center mb-4">
-        <input  type="file" name="photo" accept="image/*" id="id_photo" style="display: none;">
-        <input type="button" value="Alterar Foto" class="btn btn-outline-info" onclick="document.getElementById('id_photo').click();" />
+      <div class='input-wrapper row'>        
+        <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
+        <div class="d-flex justify-content-center w-100">
+          <label class="btn btn-outline-info" for='input-file'>
+            Alterar Foto
+          </label>
+        </div>
+        <input id='input-file' type='file' value='' />
       </div>
     </div>
     <div class="row">  

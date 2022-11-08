@@ -18,20 +18,20 @@
 		  	</small>
 	  	</a>
 	  	<a class="dropdown-item" href="{% url 'contas:user_profile' pk=request.user.id %}">
-	  		<i class="fa-solid fa-user text-info"></i><span class="text-secondary"> Visualizar Perfil</span>
+	  		<i class="fa-solid fa-user text-info mr-2"></i><span class="text-secondary"> Visualizar Perfil</span>
 	  	</a>
 	    <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id %}">
-	    	<i class="fa-solid fa-pen text-info"></i><span class="text-secondary"> Editar Perfil</span>
+	    	<i class="fa-solid fa-pen text-info mr-2"></i><span class="text-secondary"> Editar Perfil</span>
 	    </a>
 	    <a class="dropdown-item" href="{% url 'contas:change_password' %}">
-	    	<i class="fa-solid fa-lock text-info"></i><span class="text-secondary"> Alterar Senha</span>
+	    	<i class="fa-solid fa-lock text-info mr-2"></i><span class="text-secondary"> Alterar Senha</span>
 	    </a>
 	    <a class="dropdown-item" href="{% url 'contas:logout' %}">
-	    	<i class="fa-solid fa-power-off text-info"></i><span class="text-secondary"> Sair</span>
+	    	<i class="fa-solid fa-power-off text-info mr-2"></i><span class="text-secondary"> Sair</span>
 	    </a>
 	  </div>
 	</div>
-	<h3 class=" col text-secondary mt-3">Bem-vindo(a)<br/> 
+	<h3 class=" col text-secondary d-flex align-items-center">
 		<span class="text-info font-weight-bold">{{user.first_name}}</span>
 	</h3>
 </div>  

@@ -352,16 +352,31 @@ main{
 #form_update_user{
 	max-width: 100%;
 }
+	#form_update_01 div{
+		margin-bottom: 10px;
+		margin-right: 10px;		
+	}
 	#form_update_01 div>label{
+		margin-right: 5px;
 		color: #6c757d!important
 	}
 	#form_update_01 div>div>div>input{
+		    padding-left: 40px;
 		border: 1px solid #1fb9b1 !important;
 	}
+	#form_update_02{		
+    padding-left: 27px;
+	}
+	#form_update_02 div{
+		margin-bottom: 10px;
+		margin-right: 10px;		
+	}
 	#form_update_02 div>label{
+		margin-right: 5px;
 		color: #6c757d!important
 	}
 	#form_update_02 div>div>div>input{
+		    padding-left: 40px;
 		border: 1px solid #1fb9b1 !important;
 	}
 
@@ -445,8 +460,12 @@ main{
 		width: 100% !important;
 	}
 	#form_update_02{
+		padding-left: 0 !important;
 		width: 100% !important;
 	}
+		#form_update_02 div{
+			width: 100% !important;
+		}
 }
 
 @media screen and (max-width: 480px){
@@ -507,8 +526,16 @@ main{
 		width: 100% !important;
 	}
 	#form_update_02{
+		padding-left: 0 !important;
 		width: 100% !important;
 	}
-	
+		#form_update_02 div{
+			width: 100% !important;
+		}
 }
+
+input[type='file'] {
+  display: none
+}
+
 

@@ -23,6 +23,7 @@ class ProfileForm(forms.ModelForm):
 # Atualização dos dados do perfil
 class ProfileUpdateForm(forms.ModelForm):
 	cpf = BRCPFField(label='CPF', required='True')
+	photo = forms.CharField(label='', required='False')
 	class Meta:
 		model = Profile
 		fields = ('photo','telefone', 'cpf', 'aniversario')
@@ -30,6 +31,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
@@ -46,6 +48,7 @@ class UserRegistrationForm(forms.ModelForm):
         widget=forms.PasswordInput(),
     	)
     first_name = forms.CharField(label='Nome')
+    email = forms.EmailField(label='Email')
     class Meta:
         model = User
         fields = ('first_name', 'email')
@@ -77,6 +80,7 @@ class UserRegistrationForm(forms.ModelForm):
 # Editar Usuário no Sistema
 class UserEditForm(forms.ModelForm):
 	first_name = forms.CharField(label='Nome')
+	email = forms.EmailField(label='Email')
 	class Meta:
 		model = User
 		fields = ('first_name', 'email')

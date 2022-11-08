@@ -300,7 +300,7 @@ def user_update(request, pk):
     		'user_form': user_form,
     		'profile_form': form_cliente,
     		'endereco': form_endereco,
-    		'cliente': user,
+    		'cliente': obj,
     		
     	}
     	return render(request, template_name, context=context)
@@ -315,7 +315,6 @@ def user_update(request, pk):
     		edit_user = user_form.save()
     		form_cliente.instance = edit_user 
     		profile = form_cliente.save()
-    		print(profile)
     	
     		form_endereco.save()
     		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
@@ -324,7 +323,7 @@ def user_update(request, pk):
     			'user_form': user_form,
     			'profile_form': form_cliente,
     			'endereco': form_endereco,
-    			'cliente': user,
+    			'cliente': obj,
     			
     		}
     		return render(request,  template_name, context=context)
@@ -386,7 +385,6 @@ def user_update_for_adm(request, pk):
     		edit_user = user_form.save()
     		form_cliente.instance = edit_user 
     		profile = form_cliente.save()
-    		print(profile)
     	
     		form_endereco.save()
     		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))

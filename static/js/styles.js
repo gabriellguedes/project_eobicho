@@ -20,34 +20,13 @@ $(document).ready(function(){
       });
 
     });
-  /*
-  $('#id_pet_set-0-especie').change(function(){
-      const url = $('#FormAddPetCliente').attr("data-funcoes-url");
-      especieId =  $(this).val();
-      $.ajax({
-        url : url,
-        data : { 'id_pet_set-0-especie': especieId},
-        success: function(data){
-          $("#id_pet_set-0-raca").html(data);
-        }
-      });
+  
+  var $input    = document.getElementById('profile-0-photo'),
+     $fileName = document.getElementById('file-name');
 
-    });
-
-  $('#id_especie').change(function(){
-      const url = $('#FormUpdatePet').attr("data-funcoes-url");
-      especieId =  $(this).val();
-      $.ajax({
-        url : url,
-        data : { 'id_especie': especieId},
-        success: function(data){
-          $("#id_raca").html(data);
-        }
-      });
-
-    });*/
-
-
+  $input.addEventListener('change', function(){
+    $fileName.textContent = this.value;
+  });
 });
 
 $('#add-item').click(function(ev) {
