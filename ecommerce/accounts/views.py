@@ -205,9 +205,9 @@ def user_list(request):
 
 # Visualizar Dados do cliente	
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def user_profile(request):
+def user_profile(request, pk):
 	template_name = 'accounts/user_profile.html'
-	user = request.user
+	user = User.objects.get(id=pk)
 	try:
 		profile = Profile.objects.get(user=user)
 	except ObjectDoesNotExist:

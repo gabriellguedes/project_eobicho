@@ -38,7 +38,7 @@
             <span class="text-secondary">{{request.user.id}}</span>
           </small>
         </a>
-        <a class="dropdown-item" href="{% url 'contas:user_profile' %}">
+        <a class="dropdown-item" href="{% url 'contas:user_profile' pk=request.user.id %}">
           <i class="fa-solid fa-user text-info"></i><span class="text-secondary"> Visualizar Perfil</span>
         </a>
         <a class="dropdown-item" href="{% url 'contas:cliente_update' pk=user.id %}">
