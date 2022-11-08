@@ -16,11 +16,29 @@
     {% csrf_token %}
       {{form_pet.management_form}}
     <div class="col-md-4">
-      <div class="w-100 d-flex justify-content-center mb-4">
-        <span class="circle-pet-update">         
-          <img class="mask" src="{{obj.photo.url}}" alt="Foto de perfil do pet">
-        </span>
-      </div>
+      {% if obj.photo.url != None%}
+        <div class="w-100 d-flex justify-content-center mb-4">
+          <span class="circle-pet-update">         
+            <img src="{{obj.photo.url}}" alt="Foto de perfil do pet">
+          </span>
+        </div>
+      {% else %}
+            {% if obj.sexo  != 'Macho' %}
+              <div class="w-100 d-flex justify-content-center mb-4">
+                <span class="circle-img">         
+                  <img src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">
+                </span>
+              </div>
+              
+            {% else %}
+              <div class="w-100 d-flex justify-content-center mb-4">
+                <span class="circle-img">         
+                  <img src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">
+                </span>
+              </div> 
+              
+            {% endif%}
+      {% endif %}
       <div class="d-flex justify-content-center mb-4">
         <input  type="file" name="photo" accept="image/*" id="id_photo" style="display: none;">
         <input type="button" value="Alterar Foto" class="btn btn-outline-info" onclick="document.getElementById('id_photo').click();" />
