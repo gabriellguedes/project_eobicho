@@ -14,11 +14,19 @@
   </div>  
   <form name="FormAddPet" id="FormAddPet" method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_update_pet' %}">
     {% csrf_token %}
-    <div class="row">  
       {{form_pet.management_form}}
-        <div class="col-md-4">
-          {{form_pet.photo|bootstrap}}
-        </div>
+    <div class="col-md-4">
+      <div class="w-100 d-flex justify-content-center mb-4">
+        <span class="circle-pet-update">         
+          <img class="mask" src="{{obj.photo.url}}" alt="Foto de perfil do pet">
+        </span>
+      </div>
+      <div class="d-flex justify-content-center mb-4">
+        <input  type="file" name="photo" accept="image/*" id="id_photo" style="display: none;">
+        <input type="button" value="Alterar Foto" class="btn btn-outline-info" onclick="document.getElementById('id_photo').click();" />
+      </div>
+    </div>
+    <div class="row">          
         <div class="col-md-4">
           {{form_pet.nome|bootstrap}}
         </div>
