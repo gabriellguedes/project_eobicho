@@ -267,8 +267,8 @@ main{
 	overflow: hidden;
 	border-radius: 50% !important;
 	height: 230px;
-	max-width: 230px;
-	min-width: 230px;
+	width: 230px;
+	
 }
 .circle-pet-update img{
 	width: 100%;
