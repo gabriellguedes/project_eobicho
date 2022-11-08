@@ -1,13 +1,22 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% load bootstrap %}
 {% block content %}
 <section class="container py-4">
 	<div>
-		 <div class="w-100 d-flex justify-content-center mb-4">
-        <span class="circle-pet-update">         
-          <img class="mask" src="{{profile.photo.url}}" alt="Foto de perfil do pet">
-        </span>
-      </div>
+		{% if profile.photo.url != None %}
+			<div class="w-100 d-flex justify-content-center mb-4">
+		        <span class="circle-pet-update">         
+		          <img class="mask" src="{{profile.photo.url}}" alt="Foto de perfil do pet">
+		        </span>
+		    </div>
+	    {% else %}
+	    	<div class="w-100 d-flex justify-content-center mb-4">
+		        <span class="circle-pet-update">         
+		          <img class="mask" src="{% static 'img/user-default.png' %}" alt="Foto de perfil do pet">
+		        </span>
+		    </div>
+	    {% endif %}
       <div class="d-flex justify-content-center mb-4">
         <input  type="file" name="photo" accept="image/*" id="id_photo" style="display: none;">
         <input type="button" value="Alterar Foto" class="btn btn-outline-info" onclick="document.getElementById('id_photo').click();" />
