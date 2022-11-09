@@ -25,8 +25,20 @@ $(document).ready(function(){
      $fileName = document.getElementById('file-name');
 
   $input.addEventListener('change', function(){
-    $fileName.textContent = this.value;
+  $fileName.textContent = this.value;
   });
+
+
+
+});
+
+$('#showpassword').click(function mostrarSenha(){
+    var tipo = document.getElementById("id_password");
+    if(tipo.type == "password"){
+        tipo.type = "text";
+    }else{
+        tipo.type = "password"
+    }
 });
 
 $('#add-item').click(function(ev) {
@@ -48,7 +60,7 @@ $('#add-item').click(function(ev) {
     
 jQuery(document).ready(function(){
 
-    var btn = 'form[name=form_cadastro] button';      /*INFORME O SELETOR DO BOTÃO*/
+    var btn = 'form[name=form_cadastro] button[name=btn_criar_conta]';      /*INFORME O SELETOR DO BOTÃO*/
     var checkbox = '#check_termos';  /*INFORME O NOME DO ID DO CHECKBOX*/
     
     jQuery(btn).attr('disabled', 'disabled').css("opacity", "0.6");

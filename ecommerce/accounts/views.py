@@ -217,7 +217,7 @@ def user_profile(request, pk):
 	except ObjectDoesNotExist:
 		endereco = ''
 	context = {
-		'user': user,
+		'cliente': user,
 		'profile': profile,
 		'endereco': endereco,
 	}

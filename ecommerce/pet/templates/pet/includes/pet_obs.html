@@ -6,25 +6,26 @@
 </div>
 <section class="collapse border rounded" id="petCaracteristica">
   <div class="row my-3">
-  	<div class="col-md-4">
+  	<div class="col-md-4 mb-3">
 		<form class="col" method="POST" action=".">
 		
 			<legend class="text-secondary border-bottom font-weight-bold">
 				<i class="fa-solid fa-list text-info"></i> Nova observação
 			</legend>
 				
-			<button class="btn btn-success" type="submit">
+			<button class="btn btn-info mt-3" type="submit">
 				<i class="fa-solid fa-plus"></i> Adicionar
 			</button>
 		</form>
 	</div>
-	{% if ficha.observacoes %}
-		
-	{% else %}	
-		<div class="col-md-6 border-left">
-			
-			<p class="alert alert-warning mt-5">Nenhuma observação cadastrada!</p>
-				
-		</div>
-	{% endif %}
+
+	<div class="col-md-8 border-left">
+		{% if ficha.obs %}
+			{{ficha.obs }}		
+		{% else %}	
+			<div class="h-100 d-flex align-items-center px-2">
+				<p class="alert alert-warning text-center w-100">Nenhuma observação cadastrada!</p>
+			</div>	
+		{% endif %}
+	</div>
 </section><!-- /Observações -->

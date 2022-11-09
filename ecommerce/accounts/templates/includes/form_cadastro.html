@@ -13,26 +13,44 @@
         {% endif %}
 
     <div id="form_cadastro">
-        <div class="">
-            <i class="fa-solid fa-user text-info mr-2"></i>
-            <input class="form-control mb-3 pl-2" type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Nome">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-white">
+                    <i class="fa-solid fa-user text-info"></i>
+                </span>
+            </div>
+            <input class="form-control" type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Nome">
         </div>    
        
-        <div class="">
-            <i class="fa-solid fa-envelope text-info mr-2"></i>
-            <input class="form-control mb-3 pl-2" type="email" name="email" maxlength="254" id="id_email" placeholder="Email">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-white">
+                    <i class="fa-solid fa-envelope text-info"></i>
+                </span>
+            </div>
+            <input class="form-control" type="email" name="email" maxlength="254" id="id_email" placeholder="Email">
         </div>
           
-        <div class="">
-            <i class="fa-solid fa-lock text-info mr-2"></i>
-            <input class="form-control mb-3 pl-2" type="password" name="password" id="id_password" placeholder="Senha">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-white">
+                    <i class="fa-solid fa-lock text-info"></i>
+                </span>
+            </div>
+            <input class="form-control" type="password" name="password" id="id_password" placeholder="Senha" style="width: 0;" />
+            <span class="input-group-append">
+                <button id="showpassword" class="btn btn-sm btn-outline-info" type="button" onclick="mostrarSenha()" style="background:transparent;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </span>
         </div>    
-        
     </div>
+
     <label class="container_checkbox mb-3">Eu quero receber comunicações sobre conteúdo e novidades da É o bicho por email e notificação.
         <input class="checkbox" type="checkbox" name="email_market" id="email_market"/>
         <span class="checkmark" for="email_market"></span>
     </label>
+
     <label class="container_checkbox mb-3">Concordo com os <a class="text-info" href="#">Termos de Uso</a> da É o bicho.
         <input class="checkbox" type="checkbox" name="termos" id="check_termos"/>
         <span class="checkmark" for="check_termos"></span>
@@ -40,7 +58,7 @@
    
     <input type="hidden" value="6QS5FJzZUlWFfsI40rkpejqPShvQoGdX" name="csrfmiddlewaretoken">
     {% csrf_token %}
-    <button class="btn btn-info " type="submit" id="btn_new_user">Criar Conta</button>
+    <button class="btn btn-info" name="btn_criar_conta" type="submit" id="btn_new_user">Criar Conta</button>
 </form>
 
 
