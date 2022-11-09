@@ -13,7 +13,7 @@ def upload_image_formater(instance, filename):
 class Profile(models.Model):
 	status = models.BooleanField(default=True)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
-	cargo = models.CharField('', max_length=50,choices=t.CARGOS_CHOICES, default='Cliente')
+	cargo = models.CharField('Cargo', max_length=50,choices=t.CARGOS_CHOICES, default='Cliente')
 	photo = models.ImageField('Foto de Perfil',  upload_to=upload_image_formater, blank=True, null=True)
 	cpf = models.CharField('CPF', max_length=15, unique=True)
 	telefone = models.CharField('Telefone', max_length=16, null=True, blank=True)

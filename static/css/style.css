@@ -11,6 +11,7 @@ span.required:after{
 	content: "*";
 	color: red;
 }
+
 .max-100{
 	max-width: 100% !important;
 }
@@ -379,6 +380,13 @@ main{
 		border: 1px solid #1fb9b1 !important;
 	}
 
+.control-label[for='id_profile-0-cargo']{
+	margin-left: 26px;
+}
+#id_profile-0-cargo{
+	border: 1px solid #1fb9b1 !important;
+	margin-left: 10px;
+}
 
 #form_endereco{
 	max-width: 100%;
@@ -465,6 +473,19 @@ main{
 		#form_update_02 div{
 			width: 100% !important;
 		}
+	.form-group{
+		margin:0 !important;
+	}
+	.control-label[for='id_profile-0-cargo']{
+	margin-left: 0 !important;
+}
+#id_profile-0-cargo{
+	border: 1px solid #1fb9b1 !important;
+	margin-left: 0 !important;
+}
+#id_profile-0-cargo label{
+	margin-left: 0 !important;
+}
 }
 
 @media screen and (max-width: 480px){
@@ -530,7 +551,22 @@ main{
 	}
 		#form_update_02 div{
 			width: 100% !important;
+
 		}
+.form-group{
+	margin: 0 !important;
+}
+.control-label[for='id_profile-0-cargo']{
+	margin-left: 0 !important;
+}
+
+#id_profile-0-cargo{
+	border: 1px solid #1fb9b1 !important;
+	margin-left: 0 !important;
+}
+#id_profile-0-cargo label{
+	margin-left: 0 !important;
+}
 }
 
 input[type='file'] {

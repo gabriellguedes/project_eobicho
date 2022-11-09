@@ -9,6 +9,7 @@ from ecommerce.pet.forms import DateInput
 
 # Dados do Usuário
 class ProfileForm(forms.ModelForm):
+	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
 	class Meta:
 		model = Profile
@@ -20,13 +21,14 @@ class ProfileForm(forms.ModelForm):
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
-# Atualização dos dados do perfil
+# Atualização dos dados do perfil Feita pelo cliente
 class ProfileUpdateForm(forms.ModelForm):
+	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
 	photo = forms.CharField(label='', required='False')
 	class Meta:
 		model = Profile
-		fields = ('photo','telefone', 'cpf', 'aniversario')
+		fields = ('photo', 'cpf', 'telefone', 'aniversario')
 		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
@@ -34,6 +36,23 @@ class ProfileUpdateForm(forms.ModelForm):
 		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
+
+# Atualização dos dados do perfil Feita pelo gerente
+class ProfileUpdateFullForm(forms.ModelForm):
+	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
+	cpf = BRCPFField(label='CPF', required='True')
+	photo = forms.CharField(label='', required='False')
+	class Meta:
+		model = Profile
+		fields = ('photo', 'cpf', 'telefone', 'aniversario', 'cargo')
+		widgets = {'aniversario': DateInput()}
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
+		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
+		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
+
 
 # Formulário de Login		
 class LoginForm(forms.Form):

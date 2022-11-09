@@ -11,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
 from .models import Profile, Endereco
-from .forms import ProfileForm, ProfileUpdateForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteAddForm
+from .forms import ProfileForm, ProfileUpdateForm, ProfileUpdateFullForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteAddForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
@@ -359,7 +359,7 @@ def user_update_for_adm(request, pk):
 
     if request.method == 'GET':
     	user_form = UserEditForm(instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=a, can_delete=False)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateFullForm, extra=a, can_delete=False)
     	form_cliente = form_cliente_factory(instance=obj)
 
     	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=b, can_delete=False)
@@ -369,13 +369,13 @@ def user_update_for_adm(request, pk):
     		'user_form': user_form,
     		'profile_form': form_cliente,
     		'endereco': form_endereco,
-    		'cliente': user,
+    		'cliente': obj,
     		
     	}
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
     	user_form = UserEditForm(request.POST,instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateFullForm)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
     	
     	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=a, can_delete=False)
@@ -393,7 +393,7 @@ def user_update_for_adm(request, pk):
     			'user_form': user_form,
     			'profile_form': form_cliente,
     			'endereco': form_endereco,
-    			'cliente': user,
+    			'cliente': obj,
     			
     		}
     		return render(request,  template_name, context=context)

@@ -208,23 +208,4 @@ def load_funcoes(request):
         'raca': raca,
     }
     return render(request, template_name, context=context)
-# Select Espécie e Raça Add Pet por um Cliente
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def load_cliente(request):
-    template_name = 'pet/cliente_ajax.html'
-    especie_id = request.GET.get('id_pet_set-0-especie')
-    raca = Raca.objects.filter(especie=especie_id)
-    context = {
-        'raca': raca,
-    }
-    return render(request, template_name, context=context)
-# Select Espécie e Raça Add Pet por um Cliente
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
-def load_update_pet(request):
-    template_name = 'pet/update_pet_ajax.html'
-    especie_id = request.GET.get('id_especie')
-    raca = Raca.objects.filter(especie=especie_id)
-    context = {
-        'raca': raca,
-    }
-    return render(request, template_name, context=context)
+
