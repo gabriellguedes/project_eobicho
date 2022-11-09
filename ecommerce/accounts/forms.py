@@ -35,7 +35,8 @@ class ProfileUpdateForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
-		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
+		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
+		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})		
 
 # Atualização dos dados do perfil Feita pelo gerente
 class ProfileUpdateFullForm(forms.ModelForm):
@@ -51,7 +52,8 @@ class ProfileUpdateFullForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
-		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
+		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
+		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})	
 
 
 # Formulário de Login		
