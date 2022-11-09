@@ -13,7 +13,7 @@
       <i class="bi bi-journal-text text-info"></i> Atualizar Dados do Pet
     </h2>
   </div>  
-  <form class="px-4" name="FormAddPet" id="FormAddPet" method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_update_pet' %}">
+  <form class="px-4" name="FormAddPet" id="FormAddPet" method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_load_funcoes' %}">
     {% csrf_token %}
     {{form_pet.management_form}}
     <div class="col-md-4">
