@@ -16,7 +16,7 @@ class Ectoparasitas(models.Model):
 		ordering = ('pk',)
 
 	def __str__(self):
-		return self.ectoparasitas
+		return self.nome
 
 class DoencaPele(models.Model):
 	nome = models.CharField('Doenças na Pele', max_length=100)

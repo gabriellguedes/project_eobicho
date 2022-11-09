@@ -4,22 +4,57 @@ def Cadastro(tupla):
 	
 	if bd == 'Boca': 
 		from ecommerce.ficha.boca.models import Boca
+		objeto = Boca.objects.all()
 	elif bd == 'Patas':
 		from ecommerce.ficha.patas.models import Patas
+		objeto = Patas.objects.all()
+	elif bd == 'Pele':
+		from ecommerce.ficha.pele.models import Pele
+		objeto = Pele.objects.all()
+	elif bd == 'Pele_Doenca':
+		from ecommerce.ficha.pele.models import DoencaPele
+		objeto = DoencaPele.objects.all()
+	elif bd == 'Pelos':
+		from ecommerce.ficha.pelos.models import Pelos
+		objeto = Pelos.objects.all()
+	elif bd == 'Pelos_Estado':
+		from ecommerce.ficha.pelos.models import Estado_pelos
+		objeto = Estado_pelos.objects.all()
+	elif bd == 'Pelos_Condicao':
+		from ecommerce.ficha.pelos.models import Condicao_pelos
+		objeto = Condicao_pelos.objects.all()
+	elif bd == 'Unhas':
+		from ecommerce.ficha.unhas.models import Unhas
+		objeto = Unhas.objects.all()
+	elif bd == 'Orelhas':
+		from ecommerce.ficha.orelhas.models import Orelhas
+		objeto = Orelhas.objects.all()
+	elif bd == 'Olhos':
+		from ecommerce.ficha.olhos.models import Olhos
+		objeto = Olhos.objects.all()
+	elif bd == 'Ectoparasitas':
+		from ecommerce.ficha.pele.models import Ectoparasitas
+		objeto = Ectoparasitas.objects.all()
+	elif bd == 'Coloracao':
+		from ecommerce.ficha.pelos.models import Coloracao
+		objeto = Coloracao.objects.all()
+	elif bd == 'Pelagem':
+		from ecommerce.ficha.pelos.models import Pelagem
+		objeto = Pelagem.objects.all()
 	else:
-		pass
+		print("opção invalida, tente novamente.")
 	
 	lista = []
-	objeto = bd.objects.all()
+	
 	for x in tupla:
 		for y in x:
 			if y in lista:
-				print('O item ', y, ' já existe na lista.')
 				pass
 			else:
 				lista.append(y)
 				objeto.create(nome=y)
 				print(y, 'foi cadastrado no banco de dados!')
+				print("################################################################")
 				
 
 
