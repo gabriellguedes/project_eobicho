@@ -28,16 +28,22 @@ $(document).ready(function(){
   $fileName.textContent = this.value;
   });
 
-
+  
 
 });
 
+
 $('#showpassword').click(function mostrarSenha(){
     var tipo = document.getElementById("id_password");
+    var icon = document.getElementById("icon_show_password")
     if(tipo.type == "password"){
         tipo.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
     }else{
-        tipo.type = "password"
+        tipo.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
     }
 });
 
