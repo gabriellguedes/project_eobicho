@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block content %}
 <section class="container py-4">
-	<h2 class="border-bottom pb-2 text-secondary">
+	<h2 class="border-bottom pb-2 text-secondary title-2">
 		<i class="bi bi-journal-text text-info"></i>
 		Prontuário{% if ficha.pet.sexo != 'Macho' %} da{% else %} do {% endif %} <span class="text-info">{{ficha.pet.nome}}</span> do dia <span class="text-info">{{ficha.created}}</span>
 	</h2>
@@ -18,73 +18,73 @@
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
-			    			<label class="font-weight-bold text-info">Unhas: </label>
+			    			<label class="font-weight-bold text-info d-block">Unhas: </label>
 			    			{% for item in ficha.unhas.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Ectoparasitas: </label>
+							<label class="font-weight-bold text-info d-block">Ectoparasitas: </label>
 							{% for item in ficha.ectoparasitas.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Pele: </label>
+							<label class="font-weight-bold text-info d-block">Pele: </label>
 							{% for item in ficha.pele.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Pelos: </label>
+							<label class="font-weight-bold text-info d-block">Pelos: </label>
 							{% for item in ficha.pelos.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Estado dos pelos: </label>
+							<label class="font-weight-bold text-info d-block">Estado dos pelos: </label>
 							{% for item in ficha.pelosEstado.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Condição dos Pelos: </label>
+							<label class="font-weight-bold text-info d-block">Condição dos Pelos: </label>
 							{% for item in ficha.pelosCondicao.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Boca: </label>
+							<label class="font-weight-bold text-info d-block">Boca: </label>
 							{% for item in ficha.boca.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Olhos: </label>
+							<label class="font-weight-bold text-info d-block">Olhos: </label>
 							{% for item in ficha.olhos.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Patas: </label>
+							<label class="font-weight-bold text-info d-block">Patas: </label>
 							{% for item in ficha.patas.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Orelhas: </label>
+							<label class="font-weight-bold text-info d-block">Orelhas: </label>
 							{% for item in ficha.orelhas.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Doenças: </label>
+							<label class="font-weight-bold text-info d-block">Doenças: </label>
 							{% for item in ficha.doenca.all %}
 								<label class="text-monospace">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
-							<label class="font-weight-bold text-info">Observações: </label>
+							<label class="font-weight-bold text-info d-block">Observações: </label>
 							<label class="text-monospace">{{ficha.obs}}</label>
 						</div>
 					</div>	
