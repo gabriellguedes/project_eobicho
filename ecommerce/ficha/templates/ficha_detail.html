@@ -14,78 +14,78 @@
 			<div class="card">
 			
 					<div class="card-header bg-dark">
-						<h3 class="text-white"><i class="fa-solid fa-file text-info"></i> Ficha de Avalição <span class="text-info"> Nº</span> {{ficha.id}}</h3>
+						<h3 class="text-white title-2"><i class="fa-solid fa-file text-info"></i> Ficha de Avalição <span class="text-info"> Nº</span> {{ficha.id}}</h3>
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
 			    			<label class="font-weight-bold text-info d-block">Unhas: </label>
 			    			{% for item in ficha.unhas.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Ectoparasitas: </label>
 							{% for item in ficha.ectoparasitas.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Pele: </label>
 							{% for item in ficha.pele.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Pelos: </label>
 							{% for item in ficha.pelos.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Estado dos pelos: </label>
 							{% for item in ficha.pelosEstado.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Condição dos Pelos: </label>
 							{% for item in ficha.pelosCondicao.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Boca: </label>
 							{% for item in ficha.boca.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Olhos: </label>
 							{% for item in ficha.olhos.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Patas: </label>
 							{% for item in ficha.patas.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Orelhas: </label>
 							{% for item in ficha.orelhas.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Doenças: </label>
 							{% for item in ficha.doenca.all %}
-								<label class="text-monospace">{{item}}</label>
+								<label class="text-monospace text-secondary">{{item}}</label>
 							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold text-info d-block">Observações: </label>
-							<label class="text-monospace">{{ficha.obs}}</label>
+							<label class="text-monospace text-secondary">{{ficha.obs}}</label>
 						</div>
 					</div>	
 			  </div>  
