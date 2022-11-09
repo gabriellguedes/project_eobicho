@@ -143,7 +143,7 @@ def pet_update(request, pk):
     raca = []
 
     if request.method == 'GET':
-        form = PetForm(instance=obj)
+        form = PetUpdateForm(instance=obj)
         context = {
             'form_pet': form,
             'obj': obj,
@@ -152,7 +152,7 @@ def pet_update(request, pk):
         }
         return render(request, template_name, context=context)
     if request.method == 'POST':
-        form = PetForm(request.POST, request.FILES, instance=obj)
+        form = PetUpdateForm(request.POST, request.FILES, instance=obj)
 
         if form.is_valid():
             form.save()
@@ -174,7 +174,7 @@ def cliente_pet_update(request, pk):
     raca = []
 
     if request.method == 'GET':
-        form = PetClienteAddForm(instance=obj)
+        form = PetClienteUpdateForm(instance=obj)
         context = {
             'form_pet': form,
             'obj': obj,
@@ -183,7 +183,7 @@ def cliente_pet_update(request, pk):
         }
         return render(request, template_name, context=context)
     if request.method == 'POST':
-        form = PetClienteAddForm(request.POST, request.FILES, instance=obj)
+        form = PetClienteUpdateForm(request.POST, request.FILES, instance=obj)
 
         if form.is_valid():
             form.save()
