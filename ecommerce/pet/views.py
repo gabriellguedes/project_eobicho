@@ -14,7 +14,7 @@ from ecommerce.ficha.forms import FichaForm
 from ecommerce.ficha.peso.forms import PesoForm
 from ecommerce.ficha.especie.models import Especie
 from ecommerce.ficha.raca.models import Raca
-from .forms import PetForm, PetClienteAddForm
+from .forms import PetForm, PetClienteAddForm, PetUpdateForm, PetClienteUpdateForm
 from .models import Pet
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
