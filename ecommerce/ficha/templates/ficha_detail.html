@@ -14,7 +14,13 @@
 			<div class="card">
 			
 					<div class="card-header bg-info">
-						<h3 class="text-white title-2"><i class="fa-solid fa-file"></i> Ficha de Avalição <span class="> Nº</span> {{ficha.id}}</h3>
+						<h4 class="text-white title-2">
+							<i class="fa-solid fa-file"></i> Ficha de Avalição 
+							<span class=""> Nº </span> {{ficha.id}}
+						</h4>
+						<small class="d-block text-white font-italic font-weight-bold">
+							Feita por:<span class="ml-2 text-white font-weight-normal">{{ficha.funcionario.first_name}}</span>
+						</small>
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
