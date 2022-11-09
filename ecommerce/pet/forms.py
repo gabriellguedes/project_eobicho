@@ -26,8 +26,8 @@ class PetUpdateForm(forms.ModelForm):
 		model = Pet
 		fields = '__all__'
 		widgets = {'aniversario': DateInput()}
-	def __init__(self, args*, kwargs**):
-		super().__init__(args*, kwargs**)
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
 		self.fields['aniversario'].widget.attrs.update({'class':'mask-date'})
 
 class PetClienteUpdateForm(forms.ModelForm):
@@ -39,7 +39,7 @@ class PetClienteUpdateForm(forms.ModelForm):
 				'coloracao', 'type_pelo', 'pelagem', 'sexo', 'castracao',
 				)
 		widgets = {'aniversario': DateInput()}
-	def __init__(self, args*, kwargs**):
-		super().__init__(args*, kwargs**)
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
 		self.fields['aniversario'].widget.attrs.update({'class':'mask-date'})
 		
