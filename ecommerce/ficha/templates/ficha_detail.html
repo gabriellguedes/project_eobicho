@@ -13,8 +13,8 @@
 		<div class="col-lg-6">
 			<div class="card">
 			
-					<div class="card-header bg-dark">
-						<h3 class="text-white title-2"><i class="fa-solid fa-file text-info"></i> Ficha de Avalição <span class="text-info"> Nº</span> {{ficha.id}}</h3>
+					<div class="card-header bg-info">
+						<h3 class="text-white title-2"><i class="fa-solid fa-file"></i> Ficha de Avalição <span class="> Nº</span> {{ficha.id}}</h3>
 					</div>
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
@@ -92,13 +92,13 @@
 		</div>
 		<div class="col-lg-6">
 		    <div class="col mt-3">
-		    	<p class="font-weight-bold"><i class="fa-solid fa-notes-medical text-info "></i> Avaliações anteriores:</p>	
+		    	<p class="font-weight-bold text-secondary"><i class="fa-solid fa-notes-medical text-info "></i> Avaliações anteriores:</p>	
 		    	<table class="table">
 		    		<thead>
 		    			<tr class="text-center">
-			    			<th scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
-			    			<th scope="col"><i class="fa-regular fa-calendar text-info"></i> Data</th>
-			    			<th scope="col"><i class="fa-solid fa-user text-info"></i> Funcionário</th>
+			    			<th class="text-secondary" scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
+			    			<th class="text-secondary" scope="col"><i class="fa-regular fa-calendar text-info"></i> Data</th>
+			    			<th class="text-secondary" scope="col"><i class="fa-solid fa-user text-info"></i> Funcionário</th>
 			    		</tr>	
 		    		</thead>	
 		    		{% for iten in last_fichas %}
