@@ -19,47 +19,69 @@
 					<div class="card-text px-3 py-3">
 			    		<div class="col">
 			    			<label class="font-weight-bold">Unhas: </label>
-							<label class="text-monospace">{{ficha.unhas}}</label> 
+			    			{% for item in ficha.unhas.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Ectoparasitas: </label>
-							<label class="text-monospace">{{ficha.ectoparasitas}}</label> 
+							{% for item in ficha.ectoparasitas.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Pele: </label>
-							<label class="text-monospace">{{ficha.peleInfeccionada}}</label> 
+							{% for item in ficha.pele.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Pelos: </label>
-							<label class="text-monospace">{{ficha.pelos}}</label> 
+							{% for item in ficha.pelos.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Estado dos pelos: </label>
-							<label class="text-monospace">{{ficha.pelosEstado}}</label> 
+							{% for item in ficha.pelosEstado.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Condição dos Pelos: </label>
-							<label class="text-monospace">{{ficha.pelosCondicao}}</label> 
+							{% for item in ficha.pelosCondicao.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Boca: </label>
-							<label class="text-monospace">{{ficha.boca}}</label> 
+							{% for item in ficha.boca.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Olhos: </label>
-							<label class="text-monospace">{{ficha.olhos}}</label> 
+							{% for item in ficha.olhos.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Patas: </label>
-							<label class="text-monospace">{{ficha.patas}}</label> 
+							{% for item in ficha.patas.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Orelhas: </label>
-							<label class="text-monospace">{{ficha.orelhas}}</label>
+							{% for item in ficha.Orelhas.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Doenças: </label>
-							<label class="text-monospace">{{ficha.doenca}}</label>
+							{% for item in ficha.doenca.all %}
+								<label class="text-monospace">{{item}}</label>
+							{% endfor %}
 						</div>
 						<div class="col">
 							<label class="font-weight-bold">Observações: </label>
@@ -94,7 +116,7 @@
 		    </div>
 		</div>	
 	</div>	
-	<a class="btn btn-primary mt-3" href="{% url 'pet:pet_detail' pk=ficha.pet.id %}">
+	<a class="btn btn-outline-info mt-3" href="{% url 'pet:pet_detail' pk=ficha.pet.id %}">
 		<i class="bi bi-arrow-counterclockwise"></i> Voltar</a>
 </section>
 
