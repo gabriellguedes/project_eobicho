@@ -9,7 +9,6 @@ from ecommerce.pet.forms import DateInput
 
 # Dados do Usuário
 class ProfileForm(forms.ModelForm):
-	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
 	class Meta:
 		model = Profile
@@ -23,7 +22,7 @@ class ProfileForm(forms.ModelForm):
 
 # Atualização dos dados do perfil Feita pelo cliente
 class ProfileUpdateForm(forms.ModelForm):
-	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
+	aniversario = forms.DateField(input_formats=['%d/%m/%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
 	photo = forms.CharField(label='', required='False')
 	class Meta:
@@ -40,7 +39,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 # Atualização dos dados do perfil Feita pelo gerente
 class ProfileUpdateFullForm(forms.ModelForm):
-	aniversario = forms.DateField(input_formats=['%d-%m-%Y'])
+	aniversario = forms.DateField(input_formats=['%d/%m/%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
 	photo = forms.CharField(label='', required='False')
 	class Meta:
