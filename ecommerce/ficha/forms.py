@@ -8,13 +8,13 @@ t = Tuplas()
 class CheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 	input_type = 'checkbox'
 
-class FichaForm(forms.ModelForm):
+class AnamneseForm(forms.ModelForm):
 	class Meta:
-		model = Ficha
+		model = Anamnese
 		fields = '__all__'
 
 class TestForm(forms.ModelForm):
 	class Meta:
-		model = Ficha
+		model = Anamnese
 		fields = ('doenca',)
 		widgets = {'doenca': CheckboxSelectMultiple()}

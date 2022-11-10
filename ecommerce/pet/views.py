@@ -8,9 +8,9 @@ from ecommerce.accounts.models import Profile
 from ecommerce.accounts.forms import ProfileForm, UserRegistrationForm, UserEditForm
 from ecommerce.core.models import TimeStampedModel
 from ecommerce.core.forms import TimeStampedForm
-from ecommerce.ficha.models import Ficha
+from ecommerce.ficha.models import Anamnese
 from ecommerce.ficha.peso.models import Peso
-from ecommerce.ficha.forms import FichaForm
+from ecommerce.ficha.forms import AnamneseForm
 from ecommerce.ficha.peso.forms import PesoForm
 from ecommerce.ficha.especie.models import Especie
 from ecommerce.ficha.raca.models import Raca

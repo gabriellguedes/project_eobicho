@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Ficha Banho/Tosa
+{% endblock title %}
+{% load bootstrap %}
+{% block content %}
+<section class="container mt-3">
+	<form class="" method="POST" action="."> 
+		<legend class="border-bottom pb-2 text-secondary mb-3">
+			<i class="fa-solid fa-file mr-2 text-info"></i> Banho e Tosa
+		</legend>
+		{{ csrf_token }}
+		<div class="col-md-4">
+		{% for item in form %}
+			<p>{{item|bootstrap}}</p>
+		{% endfor %}
+		</div>
+		<button class="btn btn-info btn-lg mr-3" type="submit">Criar Ficha</button>
+		<button class="btn btn-outline-info btn-lg">Cancelar</button>
+	</form>
+</section>
+{% endblock %}

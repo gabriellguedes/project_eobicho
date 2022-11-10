@@ -18,7 +18,7 @@ def prontuario_create(request, pk):
     if request.method == 'GET':
         form = PetForm()
         
-        form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1)
+        form_ficha_factory = inlineformset_factory(Pet, Anamnese, form=AnamneseForm, extra=1)
         form_ficha = form_ficha_factory()
 
         context = {
@@ -30,7 +30,7 @@ def prontuario_create(request, pk):
     elif request.method == 'POST':
         
         form = PetForm(request.POST)
-        form_ficha_factory = inlineformset_factory(Pet, Ficha, form=FichaForm)
+        form_ficha_factory = inlineformset_factory(Pet, Anamnese, form=AnamneseForm)
         form_ficha = form_ficha_factory(request.POST)
 
         if form_ficha.is_valid():
@@ -57,10 +57,10 @@ def prontuario_list(request):
     if not (parametro_limit.isdigit() and int(parametro_limit)>0):
         parametro_limit = '10'
 
-    fichas = Ficha.objects.get_queryset().order_by('id')
+    fichas = Anamnese.objects.get_queryset().order_by('id')
     fichas_paginator = Paginator(fichas, parametro_limit)
 
-    lista = Ficha.objects.all()
+    lista = Anamnese.objects.all()
     pet = Pet.objects.all()
 
     try:

@@ -15,7 +15,7 @@ from ecommerce.core.models import TimeStampedModel
 
 t = Tuplas()
 
-class Ficha(models.Model):
+class Anamnese(models.Model):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
 	pele = models.ManyToManyField(Pele, verbose_name='Tipo de Pele')
 	peleInfeccionada = models.ManyToManyField(DoencaPele, verbose_name='Doença na Pele')

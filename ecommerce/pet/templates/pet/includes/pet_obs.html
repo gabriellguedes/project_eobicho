@@ -21,7 +21,12 @@
 
 	<div class="col-md-8 border-left">
 		{% if ficha.obs %}
-			{{ficha.obs }}		
+			{% for item in last_fichas %}
+				<label class="d-block text-secondary px-2">
+					<span class="text-info">{{item.created}}</span> - 
+					<span class="text-secondary">{{item.obs}}</span>
+				</label>	
+			{% endfor %}
 		{% else %}	
 			<div class="h-100 d-flex align-items-center px-2">
 				<p class="alert alert-warning text-center w-100">Nenhuma observação cadastrada!</p>

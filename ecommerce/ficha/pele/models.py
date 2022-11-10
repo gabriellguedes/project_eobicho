@@ -19,7 +19,8 @@ class Ectoparasitas(models.Model):
 		return self.nome
 
 class DoencaPele(models.Model):
-	nome = models.CharField('Doenças na Pele', max_length=100)
+	nome = models.CharField('Doenças na Pele', max_length=110)
+
 	class Meta:
 		ordering = ('pk',)
 

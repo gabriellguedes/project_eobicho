@@ -1,4 +1,4 @@
 from django.contrib import admin
-from ecommerce.ficha.models import Ficha
+from ecommerce.ficha.models import Anamnese
 
-admin.site.register(Ficha)
+admin.site.register(Anamnese)
