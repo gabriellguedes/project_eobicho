@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Cadastrados
+{% endblock %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="container py-4">
+	<div class="row border-bottom">
+		<div class="col-md-8">
+			<h2 class="text-secondary title-2 font-weight-bold">
+				<i class="fa-solid fa-shield-dog text-info"></i>
+				<span class="text-uppercase">Itens do Pet</span>
+			</h2>
+		</div>	
+		<div class="col-md-4">
+			  <div class="d-flex justify-content-end">
+				<a class="btn btn-info mb-3" href="{% url 'services:itens_add' %}">
+					<i class="fa-solid fa-plus"></i> Adicionar</a>
+			</div>	
+		</div>
+	</div>	
+	
+	<div class="row">
+		<!-- MENSAGEM DE ALERTA -->
+		<div class="col-md-5 mt-4">
+			<div class="card">
+				<h3 class="card-header bg-info text-white mb-3 text-center font-weight-bold">
+					<i class="fa-solid fa-triangle-exclamation"></i> Atenção!</h3>
+				<div class="card-text px-3">
+					<label class="text-justify pb-3">Cuidado ao <span class="text-info font-weight-bold">excluir</span> ou <span class="text-info font-weight-bold">editar</span> um <span class="text-info font-weight-bold">item</span>,  pois se  houver algum animal já cadastrado com esse item, ocorrerá<span class="text-info font-weight-bold"> erro de integridade</span> no banco de dados.
+					</label>
+				</div>	
+			</div>	
+		</div>
+		<!-- TABELA DE EXIBIÇÃO DAS ESPÉCIES CADASTRADAS -->
+		<div class="col-md-7 mt-4">
+			<table class="table">
+				<thead>
+					<th class="text-info" scope="col">#</th>
+					<th class="text-secondary" scope="col">
+						<i class="fa-solid fa-shield-dog text-info"></i> Item
+					</th>
+					<th class="text-center text-secondary" scope="col">
+						<i class="fa-solid fa-gears text-info"></i> Ações:
+					</th>
+				</thead>
+				<tbody>
+					{% for iten in form %}
+					<tr>
+						<th class="text-secondary" scope="col">{{iten.id}}</th>
+						<td>
+							<a href="{% url 'services:itens_update' pk=iten.id %}">{{iten.nome}}</a>
+						</td>
+						<td>
+							<div class="d-flex justify-content-center">
+								<a class="btn btn-outline-info rounded-circle mr-3" href="{% url 'services:itens_update' pk=iten.id %}">
+									<i class="fa-regular fa-pen-to-square"></i>
+								</a>
+								<a class="btn btn-outline-info rounded-circle" href="{% url 'services:itens_delete' pk=iten.id %}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>	
+					{% endfor%}
+				</tbody>
+			</table>
+		</div>
+	</div>		
+</section>
+{% endblock %}

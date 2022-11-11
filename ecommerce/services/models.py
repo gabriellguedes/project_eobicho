@@ -9,19 +9,19 @@ class Itens(models.Model):
 	nome= models.CharField('Itens', max_length=100)
 
 	def __str__(self):
-		return self.pk 
+		return self.nome
 
 class Banho(models.Model):
 	nome = models.CharField('Banho', max_length=100)
 
 	def __str__(self):
-		return self.pk
+		return self.nome
 
 class Tosa(models.Model):
 	nome = models.CharField('Tosa', max_length=100)
 
 	def __str__(self):
-		return self.pk
+		return self.nome
 
 class Ficha(TimeStampedModel):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)

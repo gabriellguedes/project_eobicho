@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Alterar
+{% endblock %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="container py-4">
+	<form method="POST" action=".">
+		<legend class="border-bottom text-secondary title-2 font-weight-bold pb-3">
+			<i class="bi bi-card-checklist text-info"></i> Atualizar Item
+		</legend>
+		{% csrf_token %}
+		
+		<div class="col-sm-4 my-4">
+			{{form.nome|bootstrap}}
+			
+			<div class="d-flex justify-content-end mx-3 my-3">
+				<button class="btn btn-info mr-3" type="submit">
+					<i class="fa-solid fa-plus"></i> Atualizar
+				</button>
+				
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'services:itens_list' %}'">
+	  				<i class="fa-solid fa-xmark"></i> Cancelar
+				</button>
+			</div>	
+		</div>
+		
+				
+	</form>
+</section>
+{% endblock %}
