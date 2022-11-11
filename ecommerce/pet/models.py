@@ -22,6 +22,7 @@ class Pet(models.Model):
 	tutor = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='tutores')
 	nome = models.CharField('Nome',max_length=150)
 	aniversario = models.DateField('Aniversário', blank=True, null=True)
+	idade = models.PositiveIntegerField('Idade')
 	especie = models.ForeignKey(Especie, on_delete=models.PROTECT, verbose_name='Espécie')
 	raca = models.ForeignKey(Raca, on_delete=models.PROTECT, verbose_name='Raça')
 	temperamento = models.ForeignKey(Temperamento, on_delete=models.PROTECT, verbose_name='Temperamento')

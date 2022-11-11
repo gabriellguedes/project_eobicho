@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from django.forms import inlineformset_factory
 from django.urls import reverse
@@ -127,6 +128,7 @@ def itens_delete(request, pk):
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
 	pet = Pet.objects.get(id=pk)
+	today = datetime.utcnow()
 	if request.method == 'GET':
 		form = FichaForm()
 		
@@ -136,6 +138,8 @@ def new_ficha(request, pk):
 		context = {
 			'form': form_pet,
 			'pet': pet,
+			'data': today,
+
 		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
@@ -151,5 +155,6 @@ def new_ficha(request, pk):
 			context = {
 				'form': form_pet,
 				'pet': pet,
+				'data': today,
 			}
 			return render(request, template_name, context=context)

@@ -1,3 +1,7 @@
+import dateutil
+import datetime
+from datetime import datetime
+from dateutil.relativedelta import *
 from django.shortcuts import render, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
@@ -22,6 +26,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from PIL import Image
 
+def birthday(date):
+    # Get the current date
+    now = datetime.utcnow()
+    now = now.date()
+    # Get the difference between the current date and the birthday
+    try:
+        age = dateutil.relativedelta.relativedelta(now, datetime.strptime(date, '%Y-%m-%d').date())
+    except TypeError:
+        age = dateutil.relativedelta.relativedelta(now, date)
+    age = age.months
+
+    return age
+
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_add(request):
     template_name = 'pet/pet_add.html'
@@ -38,8 +55,12 @@ def pet_add(request):
         return render(request, template_name, context=context)
     elif request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
+        aniversario = request.POST['aniversario']
+        idade = birthday(aniversario)
         if form.is_valid():
-            form.save()
+            new_pet = form.save(commit=False)
+            new_pet.idade = idade
+            new_pet.save()
             return HttpResponseRedirect(reverse('pet:pet_list'))
         else:
             context = { 'form': form }
@@ -66,9 +87,12 @@ def cliente_pet_add(request, pk):
 
     elif request.method == 'POST':
         form = PetClienteAddForm(request.POST, request.FILES)
-               
+        aniversario = request.POST['aniversario']
+        idade = birthday(aniversario)
         if form.is_valid():
-            new_pet = form.save()
+            new_pet = form.save(commit=False)
+            new_pet.idade = idade
+            new_pet.save()
             obj.tutores.add(new_pet)
 
             return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
@@ -112,21 +136,26 @@ def paginacao(request):
 def detailPet(request, pk):
     template_name ='pet/pet_detail.html'
     
-    obj = Pet.objects.get(id=pk)
-    tutor = obj.tutor.all()
-    ficha = obj.fichaPets.last()
-    last_fichas = obj.fichaPets.all()
+    pet = Pet.objects.get(id=pk)
+    tutor = pet.tutor.all()
+    ficha = pet.fichaPets.last()
+    last_fichas = pet.fichaPets.all()
     #obj_cliente = User.objects.get(id=tutor)
 
-    
     # Listar Peso        
-    list_peso = Peso.objects.filter(pet=obj)
+    list_peso = Peso.objects.filter(pet=pet)
     last_peso = list_peso.last()    
     
-   
+    #Atualizar idade do pet
+    aniversario = pet.aniversario
+    print(aniversario)
+    idade = birthday(aniversario)
+    if pet.idade != idade:
+        pet.idade = idade
+        pet.save()
    
     context = { 
-        'pet': obj,
+        'pet': pet,
         'ficha': ficha,
         'last_fichas': last_fichas,
         'last_peso': last_peso,
@@ -155,7 +184,8 @@ def pet_update(request, pk):
         form = PetUpdateForm(request.POST, request.FILES, instance=obj)
 
         if form.is_valid():
-            form.save()
+            pet = form.save(commit=False)
+            pet.save()
             return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = { 
@@ -184,9 +214,10 @@ def cliente_pet_update(request, pk):
         return render(request, template_name, context=context)
     if request.method == 'POST':
         form = PetClienteUpdateForm(request.POST, request.FILES, instance=obj)
-
+       
         if form.is_valid():
-            form.save()
+            pet = form.save(commit=False)
+            pet.save()
             return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = { 
