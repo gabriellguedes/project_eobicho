@@ -39,14 +39,7 @@
 					</div>			
 					<div class="col-md-3">
 						<label class="text-info font-weight-bold">Idade</label>
-						{% if pet.aniversario|date:'m/Y'  data|date:'m/Y' > 12  %}
-							
-							<label class="text-secondary">{{pet.idade}} anos</label>
-							
-						{% else %}
-							<label class="text-secondary">{{pet.idade|floatformat:2}} meses</label>
-							
-						{% endif %}
+						<label class="text-secondary">{{pet.idade}} {{msg}}</label>
 					</div>	
 					<div class="col-md-3">
 						<label class="text-info font-weight-bold">Cor</label> 

@@ -30,13 +30,13 @@ def birthday(date):
     # Get the current date
     now = datetime.utcnow()
     now = now.date()
+    context = {}
     # Get the difference between the current date and the birthday
     try:
         age = dateutil.relativedelta.relativedelta(now, datetime.strptime(date, '%Y-%m-%d').date())
     except TypeError:
         age = dateutil.relativedelta.relativedelta(now, date)
     age = age.months
-
     return age
 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')

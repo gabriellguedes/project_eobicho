@@ -4,6 +4,7 @@ from django.forms import inlineformset_factory
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from ecommerce.pet.models import Pet
+from ecommerce.pet.views import birthday
 from .models import Ficha, Banho, Tosa, Itens
 from .forms import FichaForm, BanhoForm, TosaForm, ItensForm
 
@@ -128,18 +129,22 @@ def itens_delete(request, pk):
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
 	pet = Pet.objects.get(id=pk)
-	today = datetime.utcnow()
+	context={}
+	niver = pet.aniversario
+	age = int(birthday(niver))
+	
 	if request.method == 'GET':
 		form = FichaForm()
-		
 		form_pet_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1, can_delete=False)
 		form_pet = form_pet_factory(instance=pet)
-
+		if age >= 0:
+			context['msg'] = 'anos'
+		else:
+			context['msg'] = 'meses'
 		context = {
 			'form': form_pet,
 			'pet': pet,
-			'data': today,
-
+			
 		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
@@ -155,6 +160,6 @@ def new_ficha(request, pk):
 			context = {
 				'form': form_pet,
 				'pet': pet,
-				'data': today,
+				
 			}
 			return render(request, template_name, context=context)
