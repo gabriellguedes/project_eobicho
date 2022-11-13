@@ -128,10 +128,13 @@ def itens_delete(request, pk):
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
 	pet = Pet.objects.get(id=pk)
-	today = datetime.utcnow()
+	today = datetime.date(datetime.utcnow())
+	aniversario = pet.aniversario
+	idade = aniversario - today
+
 	if request.method == 'GET':
 		form = FichaForm()
-		
+				
 		form_pet_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1, can_delete=False)
 		form_pet = form_pet_factory(instance=pet)
 
