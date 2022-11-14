@@ -156,8 +156,11 @@ def new_ficha(request, pk):
 		form_anamnese_factory = inlineformset_factory(Ficha, Anamnese, form=AnamneseForm, extra=1, can_delete=False)
 		form_anamnese = form_anamnese_factory(request.POST)
 
-		if form.is_valid():
-			form.save()
+		if form_pet.is_valid():
+			form_pet.instance = pet
+			new_banho = form_pet.save(commit=False)
+			new_banho[0].funcionario = request.user
+			new_banho[0].save()
 			return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': pk}))
 		else:
 			context = {
@@ -167,3 +170,4 @@ def new_ficha(request, pk):
 				
 			}
 			return render(request, template_name, context=context)
+

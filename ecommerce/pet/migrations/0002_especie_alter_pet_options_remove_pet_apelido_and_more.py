@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pet',
             name='tutor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='accounts.cliente'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='accounts.profile'),
         ),
         migrations.AlterField(
             model_name='pet',

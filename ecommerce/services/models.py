@@ -24,7 +24,7 @@ class Tosa(models.Model):
 
 class Ficha(TimeStampedModel):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-	funcionario = models.ForeignKey(User, on_delete=models.CASCADE)
+	funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 	banho = models.ForeignKey(Banho, on_delete=models.CASCADE)
 	tosa = models.ForeignKey(Tosa, on_delete=models.CASCADE)
 	itens = models.ForeignKey(Itens, on_delete=models.CASCADE)
