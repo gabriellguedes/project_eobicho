@@ -1,5 +1,6 @@
 from django.db import models
 from ecommerce.pet.tuplas import Tuplas
+from ecommerce.services.models import Ficha
 from ecommerce.pet.models import Pet
 from ecommerce.ficha.boca.models import Boca
 from ecommerce.ficha.doenca.models import Doenca
@@ -17,6 +18,7 @@ t = Tuplas()
 
 class Anamnese(models.Model):
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='fichaPets')
+	ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE, related_name='banhoEtosa', blank=True, null=True)
 	pele = models.ManyToManyField(Pele, verbose_name='Tipo de Pele')
 	peleInfeccionada = models.ManyToManyField(DoencaPele, verbose_name='Doença na Pele')
 	pelos = models.ManyToManyField(Pelos, verbose_name='Pelos')

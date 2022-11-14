@@ -4,7 +4,8 @@ from django.forms import inlineformset_factory
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from ecommerce.pet.models import Pet
-from ecommerce.pet.views import birthday
+from ecommerce.ficha.models import Anamnese
+from ecommerce.ficha.forms import AnamneseForm
 from .models import Ficha, Banho, Tosa, Itens
 from .forms import FichaForm, BanhoForm, TosaForm, ItensForm
 
@@ -129,20 +130,19 @@ def itens_delete(request, pk):
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
 	pet = Pet.objects.get(id=pk)
-	context={}
-	niver = pet.aniversario
-	age = int(birthday(niver))
-	
+	anamnese = Anamnese.objects.filter(pet=pet).last()
+
 	if request.method == 'GET':
 		form = FichaForm()
 		form_pet_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1, can_delete=False)
 		form_pet = form_pet_factory(instance=pet)
-		if age >= 0:
-			context['msg'] = 'anos'
-		else:
-			context['msg'] = 'meses'
+
+		form_anamnese_factory = inlineformset_factory(Ficha, Anamnese, form=AnamneseForm, extra=1, can_delete=False)
+		form_anamnese = form_anamnese_factory()
+
 		context = {
 			'form': form_pet,
+			'anamnese': anamnese,
 			'pet': pet,
 			
 		}
@@ -153,12 +153,16 @@ def new_ficha(request, pk):
 		form_pet_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1, can_delete=False)
 		form_pet = form_pet_factory(request.POST, instance=pet)
 		
+		form_anamnese_factory = inlineformset_factory(Ficha, Anamnese, form=AnamneseForm, extra=1, can_delete=False)
+		form_anamnese = form_anamnese_factory(request.POST)
+
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': pk}))
 		else:
 			context = {
 				'form': form_pet,
+				'anamnese': anamnese,
 				'pet': pet,
 				
 			}

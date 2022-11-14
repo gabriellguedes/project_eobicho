@@ -1,6 +1,5 @@
 from django.db import models
 from ecommerce.pet.models import Pet
-from ecommerce.ficha.models import Anamnese
 from django.contrib.auth.models import User
 from ecommerce.core.models import TimeStampedModel
 
@@ -29,8 +28,7 @@ class Ficha(TimeStampedModel):
 	banho = models.ForeignKey(Banho, on_delete=models.CASCADE)
 	tosa = models.ForeignKey(Tosa, on_delete=models.CASCADE)
 	itens = models.ForeignKey(Itens, on_delete=models.CASCADE)
-	outros = models.CharField('Outros', max_length=100)
-	anamnese = models.ForeignKey(Anamnese, on_delete=models.CASCADE)
+	outros = models.CharField('Outros Itens', max_length=100)
 	
 	class Meta:
 		ordering =('created',)
