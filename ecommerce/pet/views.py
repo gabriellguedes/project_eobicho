@@ -148,7 +148,6 @@ def detailPet(request, pk):
     
     #Atualizar idade do pet
     aniversario = pet.aniversario
-    print(aniversario)
     idade = birthday(aniversario)
     if pet.idade != idade:
         pet.idade = idade
@@ -186,6 +185,7 @@ def pet_update(request, pk):
         if form.is_valid():
             pet = form.save(commit=False)
             pet.save()
+            form.save()
             return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = { 
@@ -218,6 +218,7 @@ def cliente_pet_update(request, pk):
         if form.is_valid():
             pet = form.save(commit=False)
             pet.save()
+            form.save()
             return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={"pk": obj.pk}))
         else:
             context = { 

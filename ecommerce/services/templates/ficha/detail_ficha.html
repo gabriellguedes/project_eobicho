@@ -1,0 +1,271 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Ficha Banho/Tosa
+{% endblock title %}
+{% load static %}
+{% load bootstrap %}
+{% block content %}
+<section class="container mt-3">
+	<form class="" method="GET" action="."> 
+		<legend class="border-bottom pb-2 text-secondary mb-3">
+			<i class="fa-solid fa-file mr-2 text-info"></i> Ficha de Banho e Tosa
+		</legend>
+		{% csrf_token %}
+		<div class="container">
+			<!-- Blocos 01 e 02 Pet e Tutor  -->
+			<div class="row px-4">
+				<!-- 01 Block Dados Do Animal -->
+				<div class="border col-md-6 dados-pet mb-4 p-0">
+					<div class="border-bottom dados-pet-header pt-2">
+						<div class="row px-4">
+							<div class="w-75 col">
+								<h6 class="font-weight-bold text-secondary">Dados do animal</h6>
+							</div>
+							<div class="text-secondary text-center w-25">
+								<h6 class="font-weight-bold">Id: {{pet.id}}</h6>					
+							</div>	
+						</div>	
+					</div>
+
+					<div class="row p-4">
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Nome:</label> 
+							<label class="d-block-r text-secondary">{{pet.nome}}</label>
+						</div>			
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Idade:</label>
+							<label class="d-block-r text-secondary">{{pet.idade}} {{msg}}</label>
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Cor:</label> 
+							<label class="d-block-r text-secondary">{{pet.coloracao}}</label>
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Espécie:</label> 
+							<label class="d-block-r text-secondary">{{pet.especie}}</label>
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Raça:</label> 
+							<label class="d-block-r text-secondary">{{pet.raca.raca}}</label>
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Sexo:</label> 
+							<label class="d-block-r text-secondary">{{pet.sexo}}</label>
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Castrado:</label> 
+							{% if pet.castracao == True %}
+								<label class="d-block-r text-secondary">Sim</label>
+							{% else %}
+								<label class="d-block-r text-secondary">Não</label>
+							{% endif %}
+						</div>	
+						<div class="col-md-3">
+							<label class="d-block-r text-info font-weight-bold">Peso<small>(Kg)</small>:</label>
+							{% if pet.pet_peso.last %}
+								<label class="d-block-r text-secondary">{{pet.pet_peso.last.peso}}</label>
+							{% else %}
+								<small class="text-danger">Peso não encontrado.</small>
+							{% endif %}
+						</div>	
+					</div>
+				</div>
+				<!-- separando -->
+				<div class="mx-4"></div>
+				<!-- 02 Block Dados do Tutor -->
+				<div class="border col-md-5 dados-pet mb-4 p-0">
+					{% for tutor in pet.tutor.all %}
+						<div class="bg-white border-bottom dados-pet-header pt-2">
+							<div class="row px-4">
+								<div class="w-75 col text-secondary">
+									<label class="d-block-r font-weight-bold">Dados do Tutor</label>
+								</div>
+								<div class="text-secondary text-center w-25">
+									<label class="d-blck font-weight-bold">Id: {{tutor.id}}</label>
+								</div>						
+							</div>	
+						</div>			
+						<div class="row p-4">
+							<div class="col-md-6">
+								<label class="d-block-r font-weight-bold text-info">Nome:</label>
+								<label class="d-block-r text-secondary">{{tutor.first_name}}</label>
+							</div>
+							{% for profile in tutor.profile.all %}
+								<div class="col-md-6">
+									<label class="d-block-r font-weight-bold text-info">CPF:</label>
+									<label class="d-block-r text-secondary">{{profile.cpf}}</label>
+								</div>
+								<div class="col-md-6">
+									<label class="d-block-r font-weight-bold text-info">Telefone:</label>
+									<label class="d-block-r text-secondary">{{profile.telefone}}</label>
+								</div>
+							{% endfor %}
+							<div class="col-md-6">
+								<label class="d-block-r font-weight-bold text-info">Email:</label>
+								<label class="d-block-r text-secondary">{{tutor.email}}</label>
+							</div>
+						</div>
+					{% endfor %}	
+				</div>
+			</div>
+			<!-- 03 Block Anamnese -->
+			<div class="border dados-pet mb-4">
+				<div class="bg-secondary dados-pet-header pt-2">
+					<div class="row px-4">
+						<div class="w-75 col">
+							<h6 class="font-weight-bold text-white">Anamnase</h6>
+						</div>
+						<div class="text-white text-center w-25">
+							<h6 class="font-weight-bold mr-3">
+								<span class="mr-2">Nº</span>{{anamnese.id}}
+							</h6>					
+						</div>	
+					</div>	
+				</div>
+
+				<div class="row p-4">
+					{% if anamnese %}
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Data da Avaliação:</label>
+								<label class="text-secondary">{{anamnese.created|date:'d/m/Y'}}</label>
+							</div>	
+
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Boca:</label> 
+								{% for item in anamnese.boca.all %}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Doença:</label>
+								{% for item in anamnese.doenca.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Olhos:</label>
+								{% for item in  anamnese.olhos.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Orelhas:</label> 
+								{% for item in anamnese.orelhas.all %}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Patas:</label>
+								{% for item in  anamnese.patas.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Unhas:</label> 
+								{% for item in anamnese.unhas.all %}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Pele:</label>
+								{% for item in anamnese.pele.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Doenças na Pele:</label> 
+								{% for item in anamnese.peleInfeccionada.all %}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Ectoparasitas:</label>
+								{% for item in anamnese.ectoparasitas.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Pelos:</label> 
+								{% for item in anamnese.pelos.all %}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Estado dos Pelos:</label>
+								{% for item in anamnese.pelosEstado.all %} 
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>	
+							<div class="col-md-3">
+								<label class="text-info font-weight-bold d-block-r">Condição dos Pelos:</label> 
+								{% for item in anamnese.pelosCondicao.all%}
+									<label class="text-secondary">{{item}}</label>
+								{% endfor %}
+							</div>
+					{% else %}
+						<p class="alert alert-info w-100 text-center">Ainda não foram realizadas nenhuma anamneses no pet.</p>
+						<div class="col-md-12 d-flex justify-content-end">
+							<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:ficha_add' pk=pet.id %}'">
+								<i class="fa-solid fa-plus"></i> Anamnese
+							</button>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<!-- 04 Block Banho e Tosa -->
+			<div class="border dados-pet mb-4">
+				<div class="bg-white border-bottom dados-pet-header pt-2">
+					<div class="row px-4">
+						<div class="w-75 col">
+							<h6 class="font-weight-bold text-secondary">Banho e Tosa</h6>
+						</div>
+						<div class="text-secondary text-center w-25">
+							<h6 class="font-weight-bold mr-3">
+								<span class="mr-2">Nº</span>{{form.id}}
+							</h6>					
+						</div>	
+					</div>	
+				</div>
+
+				<div class="row p-4">
+					<div class="col-md-3">
+						<label class="text-info font-weight-bold d-block-r">Banho:</label>
+						{% for item in form.banho.all %}
+							<label class="text-secondary">{{item}}</label>
+						{% endfor %}
+					</div>
+					<div class="col-md-3">
+						<label class="text-info font-weight-bold d-block-r">Tosa:</label>
+						{% for item in form.tosa.all %}
+							<label class="text-secondary">{{item}}</label>
+						{% endfor %}
+					</div>	
+					<div class="col-md-3">
+						<label class="text-info font-weight-bold d-block-r">Pertences do Pet:</label>
+						{% for item in form.itens.all %}
+							<label class="text-secondary">{{item}}</label>
+						{% endfor %}
+					</div>
+					{% if form.outros %}	
+						<div class="col-md-3">
+							<label class="text-info font-weight-bold d-block-r">Outros Pertences:</label>
+							<label class="text-secondary">{{form.outros}}</label>
+						</div>		
+					{% endif %}	
+					<div class="w-100 px-3">
+						<small>
+							<label class="text-info font-weight-bold">Feito por:</label>
+							<label class="text-secondary">{{form.funcionario.first_name}}</label>
+						</small>
+					</div>	
+				</div>
+			</div>
+			<div class="d-flex justify-content-end">	
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'services:list_ficha'%}'">
+					<i class="fa-solid fa-chevron-left mr-2"></i> Voltar
+				</button>
+			</div>		
+		</div>	
+	</form>
+</section>
+{% endblock %}

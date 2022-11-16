@@ -407,6 +407,13 @@ main{
 	margin-bottom: 10px;
 	margin-right: 10px;
 }
+
+/**********************************************************
+ 2. - Ficha Banho e Tosa 
+ *********************************************************/
+.d-block-r{
+	display: block !important;
+}
 /********************************************************************
  3.0 - Footer
 ********************************************************************/
@@ -478,14 +485,22 @@ main{
 	}
 	.control-label[for='id_profile-0-cargo']{
 	margin-left: 0 !important;
-}
-#id_profile-0-cargo{
-	border: 1px solid #1fb9b1 !important;
-	margin-left: 0 !important;
-}
-#id_profile-0-cargo label{
-	margin-left: 0 !important;
-}
+	}
+	#id_profile-0-cargo{
+		border: 1px solid #1fb9b1 !important;
+		margin-left: 0 !important;
+	}
+	#id_profile-0-cargo label{
+		margin-left: 0 !important;
+	}
+
+	/**********************************************************
+	 5. - Responsive Ficha Banho e Tosa
+	 *********************************************************/
+	.d-block-r{
+		display: inline-block !important;
+	}
+
 }
 
 @media screen and (max-width: 480px){

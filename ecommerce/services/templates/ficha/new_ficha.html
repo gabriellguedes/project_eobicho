@@ -216,8 +216,24 @@
 			</div>
 			<div class="row px-4 mb-4">
 				{{form.management_form}}
+				
 				{% for item in form %}
-					<div class="col-md-3">{{item|bootstrap}}</div>
+					<div class="col-md-4">
+						<label class="text-info font-weight-bold d-block-r">Banho</label>
+						<div class="text-secondary">{{item.banho|bootstrap}}</div>
+					</div>
+					<div class="col-md-4">
+						<label class="text-info font-weight-bold d-block-r">Banho</label>
+						<div class="text-secondary">{{item.tosa|bootstrap}}</div>
+					</div>
+					<div class="col-md-4">
+						<label class="text-info font-weight-bold d-block-r">Banho</label>
+						<div class="text-secondary">{{item.itens|bootstrap}}</div>
+					</div>
+					<div class="col-md-4">
+						<label class="text-info font-weight-bold d-block-r">Banho</label>
+						<div class="text-secondary">{{item.outros|bootstrap}}</div>
+					</div>
 				{% endfor %}
 
 			</div>

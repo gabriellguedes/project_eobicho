@@ -34,15 +34,11 @@ class ItensForm(forms.ModelForm):
 		fields = '__all__'
 
 class FichaForm(forms.ModelForm):
-
-	#tuplas = Services()
-	#banho = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=tuplas.banho_choices,)
-	#itens = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=tuplas.itens_choices,)
-	#tosa = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=tuplas.tosa_choices,)
 	class Meta:
 		model = Ficha
-		fields = ('banho','tosa', 'itens', 'outros', 'funcionario',)
+		fields = ('banho','tosa', 'itens', 'outros', 'funcionario', 'status',)
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields['funcionario'].widget.attrs.update({'class':'d-none'})
+		self.fields['status'].widget.attrs.update({'class':'d-none'})

@@ -1,0 +1,248 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Banho e Tosa
+{% endblock title %}
+{% load static %}
+{% load bootstrap %}
+{% block content %}
+<div class="container py-3">
+	<section class="mb-3  border-bottom pb-2">
+		<div class="row px-4">
+			<div class="w-75"> 
+				<h3 class="text-secondary font-weight-bold title-2">
+					<i class="fa-solid fa-shower text-info"></i> Banho e Tosa
+				</h3>
+			</div>
+			<div class="w-25">
+				<div class="d-flex justify-content-end">
+					<a class="btn btn-info" href="">
+						<i class="fa-solid fa-plus mr-2"></i> Nova Ficha
+					</a>
+				</div>
+			</div>
+		</div>	
+	</section>
+	<section class="mb-3">
+		<div class="row">
+			<!-- Imagem -->
+			<div class="col-md-4 block-none">
+				<img src="{% static 'img/banho-e-tosa.png' %}">
+			</div>
+			<div class="col-md-8">
+				<div class="border dados-pet mb-4">
+					<div class="border-bottom bg-secondary dados-pet-header pt-2">
+						<div class="row px-4">
+							<div class="w-75 col">
+								<h6 class="font-weight-bold text-white">Em Atendimento</h6>
+							</div>
+						</div>	
+					</div>
+
+					<div class="row p-4">
+						<ul class="list-group w-100">					
+							{% for item in fichas %}
+								{% if item.status == 'atendendo' %}
+									<a class="list-group-item-action " href="{% url 'services:detail_ficha' pk=item.id %}">
+										<li class="nav-link">
+											<label class="font-weight-bold text-info">Nº da Ficha: </label>							
+											<label class="text-secondary">{{item.id}}</label>	
+											<label class="text-secondary font-weight-bold">
+												- {{item.pet.nome}}
+											</label>
+											<label class="text-secondary font-weight-bold">,
+											 {{item.pet.especie}}
+											</label>
+											<label class="text-secondary font-weight-bold">,
+												<span class="text-info font-weight-bold"> tutor</span> {{item.pet.tutor.all.first.first_name}}
+											</label>
+										</li>
+									</a>
+								{% else %}
+									<p class="alert alert-info text-center"> 
+										<i class="fa-solid fa-triangle-exclamation"></i> Sem pets em atendimento.
+									</p>	
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Fichas de Banho e Tosa - FINAL DA PÁGINA -->
+	<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+		<li class="nav-item" disabled>
+	   		 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Aguardando Aprovação</a>
+	   </li>
+	   <li class="nav-item">
+	    	<a class="nav-link " id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="True">Aprovados</a>
+	  </li>		  
+	   <li class="nav-item">
+	    	<a class="nav-link " id="alterados-tab" data-toggle="tab" href="#alterados" role="tab" aria-controls="alterados" aria-selected="True">Alterados</a>
+	  </li>
+	   <li class="nav-item">
+	    	<a class="nav-link " id="cancelados-tab" data-toggle="tab" href="#cancelados" role="tab" aria-controls="cancelados" aria-selected="True">Cancelados</a>
+	  </li>	
+
+	   <li class="nav-item">
+	    	<a class="nav-link " id="finalizados-tab" data-toggle="tab" href="#finalizados" role="tab" aria-controls="finalizados" aria-selected="True">Finalizados</a>
+	  </li>										
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<!-- Aguardando Aprovação do Tutor -->	
+		<section class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+			<div class="border dados-pet mb-4 mt-3">
+				<div class="row p-4">
+					<table class="table table-hover table-sm">
+						<thead class="text-center">
+							<tr class="font-weight-bold text-info">
+								<th scope="col">Nº Ficha</th>
+								<th scope="col">Nome do Pet</th>
+								<th scope="col">Nome do Tutor</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">									
+							{% for item in fichas %}
+								{% if item.status == 'aguardando' %}
+									<tr class="text-secondary">
+										<th>{{item.id}}</th>
+										<td>{{item.pet.nome}}</td>
+										<td>{{item.pet.tutor.all.first.first_name}}</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td><p class="alert alert-info">Sem fichas aguardando aprovação.</p></td>
+									</tr>	
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+		<!-- Aprovados pelo Tutor para banho e Tosa -->	
+		<section class="tab-pane fade  " id="aprovados" role="tabpanel" aria-labelledby="home-tab">
+			<div class="border dados-pet mb-4 mt-3">
+				<div class="row p-4">
+					<table class="table table-hover table-sm">
+						<thead class="text-center">
+							<tr class="font-weight-bold text-info">
+								<th scope="col">Nº Ficha</th>
+								<th scope="col">Nome do Pet</th>
+								<th scope="col">Nome do Tutor</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">									
+							{% for item in fichas %}
+								{% if item.status == 'aprovado' %}
+									<tr class="text-secondary">
+									<th>{{item.id}}</th>
+									<td>{{item.pet.nome}}</td>
+									<td>{{item.pet.tutor.all.first.first_name}}</td>
+								</tr>
+								{% else %}
+									<tr>
+										<td class=""><p class="alert alert-info">Sem fichas aprovadas.</p></td>
+									</tr>	
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+		<!-- Alterados  -->	
+		<section class="tab-pane fade  " id="alterados" role="tabpanel" aria-labelledby="alterados-tab">
+			<div class="border dados-pet mb-4 mt-3">
+				<div class="row p-4">
+					<table class="table table-hover table-sm">
+						<thead class="text-center">
+							<tr class="font-weight-bold text-info">
+								<th scope="col">Nº Ficha</th>
+								<th scope="col">Nome do Pet</th>
+								<th scope="col">Nome do Tutor</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">									
+							{% for item in fichas %}
+								{% if item.status == 'alterados' %}
+									<tr class="text-secondary">
+									<th>{{item.id}}</th>
+									<td>{{item.pet.nome}}</td>
+									<td>{{item.pet.tutor.all.first.first_name}}</td>
+								</tr>
+								{% else %}
+									<tr>
+										<td><p class="alert alert-info">Sem fichas alteradas.</p></td>
+									</tr>	
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>	
+		<!-- Cancelados -->
+		<section class="tab-pane fade  " id="cancelados" role="tabpanel" aria-labelledby="cancelados-tab">
+			<div class="border dados-pet mb-4 mt-3">
+				<div class="row p-4">
+					<table class="table table-hover table-sm">
+						<thead class="text-center">
+							<tr class="font-weight-bold text-info">
+								<th scope="col">Nº Ficha</th>
+								<th scope="col">Nome do Pet</th>
+								<th scope="col">Nome do Tutor</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">									
+							{% for item in fichas %}
+								{% if item.status == 'cancelado' %}
+									<tr class="text-secondary">
+									<th>{{item.id}}</th>
+									<td>{{item.pet.nome}}</td>
+									<td>{{item.pet.tutor.all.first.first_name}}</td>
+								</tr>
+								{% else %}
+									<tr>
+										<td><p class="alert alert-info">Sem fichas canceladas.</p></td>
+									</tr>	
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>	
+		<!-- Finalizados  -->
+		<section class="tab-pane fade  " id="finalizados" role="tabpanel" aria-labelledby="finalizados-tab">
+			<div class="border dados-pet mb-4 mt-3">
+				<div class="row p-4">
+					<table class="table table-hover table-sm">
+						<thead class="text-center">
+							<tr class="font-weight-bold text-info">
+								<th scope="col">Nº Ficha</th>
+								<th scope="col">Nome do Pet</th>
+								<th scope="col">Nome do Tutor</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+								{% if item.status == 'finalizadas' %}
+									<tr class="text-secondary">
+									<th>{{item.id}}</th>
+									<td>{{item.pet.nome}}</td>
+									<td>{{item.pet.tutor.all.first.first_name}}</td>
+								</tr>
+								{% else %}
+									<tr>
+										<td><p class="alert alert-info">Sem fichas Finalizadas.</p></td>
+									</tr>	
+								{% endif %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+{% endblock content %}

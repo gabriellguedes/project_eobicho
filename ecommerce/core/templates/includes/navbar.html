@@ -38,7 +38,12 @@
               </span> 
               <span class="sr-only">(Página atual)</span>
             </a>
-          </li>
+          </li>          
+          {% if user|can:'view_funcionario' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'services:list_ficha' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-shower text-info"></i> Bano e Tosa</span></a>
+            </li>
+          {% endif %}
           {% if user|can:'view_pet' %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'pet:pet_list' %}"><span class="text-white font-weight-bold"><i class="fa-solid fa-paw text-info"></i> Animais</span></a>
@@ -115,10 +120,10 @@
             </div> 
           </li>
 
-            <li class="nav-item dropdown mt-2">
+            <li class="nav-item dropdown pl-3 mt-2">
               <a data-toggle="collapse" href="#ItensBanhoTosa" role="button" aria-expanded="false" aria-controls="ItensBanhoTosa">
                   <span class="text-white font-weight-bold">
-                  <i class="fa-solid fa-paw text-info"></i> Banho/Tosa
+                  <i class="fa-solid fa-shower text-info"></i> Banho/Tosa
                 </span>
               </a>
               <div class="collapse" id="ItensBanhoTosa" aria-labelledby="dropdownMenuButton">

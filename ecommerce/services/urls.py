@@ -19,4 +19,7 @@ urlpatterns = [
 	path('itens_list/', views.itens_list, name='itens_list'),
 
 	path('New_Ficha/<int:pk>/', views.new_ficha, name='new_ficha'),
+	path('detail_ficha/<int:pk>/', views.detail_ficha, name='detail_ficha'),
+	path('banhoandtosa/', views.list_ficha, name='list_ficha'),
+	path('delete_ficha/<int:pk>/', views.delete_ficha, name='delete_ficha'),
 ]
