@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block title %}
+	{{block.super}} - Nova Ficha Banho/Tosa
+{% endblock title %}
+{% load static %}
+{% load bootstrap %}
+{% block content %}
+<section class="container mt-3">
+
+	<form class="" id="FormSelectPet" name="FormSelectPet" method="POST" action=".">
+		<legend class="border-bottom pb-2 text-secondary font-weight-bold">
+			<i class="fa-solid fa-shield-dog text-info mr-2"></i> Indique o Pet
+		</legend>
+		{% if msg %}
+			<p class="{{class}} text-center">{{msg}}</p>
+		{% endif %}
+		{% csrf_token %}
+		<div class="col-md-3 mb-3">
+			<input class="form-control" type="text" name="SelectPet" id="IdSelectPet" placeholder="Digite o Id do Pet" />
+		</div>
+		<div class="col-md-3">
+			<button class="btn btn-info mr-3" type="submit">Buscar</button>
+			<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'services:list_ficha' %}'">Cancelar</button>
+		</div>			
+	</form>
+	
+</section><!-- /SECTION CONTAINER -->
+{% endblock %}

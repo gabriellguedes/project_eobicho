@@ -1,0 +1,28 @@
+<div class="border-bottom pb-2 mb-4">
+	{% for tutor in pet.tutor.all %}
+		<div class="row px-4 font-weight-bold text-secondary py-2">
+			<label class="d-block col w-75">Dados do Tutor</label>
+			<label class="d-blck w-25 text-center">Id: {{tutor.id}}</label>					
+		</div>				
+		<div class="row px-4">
+			<div class="col-md-3">
+				<label class="font-weight-bold text-info">Nome:</label>
+				<label class="text-secondary">{{tutor.first_name}}</label>
+			</div>
+			{% for profile in tutor.profile.all %}
+				<div class="col-md-3">
+					<label class="font-weight-bold text-info">CPF:</label>
+					<label class="text-secondary">{{profile.cpf}}</label>
+				</div>
+				<div class="col-md-3">
+					<label class="font-weight-bold text-info">Telefone:</label>
+					<label class="text-secondary">{{profile.telefone}}</label>
+				</div>
+			{% endfor %}
+			<div class="col-md-3">
+				<label class="font-weight-bold text-info">Email:</label>
+				<label class="text-secondary">{{tutor.email}}</label>
+			</div>
+		</div>
+	{% endfor %}	
+</div>

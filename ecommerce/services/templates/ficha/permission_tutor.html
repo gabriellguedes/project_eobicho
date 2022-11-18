@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+	{{block.super}} - Aceitar Banho e Tosa
+{% endblock title %}
+{% block content %}
+	<section class="container">
+		<div class="border-bottom pb-2 my-3">
+			<h3 class="text-secondary font-weight-bold title-2">
+				<i class="fa-solid fa-shower text-info mr-2"></i> Ficha Banho e Tosa
+			</h3>
+		</div><!-- /DIV TITLE -->
+		
+		<div class="col mb-3">
+			<div class="row pl-4">
+				<div class="col">
+					<a class="text-info font-weight-bold" href="{% url 'services:detail_ficha_tutor' pk=form.id %}">
+						<i class="fa-solid fa-file mr-2"></i>Vizualizar ficha completa.
+					</a>
+				</div>	
+			</div>
+		</div>
+		<!-- BLOCK 01 BANHO E TOSA -->
+		<div class="col-md-7">
+			{% include 'ficha/detail_ficha/dados_banho_tosa.html' %}
+		</div>
+		<form name="FormPermissionTutor" method="POST" action=".">
+			{% csrf_token %}
+				<div class="col mb-3 border-bottom pb-2">
+					<label class="container_checkbox d-block">
+						<span class="text-secondary d-block"> Estou ciente e aceito a realização dos procedimentos descritos acima.</span>
+						<input class="checkbox" type="checkbox" name="permission_banho_tosa" id="permission_banho_tosa"> 
+						<span class="checkmark" for="permission_banho_tosa"></span>
+					</label>
+				</div>
+			<div class="col">
+				<button class="btn btn-info mr-3" name="BtnPermissionTutor" type="submit">Autorizar</button>
+				<button class="btn btn-outline-danger" type="button" onclick="location.href=''">Não Autorizo</button>
+			</div>
+			
+		</form>
+
+	</section><!-- /SECTION CONTAINER -->
+{% endblock content %}

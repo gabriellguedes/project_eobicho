@@ -1,0 +1,34 @@
+<div class="border col-md-5 dados-pet mb-4 p-0">
+	{% for tutor in pet.tutor.all %}
+		<div class="bg-white border-bottom dados-pet-header pt-2">
+			<div class="row px-4">
+				<div class="w-75 col text-secondary">
+					<label class="d-block-r font-weight-bold">Dados do Tutor</label>
+				</div>
+				<div class="text-secondary text-center w-25">
+					<label class="d-blck font-weight-bold">Id: {{tutor.id}}</label>
+				</div>						
+			</div>	
+		</div>			
+		<div class="row p-4">
+			<div class="col-md-6">
+				<label class="d-block-r font-weight-bold text-info">Nome:</label>
+				<label class="d-block-r text-secondary">{{tutor.first_name}}</label>
+			</div>
+			{% for profile in tutor.profile.all %}
+				<div class="col-md-6">
+					<label class="d-block-r font-weight-bold text-info">CPF:</label>
+					<label class="d-block-r text-secondary">{{profile.cpf}}</label>
+				</div>
+				<div class="col-md-6">
+					<label class="d-block-r font-weight-bold text-info">Telefone:</label>
+					<label class="d-block-r text-secondary">{{profile.telefone}}</label>
+				</div>
+			{% endfor %}
+			<div class="col-md-6">
+				<label class="d-block-r font-weight-bold text-info">Email:</label>
+				<label class="d-block-r text-secondary">{{tutor.email}}</label>
+			</div>
+		</div>
+	{% endfor %}	
+</div>

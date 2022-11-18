@@ -1,0 +1,47 @@
+<div class="border dados-pet mb-4">
+	<div class="bg-white border-bottom dados-pet-header pt-2">
+		<div class="row px-4">
+			<div class="w-75 col">
+				<h6 class="font-weight-bold text-secondary">Banho e Tosa</h6>
+			</div>
+			<div class="text-secondary text-center w-25">
+				<h6 class="font-weight-bold mr-3">
+					<span class="mr-2">Nº</span>{{form.id}}
+				</h6>					
+			</div>	
+		</div>	
+	</div>
+
+	<div class="row p-4">
+		<div class="col-md-3">
+			<label class="text-info font-weight-bold d-block-r">Banho:</label>
+			{% for item in form.banho.all %}
+				<label class="text-secondary">{{item}}</label>
+			{% endfor %}
+		</div>
+		<div class="col-md-3">
+			<label class="text-info font-weight-bold d-block-r">Tosa:</label>
+			{% for item in form.tosa.all %}
+				<label class="text-secondary">{{item}}</label>
+			{% endfor %}
+		</div>	
+		<div class="col-md-3">
+			<label class="text-info font-weight-bold d-block-r">Pertences do Pet:</label>
+			{% for item in form.itens.all %}
+				<label class="text-secondary">{{item}}</label>
+			{% endfor %}
+		</div>
+		{% if form.outros %}	
+			<div class="col-md-3">
+				<label class="text-info font-weight-bold d-block-r">Outros Pertences:</label>
+				<label class="text-secondary">{{form.outros}}</label>
+			</div>		
+		{% endif %}	
+		<div class="w-100 px-3">
+			<small>
+				<label class="text-info font-weight-bold">Feito por:</label>
+				<label class="text-secondary">{{form.funcionario.first_name}}</label>
+			</small>
+		</div>	
+	</div>
+</div>

@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.forms import inlineformset_factory
 from django.urls import reverse
@@ -133,9 +134,10 @@ def itens_delete(request, pk):
 		objeto.delete()
 		return HttpResponseRedirect(reverse('services:itens_list'))
 
-# Nova Ficha para realização do Banho e Tosa
+# Nova Ficha para realização do Banho e Tosa Pet Agendado
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
+	today = datetime.date(datetime.utcnow())
 	pet = Pet.objects.get(id=pk)
 	anamnese = Anamnese.objects.filter(pet=pet).last()
 
@@ -151,6 +153,7 @@ def new_ficha(request, pk):
 			'form': form_pet,
 			'anamnese': anamnese,
 			'pet': pet,
+			'today': today,
 			
 		}
 		return render(request, template_name, context=context)
@@ -170,15 +173,38 @@ def new_ficha(request, pk):
 			new_banho[0].status = 'aguardando'
 			new_banho[0].save()
 			form_pet.save()
-			return HttpResponseRedirect(reverse('pet:pet_detail', kwargs={'pk': pk}))
+			return HttpResponseRedirect(reverse('services:list_ficha'))
 		else:
+
 			context = {
 				'form': form_pet,
 				'anamnese': anamnese,
 				'pet': pet,
+				'today': today,
+				'class':'alert alert-warning',
+				'msg':'Atenção - Ficha para realização do Banho e Tosa não foi criada, verifique se todos os campos foram preenchidos corretamente.',
 				
 			}
 			return render(request, template_name, context=context)
+# Nova Ficha para realizar o Banho e Tosa Pet não agendado.
+def add_ficha(request):
+	template_name='ficha/add_ficha.html'
+	context={}
+	if request.method == 'GET':
+		return render(request, template_name)
+	elif request.method == 'POST':
+		try:
+			search = request.POST['SelectPet']
+			pet = Pet.objects.get(id=search)
+		except ValueError:
+			context['msg'] = 'O Id do Pet é composto apenas por números.'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
+		except ObjectDoesNotExist:
+			context['msg'] = 'Id não existe!'
+			context['class'] = 'alert alert-info'
+			return render(request, template_name, context=context)
+		return HttpResponseRedirect(reverse('services:new_ficha', kwargs={'pk': search}))	
 # Vizualizar Ficha de Banho e Tosa Cadastrada
 def detail_ficha(request, pk):
 	template_name = 'ficha/detail_ficha.html'
@@ -199,7 +225,6 @@ def list_ficha(request):
 		'fichas': fichas,
 	}
 	return render(request, template_name, context=context)
-
 # Apagar ficha de banho e tosa
 def delete_ficha(request, pk):
 	template_name='ficha/delete_ficha.html'
@@ -210,3 +235,47 @@ def delete_ficha(request, pk):
 	elif request.method == 'POST':
 		ficha.delete()
 		return HttpResponseRedirect(reverse('services:list_detail')) 
+
+# Pag q o cliente 
+def permission_tutor(request, pk):
+	template_name = 'ficha/permission_tutor.html'
+
+	pet = Pet.objects.get(id=pk)
+	objeto = Ficha.objects.filter(pet=pet)
+	try:
+		ficha = objeto.get(status='aguardando')
+	except ObjectDoesNotExist:
+		ficha = ''
+	anamnese = Anamnese.objects.filter(pet=pet).last()
+
+	if request.method == 'GET':
+		context = {
+			'form': ficha,
+			'pet': pet,
+			'anamnese': anamnese,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		ficha.status = 'aprovado'
+		ficha.save()
+		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': request.user.id}))
+
+# Vizualizar Ficha de Banho e Tosa Cadastrada completa para o Tutor
+def detail_ficha_tutor(request, pk):
+	template_name = 'ficha/detail_ficha_tutor.html'
+	ficha = Ficha.objects.get(id=pk)
+	pet = Pet.objects.get(id=ficha.pet.id)
+	anamnese = Anamnese.objects.filter(pet=pet).last()
+	context = {
+		'form': ficha,
+		'pet': pet,
+		'anamnese': anamnese,
+	}
+	return render(request, template_name, context=context)
+
+# Nega permissão para banho e tosa
+def permission_ficha_cancelada(request, pk):
+	ficha = Ficha.objects.get(id=pk)
+	ficha.status = 'cancelado'
+	ficha.save()
+	return HttpResponseRedirect(reverse('pet:pet_detail', ))

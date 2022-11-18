@@ -1,0 +1,24 @@
+{% load bootstrap %}
+{% if anamnese.created == today %}
+	<div class="row px-4 mb-4">
+		{{form.management_form}}	
+		{% for item in form %}
+			<div class="col-md-4">
+				<label class="text-info font-weight-bold d-block-r">Banho</label>
+				<div class="text-secondary">{{item.banho|bootstrap}}</div>
+			</div>
+			<div class="col-md-4">
+				<label class="text-info font-weight-bold d-block-r">Tosa</label>
+				<div class="text-secondary">{{item.tosa|bootstrap}}</div>
+			</div>
+			<div class="col-md-4">
+				<label class="text-info font-weight-bold d-block-r">Pertences do Pet</label>
+				<div class="text-secondary">{{item.itens|bootstrap}}</div>
+			</div>
+			<div class="col-md-4">
+				<label class="text-info font-weight-bold d-block-r">Outros itens</label>
+				<div class="text-secondary">{{item.outros|bootstrap}}</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}

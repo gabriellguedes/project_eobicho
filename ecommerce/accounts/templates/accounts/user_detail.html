@@ -85,7 +85,7 @@
 			<!-- Aceitar Banho e Tosa  -->
 			{% for pet in pet_cliente.all %}
 				{% for item in pet.FichaBanho.all %}
-					{% if item.status %}
+					{% if item.status == 'aguardando' %}
 						<div class="w-100">
 							<div class="border dados-pet mb-4">
 								<div class="dados-pet-header">
@@ -94,11 +94,11 @@
 									</label>		
 								</div>
 								<div class="px-3">
-									<label class="text-secondary d-block">
+									<label class="text-secondary d-block mb-3">
 										Banho e tosa no <span class="text-info font-weight-bold"> {{pet.nome}}</span> necessita da sua autoraziação para prosseguir ao próximo passo.  
 									</label>
-									<div class="text-secondary d-flex justify-content-center mb-3">
-										<a class="btn btn-outline-info" href="#">Clique aqui </a>
+									<div class="text-secondary d-flex justify-content-center mb-4">
+										<a class="btn btn-outline-info" href="{% url 'services:permission_tutor' pk=pet.id %}">Clique aqui </a>
 									</div>
 								</div>
 							</div>

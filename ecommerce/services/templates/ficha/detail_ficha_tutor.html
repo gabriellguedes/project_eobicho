@@ -27,7 +27,7 @@
 			{% include 'ficha/detail_ficha/dados_banho_tosa.html' %}
 
 			<div class="d-flex justify-content-end">	
-				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'services:list_ficha'%}'">
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'services:permission_tutor' pk=pet.id %}'">
 					<i class="fa-solid fa-chevron-left mr-2"></i> Voltar
 				</button>
 			</div>		

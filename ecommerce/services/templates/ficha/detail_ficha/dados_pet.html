@@ -1,0 +1,58 @@
+
+<!-- 01 Block Dados Do Animal -->
+<div class="border col-md-6 dados-pet mb-4 p-0">
+	<div class="border-bottom dados-pet-header pt-2">
+		<div class="row px-4">
+			<div class="w-75 col">
+				<h6 class="font-weight-bold text-secondary">Dados do animal</h6>
+			</div>
+			<div class="text-secondary text-center w-25">
+				<h6 class="font-weight-bold">Id: {{pet.id}}</h6>					
+			</div>	
+		</div>	
+	</div>
+
+	<div class="row p-4">
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Nome:</label> 
+			<label class="d-block-r text-secondary">{{pet.nome}}</label>
+		</div>			
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Idade:</label>
+			<label class="d-block-r text-secondary">{{pet.idade}} {{msg}}</label>
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Cor:</label> 
+			<label class="d-block-r text-secondary">{{pet.coloracao}}</label>
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Espécie:</label> 
+			<label class="d-block-r text-secondary">{{pet.especie}}</label>
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Raça:</label> 
+			<label class="d-block-r text-secondary">{{pet.raca.raca}}</label>
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Sexo:</label> 
+			<label class="d-block-r text-secondary">{{pet.sexo}}</label>
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Castrado:</label> 
+			{% if pet.castracao == True %}
+				<label class="d-block-r text-secondary">Sim</label>
+			{% else %}
+				<label class="d-block-r text-secondary">Não</label>
+			{% endif %}
+		</div>	
+		<div class="col-md-3">
+			<label class="d-block-r text-info font-weight-bold">Peso<small>(Kg)</small>:</label>
+			{% if pet.pet_peso.last %}
+				<label class="d-block-r text-secondary">{{pet.pet_peso.last.peso}}</label>
+			{% else %}
+				<small class="text-danger">Peso não encontrado.</small>
+			{% endif %}
+		</div>	
+	</div>
+</div>
+			

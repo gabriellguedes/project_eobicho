@@ -170,7 +170,7 @@ body{
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -285,6 +285,7 @@ main{
 }
 	.dados-pet-header{
 		border-radius: 9px 9px 0 0;
+		overflow: hidden;
 	}
 .title-detail{
 	font-size: 1.2rem;

@@ -15,7 +15,7 @@
 			</div>
 			<div class="w-25">
 				<div class="d-flex justify-content-end">
-					<a class="btn btn-info" href="">
+					<a class="btn btn-info" href="{% url 'services:add_ficha' %}">
 						<i class="fa-solid fa-plus mr-2"></i> Nova Ficha
 					</a>
 				</div>
@@ -26,7 +26,7 @@
 		<div class="row">
 			<!-- Imagem -->
 			<div class="col-md-4 block-none">
-				<img src="{% static 'img/banho-e-tosa.png' %}">
+				<img src="{% static 'img/banho-e-tosa-teste.png' %}">
 			</div>
 			<div class="col-md-8">
 				<div class="border dados-pet mb-4">
@@ -57,12 +57,15 @@
 											</label>
 										</li>
 									</a>
+									{% endif %}
+							{% endfor %}
+
+								{% if item.status == 'atendendo' %}
 								{% else %}
 									<p class="alert alert-info text-center"> 
 										<i class="fa-solid fa-triangle-exclamation"></i> Sem pets em atendimento.
 									</p>	
 								{% endif %}
-							{% endfor %}
 						</ul>
 					</div>
 				</div>
@@ -93,153 +96,154 @@
 		<!-- Aguardando Aprovação do Tutor -->	
 		<section class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 			<div class="border dados-pet mb-4 mt-3">
-				<div class="row p-4">
-					<table class="table table-hover table-sm">
+				<div class="p-4">
+					<table class="table table-hover ">
 						<thead class="text-center">
-							<tr class="font-weight-bold text-info">
-								<th scope="col">Nº Ficha</th>
-								<th scope="col">Nome do Pet</th>
-								<th scope="col">Nome do Tutor</th>
+							<tr class="font-weight-bold text-secondary">
+								<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+								<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+								<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">									
 							{% for item in fichas %}
 								{% if item.status == 'aguardando' %}
-									<tr class="text-secondary">
-										<th>{{item.id}}</th>
-										<td>{{item.pet.nome}}</td>
+									<tr onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'" class="text-secondary">
+										<th class="text-info">{{item.id}}</th>
+										<td><a href="{% url 'pet:pet_detail' pk=item.pet.id %}">{{item.pet.nome}}</td>
 										<td>{{item.pet.tutor.all.first.first_name}}</td>
-									</tr>
-								{% else %}
-									<tr>
-										<td><p class="alert alert-info">Sem fichas aguardando aprovação.</p></td>
 									</tr>	
 								{% endif %}
 							{% endfor %}
 						</tbody>
-					</table>
+					</table>					
+					
 				</div>
 			</div>
 		</section>
 		<!-- Aprovados pelo Tutor para banho e Tosa -->	
 		<section class="tab-pane fade  " id="aprovados" role="tabpanel" aria-labelledby="home-tab">
 			<div class="border dados-pet mb-4 mt-3">
-				<div class="row p-4">
-					<table class="table table-hover table-sm">
+				<div class="p-4">
+					<table class="table table-hover ">
 						<thead class="text-center">
-							<tr class="font-weight-bold text-info">
-								<th scope="col">Nº Ficha</th>
-								<th scope="col">Nome do Pet</th>
-								<th scope="col">Nome do Tutor</th>
+							<tr class="font-weight-bold text-secondary">
+								<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+								<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+								<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">									
 							{% for item in fichas %}
 								{% if item.status == 'aprovado' %}
-									<tr class="text-secondary">
-									<th>{{item.id}}</th>
-									<td>{{item.pet.nome}}</td>
-									<td>{{item.pet.tutor.all.first.first_name}}</td>
-								</tr>
-								{% else %}
-									<tr>
-										<td class=""><p class="alert alert-info">Sem fichas aprovadas.</p></td>
-									</tr>	
+									<tr onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'" class="text-secondary">
+										<th class="text-info">{{item.id}}</th>
+										<td><a href="{% url 'pet:pet_detail' pk=item.pet.id %}">{{item.pet.nome}}</td>
+										<td>{{item.pet.tutor.all.first.first_name}}</td>
+									</tr>
+								
 								{% endif %}
 							{% endfor %}
 						</tbody>
 					</table>
+						
 				</div>
 			</div>
 		</section>
 		<!-- Alterados  -->	
 		<section class="tab-pane fade  " id="alterados" role="tabpanel" aria-labelledby="alterados-tab">
 			<div class="border dados-pet mb-4 mt-3">
-				<div class="row p-4">
-					<table class="table table-hover table-sm">
+				<div class="p-4">
+					<table class="table table-hover ">
 						<thead class="text-center">
-							<tr class="font-weight-bold text-info">
-								<th scope="col">Nº Ficha</th>
-								<th scope="col">Nome do Pet</th>
-								<th scope="col">Nome do Tutor</th>
+							<tr class="font-weight-bold text-secondary">
+								<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+								<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+								<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">									
 							{% for item in fichas %}
 								{% if item.status == 'alterados' %}
-									<tr class="text-secondary">
-									<th>{{item.id}}</th>
-									<td>{{item.pet.nome}}</td>
-									<td>{{item.pet.tutor.all.first.first_name}}</td>
-								</tr>
-								{% else %}
-									<tr>
-										<td><p class="alert alert-info">Sem fichas alteradas.</p></td>
-									</tr>	
+									<tr onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'" class="text-secondary">
+										<th class="text-info">{{item.id}}</th>
+										<td><a href="{% url 'pet:pet_detail' pk=item.pet.id %}">{{item.pet.nome}}</td>
+										<td>{{item.pet.tutor.all.first.first_name}}</td>
+									</tr>
 								{% endif %}
 							{% endfor %}
 						</tbody>
 					</table>
+						{% if item.status == 'alterados' %}
+						{% else %}
+							<div>
+								<label class="alert alert-info d-block text-center"> Sem fichas alterados.</label>
+							</div>
+						{% endif %}
 				</div>
 			</div>
 		</section>	
 		<!-- Cancelados -->
 		<section class="tab-pane fade  " id="cancelados" role="tabpanel" aria-labelledby="cancelados-tab">
 			<div class="border dados-pet mb-4 mt-3">
-				<div class="row p-4">
-					<table class="table table-hover table-sm">
+				<div class="p-4">
+					<table class="table table-hover ">
 						<thead class="text-center">
-							<tr class="font-weight-bold text-info">
-								<th scope="col">Nº Ficha</th>
-								<th scope="col">Nome do Pet</th>
-								<th scope="col">Nome do Tutor</th>
+							<tr class="font-weight-bold text-secondary">
+								<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+								<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+								<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">									
 							{% for item in fichas %}
 								{% if item.status == 'cancelado' %}
-									<tr class="text-secondary">
-									<th>{{item.id}}</th>
-									<td>{{item.pet.nome}}</td>
-									<td>{{item.pet.tutor.all.first.first_name}}</td>
-								</tr>
-								{% else %}
-									<tr>
-										<td><p class="alert alert-info">Sem fichas canceladas.</p></td>
-									</tr>	
+									<tr onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'" class="text-secondary">
+										<th class="text-info">{{item.id}}</th>
+										<td><a href="{% url 'pet:pet_detail' pk=item.pet.id %}">{{item.pet.nome}}</td>
+										<td>{{item.pet.tutor.all.first.first_name}}</td>
+									</tr>
 								{% endif %}
 							{% endfor %}
 						</tbody>
 					</table>
+						{% if item.status == 'cancelado' %}
+						{% else %}
+							<div>
+								<label class="alert alert-info d-block text-center"> Sem fichas canceladas.</label>
+							</div>
+						{% endif %}
 				</div>
 			</div>
 		</section>	
 		<!-- Finalizados  -->
 		<section class="tab-pane fade  " id="finalizados" role="tabpanel" aria-labelledby="finalizados-tab">
 			<div class="border dados-pet mb-4 mt-3">
-				<div class="row p-4">
-					<table class="table table-hover table-sm">
+				<div class="p-4">
+					<table class="table table-hover ">
 						<thead class="text-center">
-							<tr class="font-weight-bold text-info">
-								<th scope="col">Nº Ficha</th>
-								<th scope="col">Nome do Pet</th>
-								<th scope="col">Nome do Tutor</th>
+							<tr class="font-weight-bold text-secondary">
+								<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+								<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+								<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">
 								{% if item.status == 'finalizadas' %}
 									<tr class="text-secondary">
-									<th>{{item.id}}</th>
-									<td>{{item.pet.nome}}</td>
-									<td>{{item.pet.tutor.all.first.first_name}}</td>
-								</tr>
-								{% else %}
-									<tr>
-										<td><p class="alert alert-info">Sem fichas Finalizadas.</p></td>
-									</tr>	
+										<th onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'">{{item.id}}</th>
+										<td class="text-info">{{item.pet.nome}}</td>
+										<td>{{item.pet.tutor.all.first.first_name}}</td>
+									</tr<a href="{% url 'pet:pet_detail' pk=item.pet.id %}">>	
 								{% endif %}
 						</tbody>
 					</table>
+						{% if item.status == 'finalizadas' %}
+						{% else %}
+							<div>
+								<label class="alert alert-info d-block text-center"> Sem fichas finalizadas.</label>
+							</div>
+						{% endif %}
 				</div>
 			</div>
 		</section>

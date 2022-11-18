@@ -1,0 +1,108 @@
+<div class="border dados-pet mb-4">
+	<div class="bg-secondary dados-pet-header pt-2">
+		<div class="row px-4">
+			<div class="w-75 col">
+				<h6 class="font-weight-bold text-white">Anamnase</h6>
+			</div>
+			<div class="text-white text-center w-25">
+				<h6 class="font-weight-bold mr-3">
+					<span class="mr-2">Nº</span>{{anamnese.id}}
+				</h6>					
+			</div>	
+		</div>	
+	</div>
+
+	<div class="row p-4">
+		{% if anamnese.created == today  %}
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Data da Avaliação:</label>
+					<label class="text-secondary">{{anamnese.created|date:'d/m/Y'}}</label>
+				</div>	
+
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Boca:</label> 
+					{% for item in anamnese.boca.all %}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Doença:</label>
+					{% for item in anamnese.doenca.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Olhos:</label>
+					{% for item in  anamnese.olhos.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Orelhas:</label> 
+					{% for item in anamnese.orelhas.all %}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Patas:</label>
+					{% for item in  anamnese.patas.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Unhas:</label> 
+					{% for item in anamnese.unhas.all %}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Pele:</label>
+					{% for item in anamnese.pele.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Doenças na Pele:</label> 
+					{% for item in anamnese.peleInfeccionada.all %}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Ectoparasitas:</label>
+					{% for item in anamnese.ectoparasitas.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Pelos:</label> 
+					{% for item in anamnese.pelos.all %}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Estado dos Pelos:</label>
+					{% for item in anamnese.pelosEstado.all %} 
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>	
+				<div class="col-md-3">
+					<label class="text-info font-weight-bold d-block">Condição dos Pelos:</label> 
+					{% for item in anamnese.pelosCondicao.all%}
+						<label class="text-secondary">{{item}}</label>
+					{% endfor %}
+				</div>
+				<div class="col-md-12 d-flex justify-content-end">						
+					<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:ficha_add' pk=pet.id %}'">
+						<i class="fa-solid fa-plus"></i> Anamnese
+					</button>
+				</div>
+		{% else %}
+			<p class="alert alert-info w-100 text-center">Ainda não foi realizada a anamneses no pet.</p>
+			<div class="col-md-12 d-flex justify-content-center">
+				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'fichas:ficha_add' pk=pet.id %}'">
+					<i class="fa-solid fa-plus"></i> Anamnese
+				</button>
+			</div>
+		{% endif %}
+	</div>
+</div>

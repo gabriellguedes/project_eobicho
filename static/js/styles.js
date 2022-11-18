@@ -85,3 +85,25 @@ jQuery(document).ready(function(){
         
     });
 });
+
+jQuery(document).ready(function(){
+
+    var btn = 'form[name=FormPermissionTutor] button[name=BtnPermissionTutor]';      /*INFORME O SELETOR DO BOTÃO*/
+    var checkbox = '#permission_banho_tosa';  /*INFORME O NOME DO ID DO CHECKBOX*/
+    
+    jQuery(btn).attr('disabled', 'disabled').css("opacity", "0.6");
+   
+    jQuery(checkbox).click(function(){
+      
+        if(jQuery(this).is(':checked')){
+            
+            jQuery(btn).removeAttr('disabled').css("opacity", "1");
+        
+        }else{
+            
+            jQuery(btn).attr('disabled', 'disabled').css("opacity", "0.6");
+            
+        }
+        
+    });
+});

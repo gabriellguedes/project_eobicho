@@ -69,3 +69,38 @@ def peso_update(request, pk):
         else:
             context = { 'form': form, 'pet': pet }
             return render(request, template_name, context=context)
+
+#pesar o pet
+def peso_add_for_banho(request, pk):
+    template_name = 'peso/add_peso_bt.html'
+    obj = Pet.objects.get(pk=pk)
+     # Add Peso
+    if request.method == 'GET':
+        form = PetForm()
+
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, extra=1, can_delete=False)
+        form_peso = form_peso_factory()
+
+        context={
+            'pet': obj,
+            'form': form_peso,
+        }
+        return render(request, template_name, context=context)
+        
+    elif request.method == 'POST':
+        form = PetForm(request.POST)
+        form_peso_factory = inlineformset_factory(Pet, Peso, form=PesoForm, can_delete=False)
+        form_peso = form_peso_factory(request.POST)
+        
+        if form_peso.is_valid():
+            form = form_peso.save(commit=False)
+            form[0].user = request.user
+            form_peso.instance = obj
+            form_peso.save()
+            return HttpResponseRedirect(reverse('services:new_ficha', kwargs={"pk": obj.pk}))
+        else:
+            context = {
+                'form': form_peso,
+                'pet': obj,
+            }
+            return render(request, template_name, context=context)
