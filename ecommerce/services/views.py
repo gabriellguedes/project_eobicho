@@ -220,9 +220,19 @@ def detail_ficha(request, pk):
 # Listar todos as Fichas de Banho e Tosa Cadastradas
 def list_ficha(request):
 	template_name = 'ficha/list_ficha.html'
-	fichas = Ficha.objects.all()
+	fichas_atendendo = Ficha.objects.filter(status='atendendo')
+	fichas_aguardando = Ficha.objects.filter(status='aguardando')
+	fichas_aprovado = Ficha.objects.filter(status='aprovado')
+	fichas_alterado = Ficha.objects.filter(status='alterado')
+	fichas_cancelado = Ficha.objects.filter(status='cancelado')
+	fichas_finalizado = Ficha.objects.filter(status='finalizado')
 	context = {
-		'fichas': fichas,
+		'atendendo': fichas_atendendo,
+		'aguardando': fichas_aguardando,
+		'aprovado': fichas_aprovado,
+		'alterado': fichas_alterado,
+		'cancelado': fichas_cancelado,
+		'finalizado': fichas_finalizado,
 	}
 	return render(request, template_name, context=context)
 # Apagar ficha de banho e tosa
@@ -235,7 +245,6 @@ def delete_ficha(request, pk):
 	elif request.method == 'POST':
 		ficha.delete()
 		return HttpResponseRedirect(reverse('services:list_detail')) 
-
 # Pag q o cliente 
 def permission_tutor(request, pk):
 	template_name = 'ficha/permission_tutor.html'
@@ -259,7 +268,6 @@ def permission_tutor(request, pk):
 		ficha.status = 'aprovado'
 		ficha.save()
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': request.user.id}))
-
 # Vizualizar Ficha de Banho e Tosa Cadastrada completa para o Tutor
 def detail_ficha_tutor(request, pk):
 	template_name = 'ficha/detail_ficha_tutor.html'
@@ -272,10 +280,22 @@ def detail_ficha_tutor(request, pk):
 		'anamnese': anamnese,
 	}
 	return render(request, template_name, context=context)
-
 # Nega permissão para banho e tosa
 def permission_ficha_cancelada(request, pk):
 	ficha = Ficha.objects.get(id=pk)
 	ficha.status = 'cancelado'
 	ficha.save()
-	return HttpResponseRedirect(reverse('pet:pet_detail', ))
+	return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': request.user.id}))
+# Atendimento para o banho e tosa
+def atender_ficha(request, pk):
+	ficha = Ficha.objects.get(id=pk)
+	ficha.status = 'atendendo'
+	ficha.save()
+	return HttpResponseRedirect(reverse('services:list_ficha'))
+
+# Finalizar Atendimento para o banho e tosa
+def finalizar_ficha(request, pk):
+	ficha = Ficha.objects.get(id=pk)
+	ficha.status = 'finalizado'
+	ficha.save()
+	return HttpResponseRedirect(reverse('services:list_ficha'))

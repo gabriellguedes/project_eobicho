@@ -1,0 +1,28 @@
+<div class="border dados-pet mb-4 mt-3">
+	<div class="p-4">
+		{% if aguardando %}
+			<table class="table table-hover ">
+				<thead class="text-center">
+					<tr class="font-weight-bold text-secondary">
+						<th scope="col"><span class="text-info font-weight-bold">#</span>Nº</th>
+						<th scope="col"><i class="fa-solid fa-paw text-info"></i> Pet</th>
+						<th scope="col"><i class="fa-solid fa-user text-info"></i> Tutor</th>
+					</tr>
+				</thead>
+				<tbody class="text-center">									
+					{% for item in aguardando %}
+						<tr onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'" class="text-secondary">
+							<th class="text-info">{{item.id}}</th>
+							<td><a href="{% url 'pet:pet_detail' pk=item.pet.id %}">{{item.pet.nome}}</td>
+							<td>{{item.pet.tutor.all.first.first_name}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<div>
+				<label class="alert alert-info d-block text-center"> Sem fichas aguardando aprovação do tutor.</label>
+			</div>	
+		{% endif %}	
+	</div>
+</div>

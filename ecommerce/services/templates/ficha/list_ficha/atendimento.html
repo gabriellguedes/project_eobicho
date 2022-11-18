@@ -1,0 +1,49 @@
+
+<div class="col-md-8">
+	<div class="border dados-pet mb-4">
+		<div class="border-bottom bg-secondary dados-pet-header pt-2">
+			<div class="row px-4">
+				<div class="w-75 col">
+					<h6 class="font-weight-bold text-white">Em Atendimento</h6>
+				</div>
+			</div>	
+		</div>
+
+		<div class="row p-4">
+			<ul class="list-group w-100">
+				{% if atendendo %}					
+					{% for item in atendendo %}
+						<li class="border-bottom nav-link" >
+							<div class="row">
+								<div class="w-75" onclick="location.href='{% url 'services:detail_ficha' pk=item.id %}'">	
+									<label class="text-info font-weight-bold">{{item.pet.nome}}</label>
+									<small class="text-secondary">
+									 ( {{item.pet.especie}} de 								
+									 {% for c in item.pet.raca.caracteristicas.all %}
+											Porte {{c.porte}} )
+										{% endfor %}
+									</small>
+									<small class="block-none text-secondary">
+										{% for b in item.banho.all %}
+										 - <span class="text-info font-weight-bold">Banho: </span>{{b}} /
+										{% endfor %}
+										{% for t in item.tosa.all %}
+											<span class="text-info font-weight-bold">Tosa: </span>{{t}}
+										{% endfor %}
+									</small>
+								</div>	
+								<div class="w-25 d-flex justify-content-center">
+									<a class="btn btn-outline-info btn-sm" href="{% url 'services:finalizar_ficha' pk=item.id %}">Finalizado</a>
+								</div>	
+							</div>	
+						</li>
+					{% endfor %}
+				{% else %}
+					<p class="alert alert-info text-center"> 
+						<i class="fa-solid fa-triangle-exclamation"></i> Sem pets em atendimento.
+					</p>	
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>		

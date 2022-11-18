@@ -25,4 +25,7 @@ urlpatterns = [
 	path('banhoandtosa/', views.list_ficha, name='list_ficha'),
 	path('delete_ficha/<int:pk>/', views.delete_ficha, name='delete_ficha'),
 	path('permission_tutor/<int:pk>/', views.permission_tutor, name='permission_tutor'),
+	path('atender_ficha/<int:pk>/', views.atender_ficha, name='atender_ficha'),
+	path('finalizar_ficha/<int:pk>/', views.finalizar_ficha, name='finalizar_ficha'),
+	path('permission_ficha_cancelada/<int:pk>/', views.permission_ficha_cancelada, name='permission_ficha_cancelada'),
 ]

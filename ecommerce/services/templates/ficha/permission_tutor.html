@@ -35,7 +35,7 @@
 				</div>
 			<div class="col">
 				<button class="btn btn-info mr-3" name="BtnPermissionTutor" type="submit">Autorizar</button>
-				<button class="btn btn-outline-danger" type="button" onclick="location.href=''">Não Autorizo</button>
+				<button class="btn btn-outline-danger" type="button" onclick="location.href='{% url 'services:permission_ficha_cancelada' pk=form.id %}'">Não Autorizo</button>
 			</div>
 			
 		</form>

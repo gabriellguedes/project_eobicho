@@ -15,7 +15,7 @@ class Raca(models.Model):
 		return '{} - {}'.format(self.especie, self.raca)
 
 class Caracteristicas_Raca(models.Model):
-	raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
+	raca = models.ForeignKey(Raca, on_delete=models.CASCADE, related_name='caracteristicas')
 	porte = models.CharField('Porte', max_length=15, choices=t.PORTE_RACAS_CHOICES)
 	altura = models.PositiveIntegerField('Altura (cm)',)
 	comprimento = models.PositiveIntegerField('Comprimento (cm)',)

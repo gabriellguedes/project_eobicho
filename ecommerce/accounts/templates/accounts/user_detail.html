@@ -10,24 +10,13 @@
 
 {% if user|can:'view_user_cliente' %}
 <div class="container py-4">
-	<!-- MSG de Perfil Incompleto -->
-	{% if endereco == 'None' or cliente == 'None' %}
-		<div>
-			<a href="{% url 'contas:cliente_update' pk=user.id %}">
-				<p class="alert alert-warning text-center"> 
-					<i class="fa-solid fa-triangle-exclamation"></i>
-					Olá <span class="font-weight-bold">{{ request.user.first_name }} </span> seu perfil está incompleto, clique aqui para adicionar as informações que faltam! 
-				</p>
-			</a>
-		</div>
-	{% endif %}
 	<div class="row">
 		<div class="col-md-8">
 			<!-- Block User - Mostra perfil de Usuário Logado/ Cliente que esta cadastro. -->
 			{% if user.pk != tutor.id %}
 			 	<section class="mb-3">
-					<div class="row py-3">
-						<div class="col-md-6 mb-3" id="user_responsive_block">
+					<div class="row">
+						<div class="col-md-6 " id="user_responsive_block">
 							<div class="row">
 								<div class="dropdown ml-3">
 								  {% if tutor.photo.url != None %}
@@ -62,8 +51,8 @@
 				</section>
 			{% else %}
 		 		<section class="mb-3">
-					<div class="row py-3">
-						<div class="col-md-6 mb-3" id="user_responsive_block">
+					<div class="row">
+						<div class="col-md-6" id="user_responsive_block">
 							{% include 'includes/user_responsive_block.html' %}
 											
 						</div>
@@ -82,7 +71,30 @@
 					</div>	
 				</section>
 			{% endif %}
-			<!-- Aceitar Banho e Tosa  -->
+
+			<!-- MSG de Perfil Incompleto -->
+			{% if endereco == 'None' or cliente == 'None' %}
+				<div class="w-100">
+					<div class="border dados-pet mb-4">
+						<div class="dados-pet-header">
+							<label class="d-block text-center alert alert-warning ">
+									<i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
+							</label>		
+						</div>
+						<div class="px-3">
+							<label class="text-secondary d-block mb-3">
+								Olá <span class="font-weight-bold text-info">{{ request.user.first_name }} </span> seu perfil está incompleto, clique aqui para adicionar as informações que faltam!   
+							</label>
+							<div class="text-secondary d-flex justify-content-center mb-4">
+								<a class="btn btn-outline-info" href="{% url 'contas:cliente_update' pk=user.id %}">
+									Completar Perfil
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			<!-- MSG Aceitar Banho e Tosa  -->
 			{% for pet in pet_cliente.all %}
 				{% for item in pet.FichaBanho.all %}
 					{% if item.status == 'aguardando' %}
@@ -98,7 +110,9 @@
 										Banho e tosa no <span class="text-info font-weight-bold"> {{pet.nome}}</span> necessita da sua autoraziação para prosseguir ao próximo passo.  
 									</label>
 									<div class="text-secondary d-flex justify-content-center mb-4">
-										<a class="btn btn-outline-info" href="{% url 'services:permission_tutor' pk=pet.id %}">Clique aqui </a>
+										<a class="btn btn-outline-info" href="{% url 'services:permission_tutor' pk=pet.id %}">
+											Clique aqui<i class="bi bi-hand-index-thumb ml-2"></i> 
+										</a>
 									</div>
 								</div>
 							</div>
