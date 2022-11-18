@@ -1,0 +1,93 @@
+{% load permission_tags %}
+<div class="container py-4">
+		{% if banho.created == today or peso.created == today %}	
+			<h5 class="font-weight-bold text-secondary">{{today}}</h5>
+			<ul class="list-group">
+				{% if banho.created == today  %}
+					<li class="nav-link">
+						<div class="row">
+							<div class="col-md-2 block-none">
+								{% for tutor in pet.tutor.all %}
+								 	{% if tutor == request.user %}<!-- verificando se o tutor é o mesmo que usuário logado -->
+										<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 	{% else %}
+								 		{% if user|can:'view_funcionario' %}
+								 			<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 		{% endif %}
+								 	{% endif %}
+								{% endfor %}
+							</div>
+							<div class="col-md-8 w-75 p-0">
+								<label class="text-secondary">
+									<span class="text-info font-weight-bold">{{pet.nome}}</span>
+									{% if banho.status == 'aguardando' %}
+										<span class="text-secondary">esta aguardando sua autorização para receber um banho do tipo</span>
+									{% elif banho.status == 'finalizado'%}
+										<span class="text-secondary">recebeu um banho do tipo </span>
+									{% elif banho.status == 'atendendo' %}
+										<span class="text-secondary">esta recebendo um banho do tipo</span>
+									{% endif %}
+									<span class="text-info">{{banho.banho.all.last}}</span>
+								</label>
+							</div>
+							<div class="col-md-2 w-25">
+								<div class="d-flex justify-content-end">
+									{% if banho.status == 'aguardando' %}
+										<a class="btn btn-outline-info rounded-circle" href="{% url 'services:permission_tutor' pk=pet.id %}">
+											<i class="fa-solid fa-eye"></i>
+										</a>
+									{% else %}
+										<a class="btn btn-outline-info rounded-circle" href="{% url 'services:detail_ficha_tutor' pk=banho.id %}">
+											<i class="fa-solid fa-eye"></i>
+										</a>
+									{% endif %}	
+								</div>	
+							</div>
+						</div>
+					</li><!-- /LI Q VERIFICA SE HOUVE BANHO E TOSA -->
+				{% endif %}	
+				{% if peso.created == today %}
+					<li class="nav-link">
+						<div class="row">
+							<div class="col-md-2 block-none">
+								{% for tutor in pet.tutor.all %}
+								 	{% if tutor == request.user %}<!-- verificando se o tutor é o mesmo que usuário logado -->
+										<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 	{% else %}
+								 		{% if user|can:'view_funcionario' %}
+								 			<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 		{% endif %}
+								 	{% endif %}
+								{% endfor %}
+							</div>
+							<div class="col-md-8 w-75 p-0">
+								<label class="text-secondary">
+									<span class="text-info font-weight-bold">{{pet.nome}}</span>
+									<span class="text-secondary">esta recebendo um peso de </span>
+									<span class="text-info font-weight-bold"> 
+										<i class="fa-sharp fa-solid fa-weight-hanging"></i> {{peso.peso}}<small> (Kg) </small> 
+									</span>
+								</label>
+							</div>
+							<div class="col-md-2 w-25">
+								<div class="d-flex justify-content-end">
+										<a class="btn btn-outline-info rounded-circle" data-toggle="tab" href="#peso" >
+											<i class="fa-solid fa-eye"></i>
+										</a>
+								</div>	
+							</div>
+						</div>
+					</li><!-- /LI Q VERIFICA SE O ANIMAL FOI PESADO -->
+				{% endif %}
+			</ul>
+		{% else %}
+			<p class="alert alert-warning text-center">
+				<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+				Nenhum procedimento foi realizado hoje.
+			</p>
+			<label class="text-info">
+				<a class="text-info font-weight-bold" href="#">
+					<i class="fa-solid fa-calendar mr-2"></i> Historico de outro dia</a>
+			</label>
+		{% endif %}
+</div><!-- /DIV CONTAINER -->

@@ -26,6 +26,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from PIL import Image
 
+# Calcular a idade do pet 
 def birthday(date):
     # Get the current date
     now = datetime.utcnow()
@@ -38,7 +39,41 @@ def birthday(date):
         age = dateutil.relativedelta.relativedelta(now, date)
     age = age.months
     return age
-
+# formata data da ficha de banho e tosa
+def BanhoTosa(pet):
+    pet = Pet.objects.get(id=pet.id)
+    try:
+        ficha_banho = pet.FichaBanho.all()
+        for item in ficha_banho:
+            ficha = { 
+                'id': item.id,
+                'status': item.status,
+                'banho': item.banho,
+                'tosa': item.tosa,
+                'itens': item.itens,
+                'outros': item.outros,
+                'created': datetime.date(item.created),
+                }
+        return ficha
+    except UnboundLocalError:
+        ficha = None
+        return ficha 
+#  formata data do peso do pet
+def PesoDate(pet):
+    pet = Pet.objects.get(id=pet.id)
+    try: 
+        obj_peso = pet.pet_peso.all()
+        for peso in obj_peso:
+            ficha = {
+                'id': peso.id,
+                'peso': peso.peso,
+                'obs': peso.obs,
+                'created': datetime.date(peso.created),
+            }
+        return ficha
+    except UnboundLocalError:
+        ficha = None
+        return ficha
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_add(request):
     template_name = 'pet/pet_add.html'
@@ -140,8 +175,14 @@ def detailPet(request, pk):
     tutor = pet.tutor.all()
     ficha = pet.fichaPets.last()
     last_fichas = pet.fichaPets.all()
-    #obj_cliente = User.objects.get(id=tutor)
-
+    
+    # data de hoje
+    today = datetime.date(datetime.utcnow())
+   
+    # formatando data de criação 
+    banho = BanhoTosa(pet)
+    peso = PesoDate(pet)
+   
     # Listar Peso        
     list_peso = Peso.objects.filter(pet=pet)
     last_peso = list_peso.last()    
@@ -152,7 +193,12 @@ def detailPet(request, pk):
     if pet.idade != idade:
         pet.idade = idade
         pet.save()
-   
+
+    for i in tutor:
+        if i == request.user:
+            teste = i
+        else:
+            teste = ''
     context = { 
         'pet': pet,
         'ficha': ficha,
@@ -160,6 +206,10 @@ def detailPet(request, pk):
         'last_peso': last_peso,
         'listpeso': list_peso,
         'cliente': tutor,
+        'today': today,
+        'banho': banho,
+        'peso': peso,
+        'tutor': teste,
      }
     return render(request, template_name, context=context) 
 #Atualização
