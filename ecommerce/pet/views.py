@@ -193,12 +193,15 @@ def detailPet(request, pk):
     if pet.idade != idade:
         pet.idade = idade
         pet.save()
-
-    for i in tutor:
-        if i == request.user:
-            teste = i
-        else:
-            teste = ''
+    
+    if tutor:
+        for i in tutor:
+            if i == request.user:
+                teste = i
+            else:
+                teste = None
+    else:
+        teste = None
     context = { 
         'pet': pet,
         'ficha': ficha,
@@ -250,8 +253,18 @@ def pet_update(request, pk):
 def cliente_pet_update(request, pk):
     template_name = 'pet/cliente_pet_update.html'
     obj = Pet.objects.get(id=pk)
+    tutores = obj.tutor.all()
     especie = Especie.objects.all().order_by('especie')
     raca = []
+
+    if tutores:
+        for tutor in tutores:
+            if tutor == request.user:
+                tutor_obj = tutor
+            else:
+                tutor_obj = None
+    else:
+        tutor_obj = None
 
     if request.method == 'GET':
         form = PetClienteUpdateForm(instance=obj)
@@ -260,6 +273,7 @@ def cliente_pet_update(request, pk):
             'obj': obj,
             'especie': especie,
             'raca': raca,
+            'tutor': tutor_obj,
         }
         return render(request, template_name, context=context)
     if request.method == 'POST':
@@ -275,7 +289,8 @@ def cliente_pet_update(request, pk):
                 'form_pet': form,
                 'obj': obj,
                 'especie': especie,
-                'raca': raca
+                'raca': raca,
+                'tutor': tutor_obj,
             }
             return render(request, template_name, context=context)
 # Adicionar um novo tutor ao pet já existente
