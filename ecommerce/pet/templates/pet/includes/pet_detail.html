@@ -58,12 +58,16 @@
 							<!-- Verificar se existe algum tutor -->
 							{% if pet.tutor.all %}
 								<!-- Verificar se o pet pertence ao usuário logado -->
-								{% for item in pet.tutor.all %}
-									{% if request.user.id == item.id %}
+								{% for item in pet.tutor.all %}<!-- percorre todos os tutores do pet -->
+									{% if request.user.id == item.id %} <!-- verifica se usuário logado e tutor do pet -->
 										{{item.first_name}}
 									{% else %}
-										{% if user|has_role:'colaborador'%}
-											, {{item.first_name}}
+										{% if user|can:'view_funcionario'%}<!-- verifica se é um funcionario -->
+											{% if pet.tutor.all.first == item %}
+												<span>{{item.first_name}}</span>
+											{% else %}
+												<span>- {{item.first_name}}</span>
+											{% endif %}
 										{% endif%} 
 									{% endif %}
 								{% endfor %}

@@ -11,8 +11,12 @@
 								 	{% if tutor == request.user %}<!-- verificando se o tutor é o mesmo que usuário logado -->
 										<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
 								 	{% else %}
-								 		{% if user|can:'view_funcionario' %}
-								 			<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 		{% if user|can:'view_funcionario' %}<!-- verifica se o usuário é um funcionario -->
+								 			{% if pet.tutor.all.first == tutor %}
+								 				<label class="text-info font-weight-bold">{{tutor.first_name}}</label>
+								 			{% else %}
+								 				<label class="text-info font-weight-bold">- {{tutor.first_name}}</label>
+								 			{% endif %}
 								 		{% endif %}
 								 	{% endif %}
 								{% endfor %}

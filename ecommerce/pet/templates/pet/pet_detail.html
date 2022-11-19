@@ -37,25 +37,25 @@
 				   <li class="nav-item">
 				    	<a class="nav-link" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
 				  </li>										
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link disabled" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link disabled" id="solicitacoes-tab" data-toggle="tab" href="#solicitacoes" role="tab" aria-controls="solicitacoes" aria-selected="false">Solicitações</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link disabled" id="retornos-tab" data-toggle="tab" href="#retornos" role="tab" aria-controls="retornos" aria-selected="false">Retornos</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link disabled" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
 				  </li>
-				  <li class="nav-item">
+				  <li class="nav-item d-none">
 				    	<a class="nav-link disabled" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
 				  </li>		
 				</ul>
@@ -100,24 +100,40 @@
 				</div><!-- /NAV - FINAL DA PÁGINA -->
 			</section>
 		{% else %}
-			<div class="container my-5">
-				<div class="border dados-pet mb-4">
-					<div class="dados-pet-header">
-						<label class="d-block text-center alert alert-danger ">
-								<i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
-						</label>		
-					</div>
-					<div class="px-3">
-						<label class="text-secondary d-block mb-3">
-							<span class="font-weight-bold text-info">{{ request.user.first_name }} </span> você não tem permissão para acessar essa página!   
-						</label>
-						<div class="text-secondary d-flex justify-content-center mb-4">
-							<a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
-								Voltar
-							</a>
+			<section class="container d-flex justify-content-center my-5">
+				<div class="col-md-9 ">
+					<div class="border dados-pet mb-4">
+						<div class="dados-pet-header">
+							<label class="d-block text-center alert alert-danger ">
+									<i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
+							</label>		
+						</div>
+						<div class="px-3">
+							<label class="text-secondary d-block mb-3 text-center">
+
+								<p class="mb-3">
+									<span class="font-weight-bold text-info">{{ request.user.first_name }}</span>
+									você não tem permissão para acessar essa página!
+								</p>
+								 
+								<p class="px-4">
+									<small class="text-secondary d-block mb-3 text-justify">
+										Caso você seja uma pesssoa autorizada entre em contato com o administrador do sistema para verificar se alguma das suas permissões foram revogadas.
+									</small>
+								</p>
+								<p class="text-justify px-4">	
+									<small class="text-info font-italic">Lamentamos a inconveniência.</small>
+								</p>     
+							</label>
+
+							<div class="text-secondary d-flex justify-content-center mb-4">
+								<a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
+									<i class="fa-solid fa-chevron-left mr-2"></i>	Voltar
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</div>	
+			</section>
 		{% endif %}
 {% endblock content %}

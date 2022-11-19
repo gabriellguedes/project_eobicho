@@ -5,9 +5,9 @@
 {% endblock title %}
 {% block content %}
 <section class="container py-4">
-	<h2 class="border-bottom pb-2 text-secondary title-2">
-		<i class="bi bi-journal-text text-info"></i>
-		Prontuário{% if ficha.pet.sexo != 'Macho' %} da{% else %} do {% endif %} <span class="text-info">{{ficha.pet.nome}}</span> do dia <span class="text-info">{{ficha.created}}</span>
+	<h2 class="border-bottom pb-2 text-secondary title-2 font-weight-bold">
+		<i class="fa-solid fa-stethoscope text-info mr-2"></i>
+		Anamnese{% if ficha.pet.sexo != 'Macho' %} da{% else %} do {% endif %} <span class="text-info">{{ficha.pet.nome}}</span>
 	</h2>
 	<div class="row">
 		<div class="col-lg-6">
@@ -23,6 +23,10 @@
 						</small>
 					</div>
 					<div class="card-text px-3 py-3">
+						<div class="col">
+			    			<label class="font-weight-bold text-info d-block">Data: </label>
+							<label class="text-monospace text-secondary">{{ficha.created|date:'d/m/Y'}}</label>
+						</div>
 			    		<div class="col">
 			    			<label class="font-weight-bold text-info d-block">Unhas: </label>
 			    			{% for item in ficha.unhas.all %}
@@ -98,8 +102,10 @@
 		</div>
 		<div class="col-lg-6">
 		    <div class="col mt-3">
-		    	<p class="font-weight-bold text-secondary"><i class="fa-solid fa-notes-medical text-info "></i> Avaliações anteriores:</p>	
-		    	<table class="table">
+		    	<p class="font-weight-bold text-secondary">
+		    		<i class="fa-solid fa-notes-medical text-info "></i> OutrasAvaliações:
+		    	</p>	
+		    	<table class="table table-hover">
 		    		<thead>
 		    			<tr class="text-center">
 			    			<th class="text-secondary" scope="col"><i class="fa-solid fa-file text-info"></i> Nº Ficha</th>
@@ -108,14 +114,14 @@
 			    		</tr>	
 		    		</thead>	
 		    		{% for iten in last_fichas %}
-		    			<tbody>
-		    				<tr class="text-center">
-					    		<th scope="row">
-					    			<a href="{% url 'fichas:ficha_detail' pk=pet.id n=ficha.id %}">{{iten.id}}</a>
-					    		</th>
-					    		<td>{{iten.created}}</td>
-					    		<td>{{iten.funcionario}}</td>
-				    		</tr>
+		    			<tbody class="text-secondary">
+		    				{% if iten != ficha %}
+			    				<tr class="text-center" onclick="location.href='{% url 'fichas:ficha_detail' pk=pet.id n=iten.id %}'"> 
+						    		<th class="text-info" scope="col">{{iten.id}}</th>
+						    		<td>{{iten.created|date:'d/m/Y'}}</td>
+						    		<td>{{iten.funcionario.first_name}}</td>
+					    		</tr>
+				    		{% endif %}
 				    	</tbody>	
 				    {% endfor%}							    	
 		    	</table>
