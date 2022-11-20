@@ -6,134 +6,100 @@
 	{{block.super}} - Ficha técnica
 {% endblock title %}
 {% block content %}
-		{% if tutor or user|can:'view_funcionario' %}
-			<section class="container py-4">
-				<div class="mb-3">
-					{% for item in cliente%}
-						{% if request.user.id == item.id %}
-							<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="mr-3 text-info font-weight-bold">
-								<i class="fa-solid fa-user"></i> Ir para tutor 
-							</a>
-						{% else %}
-							{% if user|has_role:'colaborador' %}
-								<label class="font-weight-bold text-secondary mr-3">					
-									<i class="fa-solid fa-user text-info"></i> Ir para tutor(a) 
-									<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="text-info font-weight-normal">{{item.first_name}}</a>
-								</label>
-							{% endif %}
-						{% endif %}
-						
-					{% endfor %}
-				</div>
-
-				{% include 'pet/includes/pet_detail.html' %}
-				{% include 'pet/includes/pet_obs.html' %}
-
-				<!-- NAV - FINAL DA PÁGINA -->
-				<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-					<li class="nav-item" disabled>
-				   		 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Histórico</a>
-				   </li>
-				   <li class="nav-item">
-				    	<a class="nav-link" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
-				  </li>										
-				  <li class="nav-item d-none">
-				    	<a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link disabled" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link disabled" id="solicitacoes-tab" data-toggle="tab" href="#solicitacoes" role="tab" aria-controls="solicitacoes" aria-selected="false">Solicitações</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link disabled" id="retornos-tab" data-toggle="tab" href="#retornos" role="tab" aria-controls="retornos" aria-selected="false">Retornos</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link disabled" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
-				  </li>
-				  <li class="nav-item d-none">
-				    	<a class="nav-link disabled" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
-				  </li>		
-				</ul>
-				<div class="tab-content" id="myTabContent">
-					<!-- Histórico -->	
-					<section class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						{% include 'pet/includes/pet_historico.html' %}
-					</section>
-					<!-- Peso -->
-					<section class="tab-pane fade" id="peso" role="tabpanel" aria-labelledby="peso-tab">
-						{% include 'pet/includes/pet_peso.html' %}		
-					</section>	
-				    <!-- Consultas  -->
-				    <section class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
-				    	{% include 'pet/includes/pet_consultas.html' %}
-				    	
-				    </section>
-					<!-- Vacinas -->
-					<section class="tab-pane fade " id="vacinas" role="tabpanel" aria-labelledby="vacinas-tab">
-						{% include 'pet/includes/pet_vacinas.html' %}
-					</section>
-					<!-- Prescrições -->
-					<section class="tab-pane fade " id="prescricoes" role="tabpanel" aria-labelledby="prescricoes-tab">
-						<h4 class="text-secondary">Prescrições</h4>
-					</section>
-					<!-- Solicitações -->	
-					<section class="tab-pane fade " id="solicitacoes" role="tabpanel" aria-labelledby="solicitacoes-tab">
-						<h4 class="text-secondary">Solicitações</h4>
-					</section>
-					<!-- Retornos -->	
-					<section class="tab-pane fade " id="retornos" role="tabpanel" aria-labelledby="retornos-tab">
-						<h4 class="text-secondary">Retornos</h4>
-					</section>
-					<!-- Medicamentos -->			
-					<section class="tab-pane fade " id="medicamentos" role="tabpanel" aria-labelledby="medicamentos-tab">
-						<h4 class="text-secondary">Medicamentos</h4>
-					</section>
-				    <!-- Anexo -->
-				    <section class="tab-pane fade " id="anexo" role="tabpanel" aria-labelledby="anexo-tab">
-						<h4 class="text-secondary">Anexos</h4>
-					</section>	
-				</div><!-- /NAV - FINAL DA PÁGINA -->
-			</section>
-		{% else %}
-			<section class="container d-flex justify-content-center my-5">
-				<div class="col-md-9 ">
-					<div class="border dados-pet mb-4">
-						<div class="dados-pet-header">
-							<label class="d-block text-center alert alert-danger ">
-									<i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
-							</label>		
-						</div>
-						<div class="px-3">
-							<label class="text-secondary d-block mb-3 text-center">
-
-								<p class="mb-3">
-									<span class="font-weight-bold text-info">{{ request.user.first_name }}</span>
-									você não tem permissão para acessar essa página!
-								</p>
-								 
-								<p class="px-4">
-									<small class="text-secondary d-block mb-3 text-justify">
-										Caso você seja uma pesssoa autorizada entre em contato com o administrador do sistema para verificar se alguma das suas permissões foram revogadas.
-									</small>
-								</p>
-								<p class="text-justify px-4">	
-									<small class="text-info font-italic">Lamentamos a inconveniência.</small>
-								</p>     
+	{% if tutor or user|can:'view_funcionario' %}
+		<section class="container py-4">
+			<div class="mb-3">
+				{% for item in cliente%}
+					{% if request.user.id == item.id %}
+						<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="mr-3 text-info font-weight-bold">
+							<i class="fa-solid fa-user"></i> Ir para tutor 
+						</a>
+					{% else %}
+						{% if user|has_role:'colaborador' %}
+							<label class="font-weight-bold text-secondary mr-3">					
+								<i class="fa-solid fa-user text-info"></i> Ir para tutor(a) 
+								<a href="{% url 'contas:cliente_detail' pk=item.id %}" class="text-info font-weight-normal">{{item.first_name}}</a>
 							</label>
+						{% endif %}
+					{% endif %}
+					
+				{% endfor %}
+			</div>
 
-							<div class="text-secondary d-flex justify-content-center mb-4">
-								<a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
-									<i class="fa-solid fa-chevron-left mr-2"></i>	Voltar
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>	
-			</section>
-		{% endif %}
+			{% include 'pet/includes/pet_detail.html' %}
+			{% include 'pet/includes/pet_obs.html' %}
+
+			<!-- NAV - FINAL DA PÁGINA -->
+			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+				<li class="nav-item" disabled>
+			   		 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Histórico</a>
+			   </li>
+			   <li class="nav-item">
+			    	<a class="nav-link" id="peso-tab" data-toggle="tab" href="#peso" role="tab" aria-controls="peso" aria-selected="false">Peso</a>
+			  </li>										
+			  <li class="nav-item d-none">
+			    	<a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link" id="vacina-tab" data-toggle="tab" href="#vacinas" role="tab" aria-controls="vacinas" aria-selected="false">Vacinas</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link disabled" id="prescricoes-tab" data-toggle="tab" href="#prescricoes" role="tab" aria-controls="prescricoes" aria-selected="false">Prescrições</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link disabled" id="solicitacoes-tab" data-toggle="tab" href="#solicitacoes" role="tab" aria-controls="solicitacoes" aria-selected="false">Solicitações</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link disabled" id="retornos-tab" data-toggle="tab" href="#retornos" role="tab" aria-controls="retornos" aria-selected="false">Retornos</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link disabled" id="medicamentos-tab" data-toggle="tab" href="#medicamentos" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</a>
+			  </li>
+			  <li class="nav-item d-none">
+			    	<a class="nav-link disabled" id="anexo-tab" data-toggle="tab" href="#anexo" role="tab" aria-controls="anexo" aria-selected="false">Anexos</a>
+			  </li>		
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<!-- Histórico -->	
+				<section class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					{% include 'pet/includes/pet_historico.html' %}
+				</section>
+				<!-- Peso -->
+				<section class="tab-pane fade" id="peso" role="tabpanel" aria-labelledby="peso-tab">
+					{% include 'pet/includes/pet_peso.html' %}		
+				</section>	
+			    <!-- Consultas  -->
+			    <section class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
+			    	{% include 'pet/includes/pet_consultas.html' %}
+			    	
+			    </section>
+				<!-- Vacinas -->
+				<section class="tab-pane fade " id="vacinas" role="tabpanel" aria-labelledby="vacinas-tab">
+					{% include 'pet/includes/pet_vacinas.html' %}
+				</section>
+				<!-- Prescrições -->
+				<section class="tab-pane fade " id="prescricoes" role="tabpanel" aria-labelledby="prescricoes-tab">
+					<h4 class="text-secondary">Prescrições</h4>
+				</section>
+				<!-- Solicitações -->	
+				<section class="tab-pane fade " id="solicitacoes" role="tabpanel" aria-labelledby="solicitacoes-tab">
+					<h4 class="text-secondary">Solicitações</h4>
+				</section>
+				<!-- Retornos -->	
+				<section class="tab-pane fade " id="retornos" role="tabpanel" aria-labelledby="retornos-tab">
+					<h4 class="text-secondary">Retornos</h4>
+				</section>
+				<!-- Medicamentos -->			
+				<section class="tab-pane fade " id="medicamentos" role="tabpanel" aria-labelledby="medicamentos-tab">
+					<h4 class="text-secondary">Medicamentos</h4>
+				</section>
+			    <!-- Anexo -->
+			    <section class="tab-pane fade " id="anexo" role="tabpanel" aria-labelledby="anexo-tab">
+					<h4 class="text-secondary">Anexos</h4>
+				</section>	
+			</div><!-- /NAV - FINAL DA PÁGINA -->
+		</section>
+	{% else %}
+  		{% include 'includes/permission_msg.html' %}
+	{% endif %}
 {% endblock content %}

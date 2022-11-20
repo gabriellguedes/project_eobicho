@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 # Criar uma Doença
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_add(request):
     template_name = 'doenca/doenca_add.html'
     if request.method == 'GET':
@@ -27,6 +28,7 @@ def doenca_add(request):
             return render(request, template_name, context=context)
 # Listar todas as doenças
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_list(request):
     template_name = 'doenca/doenca_list.html'
     objeto = Doenca.objects.all()
@@ -34,6 +36,7 @@ def doenca_list(request):
     return render(request, template_name, context=context)
 # Atualizar doença
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_update(request, pk):
     template_name = 'doenca/doenca_update.html'
     objeto = Doenca.objects.get(id=pk)
@@ -51,6 +54,7 @@ def doenca_update(request, pk):
             return render(request, template_name, context=context)
 # Deletar doença
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_delete(request, pk):
     template_name ='doenca/doenca_delete.html'
     objeto = Doenca.objects.get(id=pk)

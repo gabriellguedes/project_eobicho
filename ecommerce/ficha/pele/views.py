@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 # Adicionar Novo Tipo de Pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pele_add(request):
     template_name = 'pele/pele_add.html'
     if request.method == 'GET':
@@ -29,6 +30,7 @@ def pele_add(request):
             return render(request, template_name, context=context)
 # Listar Tipos de peles cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pele_list(request):
     template_name='pele/pele_list.html'
     objeto = Pele.objects.all()
@@ -38,6 +40,7 @@ def pele_list(request):
     return render(request, template_name, context=context)
 # Atualizar Tipo de pele cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pele_update(request, pk):
     template_name = 'pele/pele_update.html'
     objeto = Pele.objects.get(id=pk)
@@ -55,6 +58,7 @@ def pele_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pele_delete(request, pk):
     template_name = 'pele/pele_delete.html'
     objeto = Pele.objects.get(id=pk)
@@ -67,6 +71,7 @@ def pele_delete(request, pk):
 
 # Adicionar Ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def ectoparasitas_add(request):
     template_name='pele/ectoparasitas_add.html'
     if request.method == 'GET':
@@ -83,6 +88,7 @@ def ectoparasitas_add(request):
             return render(request, template_name, context=context)
 # Listar ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def ectoparasitas_list(request):
     template_name = 'pele/ectoparasitas_list.html'
     objeto = Ectoparasitas.objects.all()
@@ -92,6 +98,7 @@ def ectoparasitas_list(request):
     return render(request, template_name, context=context)
 # Update ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def ectoparasitas_update(request, pk):
     template_name='pele/ectoparasitas_update.html'
     objeto = Ectoparasitas.objects.get(id=pk)
@@ -109,6 +116,7 @@ def ectoparasitas_update(request, pk):
             return render(request, template_name, context=context)
 # Deletar ectoparasitas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def ectoparasitas_delete(request, pk):
     template_name = 'pele/ectoparasitas_delete.html'
     objeto = Ectoparasitas.objects.get(id=pk)
@@ -121,6 +129,7 @@ def ectoparasitas_delete(request, pk):
 
 # Add doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_pele_add(request):
     template_name = 'pele/doenca_pele_add.html'
     if request.method == 'GET':
@@ -137,6 +146,7 @@ def doenca_pele_add(request):
             return render(request, template_name, context=context)
 # Listar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_pele_list(request):
     template_name = 'pele/doenca_pele_list.html'
     objeto = DoencaPele.objects.all()
@@ -144,6 +154,7 @@ def doenca_pele_list(request):
     return render(request, template_name, context=context)
 # Atualizar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_pele_update(request, pk):
     template_name = 'pele/doenca_pele_update.html'
     objeto = DoencaPele.objects.get(id=pk)
@@ -161,6 +172,7 @@ def doenca_pele_update(request, pk):
             return render(request,template_name, context=context)
 # Deletar doenca_pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def doenca_pele_delete(request, pk):
     template_name = 'pele/doenca_pele_delete.html'
     objeto = DoencaPele.objects.get(id=pk)

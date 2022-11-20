@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 #Boca
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def boca_add(request):
     template_name = 'boca/boca_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def boca_add(request):
             return render(request, template_name, context=context)
 # Listar boca cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def boca_list(request):
     template_name='boca/boca_list.html'
     objeto = Boca.objects.all()
@@ -40,6 +42,7 @@ def boca_list(request):
     return render(request, template_name, context=context)
 # Atualizar boca cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def boca_update(request, pk):
     template_name = 'boca/boca_update.html'
     objeto = Boca.objects.get(id=pk)
@@ -57,6 +60,7 @@ def boca_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar uma boca
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def boca_delete(request, pk):
     template_name = 'boca/boca_delete.html'
     objeto = Boca.objects.get(id=pk)

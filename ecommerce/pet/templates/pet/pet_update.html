@@ -8,129 +8,95 @@
 {% endblock title %}
 
 {% block content %}
-{% if user|can:'view_funcionario' %}
-  <section class="container py-4">
-    <div class="border-bottom mb-4">
-      <h2 class="text-secondary title-2 font-weight-bold">
-        <i class="bi bi-journal-text text-info"></i> Atualizar Dados do Pet
-      </h2>
-    </div>  
-    <form class="px-4" name="FormAddPet" id="FormAddPet" method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_load_funcoes' %}">
-      {% csrf_token %}
-      {{form_pet.management_form}}
-      <div class="col-md-4">
-        {% if obj.photo.url != None%}
-          <div class="w-100 d-flex justify-content-center mb-4">
-            <span class="circle-pet-update">         
-              <img src="{{obj.photo.url}}" alt="Foto de perfil do pet">
-            </span>
-          </div>
-        {% else %}
-              {% if obj.sexo  != 'Macho' %}
-                <div class="w-100 d-flex justify-content-center mb-4">
-                  <span class="circle-pet-update">         
-                    <img src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">
-                  </span>
-                </div>
-                
-              {% else %}
-                <div class="w-100 d-flex justify-content-center mb-4">
-                  <span class="circle-pet-update">         
-                    <img src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">
-                  </span>
-                </div> 
-                
-              {% endif%}
-        {% endif %}
-        <div class='input-wrapper row'>        
-          <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
-          <div class="d-flex justify-content-center w-100">
-            <label class="btn btn-outline-info" for='input-file'>
-              Alterar Foto
-            </label>
-          </div>
-          <input id='input-file' type='file' value='' />
-        </div>
-      </div>
-      <div class="row">  
-          <div class="d-none">
-            {{form_pet.tutor|bootstrap}}
-          </div>
-          <div class="col-md-4">
-            {{form_pet.nome|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.aniversario|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.pelagem|bootstrap}}
-          </div>
-
-           <div class="col-md-4">
-            {{form_pet.type_pelo|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.coloracao|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.temperamento|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.especie|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.raca|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.sexo|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.castracao|bootstrap}}
-          </div>
-           <div class="col-md-4">
-            {{form_pet.status|bootstrap}}
-          </div>
-      </div>
-          
-       <button class="btn btn-info mr-3" type="submit">Salvar Alterações</button>
-       <a class="btn btn-outline-info" href="{% url 'pet:pet_list' %}">Cancelar</a>
-    </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
-  </section>
-{% else %}
-  <section class="container d-flex justify-content-center my-5">
-    <div class="col-md-9 ">
-      <div class="border dados-pet mb-4">
-        <div class="dados-pet-header">
-          <label class="d-block text-center alert alert-danger ">
-              <i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
-          </label>    
-        </div>
-        <div class="px-3">
-          <label class="text-secondary d-block mb-3 text-center">
-
-            <p class="mb-3">
-              <span class="font-weight-bold text-info">{{ request.user.first_name }}</span>
-              você não tem permissão para acessar essa página!
-            </p>
-             
-            <p class="px-4">
-              <small class="text-secondary d-block mb-3 text-justify">
-                Caso você seja uma pesssoa autorizada entre em contato com o administrador do sistema para verificar se alguma das suas permissões foram revogadas.
-              </small>
-            </p>
-            <p class="text-justify px-4"> 
-              <small class="text-info font-italic">Lamentamos a inconveniência.</small>
-            </p>     
-          </label>
-
-          <div class="text-secondary d-flex justify-content-center mb-4">
-            <a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
-              <i class="fa-solid fa-chevron-left mr-2"></i> Voltar
-            </a>
+  {% if user|can:'view_funcionario' %}
+    <section class="container py-4">
+      <div class="border-bottom mb-4">
+        <h2 class="text-secondary title-2 font-weight-bold">
+          <i class="bi bi-journal-text text-info"></i> Atualizar Dados do Pet
+        </h2>
+      </div>  
+      <form class="px-4" name="FormAddPet" id="FormAddPet" method="POST" action="." enctype="multipart/form-data" data-funcoes-url="{% url 'pet:ajax_load_funcoes' %}">
+        {% csrf_token %}
+        {{form_pet.management_form}}
+        <div class="col-md-4">
+          {% if obj.photo.url != None%}
+            <div class="w-100 d-flex justify-content-center mb-4">
+              <span class="circle-pet-update">         
+                <img src="{{obj.photo.url}}" alt="Foto de perfil do pet">
+              </span>
+            </div>
+          {% else %}
+                {% if obj.sexo  != 'Macho' %}
+                  <div class="w-100 d-flex justify-content-center mb-4">
+                    <span class="circle-pet-update">         
+                      <img src="{% static 'img/Avatar_Dog-512.png' %}" alt="Foto de perfil do pet">
+                    </span>
+                  </div>
+                  
+                {% else %}
+                  <div class="w-100 d-flex justify-content-center mb-4">
+                    <span class="circle-pet-update">         
+                      <img src="{% static 'img/dog-avatar.png' %}" alt="Foto de perfil do pet">
+                    </span>
+                  </div> 
+                  
+                {% endif%}
+          {% endif %}
+          <div class='input-wrapper row'>        
+            <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
+            <div class="d-flex justify-content-center w-100">
+              <label class="btn btn-outline-info" for='input-file'>
+                Alterar Foto
+              </label>
+            </div>
+            <input id='input-file' type='file' value='' />
           </div>
         </div>
-      </div>
-    </div>  
-  </section>    
-{% endif %}
+        <div class="row">  
+            <div class="d-none">
+              {{form_pet.tutor|bootstrap}}
+            </div>
+            <div class="col-md-4">
+              {{form_pet.nome|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.aniversario|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.pelagem|bootstrap}}
+            </div>
+
+             <div class="col-md-4">
+              {{form_pet.type_pelo|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.coloracao|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.temperamento|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.especie|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.raca|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.sexo|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.castracao|bootstrap}}
+            </div>
+             <div class="col-md-4">
+              {{form_pet.status|bootstrap}}
+            </div>
+        </div>
+            
+         <button class="btn btn-info mr-3" type="submit">Salvar Alterações</button>
+         <a class="btn btn-outline-info" href="{% url 'pet:pet_list' %}">Cancelar</a>
+      </form><!-- /FORM IDENTIFICAÇÃO DOS PETS -->
+    </section>
+  {% else %}
+      {% include 'includes/permission_msg.html' %}   
+  {% endif %}
 {% endblock content %}

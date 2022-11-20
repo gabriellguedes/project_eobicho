@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
   
 #Unhas 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def unhas_add(request):
     template_name = 'unhas/unhas_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def unhas_add(request):
             return render(request, template_name, context=context)
 # Listar unhas cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def unhas_list(request):
     template_name='unhas/unhas_list.html'
     objeto = Unhas.objects.all()
@@ -40,6 +42,7 @@ def unhas_list(request):
     return render(request, template_name, context=context)
 # Atualizar unhas cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def unhas_update(request, pk):
     template_name = 'unhas/unhas_update.html'
     objeto = Unhas.objects.get(id=pk)
@@ -57,6 +60,7 @@ def unhas_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar uma unhas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def unhas_delete(request, pk):
     template_name = 'unhas/unhas_delete.html'
     objeto = Unhas.objects.get(id=pk)

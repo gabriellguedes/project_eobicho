@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 # Add Espécie/Raça
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def especie_add(request):
     template_name = 'especie_add.html'
     
@@ -43,6 +44,7 @@ def especie_add(request):
             return render(request, template_name, context=context)
 # Adicionar uma nova Especie
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def add_Especie(request):
     template_name = 'especie_add.html'
     form = EspecieForm(request.POST or None)
@@ -54,6 +56,7 @@ def add_Especie(request):
     return render(request, template_name, context=context)
 # Listar as Especies
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def list_Especie(request):
     template_name = 'especie_list.html'
     obj = Especie.objects.all()
@@ -61,6 +64,7 @@ def list_Especie(request):
     return render(request, template_name, context=context)
 # Deletar uma Especie
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def delete_Especie(request, pk):
     template_name = 'especie_delete.html'
     objeto  = Especie.objects.get(id=pk)
@@ -74,6 +78,7 @@ def delete_Especie(request, pk):
     return HttpResponseRedirect(reverse('fichas:especie:especie_list'))
 # Atualizar/Alterar Espécies
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def update_Especie(request, pk):
     template_name = 'especie_update.html'
     obj_especie = Especie.objects.get(id=pk)

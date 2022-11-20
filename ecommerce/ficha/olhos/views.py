@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 #Olhos 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def olhos_add(request):
     template_name = 'olhos/olhos_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def olhos_add(request):
             return render(request, template_name, context=context)
 # Listar boca cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def olhos_list(request):
     template_name='olhos/olhos_list.html'
     objeto = Olhos.objects.all()
@@ -40,6 +42,7 @@ def olhos_list(request):
     return render(request, template_name, context=context)
 # Atualizar boca cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def olhos_update(request, pk):
     template_name = 'olhos/olhos_update.html'
     objeto = Olhos.objects.get(id=pk)
@@ -57,6 +60,7 @@ def olhos_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar uma boca
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def olhos_delete(request, pk):
     template_name = 'olhos/olhos_delete.html'
     objeto = Olhos.objects.get(id=pk)

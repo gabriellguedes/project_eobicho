@@ -1,147 +1,152 @@
 {% extends 'core/base.html' %}
 {% load bootstrap %}
 {% load widget_tweaks %}
+{% load permission_tags %}
 {% block content %}
-<section class="container py-4">
-  <form method="POST" action=".">
-    {% csrf_token %}
-      <legend class="text-secondary title-2 font-weight-bold border-bottom pb-3 mb-4">
-        <i class="fa-solid fa-file text-info"></i>
-        Inspeção {% if pet.sexo != 'Macho' %} da{% else %} do {% endif %} 
-        <span class="text-info"> {{pet.nome}} </span>
-      </legend>
-      {{form.management_form}}
-       {% for pf in form %}
-       <div class="d-none"> 
-        {{ pf.funcionario}}
-       </div> 
-       <div class="row">
-       <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-            <label class="text-dark text-uppercase font-weight-bold">
-              <i class="bi bi-journal-text text-info mr-1"></i> Doenças:
-            </label>
+  {% if user|can:'view_funcionario' %}
+    <section class="container py-4">
+      <form method="POST" action=".">
+        {% csrf_token %}
+          <legend class="text-secondary title-2 font-weight-bold border-bottom pb-3 mb-4">
+            <i class="fa-solid fa-file text-info"></i>
+            Inspeção {% if pet.sexo != 'Macho' %} da{% else %} do {% endif %} 
+            <span class="text-info"> {{pet.nome}} </span>
+          </legend>
+          {{form.management_form}}
+           {% for pf in form %}
+           <div class="d-none"> 
+            {{ pf.funcionario}}
+           </div> 
+           <div class="row">
+           <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+                <label class="text-dark text-uppercase font-weight-bold">
+                  <i class="bi bi-journal-text text-info mr-1"></i> Doenças:
+                </label>
+              </div>
+              <div class="card-body">
+                <div id="f_doenca">
+                    {{ pf.doenca|bootstrap }}  
+                </div>
+              </div>
+
+            </div>
+          </div>  
+
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção das Unhas:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.unhas|bootstrap }}
+              </div>
+            </div>
+          </div>  
+
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção dos Olhos:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.olhos|bootstrap }}
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <div id="f_doenca">
-                {{ pf.doenca|bootstrap }}  
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção Bucal:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.boca|bootstrap }}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">  
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção das Patas:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.patas|bootstrap }}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção Auricular:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.orelhas|bootstrap }}
+              </div>
             </div>
           </div>
 
-        </div>
-      </div>  
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-header bg-lightgray">
+              <label class="text-dark text-uppercase font-weight-bold">
+                <i class="bi bi-journal-text text-info mr-1"></i> Inspeção do Pelo:
+              </label>
+            </div>
+              <div class="card-body">
+                {{ pf.pelos|bootstrap }}
+                {{ pf.pelosEstado|bootstrap }}
+                {{ pf.pelosCondicao|bootstrap }}
+              </div>  
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3">  
+            <div class="card">
+              <div class="card-header bg-lightgray">
+                <label class="text-dark text-uppercase font-weight-bold">
+                  <i class="bi bi-journal-text text-info mr-1"></i> Inspeção da Pele:
+                </label>
+              </div>
+              <div class="card-body">
+                {{ pf.ectoparasitas|bootstrap }}
+                {{ pf.peleInfeccionada|bootstrap }}
+                {{ pf.pele|bootstrap }}
+              </div>
+            </div>
+          </div>
 
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção das Unhas:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.unhas|bootstrap }}
+          <div class="col-lg-4 mb-3">  
+            <div class="card">
+              <div class="card-header bg-lightgray">
+                <label class="text-dark text-uppercase font-weight-bold">
+                  <i class="bi bi-journal-text text-info mr-1"></i> Anotações:
+                </label>
+              </div>
+              <div class="card-body">
+                {{ pf.obs|bootstrap }}
+              </div>
+            </div>
           </div>
         </div>
-      </div>  
-
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção dos Olhos:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.olhos|bootstrap }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção Bucal:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.boca|bootstrap }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção das Patas:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.patas|bootstrap }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção Auricular:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.orelhas|bootstrap }}
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 mb-3">
-        <div class="card">
-          <div class="card-header bg-lightgray">
-          <label class="text-dark text-uppercase font-weight-bold">
-            <i class="bi bi-journal-text text-info mr-1"></i> Inspeção do Pelo:
-          </label>
-        </div>
-          <div class="card-body">
-            {{ pf.pelos|bootstrap }}
-            {{ pf.pelosEstado|bootstrap }}
-            {{ pf.pelosCondicao|bootstrap }}
-          </div>  
-        </div>
-      </div>
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-lightgray">
-            <label class="text-dark text-uppercase font-weight-bold">
-              <i class="bi bi-journal-text text-info mr-1"></i> Inspeção da Pele:
-            </label>
-          </div>
-          <div class="card-body">
-            {{ pf.ectoparasitas|bootstrap }}
-            {{ pf.peleInfeccionada|bootstrap }}
-            {{ pf.pele|bootstrap }}
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 mb-3">  
-        <div class="card">
-          <div class="card-header bg-lightgray">
-            <label class="text-dark text-uppercase font-weight-bold">
-              <i class="bi bi-journal-text text-info mr-1"></i> Anotações:
-            </label>
-          </div>
-          <div class="card-body">
-            {{ pf.obs|bootstrap }}
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-3" type="submit">Adicionar</button>
-      <a class="btn btn-outline-info" href="{% url 'services:new_ficha' pk=pet.id %}">Cancelar</a>
-    </div>  
-  </form>
-</section>  
+        {% endfor %}
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-info mr-3" type="submit">Adicionar</button>
+          <a class="btn btn-outline-info" href="{% url 'services:new_ficha' pk=pet.id %}">Cancelar</a>
+        </div>  
+      </form>
+    </section> 
+  {% else %}
+    {% include 'includes/permission_msg.html' %}
+  {% endif %} 
 {% endblock %}
 

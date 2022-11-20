@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 # Adicionar Raça
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def add_Raca(request):
     template_name = 'raca/raca_add.html'
     if request.method == 'GET':
@@ -40,6 +41,7 @@ def add_Raca(request):
             return render(request, template_name, context)
 # Listar Todas as Raças
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def list_Raca(request):
     template_name ='raca/raca_list.html'
     raca = Raca.objects.all()
@@ -50,6 +52,7 @@ def list_Raca(request):
 
 # Atualizar/Alterar Raças
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def update_Raca(request, pk):
     template_name = 'raca/raca_update.html'
     obj_raca =  Raca.objects.get(id=pk)
@@ -81,6 +84,7 @@ def update_Raca(request, pk):
             return render(request, template_name, context=context)
 # Deletar uma Raça
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def delete_Raca(request, pk):
     template_name = 'raca/raca_delete.html'
     objeto = Raca.objects.get(id=pk)

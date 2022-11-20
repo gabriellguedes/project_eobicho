@@ -10,7 +10,8 @@ from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
 
 #Adicionar peso ao pet 
-@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission') 
 def peso_add(request, pk):
     template_name='peso/peso_add.html'
     
@@ -48,6 +49,7 @@ def peso_add(request, pk):
             return render(request, template_name, context=context)
 # Alterar Peso do Pet            
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def peso_update(request, pk):
     template_name = 'peso/peso_update.html'
     obj = Peso.objects.get(id=pk)
@@ -71,6 +73,8 @@ def peso_update(request, pk):
             return render(request, template_name, context=context)
 
 #pesar o pet
+
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def peso_add_for_banho(request, pk):
     template_name = 'peso/add_peso_bt.html'
     obj = Pet.objects.get(pk=pk)

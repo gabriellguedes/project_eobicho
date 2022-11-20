@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 #Patas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def patas_add(request):
     template_name = 'patas/patas_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def patas_add(request):
             return render(request, template_name, context=context)
 # Listar patas cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def patas_list(request):
     template_name='patas/patas_list.html'
     objeto = Patas.objects.all()
@@ -40,6 +42,7 @@ def patas_list(request):
     return render(request, template_name, context=context)
 # Atualizar patas cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def patas_update(request, pk):
     template_name = 'patas/patas_update.html'
     objeto = Patas.objects.get(id=pk)
@@ -57,6 +60,7 @@ def patas_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar uma patas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def patas_delete(request, pk):
     template_name = 'patas/patas_delete.html'
     objeto = Patas.objects.get(id=pk)

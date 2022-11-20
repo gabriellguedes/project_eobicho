@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 # Adicionar Novo Tipo de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelos_add(request):
     template_name = 'pelos/pelos_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def pelos_add(request):
             return render(request, template_name, context=context)
 # Listar Tipos de pelos cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelos_list(request):
     template_name='pelos/pelos_list.html'
     objeto = Pelos.objects.all()
@@ -40,6 +42,7 @@ def pelos_list(request):
     return render(request, template_name, context=context)
 # Atualizar Tipo de pelo cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelos_update(request, pk):
     template_name = 'pelos/pelos_update.html'
     objeto = Pelos.objects.get(id=pk)
@@ -57,6 +60,7 @@ def pelos_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelos_delete(request, pk):
     template_name = 'pelos/pelos_delete.html'
     objeto = Pelos.objects.get(id=pk)
@@ -69,6 +73,7 @@ def pelos_delete(request, pk):
    
 # Adicionar Novo condição de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def estado_pelos_add(request):
     template_name = 'pelos/estado_pelos_add.html'
     if request.method == 'GET':
@@ -89,6 +94,7 @@ def estado_pelos_add(request):
             return render(request, template_name, context=context)
 # Listar condição dos pelos cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def estado_pelos_list(request):
     template_name='pelos/estado_pelos_list.html'
     objeto = Estado_pelos.objects.all()
@@ -98,6 +104,7 @@ def estado_pelos_list(request):
     return render(request, template_name, context=context)
 # Atualizar condição do pelo cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def estado_pelos_update(request, pk):
     template_name = 'pelos/estado_pelos_update.html'
     objeto = Estado_pelos.objects.get(id=pk)
@@ -115,6 +122,7 @@ def estado_pelos_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar um Condição de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def estado_pelos_delete(request, pk):
     template_name = 'pelos/estado_pelos_delete.html'
     objeto = Estado_pelos.objects.get(id=pk)
@@ -127,6 +135,7 @@ def estado_pelos_delete(request, pk):
    
 # Adicionar Novo Tipo de Pelos
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def condicao_pelos_add(request):
     template_name = 'pelos/condicao_pelos_add.html'
     if request.method == 'GET':
@@ -147,6 +156,7 @@ def condicao_pelos_add(request):
             return render(request, template_name, context=context)
 # Listar Tipos de pelos cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def condicao_pelos_list(request):
     template_name='pelos/condicao_pelos_list.html'
     objeto = Condicao_pelos.objects.all()
@@ -156,6 +166,7 @@ def condicao_pelos_list(request):
     return render(request, template_name, context=context)
 # Atualizar Tipo de pelo cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def condicao_pelos_update(request, pk):
     template_name = 'pelos/condicao_pelos_update.html'
     objeto = Condicao_pelos.objects.get(id=pk)
@@ -173,6 +184,7 @@ def condicao_pelos_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar um Tipo de Pelo
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def condicao_pelos_delete(request, pk):
     template_name = 'pelos/condicao_pelos_delete.html'
     objeto = Condicao_pelos.objects.get(id=pk)
@@ -185,6 +197,7 @@ def condicao_pelos_delete(request, pk):
 
 # PELAGEM - CRIAR UM NOVO TIPO DE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelagem_add(request):
     template_name = 'pelagem/pelagem_add.html'
     if request.method == 'GET':
@@ -201,6 +214,7 @@ def pelagem_add(request):
             return render(request, template_name, context=context)
 # ATUALIZAR/ALTERAR UM TIPODE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelagem_update(request, pk):
     template_name = 'pelagem/pelagem_update.html'
     obj = Pelagem.objects.get(id=pk)
@@ -218,6 +232,7 @@ def pelagem_update(request, pk):
             return render(request, template_name, context=context)
 # LISTAR TODOS OS TIPOS DE PELAGEM CADASTRADOS
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelagem_list(request):
     template_name = 'pelagem/pelagem_list.html'
     obj = Pelagem.objects.all()
@@ -225,6 +240,7 @@ def pelagem_list(request):
     return render(request, template_name, context=context)
 # DELETAR/APAGAR UM TIPO DE PELAGEM
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def pelagem_delete(request, pk):
     template_name = 'pelagem/pelagem_delete.html'
     objeto = Pelagem.objects.get(id=pk)
@@ -237,6 +253,7 @@ def pelagem_delete(request, pk):
 
 # COLORAÇÃO - ADICIONAR UMA NOVA COLORAÇÃO DOS PELOS
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def coloracao_add(request):
     template_name = 'coloracao/coloracao_add.html'
     if request.method == 'GET':
@@ -253,6 +270,7 @@ def coloracao_add(request):
             return render(request, template_name, context=context)
 # ATUALIZAR/ALTERAR UMA COLORAÇÃO CADASTRADA
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def coloracao_update(request, pk):
     template_name = 'coloracao/coloracao_update.html'
     obj = Coloracao.objects.get(id=pk)
@@ -270,6 +288,7 @@ def coloracao_update(request, pk):
             return render(request, template_name, context=context)
 # LISTAR TODAS AS COLORAÇÕES CADASTRADAS    
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def coloracao_list(request):
     template_name = 'coloracao/coloracao_list.html'
     obj = Coloracao.objects.all()
@@ -277,6 +296,7 @@ def coloracao_list(request):
     return render(request, template_name, context=context)
 # DELETAR/APAGAR UMA COLORAÇÃO CADASTRADA
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def coloracao_delete(request, pk):
     template_name = 'coloracao/coloracao_delete.html'
     objeto = Coloracao.objects.get(id=pk)

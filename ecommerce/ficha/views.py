@@ -84,8 +84,17 @@ def prontuario_detail(request, pk, n):
     pet = Pet.objects.get(pk=pk)
     ficha = pet.fichaPets.get(id=n)
     last_fichas = pet.fichaPets.all()
+    if pet.tutor.all():
+        for x in pet.tutor.all():
+            if x == request.user:
+                tutor = x 
+            else:
+                tutor = None
+    else:
+        tutor = None
     context={ 
         'pet': pet,
+        'tutor': tutor,
         'ficha': ficha,
         'last_fichas': last_fichas
      }

@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 #Orelhas 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def orelhas_add(request):
     template_name = 'orelhas/orelhas_add.html'
     if request.method == 'GET':
@@ -31,6 +32,7 @@ def orelhas_add(request):
             return render(request, template_name, context=context)
 # Listar orelhas cadastradas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def orelhas_list(request):
     template_name='orelhas/orelhas_list.html'
     objeto = Orelhas.objects.all()
@@ -40,6 +42,7 @@ def orelhas_list(request):
     return render(request, template_name, context=context)
 # Atualizar orelhas cadastrada
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def orelhas_update(request, pk):
     template_name = 'orelhas/orelhas_update.html'
     objeto = Orelhas.objects.get(id=pk)
@@ -57,6 +60,7 @@ def orelhas_update(request, pk):
             return render(request, template_name, context=context)    
 # Apagar uma orelhas
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def orelhas_delete(request, pk):
     template_name = 'orelhas/orelhas_delete.html'
     objeto = Orelhas.objects.get(id=pk)
