@@ -30,6 +30,8 @@
 										<span class="text-secondary">recebeu um banho do tipo </span>
 									{% elif banho.status == 'atendendo' %}
 										<span class="text-secondary">esta recebendo um banho do tipo</span>
+									{% elif banho.status == 'aprovado' %}
+										<span class="text-secondary">irá receber um banho do tipo</span>
 									{% endif %}
 									<span class="text-info">{{banho.banho.all.last}}</span>
 								</label>

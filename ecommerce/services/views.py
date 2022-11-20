@@ -9,8 +9,12 @@ from ecommerce.ficha.models import Anamnese
 from ecommerce.ficha.forms import AnamneseForm
 from .models import Ficha, Banho, Tosa, Itens
 from .forms import FichaForm, BanhoForm, TosaForm, ItensForm
+from rolepermissions.decorators import has_role_decorator, has_permission_decorator
+from django.contrib.auth.decorators import login_required
 
 # Adicionar um tipo de banho
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def banho_add(request):
 	template_name = 'banho/banho_add.html'
 	if request.method == 'GET':
@@ -24,6 +28,8 @@ def banho_add(request):
 		else:
 			return render(request, template_name, {'form':form})
 # Atualizar um tipo de banho
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def banho_update(request, pk):
 	template_name ='banho/banho_update.html'
 	objeto = Banho.objects.get(id=pk)
@@ -38,11 +44,15 @@ def banho_update(request, pk):
 		else:
 			return render(request, template_name, {'form': form})
 # Listar os banhos cadastrados
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def banho_list(request):
 	template_name = 'banho/banho_list.html'
 	obj = Banho.objects.all()
 	return render(request, template_name, {'form': obj})
 # Deletar um banho
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def banho_delete(request, pk):
 	template_name = 'banho/banho_delete.html'
 	objeto = Banho.objects.get(id=pk)
@@ -52,6 +62,8 @@ def banho_delete(request, pk):
 		objeto.delete()
 		return HttpResponseRedirect(reverse('services:banho_list'))
 # Adicionar um novo tipo de Tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def tosa_add(request):
 	template_name = 'tosa/tosa_add.html'
 	if request.method == 'GET':
@@ -65,6 +77,8 @@ def tosa_add(request):
 		else:
 			return render(request, template_name, {'form':form})
 # Atualizar um tipo de Tosa			
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def tosa_update(request, pk):
 	template_name ='tosa/tosa_update.html'
 	objeto = Tosa.objects.get(id=pk)
@@ -79,11 +93,15 @@ def tosa_update(request, pk):
 		else:
 			return render(request, template_name, {'form': form})
 # Listar os tipos de Tosa cadastrados			
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def tosa_list(request):
 	template_name = 'tosa/tosa_list.html'
 	obj = Tosa.objects.all()
 	return render(request, template_name, {'form': obj})
 # Deletar um tipo de Tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def tosa_delete(request, pk):
 	template_name = 'tosa/tosa_delete.html'
 	objeto = Tosa.objects.get(id=pk)
@@ -93,6 +111,8 @@ def tosa_delete(request, pk):
 		objeto.delete()
 		return HttpResponseRedirect(reverse('services:tosa_list'))
 # Adicionar um Item/pertence do Animal
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def itens_add(request):
 	template_name = 'itens/itens_add.html'
 	if request.method == 'GET':
@@ -106,6 +126,8 @@ def itens_add(request):
 		else:
 			return render(request, template_name, {'form':form})
 # Atualizar um Item/pertence do Animal		
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def itens_update(request, pk):
 	template_name ='itens/itens_update.html'
 	objeto = Itens.objects.get(id=pk)
@@ -120,11 +142,15 @@ def itens_update(request, pk):
 		else:
 			return render(request, template_name, {'form': form})
 # Listar itens/pertences do Animal			
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def itens_list(request):
 	template_name = 'itens/itens_list.html'
 	obj = Itens.objects.all()
 	return render(request, template_name, {'form': obj})
 # Apagar um Item ou pertence do animal
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def itens_delete(request, pk):
 	template_name = 'itens/itens_delete.html'
 	objeto = Itens.objects.get(id=pk)
@@ -135,6 +161,8 @@ def itens_delete(request, pk):
 		return HttpResponseRedirect(reverse('services:itens_list'))
 
 # Nova Ficha para realização do Banho e Tosa Pet Agendado
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def new_ficha(request, pk):
 	template_name='ficha/new_ficha.html'
 	today = datetime.date(datetime.utcnow())
@@ -187,6 +215,8 @@ def new_ficha(request, pk):
 			}
 			return render(request, template_name, context=context)
 # Nova Ficha para realizar o Banho e Tosa Pet não agendado.
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def add_ficha(request):
 	template_name='ficha/add_ficha.html'
 	context={}
@@ -206,6 +236,8 @@ def add_ficha(request):
 			return render(request, template_name, context=context)
 		return HttpResponseRedirect(reverse('services:new_ficha', kwargs={'pk': search}))	
 # Vizualizar Ficha de Banho e Tosa Cadastrada
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def detail_ficha(request, pk):
 	template_name = 'ficha/detail_ficha.html'
 	ficha = Ficha.objects.get(id=pk)
@@ -218,6 +250,8 @@ def detail_ficha(request, pk):
 	}
 	return render(request, template_name, context=context)	
 # Listar todos as Fichas de Banho e Tosa Cadastradas
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def list_ficha(request):
 	template_name = 'ficha/list_ficha.html'
 	fichas_atendendo = Ficha.objects.filter(status='atendendo')
@@ -236,6 +270,8 @@ def list_ficha(request):
 	}
 	return render(request, template_name, context=context)
 # Apagar ficha de banho e tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def delete_ficha(request, pk):
 	template_name='ficha/delete_ficha.html'
 	ficha = Ficha.objects.get(id=pk)
@@ -246,6 +282,7 @@ def delete_ficha(request, pk):
 		ficha.delete()
 		return HttpResponseRedirect(reverse('services:list_detail')) 
 # Pag q o cliente 
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def permission_tutor(request, pk):
 	template_name = 'ficha/permission_tutor.html'
 
@@ -269,6 +306,7 @@ def permission_tutor(request, pk):
 		ficha.save()
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': request.user.id}))
 # Vizualizar Ficha de Banho e Tosa Cadastrada completa para o Tutor
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def detail_ficha_tutor(request, pk):
 	template_name = 'ficha/detail_ficha_tutor.html'
 	ficha = Ficha.objects.get(id=pk)
@@ -281,12 +319,15 @@ def detail_ficha_tutor(request, pk):
 	}
 	return render(request, template_name, context=context)
 # Nega permissão para banho e tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def permission_ficha_cancelada(request, pk):
 	ficha = Ficha.objects.get(id=pk)
 	ficha.status = 'cancelado'
 	ficha.save()
 	return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': request.user.id}))
 # Atendimento para o banho e tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def atender_ficha(request, pk):
 	ficha = Ficha.objects.get(id=pk)
 	ficha.status = 'atendendo'
@@ -294,6 +335,8 @@ def atender_ficha(request, pk):
 	return HttpResponseRedirect(reverse('services:list_ficha'))
 
 # Finalizar Atendimento para o banho e tosa
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+@has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
 def finalizar_ficha(request, pk):
 	ficha = Ficha.objects.get(id=pk)
 	ficha.status = 'finalizado'
