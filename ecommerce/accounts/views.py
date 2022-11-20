@@ -4,8 +4,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.views.generic import UpdateView
-from django.views.generic.edit import DeleteView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
@@ -13,7 +11,6 @@ from ecommerce.pet.models import Pet
 from .models import Profile, Endereco
 from .forms import ProfileForm, ProfileUpdateForm, ProfileUpdateFullForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteAddForm
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from django.core.mail import send_mail
@@ -399,11 +396,15 @@ def user_update_for_adm(request, pk):
     		return render(request,  template_name, context=context)
 
 #Apagar Cliente   
-class user_delete(LoginRequiredMixin, DeleteView):
-	login_url= reverse_lazy('core:home')
+def user_delete(request, pk):
 	template_name = 'accounts/user_delete.html'
-	queryset = User.objects.all()
-	success_url = reverse_lazy('contas:cliente_list')
+	objeto = User.objects.get(id=pk)
+	if request.method == 'GET':
+		context = {'cliente': objeto,}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':
+		objeto.delete()
+		return HttpResponseRedirect(reverse('contas:cliente_list'))
 
 # Adicionar um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')

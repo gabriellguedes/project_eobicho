@@ -2,23 +2,63 @@
 {% block title %}
 	{{block.super}} - Remover Pet
 {% endblock title %}
-{% block content %}
-<section class="container py-4">
-		<form method="POST" action="." name="FormRemovePetTutor" id="FormRemovePetTutor">
-			{% csrf_token %}
-			<legend class="border-bottom pb-2 text-secondary">
-				<i class="fa-solid fa-trash text-info mr-2"></i>
-				<span class="font-weight-bold"> Remover Pet</span>
-			</legend>
-			<div class="py-4 px-2">
-				<label class="d-block text-secondary">
-					Tem certeza que deseja remover <span class="text-info">{{pet.nome}}</span> de <span class="text-info">{{tutor.first_name}}</span>?
-				</label>
-			</div>
-			<div class="px-2">
-				<button class="btn btn-info" type="submit">Sim, Tenho certeza!</button>
-				<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'contas:cliente_detail' pk=tutor.id %}'">Não, desejo voltar.</button>
-			</div>
-		</form>
-</section>
+{% load permission_tags%}
+{% block content %}	
+	{% if user|can:'view_funcionario'%}
+		<section class="container py-4">
+				<form method="POST" action="." name="FormRemovePetTutor" id="FormRemovePetTutor">
+					{% csrf_token %}
+					<legend class="border-bottom pb-2 text-secondary">
+						<i class="fa-solid fa-trash text-info mr-2"></i>
+						<span class="font-weight-bold"> Remover Pet</span>
+					</legend>
+					<div class="py-4 px-2">
+						<label class="d-block text-secondary">
+							Tem certeza que deseja remover <span class="text-info">{{pet.nome}}</span> de <span class="text-info">{{tutor.first_name}}</span>?
+						</label>
+					</div>
+					<div class="px-2">
+						<button class="btn btn-info" type="submit">Sim, Tenho certeza!</button>
+						<button class="btn btn-outline-info" type="button" onclick="location.href='{% url 'contas:cliente_detail' pk=tutor.id %}'">Não, desejo voltar.</button>
+					</div>
+				</form>
+		</section>
+	{% else %}
+	  <section class="container d-flex justify-content-center my-5">
+	    <div class="col-md-9 ">
+	      <div class="border dados-pet mb-4">
+	        <div class="dados-pet-header">
+	          <label class="d-block text-center alert alert-danger ">
+	              <i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
+	          </label>    
+	        </div>
+	        <div class="px-3">
+	          <label class="text-secondary d-block mb-3 text-center">
+
+	            <p class="mb-3">
+	              <span class="font-weight-bold text-info">{{ request.user.first_name }}</span>
+	              você não tem permissão para acessar essa página!
+	            </p>
+	             
+	            <p class="px-4">
+	              <small class="text-secondary d-block mb-3 text-justify">
+	                Caso você seja uma pesssoa autorizada entre em contato com o administrador do sistema para verificar se alguma das suas permissões foram revogadas.
+	              </small>
+	            </p>
+	            <p class="text-justify px-4"> 
+	              <small class="text-info font-italic">Lamentamos a inconveniência.</small>
+	            </p>     
+	          </label>
+
+	          <div class="text-secondary d-flex justify-content-center mb-4">
+	            <a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
+	              <i class="fa-solid fa-chevron-left mr-2"></i> Voltar
+	            </a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>  
+	  </section>
+	{% endif %}
+	
 {% endblock %}

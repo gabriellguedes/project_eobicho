@@ -4,84 +4,122 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<section class="container py-4">
-	<h2 class="border-bottom pb-3 title-2 mb-4 text-secondary">
-		<i class="fa-solid fa-user text-info mr-2"></i> Atualizar
-	</h2>
-	<div class="container">
-		<form id="form_update_user" method="POST" action="."  enctype="multipart/form-data">
-			{% csrf_token %}			
-			<div class="mb-3">
-				{% if cliente.profile.all %}
-					{% for item in cliente.profile.all %}
-						{% if item.photo.url != None %}
+	{% if request.user == cliente %}
+		<section class="container py-4">
+			<h2 class="border-bottom pb-3 title-2 mb-4 text-secondary">
+				<i class="fa-solid fa-user text-info mr-2"></i> Atualizar
+			</h2>
+			<div class="container">
+				<form id="form_update_user" method="POST" action="."  enctype="multipart/form-data">
+					{% csrf_token %}			
+					<div class="mb-3">
+						{% if cliente.profile.all %}
+							{% for item in cliente.profile.all %}
+								{% if item.photo.url != None %}
+									<div class="w-100 d-flex justify-content-center mb-4">
+								        <span class="circle-pet-update">         
+								          <img class="mask" src="{{item.photo.url}}" alt="Foto de perfil do pet">
+								        </span>
+								    </div>
+							    {% else %}
+							    	<div class="w-100 d-flex justify-content-center mb-4">
+								        <span class="circle-pet-update">         
+								          <img class="mask" src="{% static 'img/user-default.png' %}" alt="Foto de perfil do pet">
+								        </span>
+								    </div>
+							    {% endif %}
+							{% endfor %}
+						{% else %}
 							<div class="w-100 d-flex justify-content-center mb-4">
-						        <span class="circle-pet-update">         
-						          <img class="mask" src="{{item.photo.url}}" alt="Foto de perfil do pet">
-						        </span>
-						    </div>
-					    {% else %}
-					    	<div class="w-100 d-flex justify-content-center mb-4">
 						        <span class="circle-pet-update">         
 						          <img class="mask" src="{% static 'img/user-default.png' %}" alt="Foto de perfil do pet">
 						        </span>
 						    </div>
-					    {% endif %}
-					{% endfor %}
-				{% else %}
-					<div class="w-100 d-flex justify-content-center mb-4">
-				        <span class="circle-pet-update">         
-				          <img class="mask" src="{% static 'img/user-default.png' %}" alt="Foto de perfil do pet">
-				        </span>
-				    </div>
-				{% endif %}
-				<div class='input-wrapper row'>        
-				    <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
-				    <div class="d-flex justify-content-center w-100">
-				      <label class="btn btn-outline-info" for='profile-0-photo'>
-				        Alterar Foto
-				      </label>
-				    </div>
-				    <input name="profile-0-photo" id='profile-0-photo' type='file' value='' accept="image/*" />
-				</div>
-			</div>
-			<legend class="border-bottom pb-3 title-2 mb-4 text-secondary">
-				<i class="fa-solid fa-user text-info mr-2"></i> Dados do Perfil
-			</legend>
-			<div id="form_update_02" class="form-inline mb-2">
-				{% for item in user_form %}
-					<div class="form-group">
-						{{item|bootstrap}}
-					</div>
-				{% endfor %}
-			</div>
-			{{profile_form.management_form}}
-				<div id="form_update_01" class="form-inline">
-					{% for item in profile_form %}
-						<div class="form-group w-100">
-							{{item|bootstrap}}
-						</div>	
-					{% endfor %}
-				</div>
-					
-				
-			{{endereco.management_form}}
-			<div id="form_endereco" class="mb-5">
-				<legend class="border-bottom pb-3 mb-5 text-secondary">
-					<i class="fa-solid fa-location-dot text-info mr-1"></i> Endereço
-				</legend>
-				<div class="form-inline">
-					{% for i in endereco %}
-						<div id="itens_form_endereco" class="form-group w-100 mw-100 mb-2">
-							{{i|bootstrap}}
+						{% endif %}
+						<div class='input-wrapper row'>        
+						    <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
+						    <div class="d-flex justify-content-center w-100">
+						      <label class="btn btn-outline-info" for='profile-0-photo'>
+						        Alterar Foto
+						      </label>
+						    </div>
+						    <input name="profile-0-photo" id='profile-0-photo' type='file' value='' accept="image/*" />
 						</div>
-					{% endfor %}
-				</div>
-			</div>
-			
-			<button class="btn btn-info mr-3" type="submit">Atualizar</button>
-			<button type="button" class="btn btn-outline-info" onclick="location.href='{% url 'core:home' %}'">Cancelar</button>
-		</form>
-	</div>	
-</section>
+					</div>
+					<legend class="border-bottom pb-3 title-2 mb-4 text-secondary">
+						<i class="fa-solid fa-user text-info mr-2"></i> Dados do Perfil
+					</legend>
+					<div id="form_update_02" class="form-inline mb-2">
+						{% for item in user_form %}
+							<div class="form-group">
+								{{item|bootstrap}}
+							</div>
+						{% endfor %}
+					</div>
+					{{profile_form.management_form}}
+						<div id="form_update_01" class="form-inline">
+							{% for item in profile_form %}
+								<div class="form-group w-100">
+									{{item|bootstrap}}
+								</div>	
+							{% endfor %}
+						</div>
+							
+						
+					{{endereco.management_form}}
+					<div id="form_endereco" class="mb-5">
+						<legend class="border-bottom pb-3 mb-5 text-secondary">
+							<i class="fa-solid fa-location-dot text-info mr-1"></i> Endereço
+						</legend>
+						<div class="form-inline">
+							{% for i in endereco %}
+								<div id="itens_form_endereco" class="form-group w-100 mw-100 mb-2">
+									{{i|bootstrap}}
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+					
+					<button class="btn btn-info mr-3" type="submit">Atualizar</button>
+					<button type="button" class="btn btn-outline-info" onclick="location.href='{% url 'core:home' %}'">Cancelar</button>
+				</form>
+			</div>	
+		</section>
+	{% else %}
+	  <section class="container d-flex justify-content-center my-5">
+	    <div class="col-md-9 ">
+	      <div class="border dados-pet mb-4">
+	        <div class="dados-pet-header">
+	          <label class="d-block text-center alert alert-danger ">
+	              <i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção
+	          </label>    
+	        </div>
+	        <div class="px-3">
+	          <label class="text-secondary d-block mb-3 text-center">
+
+	            <p class="mb-3">
+	              <span class="font-weight-bold text-info">{{ request.user.first_name }}</span>
+	              você não tem permissão para acessar essa página!
+	            </p>
+	             
+	            <p class="px-4">
+	              <small class="text-secondary d-block mb-3 text-justify">
+	                Caso você seja uma pesssoa autorizada entre em contato com o administrador do sistema para verificar se alguma das suas permissões foram revogadas.
+	              </small>
+	            </p>
+	            <p class="text-justify px-4"> 
+	              <small class="text-info font-italic">Lamentamos a inconveniência.</small>
+	            </p>     
+	          </label>
+
+	          <div class="text-secondary d-flex justify-content-center mb-4">
+	            <a class="btn btn-outline-info" href="{% url 'contas:cliente_detail' pk=user.id %}">
+	              <i class="fa-solid fa-chevron-left mr-2"></i> Voltar
+	            </a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>  
+	  </section>
+	{% endif %}
 {% endblock %}
