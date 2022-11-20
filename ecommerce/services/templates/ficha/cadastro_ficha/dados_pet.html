@@ -17,7 +17,10 @@
 		</div>			
 		<div class="col-md-3">
 			<label class="text-info font-weight-bold">Idade:</label>
-			<label class="text-secondary">{{pet.idade}} {{msg}}</label>
+			{% for i in idade %}
+				<label class="text-secondary">{{i}}</label>
+			{% endfor %}
+			
 		</div>	
 		<div class="col-md-3">
 			<label class="text-info font-weight-bold">Cor:</label> 

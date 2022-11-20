@@ -31,14 +31,30 @@ def birthday(date):
     # Get the current date
     now = datetime.utcnow()
     now = now.date()
-    context = {}
+    idade = {}
     # Get the difference between the current date and the birthday
     try:
         age = dateutil.relativedelta.relativedelta(now, datetime.strptime(date, '%Y-%m-%d').date())
     except TypeError:
         age = dateutil.relativedelta.relativedelta(now, date)
-    age = age.months
-    return age
+    if age.years == 0:
+        if age.months == 1:
+            age = age.months
+            agetext = 'mês'
+            return age, agetext
+        else:
+            age = age.months
+            agetext = 'meses'
+            return age, agetext
+    else:
+        if age.years == 1:
+            age = age.years
+            agetext = 'ano'
+            return age, agetext
+        else:
+            age = age.years
+            agetext = 'anos'
+            return age, agetext
 # formata data da ficha de banho e tosa
 def BanhoTosa(pet):
     pet = Pet.objects.get(id=pet.id)
@@ -190,8 +206,8 @@ def detailPet(request, pk):
     #Atualizar idade do pet
     aniversario = pet.aniversario
     idade = birthday(aniversario)
-    if pet.idade != idade:
-        pet.idade = idade
+    if pet.idade != idade[0]:
+        pet.idade = idade[0]
         pet.save()
     
     if tutor:

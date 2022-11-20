@@ -5,6 +5,7 @@ from django.forms import inlineformset_factory
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from ecommerce.pet.models import Pet
+from ecommerce.pet.views import birthday
 from ecommerce.ficha.models import Anamnese
 from ecommerce.ficha.forms import AnamneseForm
 from .models import Ficha, Banho, Tosa, Itens
@@ -168,7 +169,7 @@ def new_ficha(request, pk):
 	today = datetime.date(datetime.utcnow())
 	pet = Pet.objects.get(id=pk)
 	anamnese = Anamnese.objects.filter(pet=pet).last()
-
+	idade = birthday(pet.aniversario)
 	if request.method == 'GET':
 		form = FichaForm()
 		form_pet_factory = inlineformset_factory(Pet, Ficha, form=FichaForm, extra=1, can_delete=False)
@@ -182,6 +183,7 @@ def new_ficha(request, pk):
 			'anamnese': anamnese,
 			'pet': pet,
 			'today': today,
+			'idade': idade,
 			
 		}
 		return render(request, template_name, context=context)
