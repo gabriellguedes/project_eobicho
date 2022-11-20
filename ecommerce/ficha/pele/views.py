@@ -8,6 +8,7 @@ from .models import *
 from .forms import *
 from ecommerce.pet.forms import PetForm
 from django.forms import inlineformset_factory
+from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 
 # Adicionar Novo Tipo de Pele
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
