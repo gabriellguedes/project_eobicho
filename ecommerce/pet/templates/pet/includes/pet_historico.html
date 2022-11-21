@@ -32,6 +32,8 @@
 										<span class="text-secondary">esta recebendo um banho do tipo</span>
 									{% elif banho.status == 'aprovado' %}
 										<span class="text-secondary">irá receber um banho do tipo</span>
+									{% elif banho.status == 'cancelado' %}
+										<span class="text-secondary">não recebeu(banho cancelado) um banho do tipo</span>
 									{% endif %}
 									<span class="text-info">{{banho.banho.all.last}}</span>
 								</label>
@@ -87,13 +89,13 @@
 				{% endif %}
 			</ul>
 		{% else %}
+			<label class="text-info mb-3">
+				<a class="text-info font-weight-bold" href="#">
+					<i class="fa-solid fa-calendar mr-2"></i> Historico de outro dia</a>
+			</label>
 			<p class="alert alert-warning text-center">
 				<i class="fa-solid fa-triangle-exclamation mr-2"></i>
 				Nenhum procedimento foi realizado hoje.
 			</p>
-			<label class="text-info">
-				<a class="text-info font-weight-bold" href="#">
-					<i class="fa-solid fa-calendar mr-2"></i> Historico de outro dia</a>
-			</label>
 		{% endif %}
 </div><!-- /DIV CONTAINER -->

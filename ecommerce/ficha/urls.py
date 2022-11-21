@@ -7,9 +7,9 @@ app_name = 'fichas'
 urlpatterns = [
 	
     # Prontuário
-    path('list-ficha/', views.prontuario_list, name='ficha_list'),
-    path('add_ficha/<int:pk>/', views.prontuario_create, name='ficha_add'),
-    path('oldficha/<int:pk>/<int:n>/', views.prontuario_detail, name='ficha_detail'),
+    path('list_anamneses/', views.prontuario_list, name='ficha_list'),
+    path('add_ficha_anamnese/<int:pk>/', views.prontuario_create, name='ficha_add'),
+    path('oldficha_anamnese/<int:pk>/<int:n>/', views.prontuario_detail, name='ficha_detail'),
     path('teste/', views.add_test, name='test_ficha'),
 
     #Includes

@@ -4,7 +4,7 @@
 {{block.super}} - Pets
 {% endblock title %}
 {% block content %}
-	{% if use|can:'view_funcionario' %}
+	{% if user|can:'view_funcionario' %}
 		<section class="container py-4">
 			<div class="row mb-3 border-bottom">
 				<h2 class="col-sm-6 title-2 font-weight-bold text-secondary">
