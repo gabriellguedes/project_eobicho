@@ -39,11 +39,11 @@
 						<div class='input-wrapper row'>        
 						    <span class="text-secondary w-100 text-center mb-3" id='file-name'></span>
 						    <div class="d-flex justify-content-center w-100">
-						      <label class="btn btn-outline-info" for='profile-0-photo'>
+						      <label class="btn btn-outline-info" for='id_profile-0-photo'>
 						        Alterar Foto
 						      </label>
 						    </div>
-						    <input name="profile-0-photo" id='profile-0-photo' type='file' value='' accept="image/*" />
+						    <input type="file" name="profile-0-photo" accept="image/*" id="id_profile-0-photo">
 						</div>
 					</div>
 					<legend class="border-bottom pb-3 title-2 mb-4 text-secondary">
@@ -51,12 +51,14 @@
 					</legend>
 					<div id="form_update_02" class="form-inline mb-2">
 						{% for item in user_form %}
+							{{item.photo}}
 							<div class="form-group">
 								{{item|bootstrap}}
 							</div>
 						{% endfor %}
 					</div>
 					{{profile_form.management_form}}
+
 						<div id="form_update_01" class="form-inline">
 							{% for item in profile_form %}
 								<div class="form-group w-100">
@@ -89,3 +91,13 @@
 	  {% include 'includes/permission_msg.html' %}
 	{% endif %}
 {% endblock %}
+{% block js %}
+<script type="text/javascript">
+var $input_user   = document.getElementById('id_profile-0-photo'),
+        $fileName = document.getElementById('file-name');  
+  
+  $input_user.addEventListener('change', function(){
+  $fileName.textContent = this.value;
+  });
+  </script>
+{% endblock js %}

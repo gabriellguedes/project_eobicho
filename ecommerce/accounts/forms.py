@@ -24,15 +24,13 @@ class ProfileForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
 	aniversario = forms.DateField(input_formats=['%d/%m/%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
-	photo = forms.CharField(label='', required='False')
 	class Meta:
 		model = Profile
-		fields = ('photo', 'cpf', 'telefone', 'aniversario')
+		fields = ('cpf', 'telefone', 'aniversario','photo')
 		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields['photo'].widget.attrs.update({'class': 'd-none'})
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})		
@@ -44,7 +42,7 @@ class ProfileUpdateFullForm(forms.ModelForm):
 	photo = forms.CharField(label='', required='False')
 	class Meta:
 		model = Profile
-		fields = ('photo', 'cpf', 'telefone', 'aniversario', 'cargo')
+		fields = ( 'cpf', 'telefone', 'aniversario', 'cargo','photo')
 		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):

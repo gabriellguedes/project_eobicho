@@ -70,7 +70,6 @@ def new_client(request):
 				'class': 'alert alert-warning',
 			}
 			return render(request, template_name, context=context)
-
 # Registro Novo Usuário
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def user_add(request):
@@ -121,7 +120,6 @@ def user_add(request):
 					'class': 'alert alert-danger',
 				}
 			return render(request, 'site/block-cadastro.html', context=context)	
-
 # Registro Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission') 
 def cliente_add(request):
@@ -158,8 +156,6 @@ def cliente_add(request):
 			context['msg'] = 'Algo deu errado! Cliente não foi cadastrado.'
 			context['class'] = 'alert alert-warning'
 			return render(request, template_name, context=context)
-
-
 # Listar Todos os Clientes Cadastrados no Sistema
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('view_funcionario', redirect_to_login='core:permission')
@@ -199,7 +195,6 @@ def user_list(request):
 		'profile': profile,
 	}
 	return render(request, template_name, context=context)
-
 # Visualizar Dados do cliente	
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_profile(request, pk):
@@ -219,7 +214,6 @@ def user_profile(request, pk):
 		'endereco': endereco,
 	}
 	return render(request, template_name, context=context)
-
 # Detail Cliente acesso pelo cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def user_detail(request, pk):
@@ -256,7 +250,6 @@ def user_detail(request, pk):
 	
 
 	return render(request, template_name, context=context)
-
 # Atualização Cliente Feita pelo Cliente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('update_user_cliente')
@@ -309,10 +302,10 @@ def user_update(request, pk):
     	form_endereco = form_endereco_factory(request.POST ,instance=obj)
 
     	if user_form.is_valid() and form_cliente.is_valid() and form_endereco.is_valid():
-    		edit_user = user_form.save()
+    		edit_user = user_form.save(commit=False)
     		form_cliente.instance = edit_user 
-    		profile = form_cliente.save()
-    	
+    		edit_user.save()
+    		form_cliente.save()
     		form_endereco.save()
     		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
     	else:
@@ -324,7 +317,6 @@ def user_update(request, pk):
     			
     		}
     		return render(request,  template_name, context=context)
-
 # Atualização Cliente Feito por Adm ou Gerente
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 @has_permission_decorator('update_user')
@@ -405,7 +397,6 @@ def user_delete(request, pk):
 	elif request.method == 'POST':
 		objeto.delete()
 		return HttpResponseRedirect(reverse('contas:cliente_list'))
-
 # Adicionar um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def tutor_add(request, pk):
@@ -428,7 +419,6 @@ def tutor_add(request, pk):
 			context['class'] = 'alert alert-info'
 			return render(request, template_name, context=context)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': tutor.id }))
-
 # Remover um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def tutor_remove(request, pk, n):
@@ -444,7 +434,6 @@ def tutor_remove(request, pk, n):
 	elif request.method == 'POST':
 		tutor.tutores.remove(pet)
 		return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
-
 # Adicionar um tutor ao pet
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def pet_add_tutor(request, pk):

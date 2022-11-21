@@ -7,7 +7,7 @@ class Peso(TimeStampedModel):
 	peso = models.DecimalField('Peso(kg)', max_digits=6, decimal_places=3)
 	pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='pet_peso')
 	obs = models.TextField('Anotações', null=True, blank=True)
-	user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
 	class Meta:
 		ordering = ('created',)

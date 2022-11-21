@@ -20,14 +20,12 @@ $(document).ready(function(){
       });
 
     });
-  
-  var $input    = document.getElementById('profile-0-photo'),
+  var $input_pet   = document.getElementById('id_photo'),
      $fileName = document.getElementById('file-name');
 
-  $input.addEventListener('change', function(){
+  $input_pet.addEventListener('change', function(){
   $fileName.textContent = this.value;
   });
-
   
 
 });
