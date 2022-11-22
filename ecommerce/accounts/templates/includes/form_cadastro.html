@@ -43,7 +43,13 @@
                     <i id="icon_show_password" class="fa-solid fa-eye text-info"></i>
                 </button>
             </span>
-        </div>    
+        </div>  
+        <div class="d-none">
+            {{form_cargo.management_form}}
+            {% for i in form_cargo %}
+                {{i}}
+            {% endfor %}
+        </div>  
     </div>
     <div class="mb-4">
         <label class="container_checkbox mb-3">Eu quero receber comunicações sobre conteúdo e novidades da É o bicho por email e notificação.

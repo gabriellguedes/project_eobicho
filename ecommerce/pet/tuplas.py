@@ -67,12 +67,12 @@ class Tuplas():
 		('Gigante', 'Gigante'),
 	)
 
-	CARGOS_CHOICES = (
-		('Gerente', 'Gerente'),
-		('MedicoVet', 'Médico Veterinário'),
-		('Colaborador', 'Colaborador'),
-		('Cliente', 'Cliente'),
-	)
+	CARGOS_CHOICES = [
+			('Gerente', 'Gerente'),
+			('Medico Veterinario', 'Médico Veterinário'),
+			('Colaborador', 'Colaborador'),
+			('Cliente', 'Cliente'),
+		]
 	UF_CHOICES = (
 		('AC','AC'),
 		('AL', 'AL'), 

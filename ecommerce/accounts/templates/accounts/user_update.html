@@ -1,10 +1,11 @@
 {% extends 'core/base.html'%}
+{% load permission_tags %}
 {% load static %}
 {% load bootstrap %}
 {% load widget_tweaks %}
 
 {% block content %}
-	{% if request.user == cliente %}
+	{% if request.user == cliente or user|can:'view_funcionario' %}
 		<section class="container py-4">
 			<h2 class="border-bottom pb-3 title-2 mb-4 text-secondary">
 				<i class="fa-solid fa-user text-info mr-2"></i> Atualizar

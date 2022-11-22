@@ -58,7 +58,7 @@
 					  	  </td>
 					  	 
 					      <td class="text-center text-secondary block-none">{{ item.email }}</td>
-					      {% for i in profile %}
+					      {% for i in item.cargo.all %}
 					      	{% if item.pk == i.user.pk %}
 					       		<td class="text-center text-secondary block-none">{{ i.cargo }}</td>
 					       	{% endif %}

@@ -18,7 +18,7 @@ urlpatterns = [
     path('user_update/<int:pk>/', views.user_update, name='cliente_update'),
     path('user_update_for_adm/<int:pk>/', views.user_update_for_adm, name='user_update_for_adm'),
     path('user_delete/<int:pk>/', views.user_delete, name='cliente_delete'),
-    
+    path('change_funccion/<int:pk>/', views.change_cargo, name='change_cargo'),
     path('pet_add_tutor/<int:pk>/', views.pet_add_tutor, name='pet_add_tutor'),   
     path('add_new_tutor/<int:pk>/', views.tutor_add, name='tutor_add'),
     path('remove_pet/<int:pk>/<int:n>/', views.tutor_remove, name='tutor_remove'),

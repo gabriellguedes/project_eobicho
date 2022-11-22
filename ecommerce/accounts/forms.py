@@ -4,8 +4,9 @@ from localflavor.br.forms import BRZipCodeField
 from django.core.exceptions import ValidationError
 from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
-from .models import Profile, Endereco
+from .models import Profile, Endereco, Cargo
 from ecommerce.pet.forms import DateInput
+from ecommerce.pet.tuplas import Tuplas
 
 # Dados do Usuário
 class ProfileForm(forms.ModelForm):
@@ -41,7 +42,7 @@ class ProfileUpdateFullForm(forms.ModelForm):
 	cpf = BRCPFField(label='CPF', required='True')
 	class Meta:
 		model = Profile
-		fields = ( 'cpf', 'telefone', 'aniversario', 'cargo','photo')
+		fields = ( 'cpf', 'telefone', 'aniversario', 'photo')
 		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
@@ -50,7 +51,6 @@ class ProfileUpdateFullForm(forms.ModelForm):
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 		self.fields['aniversario'].widget.attrs.update({'class': 'mask-date'})	
-
 
 # Formulário de Login		
 class LoginForm(forms.Form):
@@ -112,10 +112,11 @@ class EnderecoForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['cep'].widget.attrs.update({'class':'mask-cep', 'onblur':'IsCEP()'})
 
+#Cadastro de usuário 
 class ClienteAddForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ('aniversario','cargo', 'cpf', 'telefone', 'user',)
+		fields = ('aniversario', 'cpf', 'telefone', 'user',)
 		widgets = {'aniversario': DateInput()}
 
 	def __init__(self, *args, **kwargs):
@@ -123,4 +124,8 @@ class ClienteAddForm(forms.ModelForm):
 		self.fields['telefone'].widget.attrs.update({'class': 'mask-tel'})
 		self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})	
 
-
+#Alterar Cargo de um usuário 
+class ChangeCargoForm(forms.ModelForm):
+	class Meta:
+		model = Cargo
+		fields = '__all__'

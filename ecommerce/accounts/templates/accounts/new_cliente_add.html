@@ -15,17 +15,23 @@
 		<form class="py-4" method="POST" action=".">
 			 {% csrf_token %}
 			 <div class="row">
+			 	<div class="d-none">
+				 	{{ form_user.management_form }}
+					{% for item in form_user %}
+						<div class="col-md-4 d-none">{{item|bootstrap}}</div>
+					{% endfor %}
+				</div>
 			 	<div class="col-md-4">{{form.first_name|bootstrap}}</div>
 			 	<div class="col-md-4">{{form.email|bootstrap}}</div>
 			 	<div class="col-md-4">{{form.password|bootstrap}}</div>
 			 	
 				{{ form_user.management_form }}
 				{% for item in form_user %}
-					<div class="col-md-4 d-none">{{item.cargo|bootstrap}}</div>
 					<div class="col-md-4">{{item.aniversario|bootstrap}}</div>
 					<div class="col-md-4">{{item.cpf|bootstrap}}</div>
 					<div class="col-md-4">{{item.telefone|bootstrap}}</div>
 				{% endfor %}
+
 			 </div>
 			
 			<button class="btn btn-info mr-3" type="submit">Criar Usuário</button>

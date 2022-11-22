@@ -12,7 +12,7 @@ class Gerente(AbstractUserRole):
 		'view_funcionario': True,
 	}
 
-class MedicoVet(AbstractUserRole):
+class Medico(AbstractUserRole):
 	available_permissions = {
 		'add_pet': True, 'view_pet': True, 'update_pet': True,
 		'add_ficha': True, 'view_ficha': True,

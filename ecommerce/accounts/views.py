@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from ecommerce.pet.tuplas import Tuplas
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import inlineformset_factory
@@ -8,34 +9,48 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from ecommerce.pet.models import Pet
-from .models import Profile, Endereco
-from .forms import ProfileForm, ProfileUpdateForm, ProfileUpdateFullForm, EnderecoForm, LoginForm, UserRegistrationForm, UserEditForm, ClienteAddForm
+from .models import Profile, Endereco, Cargo
+from .forms import *
 from django.contrib.auth.decorators import login_required, permission_required
-from rolepermissions.roles import assign_role
+from rolepermissions.roles import assign_role, clear_roles
+from rolepermissions.permissions import revoke_permission
 from rolepermissions.decorators import has_role_decorator, has_permission_decorator
 from django.core.mail import send_mail
 from ecommerce.core.views import newsletter_add
-
+tuplas = Tuplas()
 # Novo Cliente(Cadastro Feito pelo próprio cliente)
 def new_client(request):
 	template_name='accounts/register.html'
 	context={}
 	if request.method == 'GET':
 		form = UserRegistrationForm()
-		context = {'form': form}
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory()
+		context = {
+			'form': form,
+			'form_cargo': form_cargo,
+		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory(request.POST)
+		# Condição de tamanho da senha
 		if len(request.POST['password']) < 6:
 			context['msg'] = 'Senha deve conter no mínimo 6 caracteres.'
 			context['class'] = 'alert alert-info'
 			return render(request, template_name, context=context)
-		if form.is_valid():
+		#Validando Formulários
+		if form.is_valid() and form_cargo.is_valid():
 			try:
 				new_user = form.save(commit=False)
 				new_user.set_password(form.cleaned_data['password'])
-				new_user.username = new_user.email
+				new_user.username = new_user.email				
 				new_user.save()
+				#Adicionando Cargo Cliente
+				form_cargo.instance = new_user
+				new_cargo = form_cargo.save()
+
 				if request.POST.get('email_market', False):
 					nome = new_user.first_name
 					email = new_user.email
@@ -51,6 +66,7 @@ def new_client(request):
 					form = UserRegistrationForm()
 					context = {
 						'form': form,
+						'form_cargo': form_cargo,
 						'msg': 'Algo deu errado!',
 						'class': 'alert alert-primary',
 					}
@@ -59,6 +75,7 @@ def new_client(request):
 				form = UserRegistrationForm()
 				context = {
 					'form': form,
+					'form_cargo': form_cargo,
 					'msg': 'Email já cadastrado.',
 					'class': 'alert alert-info',
 				}
@@ -78,9 +95,13 @@ def user_add(request):
 		user_form = UserRegistrationForm()
 		form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory()
+
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory()
 		context = {
 			'form_user':user_form,
 			'form_cliente': form_cliente,
+			'form_cargo': form_cargo,
 		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
@@ -88,21 +109,25 @@ def user_add(request):
 
 		form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory(request.POST, request.FILES)
+
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory(request.POST)
 		context ={}
-		
-		if user_form.is_valid() and form_cliente.is_valid():
-		# Create a new user object but avoid saving it yet
+		# validando formulários
+		if user_form.is_valid() and form_cliente.is_valid() and form_cargo.is_valid():
 			new_user = user_form.save()
-			# Set the chosen password
 			new_user.set_password(user_form.cleaned_data['password'])
 			new_user.username = new_user.email
-			# Save the User object
 			new_user.save()
-			if request.POST['profile_set-0-cargo'] == 'Gerente':
+
+			form_cargo.instance = new_user
+			form_cargo.save()
+
+			if request.POST['cargo-0-cargo'] == 'Gerente':
 				assign_role(new_user, 'gerente')
-			elif request.POST['profile_set-0-cargo'] == 'MedicoVet':
-				assign_role(new_user, 'medicovet')
-			elif request.POST['profile_set-0-cargo'] == 'Colaborador':
+			elif request.POST['cargo-0-cargo'] == 'Medico Veterinario':
+				assign_role(new_user, 'medico')
+			elif request.POST['cargo-0-cargo'] == 'Colaborador':
 				assign_role(new_user, 'colaborador')
 			else:
 				assign_role(new_user, 'cliente')	
@@ -129,23 +154,30 @@ def cliente_add(request):
 		form = UserRegistrationForm()
 		form_cliente_factory = inlineformset_factory(User, Profile, form=ClienteAddForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory()
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory()
 		context = {
 			'form': form,
 			'form_user': form_cliente,
+			'form_cargo': form_cargo,
 		}
 		return render(request, template_name, context=context)
 	elif request.method == 'POST':
 		form = UserRegistrationForm(request.POST)
 		form_cliente_factory = inlineformset_factory(User, Profile, form=ClienteAddForm, extra=1, can_delete=False)
 		form_cliente = form_cliente_factory(request.POST)
-		if form.is_valid() and form_cliente.is_valid():
+		form_cargo_factory = inlineformset_factory(User, Cargo, form=ChangeCargoForm, extra=1, can_delete=False)
+		form_cargo = form_cargo_factory(request.POST)
+		if form.is_valid() and form_cliente.is_valid() and form_cargo.is_valid():
 			new_user = form.save(commit=False)
 			new_user.set_password(form.cleaned_data['password'])
 			new_user.username = new_user.email
 			new_user.save()
 			
+			form_cargo.instance = new_user
+			form_cargo.save()
+
 			form_cliente.instance = new_user
-			form_cliente.cargo = 'Cliente'
 			new_cliente = form_cliente.save()
 			
 			assign_role(new_user, 'cliente')
@@ -386,7 +418,6 @@ def user_update_for_adm(request, pk):
     			
     		}
     		return render(request,  template_name, context=context)
-
 #Apagar Cliente   
 def user_delete(request, pk):
 	template_name = 'accounts/user_delete.html'
@@ -397,6 +428,48 @@ def user_delete(request, pk):
 	elif request.method == 'POST':
 		objeto.delete()
 		return HttpResponseRedirect(reverse('contas:cliente_list'))
+
+#Alterarar cargo do usuário
+@login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
+def change_cargo(request, pk):
+	template_name = 'accounts/change_cargo.html'
+	objeto = User.objects.get(id=pk)
+	obj_cargo = Cargo.objects.get(user=objeto)
+	if request.method == 'GET':	
+		form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=0, can_delete=False)
+		form_change = form_change_factory( instance=objeto)
+		context = {
+			'form':form_change, 
+			'obj': objeto,
+		}
+		return render(request, template_name, context=context)
+	elif request.method == 'POST':		
+		form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=0, can_delete=False)
+		form_change = form_change_factory(request.POST, instance=objeto )
+		if form_change.is_valid():
+
+			clear_roles(objeto)
+			form_change.instance = objeto
+			# adicionando permissões
+			if request.POST['cargo-0-cargo'] == 'Gerente':
+				assign_role(objeto, 'gerente')
+			elif request.POST['cargo-0-cargo'] == 'Medico Veterinario':
+				assign_role(objeto, 'medico')
+			elif request.POST['cargo-0-cargo'] == 'Colaborador':
+				assign_role(objeto, 'colaborador')
+			else:
+				assign_role(objeto, 'cliente')
+			form_change.save()
+			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
+		else:
+			context = {
+				'msg':'Algo deu errado! Alteração não realizada.',
+				'class':'alert alert-danger',
+				'form':form_change,
+				'obj': objeto,
+			}
+			return render(request, template_name, context=context)
+
 # Adicionar um pet já existem ao tutor 
 @login_required(redirect_field_name='Acesso_Negado', login_url='core:permission')
 def tutor_add(request, pk):
