@@ -14,7 +14,7 @@ class PetForm(forms.ModelForm):
 class PetClienteAddForm(forms.ModelForm):
 	class Meta:
 		model = Pet
-		fields = ('photo', 'nome', 'aniversario', 
+		fields = ('nome', 'aniversario', 
 				'especie', 'raca', 'temperamento', 
 				'coloracao', 'type_pelo', 'pelagem', 'sexo', 'castracao',
 				)

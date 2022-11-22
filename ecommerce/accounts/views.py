@@ -364,7 +364,7 @@ def user_update_for_adm(request, pk):
     	return render(request, template_name, context=context)
     elif request.method == 'POST':
     	user_form = UserEditForm(request.POST,instance=obj)
-    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateFullForm)
+    	form_cliente_factory = inlineformset_factory(User, Profile, form=ProfileUpdateFullForm, can_delete=False)
     	form_cliente = form_cliente_factory(request.POST, request.FILES, instance=obj)
     	
     	form_endereco_factory = inlineformset_factory(User, Endereco, form=EnderecoForm, extra=a, can_delete=False)

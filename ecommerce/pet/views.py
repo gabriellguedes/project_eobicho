@@ -1,6 +1,7 @@
 import dateutil
 import datetime
 from datetime import datetime
+from django.db import DataError
 from dateutil.relativedelta import *
 from django.shortcuts import render, resolve_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -140,13 +141,24 @@ def cliente_pet_add(request, pk):
         form = PetClienteAddForm(request.POST, request.FILES)
         aniversario = request.POST['aniversario']
         idade = birthday(aniversario)
+        idade = idade[0]
         if form.is_valid():
-            new_pet = form.save(commit=False)
-            new_pet.idade = idade
-            new_pet.save()
-            obj.tutores.add(new_pet)
-
-            return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
+            try:
+                new_pet = form.save(commit=False)
+                new_pet.idade = idade
+                new_pet.save()
+                obj.tutores.add(new_pet)
+                return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={"pk": obj.pk}))
+            except DataError:
+                context = {
+                'msg':'Aniversário não pode ser uma data futura.',
+                'class': 'alert alert-danger',
+                'especie': especie,
+                'raca': raca,
+                'form': form,
+                'cliente': obj,
+            }
+            return render(request, template_name, context=context)
         else:
             context = {
                 'especie': especie,

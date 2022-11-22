@@ -39,7 +39,6 @@ class ProfileUpdateForm(forms.ModelForm):
 class ProfileUpdateFullForm(forms.ModelForm):
 	aniversario = forms.DateField(input_formats=['%d/%m/%Y'])
 	cpf = BRCPFField(label='CPF', required='True')
-	photo = forms.CharField(label='', required='False')
 	class Meta:
 		model = Profile
 		fields = ( 'cpf', 'telefone', 'aniversario', 'cargo','photo')
