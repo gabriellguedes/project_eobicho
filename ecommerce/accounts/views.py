@@ -77,7 +77,7 @@ def new_client(request):
 					'form': form,
 					'form_cargo': form_cargo,
 					'msg': 'Email já cadastrado.',
-					'class': 'alert alert-info',
+					'class': 'alert alert-warning',
 				}
 				return render(request, template_name, context=context)
 		else:
@@ -434,9 +434,8 @@ def user_delete(request, pk):
 def change_cargo(request, pk):
 	template_name = 'accounts/change_cargo.html'
 	objeto = User.objects.get(id=pk)
-	obj_cargo = Cargo.objects.get(user=objeto)
 	if request.method == 'GET':	
-		form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=0, can_delete=False)
+		form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=1, can_delete=False)
 		form_change = form_change_factory( instance=objeto)
 		context = {
 			'form':form_change, 
@@ -446,21 +445,35 @@ def change_cargo(request, pk):
 	elif request.method == 'POST':		
 		form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=0, can_delete=False)
 		form_change = form_change_factory(request.POST, instance=objeto )
-		if form_change.is_valid():
-
-			clear_roles(objeto)
-			form_change.instance = objeto
-			# adicionando permissões
-			if request.POST['cargo-0-cargo'] == 'Gerente':
-				assign_role(objeto, 'gerente')
-			elif request.POST['cargo-0-cargo'] == 'Medico Veterinario':
-				assign_role(objeto, 'medico')
-			elif request.POST['cargo-0-cargo'] == 'Colaborador':
-				assign_role(objeto, 'colaborador')
-			else:
+		try:
+			if form_change.is_valid():
+				clear_roles(objeto)
+				form_change.instance = objeto
+				# adicionando permissões
+				if request.POST['cargo-0-cargo'] == 'Gerente':
+					assign_role(objeto, 'gerente')
+				elif request.POST['cargo-0-cargo'] == 'Medico Veterinario':
+					assign_role(objeto, 'medico')
+				elif request.POST['cargo-0-cargo'] == 'Colaborador':
+					assign_role(objeto, 'colaborador')
+				else:
+					assign_role(objeto, 'cliente')
+				form_change.save()
+				return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
+		except ObjectDoesNotExist:
+			form_change_factory = inlineformset_factory(User, Cargo, form = ChangeCargoForm, extra=0, can_delete=False)
+			form_change = form_change_factory(request.POST)
+			if form_change.is_valid():
+				form_change.instance = objeto
+				form_change.save()
 				assign_role(objeto, 'cliente')
-			form_change.save()
-			return HttpResponseRedirect(reverse('contas:cliente_detail', kwargs={'pk': pk}))
+				return HttpResponseRedirect(reverse('contas:change_cargo', pk=objeto.id))
+			else:
+				context = {
+					'msg': 'Não foi possível adicionar o usuário ao grupo cliente. Entre em contato com o Administrador do sistema.',
+					'class': 'alert alert-danger',
+				}
+				return render(request, template_name, context=context)	
 		else:
 			context = {
 				'msg':'Algo deu errado! Alteração não realizada.',
