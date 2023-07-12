@@ -21,14 +21,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    
 </head>
-<body class="row m-0" style="max-width: 100%;">
-  {% if request.user.is_authenticated %}
-    {% include 'includes/admin_navbar.html'%}
-  {% endif %}  
-    <div class="col p-0">  
+<body style="max-width: 100%;">
       <header id="wrap-header">
-        <div class="container">
-          
+        <div class="container">          
           <div class="row block-none">
             {% if request.user.is_authenticated %}
               {% if user|can:'view_user_cliente' %}
@@ -55,9 +50,17 @@
           </div>
         </div>
         
-          <div id="nav_responsive">
-            {% include 'includes/navbar.html' %}
+          <div>
+            {% if request.user.is_authenticated %}
+              {% include 'includes/navbar.html' %}
+            {% endif %} 
           </div>
+
+          <div style="display: none;"> 
+            {% if request.user.is_authenticated %}
+              {% include 'includes/admin_navbar.html'%}
+            {% endif %} 
+          </div>  
     </header><!-- /HEADER -->
 
     <main>
@@ -69,7 +72,7 @@
     <footer id="wrap-footer">
           
     </footer><!-- /FOOTER -->
-  </div>  
+
   <script type="text/javascript" src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/styles.js' %}"></script> 

@@ -1,9 +1,9 @@
 {% load static %}
 {% load permission_tags %}
 {% if user|can:'view_funcionario' %}
-<nav class="col-lg-2 bg-dark block-none" id="navbarTogglerDemo01">
-     <ul class="navbar-nav flex-column pl-3 mb-3">
-          <li class="my-5"></li>
+<nav class="navbar navbar-dark bg-dark block-none" >
+    
+     <ul class="navbar-nav mr-auto pl-3 mb-3">
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'contas:cliente_detail' pk=user.id %}">
               <span class="text-white font-weight-bold">
@@ -106,5 +106,6 @@
             </li>
           {% endif %}
         </ul>
+      
   </nav> 
 {% endif %}
